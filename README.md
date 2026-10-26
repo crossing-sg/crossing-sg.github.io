@@ -5,7 +5,8 @@
 Final group project for DEP5118 Community Data Gathering and Visualization, Master of Urban Planning, National University of Singapore (2026).
 Team: Gangsar Dwi Saputro, Xia Ruize, Yuan Zhiyi.
 
-Website: https://gangsardwisaputro.github.io/Pedestrian-Crossing-Proposal/
+Website: https://crossing-sg.github.io/
+Repository: https://github.com/crossing-sg/crossing-sg.github.io
 
 ## About the project
 
