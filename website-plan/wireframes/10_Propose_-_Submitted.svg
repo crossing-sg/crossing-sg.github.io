@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1024" viewBox="0 0 1440 1024">
+<rect id="Page background" width="1440" height="1024" fill="#FFFFFF"/>
+<g id="Navigation bar">
+<rect id="Bar background" x="0" y="0" width="1440" height="72" rx="0" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<line id="Bar divider" x1="0" y1="72" x2="1440" y2="72" stroke="#D6D6D6" stroke-width="1" stroke-linecap="butt"/>
+<text id="Home" x="951.0" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="400" fill="#1A1A1A" text-anchor="middle">Home</text>
+<text id="Map" x="1024.0" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="400" fill="#1A1A1A" text-anchor="middle">Map</text>
+<rect id="Active link background" x="1060" y="18" width="103" height="38" rx="0" fill="#1A1A1A" stroke="none" stroke-width="1"/>
+<text id="Propose" x="1111.5" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600" fill="#FFFFFF" text-anchor="middle">Propose</text>
+<text id="Methodology" x="1237.5" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="400" fill="#1A1A1A" text-anchor="middle">Methodology</text>
+<text id="About" x="1354.0" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="400" fill="#1A1A1A" text-anchor="middle">About</text>
+</g>
+<g id="Confirmation">
+<circle id="Icon background" cx="720" cy="260" r="36" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<polyline id="Check icon" points="704,260 716,272 738,248" fill="none" stroke="#1A1A1A" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<text id="Thank you, your proposal is recorded" x="720" y="350" font-family="Inter, Arial, sans-serif" font-size="32" font-weight="700" fill="#1A1A1A" text-anchor="middle">Thank you, your proposal is recorded</text>
+<text id="[Road name], segment XX" x="720" y="392" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="500" fill="#6B6B6B" text-anchor="middle">[Road name], segment XX</text>
+<rect id="Progress card" x="470" y="430" width="500" height="150" rx="8" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="This segment now has 2 proposals" x="720" y="474" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" fill="#1A1A1A" text-anchor="middle">This segment now has 2 proposals</text>
+<rect id="Progress step" x="610" y="498" width="68" height="10" rx="5" fill="#1A1A1A" stroke="none" stroke-width="1"/>
+<rect id="Progress step 2" x="686" y="498" width="68" height="10" rx="5" fill="#1A1A1A" stroke="none" stroke-width="1"/>
+<rect id="Progress step 3" x="762" y="498" width="68" height="10" rx="5" fill="#E2E2E2" stroke="none" stroke-width="1"/>
+<text id="One more proposal and it appears on the " x="720" y="546" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="400" fill="#6B6B6B" text-anchor="middle">One more proposal and it appears on the public map.</text>
+<g id="Button / Share this link">
+<rect id="Button background" x="500" y="620" width="210" height="44" rx="6" fill="#1A1A1A" stroke="#1A1A1A" stroke-width="1.5"/>
+<text id="Share this link" x="605.0" y="647.25" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="600" fill="#FFFFFF" text-anchor="middle">Share this link</text>
+</g>
+<g id="Button / See the map">
+<rect id="Button background 2" x="730" y="620" width="210" height="44" rx="6" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1.5"/>
+<text id="See the map" x="835.0" y="647.25" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="600" fill="#1A1A1A" text-anchor="middle">See the map</text>
+</g>
+<text id="Propose another crossing" x="720" y="720" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="600" fill="#1A1A1A" text-anchor="middle">Propose another crossing</text>
+</g>
+</svg>

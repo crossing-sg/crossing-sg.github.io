@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1024" viewBox="0 0 1440 1024">
+<rect id="Page background" width="1440" height="1024" fill="#FFFFFF"/>
+<g id="Sheet window">
+<rect id="Sheet toolbar" x="0" y="0" width="1440" height="56" rx="0" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<text id="Crossing proposals (team only)" x="24" y="36" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600" fill="#1A1A1A" text-anchor="start">Crossing proposals (team only)</text>
+<text id="Shared with 3 team members" x="1416" y="36" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#6B6B6B" text-anchor="end">Shared with 3 team members</text>
+<g id="Tabs">
+<rect id="Tab" x="24" y="980" width="130" height="32" rx="4" fill="#EFEFEF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="proposals" x="89" y="1001" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1A1A1A" text-anchor="middle">proposals</text>
+<rect id="Tab 2" x="164" y="980" width="130" height="32" rx="4" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="experiences" x="229" y="1001" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600" fill="#1A1A1A" text-anchor="middle">experiences</text>
+<rect id="Tab 3" x="304" y="980" width="130" height="32" rx="4" fill="#EFEFEF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="support" x="369" y="1001" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1A1A1A" text-anchor="middle">support</text>
+</g>
+<rect id="Header cell" x="24" y="80" width="140" height="36" rx="0" fill="#EFEFEF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="received" x="34" y="103" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600" fill="#1A1A1A" text-anchor="start">received</text>
+<rect id="Header cell 2" x="164" y="80" width="100" height="36" rx="0" fill="#EFEFEF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="seg_id" x="174" y="103" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600" fill="#1A1A1A" text-anchor="start">seg_id</text>
+<rect id="Header cell 3" x="264" y="80" width="220" height="36" rx="0" fill="#EFEFEF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="road" x="274" y="103" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600" fill="#1A1A1A" text-anchor="start">road</text>
+<rect id="Header cell 4" x="484" y="80" width="170" height="36" rx="0" fill="#EFEFEF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="type" x="494" y="103" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600" fill="#1A1A1A" text-anchor="start">type</text>
+<rect id="Header cell 5" x="654" y="80" width="240" height="36" rx="0" fill="#EFEFEF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="reason" x="664" y="103" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600" fill="#1A1A1A" text-anchor="start">reason</text>
+<rect id="Header cell 6" x="894" y="80" width="380" height="36" rx="0" fill="#EFEFEF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="text" x="904" y="103" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600" fill="#1A1A1A" text-anchor="start">text</text>
+<rect id="Header cell 7" x="1274" y="80" width="140" height="36" rx="0" fill="#EFEFEF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="status" x="1284" y="103" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600" fill="#1A1A1A" text-anchor="start">status</text>
+<rect id="Cell" x="24" y="116" width="140" height="40" rx="0" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="xxxx" x="34" y="141" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#6B6B6B" text-anchor="start">xxxx</text>
+<rect id="Cell 2" x="164" y="116" width="100" height="40" rx="0" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="xxxx 2" x="174" y="141" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#6B6B6B" text-anchor="start">xxxx</text>
+<rect id="Cell 3" x="264" y="116" width="220" height="40" rx="0" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="xxxx 3" x="274" y="141" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#6B6B6B" text-anchor="start">xxxx</text>
+<rect id="Cell 4" x="484" y="116" width="170" height="40" rx="0" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="xxxx 4" x="494" y="141" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#6B6B6B" text-anchor="start">xxxx</text>
+<rect id="Cell 5" x="654" y="116" width="240" height="40" rx="0" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="xxxx 5" x="664" y="141" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#6B6B6B" text-anchor="start">xxxx</text>
+<rect id="Cell 6" x="894" y="116" width="380" height="40" rx="0" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<rect id="Text placeholder" x="904" y="132" width="320" height="8" rx="4" fill="#E2E2E2" stroke="none" stroke-width="1"/>
+<rect id="Cell 7" x="1274" y="116" width="140" height="40" rx="0" fill="#F7D774" stroke="#D6D6D6" stroke-width="1"/>
+<text id="pending" x="1284" y="141" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600" fill="#1A1A1A" text-anchor="start">pending</text>
+<rect id="Cell 8" x="24" y="156" width="140" height="40" rx="0" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="xxxx 6" x="34" y="181" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#6B6B6B" text-anchor="start">xxxx</text>
+<rect id="Cell 9" x="164" y="156" width="100" height="40" rx="0" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="xxxx 7" x="174" y="181" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#6B6B6B" text-anchor="start">xxxx</text>
+<rect id="Cell 10" x="264" y="156" width="220" height="40" rx="0" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="xxxx 8" x="274" y="181" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#6B6B6B" text-anchor="start">xxxx</text>
+<rect id="Cell 11" x="484" y="156" width="170" height="40" rx="0" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="xxxx 9" x="494" y="181" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#6B6B6B" text-anchor="start">xxxx</text>
+<rect id="Cell 12" x="654" y="156" width="240" height="40" rx="0" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="xxxx 10" x="664" y="181" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#6B6B6B" text-anchor="start">xxxx</text>
+<rect id="Cell 13" x="894" y="156" width="380" height="40" rx="0" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<rect id="Text placeholder 2" x="904" y="172" width="320" height="8" rx="4" fill="#E2E2E2" stroke="none" stroke-width="1"/>
+<rect id="Cell 14" x="1274" y="156" width="140" height="40" rx="0" fill="#BFE3C8" stroke="#D6D6D6" stroke-width="1"/>
+<text id="approved" x="1284" y="181" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600" fill="#1A1A1A" text-anchor="start">approved</text>
+<rect id="Cell 15" x="24" y="196" width="140" height="40" rx="0" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="xxxx 11" x="34" y="221" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#6B6B6B" text-anchor="start">xxxx</text>
+<rect id="Cell 16" x="164" y="196" width="100" height="40" rx="0" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="xxxx 12" x="174" y="221" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#6B6B6B" text-anchor="start">xxxx</text>
+<rect id="Cell 17" x="264" y="196" width="220" height="40" rx="0" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="xxxx 13" x="274" y="221" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#6B6B6B" text-anchor="start">xxxx</text>
+<rect id="Cell 18" x="484" y="196" width="170" height="40" rx="0" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="xxxx 14" x="494" y="221" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#6B6B6B" text-anchor="start">xxxx</text>
+<rect id="Cell 19" x="654" y="196" width="240" height="40" rx="0" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="xxxx 15" x="664" y="221" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#6B6B6B" text-anchor="start">xxxx</text>
+<rect id="Cell 20" x="894" y="196" width="380" height="40" rx="0" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<rect id="Text placeholder 3" x="904" y="212" width="320" height="8" rx="4" fill="#E2E2E2" stroke="none" stroke-width="1"/>
+<rect id="Cell 21" x="1274" y="196" width="140" height="40" rx="0" fill="#F7D774" stroke="#D6D6D6" stroke-width="1"/>
+<text id="pending 2" x="1284" y="221" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600" fill="#1A1A1A" text-anchor="start">pending</text>
+<rect id="Cell 22" x="24" y="236" width="140" height="40" rx="0" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="xxxx 16" x="34" y="261" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#6B6B6B" text-anchor="start">xxxx</text>
+<rect id="Cell 23" x="164" y="236" width="100" height="40" rx="0" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="xxxx 17" x="174" y="261" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#6B6B6B" text-anchor="start">xxxx</text>
+<rect id="Cell 24" x="264" y="236" width="220" height="40" rx="0" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="xxxx 18" x="274" y="261" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#6B6B6B" text-anchor="start">xxxx</text>
+<rect id="Cell 25" x="484" y="236" width="170" height="40" rx="0" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="xxxx 19" x="494" y="261" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#6B6B6B" text-anchor="start">xxxx</text>
+<rect id="Cell 26" x="654" y="236" width="240" height="40" rx="0" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="xxxx 20" x="664" y="261" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#6B6B6B" text-anchor="start">xxxx</text>
+<rect id="Cell 27" x="894" y="236" width="380" height="40" rx="0" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<rect id="Text placeholder 4" x="904" y="252" width="320" height="8" rx="4" fill="#E2E2E2" stroke="none" stroke-width="1"/>
+<rect id="Cell 28" x="1274" y="236" width="140" height="40" rx="0" fill="#F3C1C1" stroke="#D6D6D6" stroke-width="1"/>
+<text id="rejected" x="1284" y="261" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600" fill="#1A1A1A" text-anchor="start">rejected</text>
+<rect id="Cell 29" x="24" y="276" width="140" height="40" rx="0" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="xxxx 21" x="34" y="301" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#6B6B6B" text-anchor="start">xxxx</text>
+<rect id="Cell 30" x="164" y="276" width="100" height="40" rx="0" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="xxxx 22" x="174" y="301" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#6B6B6B" text-anchor="start">xxxx</text>
+<rect id="Cell 31" x="264" y="276" width="220" height="40" rx="0" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="xxxx 23" x="274" y="301" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#6B6B6B" text-anchor="start">xxxx</text>
+<rect id="Cell 32" x="484" y="276" width="170" height="40" rx="0" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="xxxx 24" x="494" y="301" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#6B6B6B" text-anchor="start">xxxx</text>
+<rect id="Cell 33" x="654" y="276" width="240" height="40" rx="0" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="xxxx 25" x="664" y="301" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#6B6B6B" text-anchor="start">xxxx</text>
+<rect id="Cell 34" x="894" y="276" width="380" height="40" rx="0" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<rect id="Text placeholder 5" x="904" y="292" width="320" height="8" rx="4" fill="#E2E2E2" stroke="none" stroke-width="1"/>
+<rect id="Cell 35" x="1274" y="276" width="140" height="40" rx="0" fill="#BFE3C8" stroke="#D6D6D6" stroke-width="1"/>
+<text id="approved 2" x="1284" y="301" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600" fill="#1A1A1A" text-anchor="start">approved</text>
+<rect id="Note" x="24" y="380" width="560" height="120" rx="8" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="Experiences appear on the map only when " x="44" y="416" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#3A3A3A" text-anchor="start">Experiences appear on the map only when status is approved.</text>
+<text id="Proposals are counted at once, and rejec" x="44" y="438" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#3A3A3A" text-anchor="start">Proposals are counted at once, and rejected rows are removed</text>
+<text id="from the count the next time the map loa" x="44" y="460" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#3A3A3A" text-anchor="start">from the count the next time the map loads.</text>
+</g>
+</svg>

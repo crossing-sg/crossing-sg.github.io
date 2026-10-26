@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1024" viewBox="0 0 1440 1024">
+<rect id="Page background" width="1440" height="1024" fill="#FFFFFF"/>
+<g id="Navigation bar">
+<rect id="Bar background" x="0" y="0" width="1440" height="72" rx="0" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<line id="Bar divider" x1="0" y1="72" x2="1440" y2="72" stroke="#D6D6D6" stroke-width="1" stroke-linecap="butt"/>
+<rect id="Active link background" x="914" y="18" width="74" height="38" rx="0" fill="#1A1A1A" stroke="none" stroke-width="1"/>
+<text id="Home" x="951.0" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600" fill="#FFFFFF" text-anchor="middle">Home</text>
+<text id="Map" x="1024.0" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="400" fill="#1A1A1A" text-anchor="middle">Map</text>
+<text id="Propose" x="1111.5" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="400" fill="#1A1A1A" text-anchor="middle">Propose</text>
+<text id="Methodology" x="1237.5" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="400" fill="#1A1A1A" text-anchor="middle">Methodology</text>
+<text id="About" x="1354.0" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="400" fill="#1A1A1A" text-anchor="middle">About</text>
+</g>
+<g id="Map background">
+<rect id="Map canvas" x="0" y="72" width="1440" height="952" rx="0" fill="#F3F3F1" stroke="none" stroke-width="1"/>
+<clipPath id="clipc"><rect x="0" y="72" width="1440" height="952"/></clipPath>
+<line id="Road" x1="172.79999999999998" y1="72" x2="216.0" y2="1024" stroke="#DCDCDC" stroke-width="8" stroke-linecap="butt"/>
+<line id="Road 2" x1="648.0" y1="72" x2="619.2" y2="1024" stroke="#DCDCDC" stroke-width="12" stroke-linecap="butt"/>
+<line id="Road 3" x1="1123.2" y1="72" x2="1180.8000000000002" y2="1024" stroke="#DCDCDC" stroke-width="8" stroke-linecap="butt"/>
+<line id="Road 4" x1="0" y1="281.44" x2="1440" y2="329.04" stroke="#DCDCDC" stroke-width="9" stroke-linecap="butt"/>
+<line id="Road 5" x1="0" y1="624.16" x2="1440" y2="595.5999999999999" stroke="#DCDCDC" stroke-width="9" stroke-linecap="butt"/>
+<line id="Road 6" x1="0" y1="890.72" x2="1440" y2="909.76" stroke="#DCDCDC" stroke-width="9" stroke-linecap="butt"/>
+</g>
+<g id="Layer / Proposals">
+<line id="Proposal segment" x1="560" y1="330" x2="660" y2="333" stroke="#9CC7E8" stroke-width="10" stroke-linecap="butt"/>
+<line id="Proposal segment 2" x1="900" y1="338" x2="1000" y2="340" stroke="#3C8DD0" stroke-width="10" stroke-linecap="butt"/>
+<line id="Proposal segment 3" x1="1180" y1="345" x2="1280" y2="347" stroke="#0B4F8F" stroke-width="10" stroke-linecap="butt"/>
+<line id="Proposal segment 4" x1="640" y1="560" x2="740" y2="566" stroke="#3C8DD0" stroke-width="10" stroke-linecap="butt"/>
+</g>
+<g id="Closing card">
+<rect id="Card background" x="420" y="380" width="600" height="300" rx="8" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="STEP 5 OF 5" x="720" y="440" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#6B6B6B" text-anchor="middle">STEP 5 OF 5</text>
+<text id="Propose a crossing" x="720" y="488" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="700" fill="#1A1A1A" text-anchor="middle">Propose a crossing</text>
+<text id="Mark two points across a road. A segment" x="560" y="528" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="400" fill="#3A3A3A" text-anchor="start">Mark two points across a road. A segment is</text>
+<text id="shown once it has three proposals." x="560" y="552" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="400" fill="#3A3A3A" text-anchor="start">shown once it has three proposals.</text>
+<g id="Button / Propose a crossing">
+<rect id="Button background" x="512" y="600" width="200" height="44" rx="6" fill="#1A1A1A" stroke="#1A1A1A" stroke-width="1.5"/>
+<text id="Propose a crossing 2" x="612.0" y="627.25" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="600" fill="#FFFFFF" text-anchor="middle">Propose a crossing</text>
+</g>
+<g id="Button / Explore the map">
+<rect id="Button background 2" x="728" y="600" width="200" height="44" rx="6" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1.5"/>
+<text id="Explore the map" x="828.0" y="627.25" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="600" fill="#1A1A1A" text-anchor="middle">Explore the map</text>
+</g>
+</g>
+</svg>

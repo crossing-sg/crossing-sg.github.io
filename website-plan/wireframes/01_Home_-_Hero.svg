@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1024" viewBox="0 0 1440 1024">
+<rect id="Page background" width="1440" height="1024" fill="#FFFFFF"/>
+<g id="Navigation bar">
+<rect id="Bar background" x="0" y="0" width="1440" height="72" rx="0" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<line id="Bar divider" x1="0" y1="72" x2="1440" y2="72" stroke="#D6D6D6" stroke-width="1" stroke-linecap="butt"/>
+<rect id="Active link background" x="914" y="18" width="74" height="38" rx="0" fill="#1A1A1A" stroke="none" stroke-width="1"/>
+<text id="Home" x="951.0" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600" fill="#FFFFFF" text-anchor="middle">Home</text>
+<text id="Map" x="1024.0" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="400" fill="#1A1A1A" text-anchor="middle">Map</text>
+<text id="Propose" x="1111.5" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="400" fill="#1A1A1A" text-anchor="middle">Propose</text>
+<text id="Methodology" x="1237.5" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="400" fill="#1A1A1A" text-anchor="middle">Methodology</text>
+<text id="About" x="1354.0" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="400" fill="#1A1A1A" text-anchor="middle">About</text>
+</g>
+<g id="Hero image">
+<rect id="Photo placeholder (asset/hero.jpg, zebra crossing, dark wash)" x="0" y="72" width="1440" height="600" rx="0" fill="#4A4A4A" stroke="none" stroke-width="1"/>
+<line id="Zebra stripe" x1="260" y1="72" x2="520" y2="672" stroke="#5E5E5E" stroke-width="70" stroke-linecap="butt"/>
+<line id="Zebra stripe 2" x1="460" y1="72" x2="720" y2="672" stroke="#5E5E5E" stroke-width="70" stroke-linecap="butt"/>
+<line id="Zebra stripe 3" x1="660" y1="72" x2="920" y2="672" stroke="#5E5E5E" stroke-width="70" stroke-linecap="butt"/>
+<text id="Photo: Myznik Egor, Unsplash" x="1410" y="640" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="400" fill="#DDDDDD" text-anchor="end">Photo: Myznik Egor, Unsplash</text>
+</g>
+<g id="Hero text">
+<text id="PEDESTRIAN CROSSINGS IN SINGAPORE" x="720" y="250" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">PEDESTRIAN CROSSINGS IN SINGAPORE</text>
+<text id="Where residents want to cross the road" x="720" y="318" font-family="Inter, Arial, sans-serif" font-size="52" font-weight="700" fill="#FFFFFF" text-anchor="middle">Where residents want to cross the road</text>
+<text id="Crowdsourced crossing proposals and pede" x="720" y="362" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="400" fill="#FFFFFF" text-anchor="middle">Crowdsourced crossing proposals and pedestrian detours in Singapore</text>
+<text id="Residents mark where a new crossing is n" x="720" y="410" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="400" fill="#FFFFFF" text-anchor="middle">Residents mark where a new crossing is needed. Their proposals are compared with the walking</text>
+<text id="detours and crossing gaps of the existin" x="720" y="436" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="400" fill="#FFFFFF" text-anchor="middle">detours and crossing gaps of the existing pedestrian network across Singapore.</text>
+<g id="Button / Propose a crossing">
+<rect id="Button background" x="522" y="478" width="190" height="46" rx="6" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1.5"/>
+<text id="Propose a crossing" x="617" y="507" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="600" fill="#1A1A1A" text-anchor="middle">Propose a crossing</text>
+</g>
+<g id="Button / Explore the map">
+<rect id="Button outline" x="728" y="478" width="190" height="46" rx="6" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
+<text id="Explore the map" x="823" y="507" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="600" fill="#FFFFFF" text-anchor="middle">Explore the map</text>
+</g>
+</g>
+<g id="Summary cards">
+<g id="Stat card 1">
+<rect id="Card background" x="202" y="612" width="332" height="180" rx="8" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="353" x="226" y="672" font-family="Inter, Arial, sans-serif" font-size="36" font-weight="700" fill="#1A1A1A" text-anchor="start">353</text>
+<text id="pedestrian accidents outside" x="226" y="706" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="400" fill="#1A1A1A" text-anchor="start">pedestrian accidents outside</text>
+<text id="crossings in 2024, up 23%" x="226" y="728" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="400" fill="#1A1A1A" text-anchor="start">crossings in 2024, up 23%</text>
+<text id="Singapore Police Force (2025)" x="226" y="772" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="400" fill="#6B6B6B" text-anchor="start">Singapore Police Force (2025)</text>
+</g>
+<g id="Stat card 2">
+<rect id="Card background 2" x="554" y="612" width="332" height="180" rx="8" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="XXX" x="578" y="672" font-family="Inter, Arial, sans-serif" font-size="36" font-weight="700" fill="#1A1A1A" text-anchor="start">XXX</text>
+<text id="proposals from residents" x="578" y="706" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="400" fill="#1A1A1A" text-anchor="start">proposals from residents</text>
+<text id="XX road segments shown" x="578" y="728" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="400" fill="#1A1A1A" text-anchor="start">XX road segments shown</text>
+<text id="Live count" x="578" y="772" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="400" fill="#6B6B6B" text-anchor="start">Live count</text>
+</g>
+<g id="Stat card 3">
+<rect id="Card background 3" x="906" y="612" width="332" height="180" rx="8" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="DD Mon" x="930" y="672" font-family="Inter, Arial, sans-serif" font-size="36" font-weight="700" fill="#1A1A1A" text-anchor="start">DD Mon</text>
+<text id="last proposal received" x="930" y="706" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="400" fill="#1A1A1A" text-anchor="start">last proposal received</text>
+<text id="Updated automatically" x="930" y="772" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="400" fill="#6B6B6B" text-anchor="start">Updated automatically</text>
+</g>
+</g>
+<g id="Scroll hint">
+<text id="Scroll to read the story" x="720" y="850" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="500" fill="#6B6B6B" text-anchor="middle">Scroll to read the story</text>
+<polyline id="Chevron" points="712,866 720,874 728,866" fill="none" stroke="#6B6B6B" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+</svg>

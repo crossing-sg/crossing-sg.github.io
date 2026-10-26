@@ -1,0 +1,16 @@
+# Raw source data (download again from LTA DataMall, data.gov.sg and OpenStreetMap, see README)
+*.zip
+HDBExistingBuilding.geojson
+MasterPlan2019PlanningAreaBoundaryNoSea*.geojson
+
+# Research file with case details that are not published on the website
+jaywalking_incidents_sg*.geojson
+
+# Local tool settings and system files
+.claude/
+**/.claude/
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+~$*

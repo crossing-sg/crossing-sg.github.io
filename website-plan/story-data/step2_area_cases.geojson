@@ -1,0 +1,12 @@
+{
+"type": "FeatureCollection",
+"name": "step2_area_cases",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "id": "V01", "status": "verified", "year": 2017.0, "place": "Bukit Batok Central, dekat jembatan penyeberangan (arah Bukit Batok West Ave 2)", "loc_precision": "junction", "url": "https://www.malaymail.com/news/world/2018/12/07/singaporean-jailed-six-weeks-for-causing-death-of-4-year-old-girl/1700941" }, "geometry": { "type": "Point", "coordinates": [ 103.748399, 1.352411 ] } },
+{ "type": "Feature", "properties": { "id": "V26", "status": "verified", "year": 2026.0, "place": "Bukit Batok West Avenue 5 arah Brickland Road, dekat Bukit Batok Driving Centre", "loc_precision": "junction", "url": "https://mustsharenews.com/jaywalking-pedestrian-hit/" }, "geometry": { "type": "Point", "coordinates": [ 103.7486, 1.369037 ] } },
+{ "type": "Feature", "properties": { "id": "V27", "status": "verified", "year": 2026.0, "place": "Persimpangan Bukit Batok Avenue 1 dan Bukit Batok West Avenue 6", "loc_precision": "junction", "url": "https://mothership.sg/2026/07/motorcycle-crashes-jaywalker-bukit-batok/" }, "geometry": { "type": "Point", "coordinates": [ 103.746929, 1.346043 ] } },
+{ "type": "Feature", "properties": { "id": "I01", "status": "indicative", "year": 2020.0, "place": "Bukit Batok West Avenue 4 arah Bukit Batok Avenue 2", "loc_precision": "road_name_only", "url": "https://theindependent.sg/elderly-man-dies-after-being-knocked-down-while-crossing-road-in-bukit-batok/" }, "geometry": { "type": "Point", "coordinates": [ 103.747021, 1.36269 ] } },
+{ "type": "Feature", "properties": { "id": "I02", "status": "indicative", "year": 2024.0, "place": "Bukit Batok West Avenue 6 arah Bukit Batok East Avenue 6 (dekat tikungan)", "loc_precision": "junction", "url": "https://mothership.sg/2026/02/spore-man-jail-speeding-woman-die/" }, "geometry": { "type": "Point", "coordinates": [ 103.746951, 1.345941 ] } }
+]
+}

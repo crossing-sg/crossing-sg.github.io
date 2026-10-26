@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Explore the map</title>
+    <link rel="stylesheet" href="css/style.css">
+    <meta charset='utf-8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css' rel='stylesheet' />
+</head>
+<body>
+    <div class="topnav">
+        <a href="index.html">Home</a>
+        <a class="active" href="map.html">Map</a>
+        <a href="propose.html">Propose</a>
+        <a href="methodology.html">Methodology</a>
+        <a href="about.html">About</a>
+    </div>
+
+    <div class="map-page">
+        <div class="panel">
+            <h2 style="margin:0 0 6px">Explore the map</h2>
+
+            <h3>MAP LAYER</h3>
+            <label><input type="radio" name="layer" value="gap" checked> Crossing gap</label>
+            <label><input type="radio" name="layer" value="detour"> Walking detour</label>
+            <label><input type="radio" name="layer" value="proposals"> Resident proposals</label>
+
+            <p class="note" id="layer-note"></p>
+            <div id="legend"></div>
+
+            <h3>REFERENCE POINTS (ZOOM IN TO SEE)</h3>
+            <label><input type="checkbox" class="ref" value="ref-bus"> Bus stops</label>
+            <label><input type="checkbox" class="ref" value="ref-mrt"> MRT exits</label>
+            <label><input type="checkbox" class="ref" value="ref-crossing" checked> Existing crossings</label>
+            <label><input type="checkbox" class="ref" value="ref-bridge" checked> Overhead bridges</label>
+            <label><input type="checkbox" class="ref" value="ref-underpass" checked> Underpasses</label>
+
+            <h3>DATA</h3>
+            <p><a href="methodology.html#download">Download aggregated data</a><br>
+               <a href="methodology.html">How these maps are made</a></p>
+        </div>
+
+        <div class="map-area">
+            <div class="search">
+                <input id="search" type="text" placeholder="Search a block, road or postal code" autocomplete="off">
+                <ul id="results" style="display:none"></ul>
+            </div>
+            <div class="info-card" id="info"></div>
+            <div id="map" style="position:absolute;top:0;bottom:0;width:100%"></div>
+        </div>
+    </div>
+
+    <script src="js/site-config.js"></script>
+    <script src="js/explore.js"></script>
+</body>
+</html>

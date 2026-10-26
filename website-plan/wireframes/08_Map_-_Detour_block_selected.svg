@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1024" viewBox="0 0 1440 1024">
+<rect id="Page background" width="1440" height="1024" fill="#FFFFFF"/>
+<g id="Navigation bar">
+<rect id="Bar background" x="0" y="0" width="1440" height="72" rx="0" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<line id="Bar divider" x1="0" y1="72" x2="1440" y2="72" stroke="#D6D6D6" stroke-width="1" stroke-linecap="butt"/>
+<text id="Home" x="951.0" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="400" fill="#1A1A1A" text-anchor="middle">Home</text>
+<rect id="Active link background" x="992" y="18" width="64" height="38" rx="0" fill="#1A1A1A" stroke="none" stroke-width="1"/>
+<text id="Map" x="1024.0" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600" fill="#FFFFFF" text-anchor="middle">Map</text>
+<text id="Propose" x="1111.5" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="400" fill="#1A1A1A" text-anchor="middle">Propose</text>
+<text id="Methodology" x="1237.5" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="400" fill="#1A1A1A" text-anchor="middle">Methodology</text>
+<text id="About" x="1354.0" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="400" fill="#1A1A1A" text-anchor="middle">About</text>
+</g>
+<g id="Side panel">
+<rect id="Panel background" x="0" y="72" width="380" height="952" rx="0" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<line id="Panel divider" x1="380" y1="72" x2="380" y2="1024" stroke="#D6D6D6" stroke-width="1" stroke-linecap="butt"/>
+<text id="Explore the map" x="32" y="124" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700" fill="#1A1A1A" text-anchor="start">Explore the map</text>
+<text id="MAP LAYER" x="32" y="168" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="600" fill="#6B6B6B" text-anchor="start">MAP LAYER</text>
+<g id="Radio / Crossing gap">
+<circle id="Radio outline" cx="40" cy="195" r="8" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1.5"/>
+<text id="Crossing gap" x="58" y="200" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="400" fill="#1A1A1A" text-anchor="start">Crossing gap</text>
+</g>
+<g id="Radio / Walking detour">
+<circle id="Radio outline 2" cx="40" cy="225" r="8" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1.5"/>
+<circle id="Radio dot" cx="40" cy="225" r="4" fill="#1A1A1A" stroke="none" stroke-width="1"/>
+<text id="Walking detour" x="58" y="230" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="400" fill="#1A1A1A" text-anchor="start">Walking detour</text>
+</g>
+<g id="Radio / Resident proposals">
+<circle id="Radio outline 3" cx="40" cy="255" r="8" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1.5"/>
+<text id="Resident proposals" x="58" y="260" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="400" fill="#1A1A1A" text-anchor="start">Resident proposals</text>
+</g>
+<rect id="Layer explanation box" x="32" y="300" width="316" height="76" rx="6" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<text id="Blocks coloured by how much longer the" x="46" y="324" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#3A3A3A" text-anchor="start">Blocks coloured by how much longer the</text>
+<text id="walk is than the straight distance. 2.0" x="46" y="344" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#3A3A3A" text-anchor="start">walk is than the straight distance. 2.0</text>
+<text id="means twice as far." x="46" y="364" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#3A3A3A" text-anchor="start">means twice as far.</text>
+<text id="LEGEND" x="32" y="410" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="600" fill="#6B6B6B" text-anchor="start">LEGEND</text>
+<line id="Swatch" x1="32" y1="435" x2="62" y2="435" stroke="#CFE3F3" stroke-width="6" stroke-linecap="butt"/>
+<text id="Under 1.5" x="74" y="440" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1A1A1A" text-anchor="start">Under 1.5</text>
+<line id="Swatch 2" x1="32" y1="461" x2="62" y2="461" stroke="#7DB0DA" stroke-width="6" stroke-linecap="butt"/>
+<text id="1.5 to 2.0" x="74" y="466" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1A1A1A" text-anchor="start">1.5 to 2.0</text>
+<line id="Swatch 3" x1="32" y1="487" x2="62" y2="487" stroke="#2F6DB3" stroke-width="6" stroke-linecap="butt"/>
+<text id="2.0 to 2.5" x="74" y="492" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1A1A1A" text-anchor="start">2.0 to 2.5</text>
+<line id="Swatch 4" x1="32" y1="513" x2="62" y2="513" stroke="#0E2F5A" stroke-width="6" stroke-linecap="butt"/>
+<text id="Over 2.5" x="74" y="518" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1A1A1A" text-anchor="start">Over 2.5</text>
+<line id="Divider" x1="32" y1="536" x2="348" y2="536" stroke="#D6D6D6" stroke-width="1" stroke-linecap="butt"/>
+<text id="REFERENCE POINTS (ZOOM IN TO SEE)" x="32" y="560" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="600" fill="#6B6B6B" text-anchor="start">REFERENCE POINTS (ZOOM IN TO SEE)</text>
+<g id="Checkbox / Bus stops">
+<rect id="Box" x="32" y="579" width="16" height="16" rx="3" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1.5"/>
+<text id="Bus stops" x="58" y="592" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="400" fill="#1A1A1A" text-anchor="start">Bus stops</text>
+</g>
+<g id="Checkbox / MRT exits">
+<rect id="Box 2" x="32" y="607" width="16" height="16" rx="3" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1.5"/>
+<text id="MRT exits" x="58" y="620" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="400" fill="#1A1A1A" text-anchor="start">MRT exits</text>
+</g>
+<g id="Checkbox / Existing crossings">
+<rect id="Box 3" x="32" y="635" width="16" height="16" rx="3" fill="#1A1A1A" stroke="#1A1A1A" stroke-width="1.5"/>
+<polyline id="Check" points="36,643 39,646 44,639" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<text id="Existing crossings" x="58" y="648" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="400" fill="#1A1A1A" text-anchor="start">Existing crossings</text>
+</g>
+<g id="Checkbox / Overhead bridges">
+<rect id="Box 4" x="32" y="663" width="16" height="16" rx="3" fill="#1A1A1A" stroke="#1A1A1A" stroke-width="1.5"/>
+<polyline id="Check 2" points="36,671 39,674 44,667" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<text id="Overhead bridges" x="58" y="676" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="400" fill="#1A1A1A" text-anchor="start">Overhead bridges</text>
+</g>
+<g id="Checkbox / Underpasses">
+<rect id="Box 5" x="32" y="691" width="16" height="16" rx="3" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1.5"/>
+<text id="Underpasses" x="58" y="704" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="400" fill="#1A1A1A" text-anchor="start">Underpasses</text>
+</g>
+<line id="Divider 2" x1="32" y1="760" x2="348" y2="760" stroke="#D6D6D6" stroke-width="1" stroke-linecap="butt"/>
+<text id="DATA" x="32" y="790" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="600" fill="#6B6B6B" text-anchor="start">DATA</text>
+<text id="Download aggregated data (CSV, GeoJSON)" x="32" y="816" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="500" fill="#1A1A1A" text-anchor="start">Download aggregated data (CSV, GeoJSON)</text>
+<text id="How these maps are made  &gt;" x="32" y="840" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="500" fill="#1A1A1A" text-anchor="start">How these maps are made  &gt;</text>
+</g>
+<g id="Map background">
+<rect id="Map canvas" x="381" y="72" width="1059" height="952" rx="0" fill="#F3F3F1" stroke="none" stroke-width="1"/>
+<clipPath id="clipc"><rect x="381" y="72" width="1059" height="952"/></clipPath>
+<line id="Road" x1="508.08" y1="72" x2="539.85" y2="1024" stroke="#DCDCDC" stroke-width="8" stroke-linecap="butt"/>
+<line id="Road 2" x1="857.55" y1="72" x2="836.37" y2="1024" stroke="#DCDCDC" stroke-width="12" stroke-linecap="butt"/>
+<line id="Road 3" x1="1207.02" y1="72" x2="1249.38" y2="1024" stroke="#DCDCDC" stroke-width="8" stroke-linecap="butt"/>
+<line id="Road 4" x1="381" y1="281.44" x2="1440" y2="329.04" stroke="#DCDCDC" stroke-width="9" stroke-linecap="butt"/>
+<line id="Road 5" x1="381" y1="624.16" x2="1440" y2="595.5999999999999" stroke="#DCDCDC" stroke-width="9" stroke-linecap="butt"/>
+<line id="Road 6" x1="381" y1="890.72" x2="1440" y2="909.76" stroke="#DCDCDC" stroke-width="9" stroke-linecap="butt"/>
+</g>
+<g id="Search">
+<rect id="Search box" x="412" y="100" width="420" height="44" rx="8" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="Search a block, road or postal code" x="432" y="128" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="400" fill="#9E9E9E" text-anchor="start">Search a block, road or postal code</text>
+</g>
+<g id="Zoom controls">
+<rect id="Zoom background" x="1380" y="100" width="36" height="72" rx="8" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="+" x="1398" y="128" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="500" fill="#1A1A1A" text-anchor="middle">+</text>
+<text id="-" x="1398" y="162" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="500" fill="#1A1A1A" text-anchor="middle">-</text>
+</g>
+<g id="Layer / Blocks">
+<rect id="Block" x="560" y="200" width="34" height="24" rx="3" fill="#CFE3F3" stroke="none" stroke-width="1"/>
+<rect id="Block 2" x="700" y="420" width="34" height="24" rx="3" fill="#7DB0DA" stroke="none" stroke-width="1"/>
+<rect id="Block 3" x="1000" y="230" width="34" height="24" rx="3" fill="#2F6DB3" stroke="none" stroke-width="1"/>
+<rect id="Block 4" x="1180" y="500" width="34" height="24" rx="3" fill="#0E2F5A" stroke="none" stroke-width="1"/>
+<rect id="Block 5" x="620" y="760" width="34" height="24" rx="3" fill="#CFE3F3" stroke="none" stroke-width="1"/>
+<rect id="Block 6" x="1080" y="820" width="34" height="24" rx="3" fill="#7DB0DA" stroke="none" stroke-width="1"/>
+<rect id="Block 7" x="860" y="560" width="34" height="24" rx="3" fill="#2F6DB3" stroke="none" stroke-width="1"/>
+</g>
+<g id="Layer / Routes of selected block">
+<line id="Straight line" x1="877" y1="572" x2="1090" y2="320" stroke="#1A1A1A" stroke-width="2" stroke-linecap="butt" stroke-dasharray="8 6"/>
+<polyline id="Walking route" points="877,584 960,590 1020,590 1070,470 1092,330" fill="none" stroke="#C23B3B" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<line id="Straight line 2" x1="877" y1="572" x2="700" y2="660" stroke="#1A1A1A" stroke-width="2" stroke-linecap="butt" stroke-dasharray="8 6"/>
+<polyline id="Walking route 2" points="860,584 800,640 720,650 702,664" fill="none" stroke="#C23B3B" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g id="Block panel">
+<rect id="Card background" x="1060" y="560" width="330" height="400" rx="8" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="Blk XXX [Street]" x="1082" y="596" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700" fill="#1A1A1A" text-anchor="start">Blk XXX [Street]</text>
+<text id="Mean detour ratio X.X  (X destinations)" x="1082" y="620" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="500" fill="#6B6B6B" text-anchor="start">Mean detour ratio X.X  (X destinations)</text>
+<line id="Divider 3" x1="1082" y1="640" x2="1368" y2="640" stroke="#D6D6D6" stroke-width="1" stroke-linecap="butt"/>
+<text id="Bus stop XXXXX" x="1082" y="676" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="600" fill="#1A1A1A" text-anchor="start">Bus stop XXXXX</text>
+<text id="Straight XXX m   Walk X,XXX m" x="1082" y="700" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#6B6B6B" text-anchor="start">Straight XXX m   Walk X,XXX m</text>
+<rect id="Bar track" x="1082" y="712" width="280" height="6" rx="3" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<rect id="Bar value" x="1082" y="712" width="120" height="6" rx="3" fill="#C23B3B" stroke="none" stroke-width="1"/>
+<text id="Bus stop XXXXX 2" x="1082" y="746" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="600" fill="#1A1A1A" text-anchor="start">Bus stop XXXXX</text>
+<text id="Straight XXX m   Walk XXX m" x="1082" y="770" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#6B6B6B" text-anchor="start">Straight XXX m   Walk XXX m</text>
+<rect id="Bar track 2" x="1082" y="782" width="280" height="6" rx="3" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<rect id="Bar value 2" x="1082" y="782" width="170" height="6" rx="3" fill="#C23B3B" stroke="none" stroke-width="1"/>
+<text id="MRT exit X" x="1082" y="816" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="600" fill="#1A1A1A" text-anchor="start">MRT exit X</text>
+<text id="Straight XXX m   Walk X,XXX m 2" x="1082" y="840" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#6B6B6B" text-anchor="start">Straight XXX m   Walk X,XXX m</text>
+<rect id="Bar track 3" x="1082" y="852" width="280" height="6" rx="3" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<rect id="Bar value 3" x="1082" y="852" width="220" height="6" rx="3" fill="#C23B3B" stroke="none" stroke-width="1"/>
+</g>
+</svg>

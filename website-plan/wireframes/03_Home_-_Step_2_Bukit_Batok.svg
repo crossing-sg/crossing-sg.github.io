@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1024" viewBox="0 0 1440 1024">
+<rect id="Page background" width="1440" height="1024" fill="#FFFFFF"/>
+<g id="Navigation bar">
+<rect id="Bar background" x="0" y="0" width="1440" height="72" rx="0" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<line id="Bar divider" x1="0" y1="72" x2="1440" y2="72" stroke="#D6D6D6" stroke-width="1" stroke-linecap="butt"/>
+<rect id="Active link background" x="914" y="18" width="74" height="38" rx="0" fill="#1A1A1A" stroke="none" stroke-width="1"/>
+<text id="Home" x="951.0" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600" fill="#FFFFFF" text-anchor="middle">Home</text>
+<text id="Map" x="1024.0" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="400" fill="#1A1A1A" text-anchor="middle">Map</text>
+<text id="Propose" x="1111.5" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="400" fill="#1A1A1A" text-anchor="middle">Propose</text>
+<text id="Methodology" x="1237.5" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="400" fill="#1A1A1A" text-anchor="middle">Methodology</text>
+<text id="About" x="1354.0" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="400" fill="#1A1A1A" text-anchor="middle">About</text>
+</g>
+<g id="Map background">
+<rect id="Map canvas" x="0" y="72" width="1440" height="952" rx="0" fill="#F3F3F1" stroke="none" stroke-width="1"/>
+<clipPath id="clipc"><rect x="0" y="72" width="1440" height="952"/></clipPath>
+<line id="Road" x1="172.79999999999998" y1="72" x2="216.0" y2="1024" stroke="#DCDCDC" stroke-width="8" stroke-linecap="butt"/>
+<line id="Road 2" x1="648.0" y1="72" x2="619.2" y2="1024" stroke="#DCDCDC" stroke-width="12" stroke-linecap="butt"/>
+<line id="Road 3" x1="1123.2" y1="72" x2="1180.8000000000002" y2="1024" stroke="#DCDCDC" stroke-width="8" stroke-linecap="butt"/>
+<line id="Road 4" x1="0" y1="281.44" x2="1440" y2="329.04" stroke="#DCDCDC" stroke-width="9" stroke-linecap="butt"/>
+<line id="Road 5" x1="0" y1="624.16" x2="1440" y2="595.5999999999999" stroke="#DCDCDC" stroke-width="9" stroke-linecap="butt"/>
+<line id="Road 6" x1="0" y1="890.72" x2="1440" y2="909.76" stroke="#DCDCDC" stroke-width="9" stroke-linecap="butt"/>
+</g>
+<g id="Layer / Crossing gap">
+<line id="Segment" x1="640" y1="330" x2="760" y2="334" stroke="#DADCE0" stroke-width="10" stroke-linecap="butt"/>
+<line id="Segment 2" x1="760" y1="334" x2="900" y2="338" stroke="#F7D774" stroke-width="10" stroke-linecap="butt"/>
+<line id="Segment 3" x1="900" y1="338" x2="1060" y2="342" stroke="#EE8B2B" stroke-width="10" stroke-linecap="butt"/>
+<line id="Segment 4" x1="1060" y1="342" x2="1300" y2="348" stroke="#C62828" stroke-width="10" stroke-linecap="butt"/>
+<line id="Segment 5" x1="1300" y1="348" x2="1440" y2="350" stroke="#C62828" stroke-width="10" stroke-linecap="butt"/>
+</g>
+<g id="Layer / Existing crossings">
+<rect id="Crossing marker" x="627" y="318" width="10" height="30" rx="2" fill="#00B8D9" stroke="none" stroke-width="1"/>
+<rect id="Crossing marker 2" x="900" y="324" width="10" height="30" rx="2" fill="#00B8D9" stroke="none" stroke-width="1"/>
+<rect id="Crossing marker 3" x="1057" y="327" width="10" height="30" rx="2" fill="#00B8D9" stroke="none" stroke-width="1"/>
+</g>
+<g id="Layer / Bukit Batok cases">
+<circle id="Case point" cx="910" cy="360" r="9" fill="#C62828" stroke="#FFFFFF" stroke-width="2"/>
+<circle id="Case point 2" cx="1066" cy="362" r="9" fill="#C62828" stroke="#FFFFFF" stroke-width="2"/>
+<circle id="Case point 3" cx="780" cy="560" r="9" fill="#C62828" stroke="#FFFFFF" stroke-width="2"/>
+<circle id="Case point 4" cx="1180" cy="600" r="9" fill="#FFFFFF" stroke="#C62828" stroke-width="2"/>
+<circle id="Case point 5" cx="1185" cy="600" r="9" fill="#FFFFFF" stroke="#C62828" stroke-width="2"/>
+</g>
+<g id="Legend / DISTANCE TO NEAREST CROSSING">
+<rect id="Legend background" x="1100" y="800" width="260" height="144" rx="8" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="DISTANCE TO NEAREST CROSSING" x="1116" y="826" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#6B6B6B" text-anchor="start">DISTANCE TO NEAREST CROSSING</text>
+<line id="Swatch" x1="1116" y1="847" x2="1146" y2="847" stroke="#DADCE0" stroke-width="6" stroke-linecap="butt"/>
+<text id="Under 50 m" x="1158" y="852" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1A1A1A" text-anchor="start">Under 50 m</text>
+<line id="Swatch 2" x1="1116" y1="873" x2="1146" y2="873" stroke="#F7D774" stroke-width="6" stroke-linecap="butt"/>
+<text id="50 to 100 m" x="1158" y="878" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1A1A1A" text-anchor="start">50 to 100 m</text>
+<line id="Swatch 3" x1="1116" y1="899" x2="1146" y2="899" stroke="#EE8B2B" stroke-width="6" stroke-linecap="butt"/>
+<text id="100 to 200 m" x="1158" y="904" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1A1A1A" text-anchor="start">100 to 200 m</text>
+<line id="Swatch 4" x1="1116" y1="925" x2="1146" y2="925" stroke="#C62828" stroke-width="6" stroke-linecap="butt"/>
+<text id="Over 200 m" x="1158" y="930" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1A1A1A" text-anchor="start">Over 200 m</text>
+</g>
+<g id="Story card">
+<rect id="Card background" x="80" y="200" width="440" height="420" rx="8" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="STEP 2 OF 5" x="112" y="248" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#6B6B6B" text-anchor="start">STEP 2 OF 5</text>
+<text id="Reported cases in" x="112" y="290" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="700" fill="#1A1A1A" text-anchor="start">Reported cases in</text>
+<text id="Bukit Batok" x="112" y="326" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="700" fill="#1A1A1A" text-anchor="start">Bukit Batok</text>
+<text id="Bukit Batok has the most reported cases " x="112" y="376" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="400" fill="#3A3A3A" text-anchor="start">Bukit Batok has the most reported cases in</text>
+<text id="the news sample, five in total, three fa" x="112" y="400" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="400" fill="#3A3A3A" text-anchor="start">the news sample, five in total, three fatal.</text>
+<text id="Four are within 20 m of a crossing." x="112" y="424" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="400" fill="#3A3A3A" text-anchor="start">Four are within 20 m of a crossing.</text>
+<text id="" x="112" y="448" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="400" fill="#3A3A3A" text-anchor="start"></text>
+<text id="20% of road length in Bukit Batok is mor" x="112" y="472" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="400" fill="#3A3A3A" text-anchor="start">20% of road length in Bukit Batok is more</text>
+<text id="than 200 m from a crossing (33% for" x="112" y="496" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="400" fill="#3A3A3A" text-anchor="start">than 200 m from a crossing (33% for</text>
+<text id="Singapore)." x="112" y="520" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="400" fill="#3A3A3A" text-anchor="start">Singapore).</text>
+<text id="See all roads on the map  &gt;" x="112" y="590" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="600" fill="#1A1A1A" text-anchor="start">See all roads on the map  &gt;</text>
+</g>
+<g id="Scroll progress">
+<circle id="Progress dot" cx="1380" cy="420" r="5" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1.5"/>
+<circle id="Progress dot 2" cx="1380" cy="446" r="5" fill="#1A1A1A" stroke="#1A1A1A" stroke-width="1.5"/>
+<circle id="Progress dot 3" cx="1380" cy="472" r="5" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1.5"/>
+<circle id="Progress dot 4" cx="1380" cy="498" r="5" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1.5"/>
+<circle id="Progress dot 5" cx="1380" cy="524" r="5" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1.5"/>
+</g>
+</svg>

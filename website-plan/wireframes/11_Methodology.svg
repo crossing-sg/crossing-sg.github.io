@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1300" viewBox="0 0 1440 1300">
+<rect id="Page background" width="1440" height="1300" fill="#FFFFFF"/>
+<g id="Navigation bar">
+<rect id="Bar background" x="0" y="0" width="1440" height="72" rx="0" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<line id="Bar divider" x1="0" y1="72" x2="1440" y2="72" stroke="#D6D6D6" stroke-width="1" stroke-linecap="butt"/>
+<text id="Home" x="951.0" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="400" fill="#1A1A1A" text-anchor="middle">Home</text>
+<text id="Map" x="1024.0" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="400" fill="#1A1A1A" text-anchor="middle">Map</text>
+<text id="Propose" x="1111.5" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="400" fill="#1A1A1A" text-anchor="middle">Propose</text>
+<rect id="Active link background" x="1167" y="18" width="141" height="38" rx="0" fill="#1A1A1A" stroke="none" stroke-width="1"/>
+<text id="Methodology" x="1237.5" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600" fill="#FFFFFF" text-anchor="middle">Methodology</text>
+<text id="About" x="1354.0" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="400" fill="#1A1A1A" text-anchor="middle">About</text>
+</g>
+<g id="Page contents">
+<text id="Methodology 2" x="80" y="140" font-family="Inter, Arial, sans-serif" font-size="36" font-weight="700" fill="#1A1A1A" text-anchor="start">Methodology</text>
+<g id="Table of contents">
+<text id="Data sources" x="80" y="210" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="600" fill="#1A1A1A" text-anchor="start">Data sources</text>
+<text id="Crossing gap" x="80" y="244" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="400" fill="#6B6B6B" text-anchor="start">Crossing gap</text>
+<text id="Walking detour" x="80" y="278" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="400" fill="#6B6B6B" text-anchor="start">Walking detour</text>
+<text id="Resident proposals" x="80" y="312" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="400" fill="#6B6B6B" text-anchor="start">Resident proposals</text>
+<text id="Moderation and privacy" x="80" y="346" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="400" fill="#6B6B6B" text-anchor="start">Moderation and privacy</text>
+<text id="Limits" x="80" y="380" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="400" fill="#6B6B6B" text-anchor="start">Limits</text>
+<text id="Download" x="80" y="414" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="400" fill="#6B6B6B" text-anchor="start">Download</text>
+</g>
+<g id="Section / Data sources">
+<text id="Data sources 2" x="400" y="210" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700" fill="#1A1A1A" text-anchor="start">Data sources</text>
+<g id="Text placeholder">
+<rect id="Placeholder line" x="400" y="238" width="860" height="10" rx="4" fill="#E2E2E2" stroke="none" stroke-width="1"/>
+<rect id="Placeholder line 2" x="400" y="256" width="860" height="10" rx="4" fill="#E2E2E2" stroke="none" stroke-width="1"/>
+<rect id="Placeholder line 3" x="400" y="274" width="860" height="10" rx="4" fill="#E2E2E2" stroke="none" stroke-width="1"/>
+<rect id="Placeholder line 4" x="400" y="292" width="533" height="10" rx="4" fill="#E2E2E2" stroke="none" stroke-width="1"/>
+</g>
+</g>
+<g id="Section / Crossing gap">
+<text id="Crossing gap 2" x="400" y="360" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700" fill="#1A1A1A" text-anchor="start">Crossing gap</text>
+<g id="Text placeholder 2">
+<rect id="Placeholder line 5" x="400" y="388" width="860" height="10" rx="4" fill="#E2E2E2" stroke="none" stroke-width="1"/>
+<rect id="Placeholder line 6" x="400" y="406" width="860" height="10" rx="4" fill="#E2E2E2" stroke="none" stroke-width="1"/>
+<rect id="Placeholder line 7" x="400" y="424" width="533" height="10" rx="4" fill="#E2E2E2" stroke="none" stroke-width="1"/>
+</g>
+</g>
+<g id="Section / Walking detour">
+<text id="Walking detour 2" x="400" y="492" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700" fill="#1A1A1A" text-anchor="start">Walking detour</text>
+<rect id="Formula box" x="400" y="512" width="520" height="60" rx="6" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<text id="Detour ratio = walking distance / straig" x="660" y="550" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="600" fill="#1A1A1A" text-anchor="middle">Detour ratio = walking distance / straight distance</text>
+<g id="Text placeholder 3">
+<rect id="Placeholder line 8" x="400" y="596" width="860" height="10" rx="4" fill="#E2E2E2" stroke="none" stroke-width="1"/>
+<rect id="Placeholder line 9" x="400" y="614" width="860" height="10" rx="4" fill="#E2E2E2" stroke="none" stroke-width="1"/>
+<rect id="Placeholder line 10" x="400" y="632" width="533" height="10" rx="4" fill="#E2E2E2" stroke="none" stroke-width="1"/>
+</g>
+</g>
+<g id="Section / Resident proposals">
+<text id="Resident proposals 2" x="400" y="700" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700" fill="#1A1A1A" text-anchor="start">Resident proposals</text>
+<g id="Text placeholder 4">
+<rect id="Placeholder line 11" x="400" y="728" width="860" height="10" rx="4" fill="#E2E2E2" stroke="none" stroke-width="1"/>
+<rect id="Placeholder line 12" x="400" y="746" width="860" height="10" rx="4" fill="#E2E2E2" stroke="none" stroke-width="1"/>
+<rect id="Placeholder line 13" x="400" y="764" width="533" height="10" rx="4" fill="#E2E2E2" stroke="none" stroke-width="1"/>
+</g>
+</g>
+<g id="Section / Moderation and privacy">
+<text id="Moderation and privacy 2" x="400" y="832" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700" fill="#1A1A1A" text-anchor="start">Moderation and privacy</text>
+<g id="Text placeholder 5">
+<rect id="Placeholder line 14" x="400" y="860" width="860" height="10" rx="4" fill="#E2E2E2" stroke="none" stroke-width="1"/>
+<rect id="Placeholder line 15" x="400" y="878" width="860" height="10" rx="4" fill="#E2E2E2" stroke="none" stroke-width="1"/>
+<rect id="Placeholder line 16" x="400" y="896" width="533" height="10" rx="4" fill="#E2E2E2" stroke="none" stroke-width="1"/>
+</g>
+</g>
+<g id="Section / Limits">
+<text id="Limits 2" x="400" y="964" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700" fill="#1A1A1A" text-anchor="start">Limits</text>
+<g id="Text placeholder 6">
+<rect id="Placeholder line 17" x="400" y="992" width="860" height="10" rx="4" fill="#E2E2E2" stroke="none" stroke-width="1"/>
+<rect id="Placeholder line 18" x="400" y="1010" width="860" height="10" rx="4" fill="#E2E2E2" stroke="none" stroke-width="1"/>
+<rect id="Placeholder line 19" x="400" y="1028" width="533" height="10" rx="4" fill="#E2E2E2" stroke="none" stroke-width="1"/>
+</g>
+</g>
+<g id="Section / Download">
+<text id="Download 2" x="400" y="1096" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700" fill="#1A1A1A" text-anchor="start">Download</text>
+<rect id="Download card" x="400" y="1120" width="270" height="70" rx="8" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="Crossing gap segments (GeoJSON)" x="420" y="1162" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600" fill="#1A1A1A" text-anchor="start">Crossing gap segments (GeoJSON)</text>
+<rect id="Download card 2" x="690" y="1120" width="270" height="70" rx="8" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="Detour by block (CSV)" x="710" y="1162" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600" fill="#1A1A1A" text-anchor="start">Detour by block (CSV)</text>
+<rect id="Download card 3" x="980" y="1120" width="270" height="70" rx="8" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="Proposals by segment, aggregated (CSV)" x="1000" y="1162" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600" fill="#1A1A1A" text-anchor="start">Proposals by segment, aggregated (CSV)</text>
+</g>
+</g>
+</svg>

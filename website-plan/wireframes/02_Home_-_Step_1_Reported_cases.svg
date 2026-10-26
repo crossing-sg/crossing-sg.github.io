@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1024" viewBox="0 0 1440 1024">
+<rect id="Page background" width="1440" height="1024" fill="#FFFFFF"/>
+<g id="Navigation bar">
+<rect id="Bar background" x="0" y="0" width="1440" height="72" rx="0" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<line id="Bar divider" x1="0" y1="72" x2="1440" y2="72" stroke="#D6D6D6" stroke-width="1" stroke-linecap="butt"/>
+<rect id="Active link background" x="914" y="18" width="74" height="38" rx="0" fill="#1A1A1A" stroke="none" stroke-width="1"/>
+<text id="Home" x="951.0" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600" fill="#FFFFFF" text-anchor="middle">Home</text>
+<text id="Map" x="1024.0" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="400" fill="#1A1A1A" text-anchor="middle">Map</text>
+<text id="Propose" x="1111.5" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="400" fill="#1A1A1A" text-anchor="middle">Propose</text>
+<text id="Methodology" x="1237.5" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="400" fill="#1A1A1A" text-anchor="middle">Methodology</text>
+<text id="About" x="1354.0" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="400" fill="#1A1A1A" text-anchor="middle">About</text>
+</g>
+<g id="Map background">
+<rect id="Map canvas" x="0" y="72" width="1440" height="952" rx="0" fill="#F3F3F1" stroke="none" stroke-width="1"/>
+<clipPath id="clipc"><rect x="0" y="72" width="1440" height="952"/></clipPath>
+<line id="Road" x1="172.79999999999998" y1="72" x2="216.0" y2="1024" stroke="#DCDCDC" stroke-width="8" stroke-linecap="butt"/>
+<line id="Road 2" x1="648.0" y1="72" x2="619.2" y2="1024" stroke="#DCDCDC" stroke-width="12" stroke-linecap="butt"/>
+<line id="Road 3" x1="1123.2" y1="72" x2="1180.8000000000002" y2="1024" stroke="#DCDCDC" stroke-width="8" stroke-linecap="butt"/>
+<line id="Road 4" x1="0" y1="281.44" x2="1440" y2="329.04" stroke="#DCDCDC" stroke-width="9" stroke-linecap="butt"/>
+<line id="Road 5" x1="0" y1="624.16" x2="1440" y2="595.5999999999999" stroke="#DCDCDC" stroke-width="9" stroke-linecap="butt"/>
+<line id="Road 6" x1="0" y1="890.72" x2="1440" y2="909.76" stroke="#DCDCDC" stroke-width="9" stroke-linecap="butt"/>
+</g>
+<g id="Layer / Reported fatal cases">
+<circle id="Case point" cx="860" cy="300" r="9" fill="#C62828" stroke="#FFFFFF" stroke-width="2"/>
+<circle id="Case point 2" cx="1010" cy="520" r="9" fill="#C62828" stroke="#FFFFFF" stroke-width="2"/>
+<circle id="Case point 3" cx="1120" cy="410" r="9" fill="#C62828" stroke="#FFFFFF" stroke-width="2"/>
+<circle id="Case point 4" cx="930" cy="700" r="9" fill="#C62828" stroke="#FFFFFF" stroke-width="2"/>
+<circle id="Case point 5" cx="1240" cy="610" r="9" fill="#C62828" stroke="#FFFFFF" stroke-width="2"/>
+</g>
+<g id="Legend / REPORTED FATAL CASES">
+<rect id="Legend background" x="1100" y="860" width="260" height="66" rx="8" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="REPORTED FATAL CASES" x="1116" y="886" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#6B6B6B" text-anchor="start">REPORTED FATAL CASES</text>
+<circle id="Swatch" cx="1126" cy="907" r="6" fill="#C62828" stroke="#FFFFFF" stroke-width="1.5"/>
+<text id="2017 to 2024, news and court" x="1158" y="912" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1A1A1A" text-anchor="start">2017 to 2024, news and court</text>
+</g>
+<g id="Story card">
+<rect id="Card background" x="80" y="200" width="440" height="420" rx="8" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="STEP 1 OF 5" x="112" y="248" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#6B6B6B" text-anchor="start">STEP 1 OF 5</text>
+<text id="Reported fatal cases," x="112" y="290" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="700" fill="#1A1A1A" text-anchor="start">Reported fatal cases,</text>
+<text id="2017 to 2024" x="112" y="326" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="700" fill="#1A1A1A" text-anchor="start">2017 to 2024</text>
+<text id="News and court reports describe five fat" x="112" y="376" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="400" fill="#3A3A3A" text-anchor="start">News and court reports describe five fatal</text>
+<text id="cases. Official statistics do not record" x="112" y="400" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="400" fill="#3A3A3A" text-anchor="start">cases. Official statistics do not record</text>
+<text id="where accidents happen." x="112" y="424" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="400" fill="#3A3A3A" text-anchor="start">where accidents happen.</text>
+<text id="" x="112" y="448" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="400" fill="#3A3A3A" text-anchor="start"></text>
+<text id="Two cases happened at signalised crossin" x="112" y="472" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="400" fill="#3A3A3A" text-anchor="start">Two cases happened at signalised crossings.</text>
+<text id="Points mark the road or junction named i" x="112" y="496" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="400" fill="#3A3A3A" text-anchor="start">Points mark the road or junction named in</text>
+<text id="the report, not the exact spot." x="112" y="520" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="400" fill="#3A3A3A" text-anchor="start">the report, not the exact spot.</text>
+<text id="Sources for each case  &gt;" x="112" y="590" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="600" fill="#1A1A1A" text-anchor="start">Sources for each case  &gt;</text>
+</g>
+<g id="Scroll progress">
+<circle id="Progress dot" cx="1380" cy="420" r="5" fill="#1A1A1A" stroke="#1A1A1A" stroke-width="1.5"/>
+<circle id="Progress dot 2" cx="1380" cy="446" r="5" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1.5"/>
+<circle id="Progress dot 3" cx="1380" cy="472" r="5" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1.5"/>
+<circle id="Progress dot 4" cx="1380" cy="498" r="5" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1.5"/>
+<circle id="Progress dot 5" cx="1380" cy="524" r="5" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1.5"/>
+</g>
+</svg>

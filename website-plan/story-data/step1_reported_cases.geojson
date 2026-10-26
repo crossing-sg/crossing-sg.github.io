@@ -1,0 +1,12 @@
+{
+"type": "FeatureCollection",
+"name": "step1_reported_cases",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "id": "V01", "year": 2017.0, "place": "Bukit Batok Central, dekat jembatan penyeberangan (arah Bukit Batok West Ave 2)", "loc_precision": "junction", "media": "Malay Mail", "url": "https://www.malaymail.com/news/world/2018/12/07/singaporean-jailed-six-weeks-for-causing-death-of-4-year-old-girl/1700941" }, "geometry": { "type": "Point", "coordinates": [ 103.748399, 1.352411 ] } },
+{ "type": "Feature", "properties": { "id": "V10", "year": 2020.0, "place": "Queensway arah Jalan Bukit Merah, ruas antara Jalan Bukit Merah dan Portsdown Avenue", "loc_precision": "between_two_junctions", "media": "MustShareNews (dari CNA/TODAY)", "url": "https://mustsharenews.com/driver-jailed-jaywalker-queensway/" }, "geometry": { "type": "Point", "coordinates": [ 103.801625, 1.290547 ] } },
+{ "type": "Feature", "properties": { "id": "V13", "year": 2022.0, "place": "Persimpangan Sims Avenue dan Aljunied Road (berlampu)", "loc_precision": "junction", "media": "Mothership", "url": "https://mothership.sg/2023/04/cross-road-look-phone-death/" }, "geometry": { "type": "Point", "coordinates": [ 103.881828, 1.314954 ] } },
+{ "type": "Feature", "properties": { "id": "V15", "year": 2024.0, "place": "Institution Hill, River Valley (jalan 2 lajur, di antara kendaraan parkir)", "loc_precision": "road_name_only", "media": "AsiaOne (dari ST)", "url": "https://www.asiaone.com/singapore/maid-jaywalked-4-year-old-girl-who-was-killed-river-valley-accident-traffic-police" }, "geometry": { "type": "Point", "coordinates": [ 103.840013, 1.295211 ] } },
+{ "type": "Feature", "properties": { "id": "V17", "year": 2024.0, "place": "Balestier Road arah Lavender Street, dekat penyeberangan di Jalan Dusun", "loc_precision": "junction", "media": "Mothership", "url": "https://mothership.sg/2025/08/woman-jaywalk-balestier-road/" }, "geometry": { "type": "Point", "coordinates": [ 103.843936, 1.326587 ] } }
+]
+}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Methodology</title>
+    <link rel="stylesheet" href="css/style.css">
+    <meta charset='utf-8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <div class="topnav">
+        <a href="index.html">Home</a>
+        <a href="map.html">Map</a>
+        <a href="propose.html">Propose</a>
+        <a class="active" href="methodology.html">Methodology</a>
+        <a href="about.html">About</a>
+    </div>
+
+    <div class="description">
+        <h1>Methodology</h1>
+        <p>The project links two kinds of data through the road segment. Open data describes the existing pedestrian network. Residents add proposals for where a new crossing should be. Each proposal is assigned to a 50 m road segment, which allows proposals to be compared with the distance to the nearest crossing and with the walking detours of nearby residents.</p>
+
+        <h2>Data sources</h2>
+        <table>
+            <tr><th>Data</th><th>Source</th><th>Use</th></tr>
+            <tr><td>Road Section Line, Road Crossing, Pedestrian Overhead Bridge and Underpass, Bus Stop Location, Train Station Exit (September 2026)</td><td>Land Transport Authority, LTA DataMall</td><td>Road segments, existing crossings and destinations</td></tr>
+            <tr><td>HDB Existing Building</td><td>Housing and Development Board, data.gov.sg</td><td>Residential blocks</td></tr>
+            <tr><td>Road and footpath network</td><td>OpenStreetMap contributors (ODbL)</td><td>Walking routes</td></tr>
+            <tr><td>Address search</td><td>Singapore Land Authority, OneMap API</td><td>Search box on the map page</td></tr>
+            <tr><td>Pedestrian accident statistics</td><td>Singapore Police Force annual road traffic situation reports</td><td>Context on the home page</td></tr>
+            <tr><td>Reported fatal cases</td><td>News and court reports, each linked on the home page</td><td>Context on the home page</td></tr>
+            <tr><td>Crossing proposals, experiences and support</td><td>Residents, through the proposal form</td><td>Resident proposals layer</td></tr>
+        </table>
+
+        <h2>Crossing gap</h2>
+        <p>LTA road sections are split into segments of about 50 m. For each segment, the straight-line distance from its midpoint to the nearest road crossing, overhead bridge or underpass is measured in SVY21 (EPSG:3414). Segments are grouped into four classes, under 50 m, 50 to 100 m, 100 to 200 m and over 200 m. Expressway segments (road category CAT1) are excluded because pedestrians are not expected to cross them.</p>
+
+        <h2>Walking detour</h2>
+        <p>Each HDB block is paired with every bus stop and MRT station exit within 500 m in a straight line. Pairs closer than 50 m are excluded. The walking distance for each pair is the shortest path on the OpenStreetMap network, computed with Dijkstra's algorithm. A total of 227,808 pairs are used.</p>
+        <p class="formula"><b>Detour ratio</b> = walking distance / straight-line distance</p>
+        <p>A ratio of 1.0 means the walk is as short as the straight line. A ratio of 2.0 means the walk is twice as long. Each block is coloured by the mean ratio of its pairs (Loo et al., 2024).</p>
+
+        <h2>Resident proposals</h2>
+        <p>A contributor marks point A and point B on opposite sides of a road, no more than 80 m apart, and chooses a crossing type and a main reason. The form finds the road segment between the two points. Each proposal is counted on that segment as soon as it is received. A segment appears on the public map only after it has three or more proposals. For each segment the map shows the number of proposals, the most requested type, the most common reason, the distance to the nearest existing crossing and one representative crossing line drawn from the mean of the submitted points.</p>
+        <p>Visitors can also add support to a segment that is already shown. Support is counted separately and does not affect the three-proposal threshold.</p>
+
+        <h2>Moderation and privacy</h2>
+        <ul>
+            <li>The form collects no login, name, contact detail, photo or device identifier.</li>
+            <li>Points are rounded to about 10 m and are stored only in a sheet that the project team can access. Individual points are never published.</li>
+            <li>Proposals are screened automatically and checked by the team, who can remove invalid entries. Removed entries leave the totals the next time the map loads.</li>
+            <li>Written experiences appear only after the team approves them, and are placed on the road segment rather than at the marked points.</li>
+        </ul>
+
+        <h2>Limits</h2>
+        <ul>
+            <li>The LTA Road Crossing layer is incomplete. About 2,700 crossings recorded in OpenStreetMap are not in the LTA layer, mostly in new towns such as Tengah. The length of road more than 200 m from a crossing is therefore an upper bound.</li>
+            <li>Walking routes depend on the completeness of OpenStreetMap footpaths. A missing footpath makes a detour look longer than it is.</li>
+            <li>Straight-line distance to a crossing ignores fences, medians and the side of the road.</li>
+            <li>Contributors are self-selected through classmates, residents' networks and posters, so proposals do not represent all residents.</li>
+            <li>Support is limited to one per segment per browser. This can be bypassed by changing browser or device.</li>
+            <li>Reported fatal cases come from news and court reports, which favour filmed and widely shared incidents. They are context, not a measure of where accidents happen.</li>
+        </ul>
+
+        <h2 id="download">Download</h2>
+        <p>Processed data used on the map, in WGS84 (EPSG:4326).</p>
+        <ul>
+            <li><a href="data/gap_segments.geojson" download>Crossing gap segments (GeoJSON)</a></li>
+            <li><a href="data/detour_blocks.geojson" download>Mean detour ratio by HDB block (GeoJSON)</a></li>
+            <li><a href="data/crossing_markers.geojson" download>Existing crossings, overhead bridges and underpasses (GeoJSON)</a></li>
+            <li>Proposals by road segment, aggregated (CSV), available once the form is open</li>
+        </ul>
+
+        <h2>Reference</h2>
+        <p>Loo, B. P. Y., Lian, T., &amp; Frank, L. D. (2024). Walking (in)convenience: An in-depth study of pedestrian detours to daily facilities. <i>Journal of the American Planning Association, 90</i>(4), 742&ndash;757.</p>
+    </div>
+</body>
+</html>

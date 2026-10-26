@@ -1,0 +1,353 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;1,400&display=swap');
+
+/* ===== Base rules, same selectors and properties as the class example (Week 1, 3 and 5 css/style.css) ===== */
+
+body {
+  margin:0;
+  padding: 25px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: white;
+}
+
+.topnav a {
+  float: left;
+  color: #1a1a1a;
+  text-align: center;
+  padding: 5px 12px;
+  text-decoration: none;
+  font-size: 12px;
+}
+
+.topnav a:hover {
+  background-color: white;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #1a1a1a;
+  color: white;
+}
+
+.description {
+ padding-left: 10%;
+ padding-right: 25%;
+ padding-bottom: 30%;
+ height: 100%;
+}
+
+h1{
+  padding-top: 10%;
+  padding-bottom: 5%;
+}
+
+iframe {
+  width: 100vw; /* 100% of viewport width */
+  height: 100vh; /* 100% of viewport height */
+  border: none; /* Removes default border */
+  display: block; /* Eliminates inline spacing bugs */
+}
+
+/* ===== Added for this project ===== */
+
+/* Navigation links sit on the right. Flex keeps the link order and overrides the float from the base rule. */
+.topnav {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Larger navigation links than the class example, so they are easier to see and click */
+.topnav a {
+  font-size: 15px;
+  padding: 8px 18px;
+}
+
+/* The story iframe on Home fills the area under the navigation bar */
+.map-page iframe {
+  width: 100%;
+  height: 100%;
+}
+
+.description h2 {
+  margin-top: 40px;
+}
+
+.description p,
+.description li {
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+table {
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+td, th {
+  border: 1px solid #ddd;
+  padding: 6px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.formula {
+  background: #efefef;
+  padding: 12px 16px;
+  border-radius: 6px;
+  display: inline-block;
+}
+
+.btn, .btn:visited {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 1.5px solid #1a1a1a;
+  border-radius: 6px;
+  background: #1a1a1a;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.btn-light, .btn-light:visited {
+  background: #fff;
+  color: #1a1a1a;
+}
+
+/* Pages with a full-height map under the navigation bar */
+.map-page {
+  position: absolute;
+  top: 76px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.panel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 340px;
+  overflow-y: auto;
+  padding: 20px 24px;
+  box-sizing: border-box;
+  border-right: 1px solid #ddd;
+  background: #fff;
+  font-size: 14px;
+}
+
+.panel h3 {
+  font-size: 11px;
+  color: #6b6b6b;
+  letter-spacing: 0.05em;
+  margin: 22px 0 8px;
+}
+
+.panel label {
+  display: block;
+  margin: 6px 0;
+  cursor: pointer;
+}
+
+.panel .note {
+  background: #efefef;
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.map-area {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 340px;
+  right: 0;
+}
+
+.key {
+  display: inline-block;
+  width: 26px;
+  height: 6px;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.search {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 2;
+  width: 360px;
+}
+
+.search input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.search ul {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.search li {
+  padding: 8px 12px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.search li:hover {
+  background: #efefef;
+}
+
+.info-card {
+  position: absolute;
+  right: 14px;
+  bottom: 30px;
+  z-index: 2;
+  width: 360px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px 18px;
+  font-size: 13px;
+  display: none;
+}
+
+.info-card .close {
+  float: right;
+  cursor: pointer;
+  color: #6b6b6b;
+}
+
+.info-card .nums {
+  display: flex;
+  gap: 18px;
+  margin: 10px 0;
+}
+
+.info-card .nums b {
+  display: block;
+  font-size: 22px;
+}
+
+.info-card .small {
+  color: #6b6b6b;
+  font-size: 11px;
+}
+
+.bar {
+  height: 5px;
+  background: #efefef;
+  border-radius: 3px;
+  margin: 4px 0 10px;
+}
+
+.bar div {
+  height: 5px;
+  background: #C23B3B;
+  border-radius: 3px;
+}
+
+/* Propose page */
+.form-page {
+  position: absolute;
+  top: 76px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.form-map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 440px;
+}
+
+.form-side {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 440px;
+  overflow-y: auto;
+  padding: 20px 28px;
+  box-sizing: border-box;
+  border-left: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.form-side h4 {
+  margin: 22px 0 6px;
+  font-size: 16px;
+}
+
+.form-side textarea {
+  width: 100%;
+  box-sizing: border-box;
+  height: 100px;
+  font-family: inherit;
+  padding: 8px;
+}
+
+.error {
+  color: #b42318;
+  font-size: 13px;
+}
+
+.map-hint {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 2;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 13px;
+}
+
+.thanks {
+  max-width: 560px;
+  margin: 80px auto;
+  text-align: center;
+  display: none;
+}
+
+.progress {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin: 14px 0;
+}
+
+.progress div {
+  width: 64px;
+  height: 10px;
+  border-radius: 5px;
+  background: #e2e2e2;
+}
+
+.progress div.on {
+  background: #1a1a1a;
+}

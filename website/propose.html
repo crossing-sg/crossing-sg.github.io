@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Propose a crossing</title>
+    <link rel="stylesheet" href="css/style.css">
+    <meta charset='utf-8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css' rel='stylesheet' />
+</head>
+<body>
+    <div class="topnav">
+        <a href="index.html">Home</a>
+        <a href="map.html">Map</a>
+        <a class="active" href="propose.html">Propose</a>
+        <a href="methodology.html">Methodology</a>
+        <a href="about.html">About</a>
+    </div>
+
+    <div class="form-page" id="form-page">
+        <div class="form-map">
+            <div class="map-hint" id="hint">Zoom in to a road, then click one side of the road and then the other</div>
+            <div id="map" style="position:absolute;top:0;bottom:0;width:100%"></div>
+        </div>
+
+        <div class="form-side">
+            <h2 style="margin:0">Propose a crossing</h2>
+            <p style="color:#6b6b6b">Takes about two minutes. No login and no personal details are collected.</p>
+
+            <h4>1 &nbsp;Where</h4>
+            <div id="where">No points marked yet.</div>
+            <button class="btn btn-light" style="margin-top:8px" onclick="resetPoints()">Mark again</button>
+
+            <h4>2 &nbsp;Type of crossing</h4>
+            <label><input type="radio" name="type" value="Zebra crossing"> Zebra crossing</label><br>
+            <label><input type="radio" name="type" value="Signalised crossing"> Signalised crossing</label><br>
+            <label><input type="radio" name="type" value="Overhead bridge with lift"> Overhead bridge with lift</label><br>
+            <label><input type="radio" name="type" value="Underpass"> Underpass</label><br>
+            <label><input type="radio" name="type" value="Not sure"> Not sure</label>
+
+            <h4>3 &nbsp;Main reason</h4>
+            <label><input type="radio" name="reason" value="Nearest crossing is too far"> Nearest crossing is too far</label><br>
+            <label><input type="radio" name="reason" value="Stairs at the overhead bridge"> Stairs at the overhead bridge</label><br>
+            <label><input type="radio" name="reason" value="Long wait at the lights"> Long wait at the lights</label><br>
+            <label><input type="radio" name="reason" value="Existing crossing is not on the way"> Existing crossing is not on the way</label><br>
+            <label><input type="radio" name="reason" value="Other"> Other</label>
+
+            <h4>4 &nbsp;Your experience (optional)</h4>
+            <p style="color:#6b6b6b;font-size:13px;margin-top:0">Reviewed by the team before it appears on the map. Do not include names or vehicle numbers.</p>
+            <textarea id="story" maxlength="300" placeholder="What makes crossing here difficult?"></textarea>
+            <div style="text-align:right;font-size:12px;color:#9e9e9e"><span id="chars">0</span> / 300</div>
+
+            <!-- Hidden field that only automated spam fills in -->
+            <input type="text" id="website" style="display:none" tabindex="-1" autocomplete="off">
+
+            <p class="error" id="error"></p>
+            <button class="btn" style="width:100%;padding:12px" id="submit" onclick="submitProposal()">Submit proposal</button>
+            <p style="font-size:12px;color:#6b6b6b">Proposals are shown only as totals per road segment. The exact points you mark are never published.</p>
+        </div>
+    </div>
+
+    <div class="thanks" id="thanks">
+        <h2>Thank you, your proposal is recorded</h2>
+        <p id="thanks-road" style="color:#6b6b6b"></p>
+        <p><b id="thanks-count"></b></p>
+        <div class="progress"><div id="p1"></div><div id="p2"></div><div id="p3"></div></div>
+        <p id="thanks-next" style="color:#6b6b6b"></p>
+        <p style="margin-top:28px">
+            <button class="btn" onclick="shareLink()" id="share">Copy link to share</button>
+            <a class="btn btn-light" href="map.html?layer=proposals">See the map</a>
+        </p>
+        <p><a href="propose.html">Propose another crossing</a></p>
+    </div>
+
+    <script src="js/site-config.js"></script>
+    <script src="js/propose.js"></script>
+</body>
+</html>

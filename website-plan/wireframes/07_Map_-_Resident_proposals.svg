@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1024" viewBox="0 0 1440 1024">
+<rect id="Page background" width="1440" height="1024" fill="#FFFFFF"/>
+<g id="Navigation bar">
+<rect id="Bar background" x="0" y="0" width="1440" height="72" rx="0" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<line id="Bar divider" x1="0" y1="72" x2="1440" y2="72" stroke="#D6D6D6" stroke-width="1" stroke-linecap="butt"/>
+<text id="Home" x="951.0" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="400" fill="#1A1A1A" text-anchor="middle">Home</text>
+<rect id="Active link background" x="992" y="18" width="64" height="38" rx="0" fill="#1A1A1A" stroke="none" stroke-width="1"/>
+<text id="Map" x="1024.0" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600" fill="#FFFFFF" text-anchor="middle">Map</text>
+<text id="Propose" x="1111.5" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="400" fill="#1A1A1A" text-anchor="middle">Propose</text>
+<text id="Methodology" x="1237.5" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="400" fill="#1A1A1A" text-anchor="middle">Methodology</text>
+<text id="About" x="1354.0" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="400" fill="#1A1A1A" text-anchor="middle">About</text>
+</g>
+<g id="Side panel">
+<rect id="Panel background" x="0" y="72" width="380" height="952" rx="0" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<line id="Panel divider" x1="380" y1="72" x2="380" y2="1024" stroke="#D6D6D6" stroke-width="1" stroke-linecap="butt"/>
+<text id="Explore the map" x="32" y="124" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700" fill="#1A1A1A" text-anchor="start">Explore the map</text>
+<text id="MAP LAYER" x="32" y="168" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="600" fill="#6B6B6B" text-anchor="start">MAP LAYER</text>
+<g id="Radio / Crossing gap">
+<circle id="Radio outline" cx="40" cy="195" r="8" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1.5"/>
+<text id="Crossing gap" x="58" y="200" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="400" fill="#1A1A1A" text-anchor="start">Crossing gap</text>
+</g>
+<g id="Radio / Walking detour">
+<circle id="Radio outline 2" cx="40" cy="225" r="8" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1.5"/>
+<text id="Walking detour" x="58" y="230" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="400" fill="#1A1A1A" text-anchor="start">Walking detour</text>
+</g>
+<g id="Radio / Resident proposals">
+<circle id="Radio outline 3" cx="40" cy="255" r="8" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1.5"/>
+<circle id="Radio dot" cx="40" cy="255" r="4" fill="#1A1A1A" stroke="none" stroke-width="1"/>
+<text id="Resident proposals" x="58" y="260" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="400" fill="#1A1A1A" text-anchor="start">Resident proposals</text>
+</g>
+<rect id="Layer explanation box" x="32" y="300" width="316" height="76" rx="6" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<text id="Road pieces coloured by the number of" x="46" y="324" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#3A3A3A" text-anchor="start">Road pieces coloured by the number of</text>
+<text id="proposals. Pieces with fewer than three" x="46" y="344" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#3A3A3A" text-anchor="start">proposals. Pieces with fewer than three</text>
+<text id="proposals are not shown." x="46" y="364" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#3A3A3A" text-anchor="start">proposals are not shown.</text>
+<text id="LEGEND" x="32" y="410" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="600" fill="#6B6B6B" text-anchor="start">LEGEND</text>
+<line id="Swatch" x1="32" y1="435" x2="62" y2="435" stroke="#9CC7E8" stroke-width="6" stroke-linecap="butt"/>
+<text id="3 to 4 proposals" x="74" y="440" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1A1A1A" text-anchor="start">3 to 4 proposals</text>
+<line id="Swatch 2" x1="32" y1="461" x2="62" y2="461" stroke="#3C8DD0" stroke-width="6" stroke-linecap="butt"/>
+<text id="5 to 9" x="74" y="466" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1A1A1A" text-anchor="start">5 to 9</text>
+<line id="Swatch 3" x1="32" y1="487" x2="62" y2="487" stroke="#0B4F8F" stroke-width="6" stroke-linecap="butt"/>
+<text id="10 or more" x="74" y="492" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#1A1A1A" text-anchor="start">10 or more</text>
+<line id="Divider" x1="32" y1="536" x2="348" y2="536" stroke="#D6D6D6" stroke-width="1" stroke-linecap="butt"/>
+<text id="REFERENCE POINTS (ZOOM IN TO SEE)" x="32" y="560" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="600" fill="#6B6B6B" text-anchor="start">REFERENCE POINTS (ZOOM IN TO SEE)</text>
+<g id="Checkbox / Bus stops">
+<rect id="Box" x="32" y="579" width="16" height="16" rx="3" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1.5"/>
+<text id="Bus stops" x="58" y="592" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="400" fill="#1A1A1A" text-anchor="start">Bus stops</text>
+</g>
+<g id="Checkbox / MRT exits">
+<rect id="Box 2" x="32" y="607" width="16" height="16" rx="3" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1.5"/>
+<text id="MRT exits" x="58" y="620" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="400" fill="#1A1A1A" text-anchor="start">MRT exits</text>
+</g>
+<g id="Checkbox / Existing crossings">
+<rect id="Box 3" x="32" y="635" width="16" height="16" rx="3" fill="#1A1A1A" stroke="#1A1A1A" stroke-width="1.5"/>
+<polyline id="Check" points="36,643 39,646 44,639" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<text id="Existing crossings" x="58" y="648" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="400" fill="#1A1A1A" text-anchor="start">Existing crossings</text>
+</g>
+<g id="Checkbox / Overhead bridges">
+<rect id="Box 4" x="32" y="663" width="16" height="16" rx="3" fill="#1A1A1A" stroke="#1A1A1A" stroke-width="1.5"/>
+<polyline id="Check 2" points="36,671 39,674 44,667" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<text id="Overhead bridges" x="58" y="676" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="400" fill="#1A1A1A" text-anchor="start">Overhead bridges</text>
+</g>
+<g id="Checkbox / Underpasses">
+<rect id="Box 5" x="32" y="691" width="16" height="16" rx="3" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1.5"/>
+<text id="Underpasses" x="58" y="704" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="400" fill="#1A1A1A" text-anchor="start">Underpasses</text>
+</g>
+<line id="Divider 2" x1="32" y1="760" x2="348" y2="760" stroke="#D6D6D6" stroke-width="1" stroke-linecap="butt"/>
+<text id="DATA" x="32" y="790" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="600" fill="#6B6B6B" text-anchor="start">DATA</text>
+<text id="Download aggregated data (CSV, GeoJSON)" x="32" y="816" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="500" fill="#1A1A1A" text-anchor="start">Download aggregated data (CSV, GeoJSON)</text>
+<text id="How these maps are made  &gt;" x="32" y="840" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="500" fill="#1A1A1A" text-anchor="start">How these maps are made  &gt;</text>
+</g>
+<g id="Map background">
+<rect id="Map canvas" x="381" y="72" width="1059" height="952" rx="0" fill="#F3F3F1" stroke="none" stroke-width="1"/>
+<clipPath id="clipc"><rect x="381" y="72" width="1059" height="952"/></clipPath>
+<line id="Road" x1="508.08" y1="72" x2="539.85" y2="1024" stroke="#DCDCDC" stroke-width="8" stroke-linecap="butt"/>
+<line id="Road 2" x1="857.55" y1="72" x2="836.37" y2="1024" stroke="#DCDCDC" stroke-width="12" stroke-linecap="butt"/>
+<line id="Road 3" x1="1207.02" y1="72" x2="1249.38" y2="1024" stroke="#DCDCDC" stroke-width="8" stroke-linecap="butt"/>
+<line id="Road 4" x1="381" y1="281.44" x2="1440" y2="329.04" stroke="#DCDCDC" stroke-width="9" stroke-linecap="butt"/>
+<line id="Road 5" x1="381" y1="624.16" x2="1440" y2="595.5999999999999" stroke="#DCDCDC" stroke-width="9" stroke-linecap="butt"/>
+<line id="Road 6" x1="381" y1="890.72" x2="1440" y2="909.76" stroke="#DCDCDC" stroke-width="9" stroke-linecap="butt"/>
+</g>
+<g id="Search">
+<rect id="Search box" x="412" y="100" width="420" height="44" rx="8" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="Search a block, road or postal code" x="432" y="128" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="400" fill="#9E9E9E" text-anchor="start">Search a block, road or postal code</text>
+</g>
+<g id="Zoom controls">
+<rect id="Zoom background" x="1380" y="100" width="36" height="72" rx="8" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="+" x="1398" y="128" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="500" fill="#1A1A1A" text-anchor="middle">+</text>
+<text id="-" x="1398" y="162" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="500" fill="#1A1A1A" text-anchor="middle">-</text>
+</g>
+<g id="Layer / Proposals">
+<line id="Proposal segment" x1="520" y1="296" x2="620" y2="300" stroke="#9CC7E8" stroke-width="10" stroke-linecap="butt"/>
+<line id="Proposal segment 2" x1="880" y1="312" x2="980" y2="315" stroke="#0B4F8F" stroke-width="10" stroke-linecap="butt"/>
+<line id="Proposal segment 3" x1="1160" y1="330" x2="1260" y2="333" stroke="#3C8DD0" stroke-width="10" stroke-linecap="butt"/>
+<line id="Proposal segment 4" x1="860" y1="690" x2="960" y2="700" stroke="#3C8DD0" stroke-width="10" stroke-linecap="butt"/>
+<line id="Proposal segment 5" x1="1220" y1="610" x2="1320" y2="614" stroke="#9CC7E8" stroke-width="10" stroke-linecap="butt"/>
+<line id="Representative crossing line" x1="905" y1="250" x2="960" y2="380" stroke="#C23B3B" stroke-width="7" stroke-linecap="round"/>
+</g>
+<g id="Segment card">
+<rect id="Card background" x="990" y="400" width="380" height="330" rx="8" fill="#FFFFFF" stroke="#D6D6D6" stroke-width="1"/>
+<text id="[Road name], segment XX" x="1012" y="436" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700" fill="#1A1A1A" text-anchor="start">[Road name], segment XX</text>
+<text id="x" x="1348" y="436" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="500" fill="#6B6B6B" text-anchor="middle">x</text>
+<text id="PROPOSALS" x="1012" y="474" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="600" fill="#6B6B6B" text-anchor="start">PROPOSALS</text>
+<text id="12" x="1012" y="506" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="700" fill="#1A1A1A" text-anchor="start">12</text>
+<text id="SUPPORT" x="1130" y="474" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="600" fill="#6B6B6B" text-anchor="start">SUPPORT</text>
+<text id="34" x="1130" y="506" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="700" fill="#1A1A1A" text-anchor="start">34</text>
+<text id="NEAREST CROSSING" x="1240" y="474" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="600" fill="#6B6B6B" text-anchor="start">NEAREST CROSSING</text>
+<text id="XXX m" x="1240" y="506" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="700" fill="#1A1A1A" text-anchor="start">XXX m</text>
+<line id="Divider 3" x1="1012" y1="526" x2="1348" y2="526" stroke="#D6D6D6" stroke-width="1" stroke-linecap="butt"/>
+<text id="Most requested type" x="1012" y="556" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="500" fill="#6B6B6B" text-anchor="start">Most requested type</text>
+<text id="Zebra crossing (7 of 12)" x="1012" y="578" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="600" fill="#1A1A1A" text-anchor="start">Zebra crossing (7 of 12)</text>
+<text id="Most common reason" x="1012" y="606" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="500" fill="#6B6B6B" text-anchor="start">Most common reason</text>
+<text id="Stairs at the overhead bridge (5 of 12)" x="1012" y="628" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="600" fill="#1A1A1A" text-anchor="start">Stairs at the overhead bridge (5 of 12)</text>
+<g id="Button / I need a crossing here too">
+<rect id="Button background" x="1012" y="660" width="220" height="40" rx="6" fill="#1A1A1A" stroke="#1A1A1A" stroke-width="1.5"/>
+<text id="I need a crossing here too" x="1122.0" y="684.55" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="middle">I need a crossing here too</text>
+</g>
+<g id="Button / Propose here">
+<rect id="Button background 2" x="1244" y="660" width="104" height="40" rx="6" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1.5"/>
+<text id="Propose here" x="1296.0" y="684.55" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600" fill="#1A1A1A" text-anchor="middle">Propose here</text>
+</g>
+</g>
+</svg>

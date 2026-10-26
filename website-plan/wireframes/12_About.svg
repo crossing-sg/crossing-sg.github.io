@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1024" viewBox="0 0 1440 1024">
+<rect id="Page background" width="1440" height="1024" fill="#FFFFFF"/>
+<g id="Navigation bar">
+<rect id="Bar background" x="0" y="0" width="1440" height="72" rx="0" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<line id="Bar divider" x1="0" y1="72" x2="1440" y2="72" stroke="#D6D6D6" stroke-width="1" stroke-linecap="butt"/>
+<text id="Home" x="951.0" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="400" fill="#1A1A1A" text-anchor="middle">Home</text>
+<text id="Map" x="1024.0" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="400" fill="#1A1A1A" text-anchor="middle">Map</text>
+<text id="Propose" x="1111.5" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="400" fill="#1A1A1A" text-anchor="middle">Propose</text>
+<text id="Methodology" x="1237.5" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="400" fill="#1A1A1A" text-anchor="middle">Methodology</text>
+<rect id="Active link background" x="1312" y="18" width="84" height="38" rx="0" fill="#1A1A1A" stroke="none" stroke-width="1"/>
+<text id="About" x="1354.0" y="43" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600" fill="#FFFFFF" text-anchor="middle">About</text>
+</g>
+<g id="Page contents">
+<text id="About 2" x="80" y="140" font-family="Inter, Arial, sans-serif" font-size="36" font-weight="700" fill="#1A1A1A" text-anchor="start">About</text>
+<g id="Text placeholder">
+<rect id="Placeholder line" x="80" y="180" width="700" height="10" rx="4" fill="#E2E2E2" stroke="none" stroke-width="1"/>
+<rect id="Placeholder line 2" x="80" y="198" width="700" height="10" rx="4" fill="#E2E2E2" stroke="none" stroke-width="1"/>
+<rect id="Placeholder line 3" x="80" y="216" width="434" height="10" rx="4" fill="#E2E2E2" stroke="none" stroke-width="1"/>
+</g>
+<text id="Team" x="80" y="290" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700" fill="#1A1A1A" text-anchor="start">Team</text>
+<circle id="Photo placeholder" cx="140" cy="380" r="48" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<text id="Gangsar Dwi Saputro" x="200" y="372" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600" fill="#1A1A1A" text-anchor="start">Gangsar Dwi Saputro</text>
+<text id="Role" x="200" y="396" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#6B6B6B" text-anchor="start">Role</text>
+<circle id="Photo placeholder 2" cx="440" cy="380" r="48" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<text id="Xia Ruize" x="500" y="372" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600" fill="#1A1A1A" text-anchor="start">Xia Ruize</text>
+<text id="Role 2" x="500" y="396" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#6B6B6B" text-anchor="start">Role</text>
+<circle id="Photo placeholder 3" cx="740" cy="380" r="48" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<text id="Yuan Zhiyi" x="800" y="372" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600" fill="#1A1A1A" text-anchor="start">Yuan Zhiyi</text>
+<text id="Role 3" x="800" y="396" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#6B6B6B" text-anchor="start">Role</text>
+<text id="Course" x="80" y="500" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700" fill="#1A1A1A" text-anchor="start">Course</text>
+<text id="DEP5118 Community Data Gathering and Vis" x="80" y="532" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="400" fill="#3A3A3A" text-anchor="start">DEP5118 Community Data Gathering and Visualization, National University of Singapore</text>
+<text id="Management plan" x="80" y="610" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700" fill="#1A1A1A" text-anchor="start">Management plan</text>
+<text id="Proposals" x="80" y="650" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="600" fill="#1A1A1A" text-anchor="start">Proposals</text>
+<text id="Saved automatically, checked by the team" x="260" y="650" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="400" fill="#3A3A3A" text-anchor="start">Saved automatically, checked by the team every week</text>
+<text id="Experiences" x="80" y="682" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="600" fill="#1A1A1A" text-anchor="start">Experiences</text>
+<text id="Shown only after review" x="260" y="682" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="400" fill="#3A3A3A" text-anchor="start">Shown only after review</text>
+<text id="Network data" x="80" y="714" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="600" fill="#1A1A1A" text-anchor="start">Network data</text>
+<text id="Updated with each LTA DataMall release" x="260" y="714" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="400" fill="#3A3A3A" text-anchor="start">Updated with each LTA DataMall release</text>
+<text id="Code" x="80" y="746" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="600" fill="#1A1A1A" text-anchor="start">Code</text>
+<text id="Open source on GitHub" x="260" y="746" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="400" fill="#3A3A3A" text-anchor="start">Open source on GitHub</text>
+<text id="Contact the team  &gt;" x="80" y="830" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="600" fill="#1A1A1A" text-anchor="start">Contact the team  &gt;</text>
+</g>
+</svg>
