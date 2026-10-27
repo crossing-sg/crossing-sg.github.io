@@ -1,0 +1,20 @@
+{
+"type": "FeatureCollection",
+"name": "step3_destinations",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "BUS_STOP_N": "43009", "LOC_DESC": "Bt Batok Int" }, "geometry": { "type": "Point", "coordinates": [ 103.751061899688864, 1.349993540365124 ] } },
+{ "type": "Feature", "properties": { "BUS_STOP_N": "43321", "LOC_DESC": "Opp Blk 144" }, "geometry": { "type": "Point", "coordinates": [ 103.745108800028106, 1.349905999589128 ] } },
+{ "type": "Feature", "properties": { "BUS_STOP_N": "43329", "LOC_DESC": "Blk 146" }, "geometry": { "type": "Point", "coordinates": [ 103.744840000433868, 1.349762040436914 ] } },
+{ "type": "Feature", "properties": { "BUS_STOP_N": "43389", "LOC_DESC": "Opp Blk 102" }, "geometry": { "type": "Point", "coordinates": [ 103.748343000241718, 1.347604989847873 ] } },
+{ "type": "Feature", "properties": { "BUS_STOP_N": "43391", "LOC_DESC": "Bt Batok CC" }, "geometry": { "type": "Point", "coordinates": [ 103.747797499996906, 1.349893949750586 ] } },
+{ "type": "Feature", "properties": { "BUS_STOP_N": "43399", "LOC_DESC": "Opp Blk 120" }, "geometry": { "type": "Point", "coordinates": [ 103.7480888003373, 1.350667150078329 ] } },
+{ "type": "Feature", "properties": { "BUS_STOP_N": "43401", "LOC_DESC": "Bt Batok Polyclinic" }, "geometry": { "type": "Point", "coordinates": [ 103.74681640030505, 1.352264990138127 ] } },
+{ "type": "Feature", "properties": { "BUS_STOP_N": "43409", "LOC_DESC": "Opp Blk 127" }, "geometry": { "type": "Point", "coordinates": [ 103.747023999747682, 1.35244366722295 ] } },
+{ "type": "Feature", "properties": { "BUS_STOP_N": "43411", "LOC_DESC": "Opp Blk 628" }, "geometry": { "type": "Point", "coordinates": [ 103.750198899984809, 1.351765199566594 ] } },
+{ "type": "Feature", "properties": { "BUS_STOP_N": "43419", "LOC_DESC": "Aft Bt Batok Stn/Blk 628" }, "geometry": { "type": "Point", "coordinates": [ 103.749933800066472, 1.351623360002178 ] } },
+{ "type": "Feature", "properties": { "BUS_STOP_N": "43461", "LOC_DESC": "Aft Bt Batok West Ave 5" }, "geometry": { "type": "Point", "coordinates": [ 103.747493700256797, 1.355046659766302 ] } },
+{ "type": "Feature", "properties": { "BUS_STOP_N": "43469", "LOC_DESC": "Bef Bt Batok West Ave 5" }, "geometry": { "type": "Point", "coordinates": [ 103.747308600102414, 1.355468030419806 ] } },
+{ "type": "Feature", "properties": { "BUS_STOP_N": "43531", "LOC_DESC": "Blk 140" }, "geometry": { "type": "Point", "coordinates": [ 103.74377630017851, 1.351548690369386 ] } }
+]
+}
