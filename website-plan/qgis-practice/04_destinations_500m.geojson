@@ -1,0 +1,24 @@
+{
+"type": "FeatureCollection",
+"name": "04_destinations_500m",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3414" } },
+"features": [
+{ "type": "Feature", "properties": { "dest_id": "43009", "dest_type": "bus_stop", "name": "Bt Batok Int", "straight_m": 390.7 }, "geometry": { "type": "Point", "coordinates": [ 18845.749800000339746, 36901.097599999979138 ] } },
+{ "type": "Feature", "properties": { "dest_id": "43321", "dest_type": "bus_stop", "name": "Opp Blk 144", "straight_m": 356.3 }, "geometry": { "type": "Point", "coordinates": [ 18183.235399999655783, 36891.440999999642372 ] } },
+{ "type": "Feature", "properties": { "dest_id": "43329", "dest_type": "bus_stop", "name": "Blk 146", "straight_m": 390.2 }, "geometry": { "type": "Point", "coordinates": [ 18153.32039999961853, 36875.523800000548363 ] } },
+{ "type": "Feature", "properties": { "dest_id": "43389", "dest_type": "bus_stop", "name": "Opp Blk 102", "straight_m": 434.2 }, "geometry": { "type": "Point", "coordinates": [ 18543.157200000248849, 36636.994000000879169 ] } },
+{ "type": "Feature", "properties": { "dest_id": "43391", "dest_type": "bus_stop", "name": "Bt Batok CC", "straight_m": 178.4 }, "geometry": { "type": "Point", "coordinates": [ 18482.457899999804795, 36890.097899999469519 ] } },
+{ "type": "Feature", "properties": { "dest_id": "43399", "dest_type": "bus_stop", "name": "Opp Blk 120", "straight_m": 95.3 }, "geometry": { "type": "Point", "coordinates": [ 18514.879399999976158, 36975.593399999663234 ] } },
+{ "type": "Feature", "properties": { "dest_id": "43401", "dest_type": "bus_stop", "name": "Bt Batok Polyclinic", "straight_m": 146.0 }, "geometry": { "type": "Point", "coordinates": [ 18373.281700000166893, 37152.279600000008941 ] } },
+{ "type": "Feature", "properties": { "dest_id": "43409", "dest_type": "bus_stop", "name": "Opp Blk 127", "straight_m": 141.5 }, "geometry": { "type": "Point", "coordinates": [ 18396.385900000110269, 37172.036000000312924 ] } },
+{ "type": "Feature", "properties": { "dest_id": "43411", "dest_type": "bus_stop", "name": "Opp Blk 628", "straight_m": 258.7 }, "geometry": { "type": "Point", "coordinates": [ 18749.714200000278652, 37097.002100000157952 ] } },
+{ "type": "Feature", "properties": { "dest_id": "43419", "dest_type": "bus_stop", "name": "Aft Bt Batok Stn/Blk 628", "straight_m": 228.0 }, "geometry": { "type": "Point", "coordinates": [ 18720.21100000012666, 37081.319199999794364 ] } },
+{ "type": "Feature", "properties": { "dest_id": "43461", "dest_type": "bus_stop", "name": "Aft Bt Batok West Ave 5", "straight_m": 394.1 }, "geometry": { "type": "Point", "coordinates": [ 18448.668499999679625, 37459.86009999923408 ] } },
+{ "type": "Feature", "properties": { "dest_id": "43469", "dest_type": "bus_stop", "name": "Bef Bt Batok West Ave 5", "straight_m": 442.9 }, "geometry": { "type": "Point", "coordinates": [ 18428.070600000210106, 37506.453900000080466 ] } },
+{ "type": "Feature", "properties": { "dest_id": "43531", "dest_type": "bus_stop", "name": "Blk 140", "straight_m": 457.7 }, "geometry": { "type": "Point", "coordinates": [ 18034.949599999934435, 37073.08699999935925 ] } },
+{ "type": "Feature", "properties": { "dest_id": "BUKIT BATOK MRT STATION Exit B", "dest_type": "train_exit", "name": "BUKIT BATOK MRT STATION", "straight_m": 326.6 }, "geometry": { "type": "Point", "coordinates": [ 18720.553713729605079, 36834.319818301126361 ] } },
+{ "type": "Feature", "properties": { "dest_id": "BUKIT BATOK MRT STATION Exit C", "dest_type": "train_exit", "name": "BUKIT BATOK MRT STATION", "straight_m": 303.1 }, "geometry": { "type": "Point", "coordinates": [ 18701.591613729484379, 36848.747518301010132 ] } },
+{ "type": "Feature", "properties": { "dest_id": "BUKIT BATOK MRT STATION Exit D", "dest_type": "train_exit", "name": "BUKIT BATOK MRT STATION", "straight_m": 369.1 }, "geometry": { "type": "Point", "coordinates": [ 18629.453113729134202, 36725.493718300014734 ] } },
+{ "type": "Feature", "properties": { "dest_id": "BUKIT BATOK MRT STATION Exit A", "dest_type": "train_exit", "name": "BUKIT BATOK MRT STATION", "straight_m": 316.3 }, "geometry": { "type": "Point", "coordinates": [ 18724.675913729704916, 36853.281918300315738 ] } }
+]
+}

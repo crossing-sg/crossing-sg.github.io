@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "02_block_650121_centroid",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3414" } },
+"features": [
+{ "type": "Feature", "properties": { "BLK_NO": "121", "POSTAL_COD": "650121" }, "geometry": { "type": "Point", "coordinates": [ 18492.623189529749652, 37068.254943146064761 ] } }
+]
+}
