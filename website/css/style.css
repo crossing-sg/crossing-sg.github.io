@@ -351,3 +351,11 @@ td, th {
 .progress div.on {
   background: #1a1a1a;
 }
+
+/* Pictogram next to each reference point checkbox on the map page */
+.ref-icon {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  margin: 0 6px 0 4px;
+}

@@ -54,27 +54,43 @@ map.on('load', function () {
     map.addSource('proposal-line', { type: 'geojson', data: empty });
     map.addLayer({ id: 'proposal-line', type: 'line', source: 'proposal-line', paint: { 'line-color': SITE.routeWalk, 'line-width': 6, 'line-opacity': 0.9 }, layout: { 'line-cap': 'round' } });
 
-    // Reference points appear from zoom 15 so the island view stays readable
+    // Reference points are shown as pictogram icons from zoom 15, so the island view stays readable.
+    // Each entry: layer id, data file, kind filter, icon name, icon colour.
     var refs = [
-        ['ref-bus', 'data/bus_stops.geojson', null, SITE.markerColors.bus],
-        ['ref-mrt', 'data/mrt_exits.geojson', null, SITE.markerColors.mrt],
-        ['ref-crossing', 'data/crossing_markers.geojson', 'crossing', SITE.markerColors.crossing],
-        ['ref-bridge', 'data/crossing_markers.geojson', 'overhead_bridge', SITE.markerColors.overhead_bridge],
-        ['ref-underpass', 'data/crossing_markers.geojson', 'underpass', SITE.markerColors.underpass]
+        ['ref-bus', 'data/bus_stops.geojson', null, 'icon-bus', SITE.markerColors.bus],
+        ['ref-mrt', 'data/mrt_exits.geojson', null, 'icon-mrt', SITE.markerColors.mrt],
+        ['ref-crossing', 'data/crossing_markers.geojson', 'crossing', 'icon-crossing', SITE.markerColors.crossing],
+        ['ref-bridge', 'data/crossing_markers.geojson', 'overhead_bridge', 'icon-bridge', SITE.markerColors.overhead_bridge],
+        ['ref-underpass', 'data/crossing_markers.geojson', 'underpass', 'icon-underpass', SITE.markerColors.underpass]
     ];
-    refs.forEach(function (r) {
-        if (!map.getSource(r[1])) { map.addSource(r[1], { type: 'geojson', data: r[1] }); }
-        var layer = {
-            id: r[0], type: 'circle', source: r[1], minzoom: 15,
-            paint: { 'circle-radius': 5, 'circle-color': r[3], 'circle-stroke-color': SITE.basemapDark, 'circle-stroke-width': 1 }
-        };
-        if (r[2]) { layer.filter = ['==', ['get', 'kind'], r[2]]; }
-        map.addLayer(layer);
+    var iconColors = {};
+    refs.forEach(function (r) { iconColors[r[3]] = r[4]; });
+    addMapIcons(map, iconColors).then(function () {
+        refs.forEach(function (r) {
+            if (!map.getSource(r[1])) { map.addSource(r[1], { type: 'geojson', data: r[1] }); }
+            var layer = {
+                id: r[0], type: 'symbol', source: r[1], minzoom: 15,
+                layout: {
+                    'icon-image': r[3],
+                    'icon-size': ['interpolate', ['linear'], ['zoom'], 15, 0.75, 18, 1.1],
+                    'icon-allow-overlap': true
+                }
+            };
+            if (r[2]) { layer.filter = ['==', ['get', 'kind'], r[2]]; }
+            map.addLayer(layer);
+        });
+        document.querySelectorAll('.ref').forEach(function (box) {
+            box.addEventListener('change', updateRefs);
+            // Show the same icon next to the checkbox in the side panel
+            var r = refs.find(function (x) { return x[0] === box.value; });
+            var img = document.createElement('img');
+            img.src = iconUrl(r[3], r[4]);
+            img.className = 'ref-icon';
+            img.alt = '';
+            box.insertAdjacentElement('afterend', img);
+        });
+        updateRefs();
     });
-    document.querySelectorAll('.ref').forEach(function (box) {
-        box.addEventListener('change', updateRefs);
-    });
-    updateRefs();
 
     document.querySelectorAll('input[name=layer]').forEach(function (radio) {
         radio.addEventListener('change', function () { setTheme(this.value); });

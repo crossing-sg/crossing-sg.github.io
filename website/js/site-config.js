@@ -15,7 +15,7 @@ var SITE = {
     caseColor: '#FF3B30',
     highlight: '#38BDF8',
     basemapDark: '#1B1E23',
-    markerColors: { crossing: '#38BDF8', overhead_bridge: '#A78BFA', underpass: '#4ADE80', bus: '#9CA3AF', mrt: '#FFFFFF' }
+    markerColors: { crossing: '#14B8A6', overhead_bridge: '#8B5CF6', underpass: '#22C55E', bus: '#6B7280', mrt: '#2563EB' }
 };
 SITE.gapColors = ['step', ['get', 'dist_m'], SITE.classColors[0], 50.0001, SITE.classColors[1], 100.0001, SITE.classColors[2], 200.0001, SITE.classColors[3]];
 SITE.detourColors = ['step', ['get', 'mean_detour'], SITE.classColors[0], 1.5, SITE.classColors[1], 2, SITE.classColors[2], 2.5, SITE.classColors[3]];
