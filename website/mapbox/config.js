@@ -1,8 +1,12 @@
 // Story chapters for the Home page. Layer names come from story-layers.js.
-var show = function (layers, opacity) {
-    return layers.map(function (l) { return { layer: l, opacity: opacity === undefined ? 1 : opacity, duration: 800 }; });
+// Each chapter sets the opacity of every story layer when it is entered, so the result
+// does not depend on the order in which scrollama fires enter and exit events.
+var STORY_LAYERS = ['cases', 'area-cases', 'gap', 'markers', 'block', 'routes-other', 'route-walk', 'route-straight', 'stops', 'proposals'];
+var only = function (visible) {
+    return STORY_LAYERS.map(function (l) {
+        return { layer: l, opacity: visible[l] === undefined ? 0 : visible[l], duration: 800 };
+    });
 };
-var hide = function (layers) { return show(layers, 0); };
 
 var config = {
     style: SITE.mapStyle,
@@ -30,7 +34,7 @@ var config = {
             mapAnimation: 'flyTo',
             rotateAnimation: false,
             callback: '',
-            onChapterEnter: [],
+            onChapterEnter: only({}),
             onChapterExit: []
         },
         {
@@ -46,8 +50,8 @@ var config = {
             mapAnimation: 'flyTo',
             rotateAnimation: false,
             callback: '',
-            onChapterEnter: show(['cases']),
-            onChapterExit: hide(['cases'])
+            onChapterEnter: only({ cases: 1 }),
+            onChapterExit: []
         },
         {
             id: 'bukit-batok',
@@ -56,7 +60,7 @@ var config = {
             title: 'Reported cases in Bukit Batok',
             description:
                 'Bukit Batok has the most reported cases in the news sample, five in total, of which three were fatal. ' +
-                'Filled pink points are cases confirmed by the source. Outlined points are cases where the source does not confirm how the pedestrian crossed.<br><br>' +
+                'Solid red triangles are cases confirmed by the source. Outlined triangles are cases where the source does not confirm how the pedestrian crossed.<br><br>' +
                 'Four of the five cases are within 20 m of an existing crossing. Roads are coloured by the distance to the nearest crossing, overhead bridge or underpass.<br><br>' +
                 '<span class="key" style="background:' + SITE.classColors[0] + '"></span> under 50 m &nbsp; <span class="key" style="background:' + SITE.classColors[1] + '"></span> 50 to 100 m &nbsp; ' +
                 '<span class="key" style="background:' + SITE.classColors[2] + '"></span> 100 to 200 m &nbsp; <span class="key" style="background:' + SITE.classColors[3] + '"></span> over 200 m<br><br>' +
@@ -66,8 +70,8 @@ var config = {
             mapAnimation: 'flyTo',
             rotateAnimation: false,
             callback: '',
-            onChapterEnter: show(['gap', 'markers', 'area-cases']),
-            onChapterExit: hide(['gap', 'markers', 'area-cases'])
+            onChapterEnter: only({ gap: 1, markers: 1, 'area-cases': 1 }),
+            onChapterExit: []
         },
         {
             id: 'detour',
@@ -83,9 +87,8 @@ var config = {
             mapAnimation: 'flyTo',
             rotateAnimation: false,
             callback: '',
-            onChapterEnter: show(['gap', 'block', 'routes-other', 'route-walk', 'route-straight', 'stops', 'area-cases'], 1)
-                .map(function (l) { if (l.layer === 'gap') { l.opacity = 0.25; } if (l.layer === 'routes-other') { l.opacity = 0.3; } return l; }),
-            onChapterExit: hide(['gap', 'block', 'routes-other', 'route-walk', 'route-straight', 'stops', 'area-cases'])
+            onChapterEnter: only({ gap: 0.25, block: 1, 'routes-other': 0.3, 'route-walk': 1, 'route-straight': 1, stops: 1, 'area-cases': 1 }),
+            onChapterExit: []
         },
         {
             id: 'voices',
@@ -98,7 +101,7 @@ var config = {
             mapAnimation: 'flyTo',
             rotateAnimation: false,
             callback: '',
-            onChapterEnter: [],
+            onChapterEnter: only({}),
             onChapterExit: []
         },
         {
@@ -113,8 +116,8 @@ var config = {
             mapAnimation: 'flyTo',
             rotateAnimation: false,
             callback: '',
-            onChapterEnter: show(['proposals']),
-            onChapterExit: hide(['proposals'])
+            onChapterEnter: only({ proposals: 1 }),
+            onChapterExit: []
         }
     ]
 };

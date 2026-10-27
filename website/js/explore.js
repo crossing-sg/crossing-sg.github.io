@@ -25,6 +25,12 @@ var LEGENDS = {
 var THEME_LAYERS = { gap: ['gap'], detour: ['blocks'], proposals: ['proposals', 'proposal-line'] };
 var empty = { type: 'FeatureCollection', features: [] };
 
+// Block names and mean ratios by postal code, used for the block panel title
+var blockInfo = {};
+var blocksReady = fetch('data/detour_blocks.geojson')
+    .then(function (r) { return r.json(); })
+    .then(function (gj) { gj.features.forEach(function (f) { blockInfo[f.properties.postal] = f.properties; }); });
+
 map.on('load', function () {
     map.addSource('gap', { type: 'geojson', data: 'data/gap_segments.geojson' });
     map.addLayer({ id: 'gap', type: 'line', source: 'gap', paint: { 'line-color': SITE.gapColors, 'line-width': ['interpolate', ['linear'], ['zoom'], 11, 1.2, 16, 6] } });
@@ -118,15 +124,16 @@ function updateRefs() {
 
 // Detour: load the routes of one block from data/routes/<postal>.json
 function openBlock(postal, fly) {
-    fetch('data/routes/' + postal + '.json')
+    blocksReady
+        .then(function () { return fetch('data/routes/' + postal + '.json'); })
         .then(function (r) { return r.json(); })
         .then(function (gj) {
             map.getSource('routes').setData(gj);
             var walks = gj.features.filter(function (f) { return f.properties.kind === 'walk'; })
                 .sort(function (a, b) { return b.properties.detour - a.properties.detour; });
-            var block = map.querySourceFeatures('blocks', { filter: ['==', ['get', 'postal'], Number(postal)] })[0];
-            var title = block ? 'Blk ' + block.properties.BLK_NO : 'Postal ' + postal;
-            var mean = block ? block.properties.mean_detour : '';
+            var block = blockInfo[Number(postal)];
+            var title = block ? 'Blk ' + block.BLK_NO : 'Postal ' + postal;
+            var mean = block ? block.mean_detour : '';
             var html = '<span class="close" onclick="closeCard()">x</span><b style="font-size:16px">' + title + '</b>' +
                 '<div class="small">Postal ' + postal + (mean ? ' | mean detour ratio ' + mean : '') + ' | ' + walks.length + ' destinations</div><hr>';
             var maxRoute = Math.max.apply(null, walks.map(function (w) { return w.properties.route_m; }));

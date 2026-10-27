@@ -20,7 +20,7 @@ var empty = { type: 'FeatureCollection', features: [] };
 
 map.on('load', function () {
     map.addSource('gap', { type: 'geojson', data: 'data/gap_segments.geojson' });
-    map.addLayer({ id: 'gap', type: 'line', source: 'gap', paint: { 'line-color': SITE.routeStraight, 'line-width': 6, 'line-opacity': 0.3 } });
+    map.addLayer({ id: 'gap', type: 'line', source: 'gap', paint: { 'line-color': SITE.routeStraight, 'line-width': 6, 'line-opacity': 0.45 } });
     map.addLayer({ id: 'gap-selected', type: 'line', source: 'gap', filter: ['==', ['get', 'seg_id'], -1], paint: { 'line-color': SITE.highlight, 'line-width': 8 } });
     map.addSource('draft', { type: 'geojson', data: empty });
     map.addLayer({ id: 'draft-line', type: 'line', source: 'draft', paint: { 'line-color': SITE.routeWalk, 'line-width': 4, 'line-dasharray': [1.5, 1.5] } });
