@@ -1,7 +1,7 @@
 // Story chapters for the Home page. Layer names come from story-layers.js.
 // Each chapter sets the opacity of every story layer when it is entered, so the result
 // does not depend on the order in which scrollama fires enter and exit events.
-var STORY_LAYERS = ['cases', 'area-cases', 'gap', 'markers', 'block', 'routes-other', 'route-walk', 'route-straight', 'stops', 'proposals'];
+var STORY_LAYERS = ['ctx-bus', 'ctx-crossings', 'ctx-mrt', 'cases', 'area-cases', 'gap', 'markers', 'block', 'routes-other', 'route-walk', 'route-straight', 'stops', 'proposals'];
 var only = function (visible) {
     return STORY_LAYERS.map(function (l) {
         return { layer: l, opacity: visible[l] === undefined ? 0 : visible[l], duration: 800 };
@@ -47,12 +47,17 @@ var config = {
             title: 'Crossings in Singapore',
             description:
                 'LTA records 9,702 road crossings and 771 overhead bridges and underpasses across Singapore. ' +
-                'This story looks at reported pedestrian deaths, then at one town, Bukit Batok, and at the walk from one block to its nearest bus stop.',
-            location: { center: [103.82, 1.355], zoom: 10.6, pitch: 0, bearing: 0, padding: PAD_LEFT },
+                'This story looks at reported pedestrian deaths, then at one town, Bukit Batok, and at the walk from one block to its nearest bus stop.<br><br>' +
+                '<span class="dot" style="background:' + SITE.markerColors.crossing + '"></span> road crossing &nbsp; ' +
+                '<span class="dot" style="background:' + SITE.markerColors.overhead_bridge + '"></span> overhead bridge &nbsp; ' +
+                '<span class="dot" style="background:' + SITE.markerColors.underpass + '"></span> underpass<br>' +
+                '<span class="dot" style="background:' + SITE.markerColors.bus + '"></span> bus stop &nbsp; ' +
+                '<span class="dot" style="background:' + SITE.markerColors.mrt + '"></span> MRT exit',
+            location: { center: [103.815, 1.352], zoom: 11.2, pitch: 0, bearing: 0, padding: PAD_LEFT },
             mapAnimation: 'flyTo',
             rotateAnimation: false,
             callback: '',
-            onChapterEnter: only({}),
+            onChapterEnter: only({ 'ctx-bus': 0.7, 'ctx-crossings': 0.9, 'ctx-mrt': 1 }),
             onChapterExit: []
         },
         {
@@ -68,7 +73,7 @@ var config = {
             mapAnimation: 'flyTo',
             rotateAnimation: false,
             callback: '',
-            onChapterEnter: only({ cases: 1 }),
+            onChapterEnter: only({ 'ctx-bus': 0.25, 'ctx-crossings': 0.3, 'ctx-mrt': 0.35, cases: 1 }),
             onChapterExit: []
         },
         {

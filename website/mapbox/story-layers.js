@@ -31,6 +31,24 @@ function addStoryLayers(map) {
         'icon-ignore-placement': true
     };
 
+    // Island-wide context for the first chapters: every crossing, bridge, underpass, bus stop and MRT exit
+    map.addSource('ctx-markers', { type: 'geojson', data: '../data/crossing_markers.geojson' });
+    map.addSource('ctx-bus', { type: 'geojson', data: '../data/bus_stops.geojson' });
+    map.addSource('ctx-mrt', { type: 'geojson', data: '../data/mrt_exits.geojson' });
+    var dot = function (id, source, color, radius) {
+        map.addLayer({
+            id: id, type: 'circle', source: source,
+            paint: {
+                'circle-radius': ['interpolate', ['linear'], ['zoom'], 10, radius, 14, radius * 2],
+                'circle-color': color, 'circle-opacity': 0, 'circle-stroke-opacity': 0
+            }
+        });
+    };
+    dot('ctx-bus', 'ctx-bus', SITE.markerColors.bus, 1);
+    dot('ctx-crossings', 'ctx-markers', ['match', ['get', 'kind'], 'overhead_bridge', SITE.markerColors.overhead_bridge,
+        'underpass', SITE.markerColors.underpass, SITE.markerColors.crossing], 1.2);
+    dot('ctx-mrt', 'ctx-mrt', SITE.markerColors.mrt, 1.8);
+
     map.addSource('cases', { type: 'geojson', data: data + 'step1_reported_cases.geojson' });
     map.addLayer({ id: 'cases', type: 'symbol', source: 'cases', layout: warnLayout, paint: { 'icon-opacity': 0 } });
 
