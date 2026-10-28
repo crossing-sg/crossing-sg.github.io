@@ -49,6 +49,27 @@ function addStoryLayers(map) {
         'underpass', SITE.markerColors.underpass, SITE.markerColors.crossing], 1.2);
     dot('ctx-mrt', 'ctx-mrt', SITE.markerColors.mrt, 1.8);
 
+    // Transition chapter: planning areas shaded by the number of reported cases, and all 32 cases as dots
+    map.addSource('area-stats', { type: 'geojson', data: data + 'step1b_area_stats.geojson' });
+    map.addLayer({
+        id: 'area-fill', type: 'fill', source: 'area-stats',
+        paint: {
+            'fill-color': ['step', ['get', 'cases'], 'rgba(0,0,0,0)', 1, '#5C2A2A', 2, '#8A3333', 4, '#C0392B'],
+            'fill-opacity': 0
+        }
+    });
+    map.addLayer({ id: 'area-line', type: 'line', source: 'area-stats', paint: { 'line-color': '#8A9099', 'line-width': 0.6, 'line-opacity': 0 } });
+    map.addSource('all-cases', { type: 'geojson', data: data + 'step1b_all_cases.geojson' });
+    map.addLayer({
+        id: 'all-cases', type: 'circle', source: 'all-cases',
+        paint: {
+            'circle-radius': ['case', ['get', 'fatal'], 6, 4],
+            'circle-color': ['match', ['get', 'status'], 'indicative', SITE.basemapDark, SITE.caseColor],
+            'circle-stroke-color': ['match', ['get', 'status'], 'indicative', SITE.caseColor, '#FFFFFF'],
+            'circle-stroke-width': 1.5, 'circle-opacity': 0, 'circle-stroke-opacity': 0
+        }
+    });
+
     map.addSource('cases', { type: 'geojson', data: data + 'step1_reported_cases.geojson' });
     map.addLayer({ id: 'cases', type: 'symbol', source: 'cases', layout: warnLayout, paint: { 'icon-opacity': 0 } });
 

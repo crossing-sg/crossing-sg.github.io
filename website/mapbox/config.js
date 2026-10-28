@@ -1,7 +1,7 @@
 // Story chapters for the Home page. Layer names come from story-layers.js.
 // Each chapter sets the opacity of every story layer when it is entered, so the result
 // does not depend on the order in which scrollama fires enter and exit events.
-var STORY_LAYERS = ['ctx-bus', 'ctx-crossings', 'ctx-mrt', 'cases', 'area-cases', 'gap', 'markers', 'block', 'routes-other', 'route-walk', 'route-straight', 'stops', 'proposals'];
+var STORY_LAYERS = ['ctx-bus', 'ctx-crossings', 'ctx-mrt', 'area-fill', 'area-line', 'all-cases', 'cases', 'area-cases', 'gap', 'markers', 'block', 'routes-other', 'route-walk', 'route-straight', 'stops', 'proposals'];
 var only = function (visible) {
     return STORY_LAYERS.map(function (l) {
         return { layer: l, opacity: visible[l] === undefined ? 0 : visible[l], duration: 800 };
@@ -25,6 +25,45 @@ function updateStoryPadding() {
 }
 window.addEventListener('load', updateStoryPadding);
 window.addEventListener('resize', updateStoryPadding);
+
+
+// Cases and crossing provision for planning areas with two or more reported cases
+// (from website-plan/make_area_stats.py). Crossings = road crossings, overhead bridges and underpasses.
+var AREA_STATS = {
+    national: { crossings_per_km: 3.8, pct_far: 33 },
+    rows: [
+        { name: 'Bukit Batok', cases: 5, crossings_per_km: 5.4, pct_far: 20 },
+        { name: 'Novena', cases: 4, crossings_per_km: 2.0, pct_far: 31 },
+        { name: 'Yishun', cases: 3, crossings_per_km: 4.6, pct_far: 33 },
+        { name: 'Hougang', cases: 3, crossings_per_km: 4.0, pct_far: 26 },
+        { name: 'Sengkang', cases: 2, crossings_per_km: 9.4, pct_far: 11 },
+        { name: 'Kallang', cases: 2, crossings_per_km: 3.6, pct_far: 14 },
+        { name: 'Rochor', cases: 2, crossings_per_km: 3.3, pct_far: 0 },
+        { name: 'Geylang', cases: 2, crossings_per_km: 3.2, pct_far: 13 }
+    ]
+};
+
+// Small two-column bar chart drawn as inline SVG: reported cases, and crossings per km of road
+// with a dashed line for the Singapore average
+function areaChart() {
+    var rowH = 24, top = 34, nameW = 92, casesW = 110, gapW = 16, crossW = 150;
+    var x2 = nameW + casesW + gapW, h = top + AREA_STATS.rows.length * rowH + 8, w = x2 + crossW + 40;
+    var avgX = x2 + AREA_STATS.national.crossings_per_km / 10 * crossW;
+    var svg = '<svg viewBox="0 0 ' + w + ' ' + h + '" width="100%" style="max-width:' + w + 'px;font-size:11px">' +
+        '<text x="' + nameW + '" y="12" fill="#c9ced6">Reported cases</text>' +
+        '<text x="' + x2 + '" y="12" fill="#c9ced6">Crossings per km of road</text>' +
+        '<line x1="' + avgX + '" y1="18" x2="' + avgX + '" y2="' + (h - 6) + '" stroke="#fafafa" stroke-dasharray="3 3"/>' +
+        '<text x="' + (avgX + 4) + '" y="28" fill="#fafafa">Singapore ' + AREA_STATS.national.crossings_per_km + '</text>';
+    AREA_STATS.rows.forEach(function (r, i) {
+        var y = top + i * rowH, bold = r.name === 'Bukit Batok' ? ' font-weight="700"' : '';
+        svg += '<text x="0" y="' + (y + 13) + '" fill="#fafafa"' + bold + '>' + r.name + '</text>' +
+            '<rect x="' + nameW + '" y="' + (y + 3) + '" width="' + (r.cases / 5 * casesW) + '" height="13" fill="' + SITE.caseColor + '"/>' +
+            '<text x="' + (nameW + r.cases / 5 * casesW + 4) + '" y="' + (y + 13) + '" fill="#fafafa">' + r.cases + '</text>' +
+            '<rect x="' + x2 + '" y="' + (y + 3) + '" width="' + (Math.min(r.crossings_per_km, 10) / 10 * crossW) + '" height="13" fill="' + SITE.markerColors.crossing + '"/>' +
+            '<text x="' + (x2 + Math.min(r.crossings_per_km, 10) / 10 * crossW + 4) + '" y="' + (y + 13) + '" fill="#fafafa">' + r.crossings_per_km.toFixed(1) + '</text>';
+    });
+    return svg + '</svg>';
+}
 
 var config = {
     style: SITE.mapStyle,
@@ -77,6 +116,25 @@ var config = {
             onChapterExit: []
         },
         {
+            id: 'by-area',
+            alignment: 'left',
+            hidden: false,
+            title: 'Cases and crossings by planning area',
+            description:
+                'All 32 cases in the news sample are grouped by URA planning area. For each area, crossing provision is measured as the number of road crossings, ' +
+                'overhead bridges and underpasses per kilometre of road (expressways excluded), using LTA DataMall layers.<br><br>' +
+                areaChart() + '<br>' +
+                'More cases do not mean fewer crossings. Bukit Batok has the most reported cases, yet 5.4 crossings per km against 3.8 across Singapore, ' +
+                'and 20% of its road length is more than 200 m from a crossing against 33% nationally. Novena, with four cases, has 2.0 crossings per km.<br><br>' +
+                '<small>Cases come from news and court reports, which favour filmed and widely shared incidents, so the counts are small and not a measure of risk.</small>',
+            location: { center: [103.83, 1.345], zoom: 11.3, pitch: 0, bearing: 0, padding: PAD_LEFT },
+            mapAnimation: 'flyTo',
+            rotateAnimation: false,
+            callback: '',
+            onChapterEnter: only({ 'area-fill': 0.75, 'area-line': 0.6, 'all-cases': 1, 'ctx-crossings': 0.25 }),
+            onChapterExit: []
+        },
+        {
             id: 'bukit-batok',
             alignment: 'left',
             hidden: false,
@@ -87,7 +145,6 @@ var config = {
                 'Four of the five cases are within 20 m of an existing crossing. Roads are coloured by the distance to the nearest crossing, overhead bridge or underpass.<br><br>' +
                 '<span class="key" style="background:' + SITE.classColors[0] + '"></span> under 50 m &nbsp; <span class="key" style="background:' + SITE.classColors[1] + '"></span> 50 to 100 m &nbsp; ' +
                 '<span class="key" style="background:' + SITE.classColors[2] + '"></span> 100 to 200 m &nbsp; <span class="key" style="background:' + SITE.classColors[3] + '"></span> over 200 m<br><br>' +
-                'In Bukit Batok, 20% of road length is more than 200 m from a crossing, compared with 33% across Singapore.<br><br>' +
                 '<a href="../map.html?layer=gap" target="_top">See all roads on the map</a>',
             location: { center: [103.7478, 1.3575], zoom: 13.9, pitch: 0, bearing: 0, padding: PAD_LEFT },
             mapAnimation: 'flyTo',
