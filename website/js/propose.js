@@ -179,10 +179,7 @@ function showThanks(count, road) {
     document.getElementById('thanks').style.display = 'block';
     document.getElementById('thanks-road').innerText = road || '';
     document.getElementById('thanks-count').innerText = 'This road segment now has ' + count + (count === 1 ? ' proposal' : ' proposals');
-    for (var i = 1; i <= 3; i++) { document.getElementById('p' + i).className = i <= count ? 'on' : ''; }
-    document.getElementById('thanks-next').innerText = count >= 3
-        ? 'This segment is shown on the public map.'
-        : (3 - count) + ' more ' + (3 - count === 1 ? 'proposal' : 'proposals') + ' and it appears on the public map.';
+    document.getElementById('thanks-next').innerText = 'Your proposal is on the public map now. Share the link so neighbours can add theirs.';
 }
 
 function shareLink() {

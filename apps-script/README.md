@@ -18,6 +18,17 @@
 
 Edit the code, save, then **Deploy → Manage deployments → Edit (pencil) → Version: New version → Deploy**. The URL stays the same. A plain save does not change the live web app.
 
+## Pilot settings
+
+At the top of `Code.gs`:
+
+| Setting | Pilot value | Full launch | Effect |
+|---|---|---|---|
+| `MIN_PROPOSALS` | 1 | 3 | Number of proposals before a segment appears on the map |
+| `LINE_MIN` | 1 | 3 | Number of proposals before the mean crossing line is shown. With 1, a segment with a single proposal shows that resident's own points |
+
+After changing either value, deploy a new version (see above).
+
 ## Reviewing entries (team)
 
 | Tab | Column | What to do |

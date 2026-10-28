@@ -133,7 +133,7 @@ var config = {
             hidden: false,
             title: 'Propose a crossing',
             description:
-                'Mark two points on opposite sides of a road and choose the type of crossing that would help. A road segment is shown on the map once it has three proposals.' +
+                'Mark two points on opposite sides of a road and choose the type of crossing that would help. Each proposal appears on the map as soon as it is sent.' +
                 '<p class="buttons"><a class="btn" href="../propose.html" target="_top">Propose a crossing</a> <a class="btn btn-light" href="../map.html" target="_top">Explore the map</a></p>',
             location: { center: [103.82, 1.355], zoom: 10.8, pitch: 0, bearing: 0, padding: PAD_NONE },
             mapAnimation: 'flyTo',

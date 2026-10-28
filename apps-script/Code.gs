@@ -7,12 +7,18 @@
  *   { kind: 'proposal', seg_id, dist_m, a: [lng, lat], b: [lng, lat], type, reason, story, website }
  *   { kind: 'support', seg_id }
  * GET
- *   ?view=segments  segments with 3 or more proposals, aggregated, no individual points
+ *   ?view=segments  every segment with proposals, aggregated. The mean crossing line is only
+ *                   returned from LINE_MIN proposals, so no single resident's points are shown
  *   ?view=summary   totals for the cards on the home page
  *   ?view=csv       aggregated table for download
  */
 
-var MIN_PROPOSALS = 3;
+// Pilot setting: every proposal is shown. Raise MIN_PROPOSALS to 3 for a full launch.
+var MIN_PROPOSALS = 1;
+// The mean crossing line is returned only when it averages at least this many residents.
+// Pilot setting 1 shows every line for the class presentation. Set to 3 once more proposals arrive,
+// so that no single resident's points are shown.
+var LINE_MIN = 1;
 var TYPES = ['Zebra crossing', 'Signalised crossing', 'Overhead bridge with lift', 'Underpass', 'Not sure'];
 var REASONS = ['Nearest crossing is too far', 'Stairs at the overhead bridge', 'Long wait at the lights',
   'Existing crossing is not on the way', 'Other'];
@@ -84,7 +90,7 @@ function doGet(e) {
   return json({ segments: segments() });
 }
 
-/** Segments with at least MIN_PROPOSALS proposals. Individual points are averaged, never returned. */
+/** Segments with at least MIN_PROPOSALS proposals. Individual points are never returned. */
 function segments() {
   var groups = {};
   proposalRows().forEach(function (r) {
@@ -111,7 +117,9 @@ function segments() {
       dist_m: g.rows[0].dist_m,
       top_type: topType.key + ' (' + topType.n + ' of ' + n + ')',
       top_reason: topReason.key + ' (' + topReason.n + ' of ' + n + ')',
-      line: [[mean('a_lng'), mean('a_lat')], [mean('b_lng'), mean('b_lat')]]
+      line: n >= LINE_MIN ? [[mean('a_lng'), mean('a_lat')], [mean('b_lng'), mean('b_lat')]] : null,
+      // Segment centre rounded to about 100 m, used for the dots on the home page
+      center: [round3((mean('a_lng') + mean('b_lng')) / 2), round3((mean('a_lat') + mean('b_lat')) / 2)]
     };
   });
 }
@@ -165,6 +173,7 @@ function inSingapore(p) {
 }
 
 function round4(x) { return Math.round(Number(x) * 10000) / 10000; }
+function round3(x) { return Math.round(Number(x) * 1000) / 1000; }
 
 function json(obj) {
   return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);

@@ -15,12 +15,12 @@ map.addControl(new mapboxgl.NavigationControl(), 'top-right');
 var NOTES = {
     gap: 'Each 50 m piece of road is coloured by the straight-line distance to the nearest crossing, overhead bridge or underpass. Expressways are not shown. Click a piece of road to see its distance.',
     detour: 'Each point is an HDB block, coloured by how much longer the walk to nearby bus stops and MRT exits is than the straight distance. 2.0 means twice as far. Click a block to see its routes.',
-    proposals: 'Road pieces coloured by the number of crossing proposals from residents. Pieces with fewer than three proposals are not shown. Click a piece of road to read the summary and add your support.'
+    proposals: 'Road pieces coloured by the number of crossing proposals from residents. Click a piece of road to see the suggested crossing line, read the summary and add your support.'
 };
 var LEGENDS = {
     gap: [[SITE.classColors[0], 'Under 50 m'], [SITE.classColors[1], '50 to 100 m'], [SITE.classColors[2], '100 to 200 m'], [SITE.classColors[3], 'Over 200 m']],
     detour: [[SITE.classColors[0], 'Under 1.5'], [SITE.classColors[1], '1.5 to 2.0'], [SITE.classColors[2], '2.0 to 2.5'], [SITE.classColors[3], 'Over 2.5']],
-    proposals: [[SITE.proposalRamp[0], '3 to 4 proposals'], [SITE.proposalRamp[1], '5 to 9'], [SITE.proposalRamp[2], '10 or more']]
+    proposals: [[SITE.proposalRamp[0], '1 to 2 proposals'], [SITE.proposalRamp[1], '3 to 4'], [SITE.proposalRamp[2], '5 to 9'], [SITE.proposalRamp[3], '10 or more']]
 };
 var THEME_LAYERS = { gap: ['gap'], detour: ['blocks'], proposals: ['proposals', 'proposal-line'] };
 var empty = { type: 'FeatureCollection', features: [] };
@@ -187,8 +187,9 @@ function loadProposals() {
 }
 
 function openSegment(p) {
+    // The mean crossing line exists only for segments with three or more proposals
     var line = typeof p.line === 'string' ? JSON.parse(p.line) : p.line;
-    map.getSource('proposal-line').setData({ type: 'Feature', geometry: { type: 'LineString', coordinates: line }, properties: {} });
+    map.getSource('proposal-line').setData(line ? { type: 'Feature', geometry: { type: 'LineString', coordinates: line }, properties: {} } : empty);
     var supported = hasSupported(p.seg_id);
     showCard('<span class="close" onclick="closeCard()">x</span><b style="font-size:16px">' + p.road + '</b>' +
         '<div class="nums"><div><span class="small">PROPOSALS</span><b>' + p.count + '</b></div>' +

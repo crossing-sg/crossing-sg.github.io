@@ -9,7 +9,7 @@ var SITE = {
 
     // Colours for a dark basemap. Crossing gap and walking detour share one ramp: grey, yellow, orange, red (worse).
     classColors: ['#5C6370', '#F2C94C', '#F2994A', '#EB5757'],
-    proposalRamp: ['#6D5BA8', '#9B7FE0', '#D2C3FF'],
+    proposalRamp: ['#5B4B8A', '#7C6BC4', '#A897F0', '#D2C3FF'],
     routeWalk: '#FFFFFF',
     routeStraight: '#D1D5DB',
     caseColor: '#FF3B30',
@@ -19,4 +19,4 @@ var SITE = {
 };
 SITE.gapColors = ['step', ['get', 'dist_m'], SITE.classColors[0], 50.0001, SITE.classColors[1], 100.0001, SITE.classColors[2], 200.0001, SITE.classColors[3]];
 SITE.detourColors = ['step', ['get', 'mean_detour'], SITE.classColors[0], 1.5, SITE.classColors[1], 2, SITE.classColors[2], 2.5, SITE.classColors[3]];
-SITE.proposalColors = ['step', ['get', 'count'], SITE.proposalRamp[0], 5, SITE.proposalRamp[1], 10, SITE.proposalRamp[2]];
+SITE.proposalColors = ['step', ['get', 'count'], SITE.proposalRamp[0], 3, SITE.proposalRamp[1], 5, SITE.proposalRamp[2], 10, SITE.proposalRamp[3]];

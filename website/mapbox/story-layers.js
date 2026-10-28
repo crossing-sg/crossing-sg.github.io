@@ -110,18 +110,21 @@ function addStoryLayers(map) {
     var empty = { type: 'FeatureCollection', features: [] };
     map.addSource('proposals', { type: 'geojson', data: empty });
     map.addLayer({
-        id: 'proposals', type: 'line', source: 'proposals',
-        paint: { 'line-color': SITE.proposalColors, 'line-width': 6, 'line-opacity': 0 }
+        id: 'proposals', type: 'circle', source: 'proposals',
+        paint: {
+            'circle-color': SITE.proposalColors, 'circle-radius': ['interpolate', ['linear'], ['get', 'count'], 1, 5, 10, 11],
+            'circle-opacity': 0, 'circle-stroke-color': SITE.basemapDark, 'circle-stroke-width': 1, 'circle-stroke-opacity': 0
+        }
     });
     if (SITE.appsScriptUrl) {
-        // On the island view, each segment is drawn as its representative crossing line
+        // On the island view, each segment is a dot at its centre, rounded to about 100 m
         fetch(SITE.appsScriptUrl + '?view=segments')
             .then(function (r) { return r.json(); })
             .then(function (res) {
                 map.getSource('proposals').setData({
                     type: 'FeatureCollection',
                     features: res.segments.map(function (s) {
-                        return { type: 'Feature', geometry: { type: 'LineString', coordinates: s.line }, properties: { count: s.count } };
+                        return { type: 'Feature', geometry: { type: 'Point', coordinates: s.center }, properties: { count: s.count } };
                     })
                 });
             })
