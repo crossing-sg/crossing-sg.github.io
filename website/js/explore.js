@@ -15,14 +15,14 @@ map.addControl(new mapboxgl.NavigationControl(), 'top-right');
 var NOTES = {
     gap: 'Each 50 m piece of road is coloured by the straight-line distance to the nearest crossing, overhead bridge or underpass. Expressways are not shown. Click a piece of road to see its distance.',
     detour: 'Each point is an HDB block, coloured by how much longer the walk to nearby bus stops and MRT exits is than the straight distance. 2.0 means twice as far. Click a block to see its routes.',
-    proposals: 'Road pieces coloured by the number of crossing proposals from residents. Click a piece of road to see the suggested crossing line, read the summary and add your support.'
+    proposals: 'Each line is a crossing proposed by residents, from one side of the road to the other, coloured by the number of proposals on that piece of road. Click a line to read the summary and add your support.'
 };
 var LEGENDS = {
     gap: [[SITE.classColors[0], 'Under 50 m'], [SITE.classColors[1], '50 to 100 m'], [SITE.classColors[2], '100 to 200 m'], [SITE.classColors[3], 'Over 200 m']],
     detour: [[SITE.classColors[0], 'Under 1.5'], [SITE.classColors[1], '1.5 to 2.0'], [SITE.classColors[2], '2.0 to 2.5'], [SITE.classColors[3], 'Over 2.5']],
     proposals: [[SITE.proposalRamp[0], '1 to 2 proposals'], [SITE.proposalRamp[1], '3 to 4'], [SITE.proposalRamp[2], '5 to 9'], [SITE.proposalRamp[3], '10 or more']]
 };
-var THEME_LAYERS = { gap: ['gap'], detour: ['blocks'], proposals: ['proposals', 'proposal-line'] };
+var THEME_LAYERS = { gap: ['gap'], detour: ['blocks'], proposals: ['proposals', 'proposal-crossings-casing', 'proposal-crossings', 'proposal-line'] };
 var empty = { type: 'FeatureCollection', features: [] };
 
 // Block names and mean ratios by postal code, used for the block panel title
@@ -50,9 +50,16 @@ map.on('load', function () {
     map.addLayer({ id: 'route-straight', type: 'line', source: 'routes', filter: ['==', ['get', 'kind'], 'straight'], paint: { 'line-color': SITE.routeStraight, 'line-width': 1.5, 'line-dasharray': [2, 2] } });
 
     map.addSource('proposals', { type: 'geojson', data: empty });
-    map.addLayer({ id: 'proposals', type: 'line', source: 'proposals', paint: { 'line-color': SITE.proposalColors, 'line-width': ['interpolate', ['linear'], ['zoom'], 11, 3, 16, 9] } });
+    map.addLayer({ id: 'proposals', type: 'line', source: 'proposals', paint: { 'line-color': SITE.proposalColors, 'line-width': ['interpolate', ['linear'], ['zoom'], 11, 2, 16, 6], 'line-opacity': 0.45 } });
+    // Proposed crossing lines (mean of point A and point B), coloured by the number of proposals
+    map.addSource('proposal-crossings', { type: 'geojson', data: empty });
+    map.addLayer({ id: 'proposal-crossings-casing', type: 'line', source: 'proposal-crossings', layout: { 'line-cap': 'round' },
+        paint: { 'line-color': '#FFFFFF', 'line-width': ['interpolate', ['linear'], ['zoom'], 11, 5, 16, 11] } });
+    map.addLayer({ id: 'proposal-crossings', type: 'line', source: 'proposal-crossings', layout: { 'line-cap': 'round' },
+        paint: { 'line-color': SITE.proposalColors, 'line-width': ['interpolate', ['linear'], ['zoom'], 11, 3, 16, 7] } });
     map.addSource('proposal-line', { type: 'geojson', data: empty });
-    map.addLayer({ id: 'proposal-line', type: 'line', source: 'proposal-line', paint: { 'line-color': SITE.routeWalk, 'line-width': 6, 'line-opacity': 0.9 }, layout: { 'line-cap': 'round' } });
+    // Selected crossing, outlined in the highlight colour
+    map.addLayer({ id: 'proposal-line', type: 'line', source: 'proposal-line', paint: { 'line-color': SITE.highlight, 'line-width': 4, 'line-gap-width': 8 }, layout: { 'line-cap': 'round' } });
 
     // Reference points are shown as pictogram icons from zoom 15, so the island view stays readable.
     // Each entry: layer id, data file, kind filter, icon name, icon colour.
@@ -110,7 +117,8 @@ map.on('load', function () {
     });
     map.on('click', 'blocks', function (e) { openBlock(e.features[0].properties.postal, false); });
     map.on('click', 'proposals', function (e) { openSegment(e.features[0].properties); });
-    ['gap', 'blocks', 'proposals'].forEach(function (id) {
+    map.on('click', 'proposal-crossings', function (e) { openSegment(e.features[0].properties); });
+    ['gap', 'blocks', 'proposals', 'proposal-crossings'].forEach(function (id) {
         map.on('mouseenter', id, function () { map.getCanvas().style.cursor = 'pointer'; });
         map.on('mouseleave', id, function () { map.getCanvas().style.cursor = ''; });
     });
@@ -183,6 +191,9 @@ function loadProposals() {
             return { type: 'Feature', geometry: f.geometry, properties: Object.assign({}, s, { line: JSON.stringify(s.line) }) };
         });
         map.getSource('proposals').setData({ type: 'FeatureCollection', features: features });
+        map.getSource('proposal-crossings').setData({ type: 'FeatureCollection', features: res[0].segments.filter(function (s) { return s.line; }).map(function (s) {
+            return { type: 'Feature', geometry: { type: 'LineString', coordinates: s.line }, properties: Object.assign({}, s, { line: JSON.stringify(s.line) }) };
+        }) });
     }).catch(function () { });
 }
 
