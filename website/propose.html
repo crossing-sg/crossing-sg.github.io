@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Propose a crossing</title>
-    <link rel="stylesheet" href="css/style.css?v=20261028c">
+    <link rel="stylesheet" href="css/style.css?v=20261028f">
     <meta charset='utf-8' />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js'></script>
@@ -19,6 +19,10 @@
 
     <div class="form-page" id="form-page">
         <div class="form-map">
+            <div class="search">
+                <input id="search" type="text" placeholder="Search a block, road, place or postal code" autocomplete="off">
+                <ul id="results" style="display:none"></ul>
+            </div>
             <div class="map-hint" id="hint">Zoom in to a road, then click one side of the road and then the other</div>
             <div id="map" style="position:absolute;top:0;bottom:0;width:100%"></div>
         </div>
@@ -72,7 +76,8 @@
         <p><a href="propose.html">Propose another crossing</a></p>
     </div>
 
-    <script src="js/site-config.js?v=20261028c"></script>
-    <script src="js/propose.js?v=20261028c"></script>
+    <script src="js/site-config.js?v=20261028f"></script>
+    <script src="js/search.js?v=20261028f"></script>
+    <script src="js/propose.js?v=20261028f"></script>
 </body>
 </html>

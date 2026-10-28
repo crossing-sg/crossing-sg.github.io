@@ -241,32 +241,9 @@ function closeCard() {
     if (map.getSource('proposal-line')) { map.getSource('proposal-line').setData(empty); }
 }
 
-// OneMap search, as in the Week 7 lab. The search endpoint does not need a token.
-var searchBox = document.getElementById('search');
-var results = document.getElementById('results');
-var timer;
-searchBox.addEventListener('input', function () {
-    clearTimeout(timer);
-    var q = searchBox.value.trim();
-    if (q.length < 3) { results.style.display = 'none'; return; }
-    timer = setTimeout(function () {
-        var url = 'https://www.onemap.gov.sg/api/common/elastic/search?searchVal=' + encodeURIComponent(q) +
-            '&returnGeom=Y&getAddrDetails=Y&pageNum=1';
-        fetch(url).then(function (r) { return r.json(); }).then(function (data) {
-            results.innerHTML = '';
-            data.results.slice(0, 8).forEach(function (r) {
-                var li = document.createElement('li');
-                li.innerText = r.ADDRESS;
-                li.onclick = function () {
-                    results.style.display = 'none';
-                    searchBox.value = r.ADDRESS;
-                    map.flyTo({ center: [Number(r.LONGITUDE), Number(r.LATITUDE)], zoom: 16.5 });
-                    var theme = document.querySelector('input[name=layer]:checked').value;
-                    if (theme === 'detour' && r.POSTAL && r.POSTAL !== 'NIL') { openBlock(r.POSTAL, false); }
-                };
-                results.appendChild(li);
-            });
-            results.style.display = data.results.length ? 'block' : 'none';
-        }).catch(function () { results.style.display = 'none'; });
-    }, 300);
+// Address search (js/search.js). In the detour layer, picking an HDB address also opens its routes.
+addSearch(document.getElementById('search'), document.getElementById('results'), function (r) {
+    map.flyTo({ center: [Number(r.LONGITUDE), Number(r.LATITUDE)], zoom: 16.5 });
+    var theme = document.querySelector('input[name=layer]:checked').value;
+    if (theme === 'detour' && r.POSTAL && r.POSTAL !== 'NIL') { openBlock(r.POSTAL, false); }
 });

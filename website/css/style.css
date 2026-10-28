@@ -183,7 +183,7 @@ td, th {
   position: absolute;
   top: 14px;
   left: 14px;
-  z-index: 2;
+  z-index: 3;
   width: 360px;
 }
 
@@ -358,4 +358,9 @@ td, th {
   height: 20px;
   vertical-align: middle;
   margin: 0 6px 0 4px;
+}
+
+/* Propose page: the hint sits below the search box */
+.form-map .map-hint {
+  top: 64px;
 }

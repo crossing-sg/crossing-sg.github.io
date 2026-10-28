@@ -20,7 +20,7 @@ var empty = { type: 'FeatureCollection', features: [] };
 
 map.on('load', function () {
     map.addSource('gap', { type: 'geojson', data: 'data/gap_segments.geojson' });
-    map.addLayer({ id: 'gap', type: 'line', source: 'gap', paint: { 'line-color': SITE.routeStraight, 'line-width': 6, 'line-opacity': 0.45 } });
+    map.addLayer({ id: 'gap', type: 'line', source: 'gap', paint: { 'line-color': SITE.routeStraight, 'line-width': ['interpolate', ['linear'], ['zoom'], 11, 0.6, 16, 6], 'line-opacity': ['interpolate', ['linear'], ['zoom'], 11, 0.2, 16, 0.45] } });
     map.addLayer({ id: 'gap-selected', type: 'line', source: 'gap', filter: ['==', ['get', 'seg_id'], -1], paint: { 'line-color': SITE.highlight, 'line-width': 8 } });
     map.addSource('draft', { type: 'geojson', data: empty });
     map.addLayer({ id: 'draft-line', type: 'line', source: 'draft', paint: { 'line-color': SITE.routeWalk, 'line-width': 4, 'line-dasharray': [1.5, 1.5] } });
@@ -42,6 +42,12 @@ map.on('load', function () {
             if (f) { map.flyTo({ center: f.geometry.coordinates[0], zoom: 17.5 }); }
         });
     }
+});
+
+// Address search (js/search.js): jump close enough to mark points straight away
+addSearch(document.getElementById('search'), document.getElementById('results'), function (r) {
+    map.flyTo({ center: [Number(r.LONGITUDE), Number(r.LATITUDE)], zoom: 18 });
+    setHint('Now click one side of the road and then the other');
 });
 
 map.on('click', function (e) {
