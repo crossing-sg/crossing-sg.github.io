@@ -47,12 +47,12 @@ map.on('load', function () {
 // Address search (js/search.js): jump close enough to mark points straight away
 addSearch(document.getElementById('search'), document.getElementById('results'), function (r) {
     map.flyTo({ center: [Number(r.LONGITUDE), Number(r.LATITUDE)], zoom: 18 });
-    setHint('Now click one side of the road and then the other');
 });
 
 map.on('click', function (e) {
+    if (!map.getSource('draft')) { return; }   // map layers are still loading
     if (map.getZoom() < MIN_ZOOM) {
-        setHint('Zoom in further before marking points');
+        showWhere('Zoom in further before marking points.');
         return;
     }
     if (points.length === 2) { resetPoints(); }
@@ -67,7 +67,7 @@ function drawDraft() {
     });
     if (points.length === 2) { feats.unshift({ type: 'Feature', geometry: { type: 'LineString', coordinates: points }, properties: {} }); }
     map.getSource('draft').setData({ type: 'FeatureCollection', features: feats });
-    setHint(points.length === 1 ? 'Now click the other side of the road' : 'Zoom in to a road, then click one side of the road and then the other');
+    if (points.length === 1) { showWhere('Point A marked. Now click the other side of the road.'); }
 }
 
 // The segment is the gap layer feature that the A to B line crosses, closest to its midpoint
@@ -115,11 +115,10 @@ function resetPoints() {
         map.getSource('draft').setData(empty);
         map.setFilter('gap-selected', ['==', ['get', 'seg_id'], -1]);
     }
-    showWhere('No points marked yet.');
+    showWhere('Search or zoom in to a road, then click one side of the road and then the other.');
 }
 
 function showWhere(html) { document.getElementById('where').innerHTML = html; }
-function setHint(text) { document.getElementById('hint').innerText = text; }
 
 document.getElementById('story').addEventListener('input', function () {
     document.getElementById('chars').innerText = this.value.length;
