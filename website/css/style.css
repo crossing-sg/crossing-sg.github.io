@@ -360,7 +360,11 @@ td, th {
   margin: 0 6px 0 4px;
 }
 
-/* Propose page: the hint sits below the search box */
+/* Propose page: the hint sits at the bottom centre of the map, clear of the search box */
 .form-map .map-hint {
-  top: 64px;
+  top: auto;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
 }
