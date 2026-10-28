@@ -128,9 +128,10 @@ function addStoryLayers(map) {
             .catch(function () { });
     }
 
-    // Summary cards in the intro chapter
-    fillSummaryCards();
 }
+
+// The summary cards sit above the map, so they are filled as soon as the page loads
+window.addEventListener('DOMContentLoaded', fillSummaryCards);
 
 function fillSummaryCards() {
     if (!SITE.appsScriptUrl) { return; }

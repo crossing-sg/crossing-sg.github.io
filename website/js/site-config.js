@@ -3,7 +3,7 @@ var SITE = {
     // Public Mapbox token (starts with pk.). Restrict it to the GitHub Pages URL in your Mapbox account.
     mapboxToken: 'pk.eyJ1IjoiZ2FuZ3NhcmR3aXNhcHV0cm8iLCJhIjoiY212cXFkNTNzMDFraDJ6c2pqdTJnMmQxbCJ9.nwxMvYgUP9OHtwllgaJDVQ',
     // Web app URL of the Google Apps Script deployment (ends with /exec). Leave empty until the script is deployed.
-    appsScriptUrl: '',
+    appsScriptUrl: 'https://script.google.com/macros/s/AKfycbyzq00Ifw3p04T6hmQYeYfKpLUGCw0W1DpOvU1g8yCVtX9BwgKhVOT1AwtCV_0OlC0DPg/exec',
     // Replace with your own Monochrome Dark style from Mapbox Studio (classic template, works with GL JS v2)
     mapStyle: 'mapbox://styles/mapbox/dark-v11',
 
