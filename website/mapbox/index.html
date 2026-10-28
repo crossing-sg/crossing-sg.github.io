@@ -170,7 +170,7 @@
             background-color: #4a4a4a;
             background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('../asset/hero.jpg');
             background-size: cover; background-position: center; }
-        .hero-image { position: relative; }
+        .hero-image { position: relative; box-sizing: border-box; padding-bottom: 90px; height: 74vh; } /* room between the buttons and the cards */
         .credit { position: absolute; right: 16px; bottom: 66px; margin: 0; font-size: 11px; color: rgba(255, 255, 255, 0.8); }
         .credit a, .credit a:visited { color: rgba(255, 255, 255, 0.8); }
         .hero-text { width: 70vw; text-align: center; color: #fff; }
@@ -241,10 +241,10 @@
     </div>
     <div id="story"></div>
 
-    <script src="../js/site-config.js?v=20261028o"></script>
-    <script src="./config.js?v=20261028o"></script>
+    <script src="../js/site-config.js?v=20261028p"></script>
+    <script src="./config.js?v=20261028p"></script>
     <!-- Added for this project: adds the GeoJSON layers used by the chapters -->
-    <script src="./story-layers.js?v=20261028o"></script>
+    <script src="./story-layers.js?v=20261028p"></script>
     <script>
         var initLoad = true;
         var layerTypes = {
