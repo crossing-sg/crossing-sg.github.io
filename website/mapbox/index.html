@@ -197,6 +197,10 @@
         }
         .key { display: inline-block; width: 18px; height: 6px; vertical-align: middle; }
         .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; vertical-align: middle; margin-right: 2px; }
+        /* The transition chapter is a wide centred panel for its chart */
+        #by-area.centered { width: 72vw; }
+        @media (max-width: 750px) { #by-area.centered { width: 92vw; } }
+        #by-area.centered > div { background-color: rgba(35, 39, 45, 0.94) !important; }
         /* Story cards use the template's dark theme to match the dark basemap */
         .dark { background-color: #23272d !important; }
         .dark a, .dark a:visited { color: #7cc4ff; }
@@ -241,10 +245,10 @@
     </div>
     <div id="story"></div>
 
-    <script src="../js/site-config.js?v=20261028p"></script>
-    <script src="./config.js?v=20261028p"></script>
+    <script src="../js/site-config.js?v=20261028r"></script>
+    <script src="./config.js?v=20261028r"></script>
     <!-- Added for this project: adds the GeoJSON layers used by the chapters -->
-    <script src="./story-layers.js?v=20261028p"></script>
+    <script src="./story-layers.js?v=20261028r"></script>
     <script>
         var initLoad = true;
         var layerTypes = {

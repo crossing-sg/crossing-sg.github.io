@@ -43,24 +43,28 @@ var AREA_STATS = {
     ]
 };
 
-// Small two-column bar chart drawn as inline SVG: reported cases, and crossings per km of road
-// with a dashed line for the Singapore average
+// Wide chart drawn as inline SVG for the centred panel. Areas run left to right. The upper row of
+// columns shows reported cases, the lower row crossings per km of road, with a dashed line for the
+// Singapore average. Each row has its own scale, so the two are read separately.
 function areaChart() {
-    var rowH = 24, top = 34, nameW = 92, casesW = 110, gapW = 16, crossW = 150;
-    var x2 = nameW + casesW + gapW, h = top + AREA_STATS.rows.length * rowH + 8, w = x2 + crossW + 40;
-    var avgX = x2 + AREA_STATS.national.crossings_per_km / 10 * crossW;
-    var svg = '<svg viewBox="0 0 ' + w + ' ' + h + '" width="100%" style="max-width:' + w + 'px;font-size:11px">' +
-        '<text x="' + nameW + '" y="12" fill="#c9ced6">Reported cases</text>' +
-        '<text x="' + x2 + '" y="12" fill="#c9ced6">Crossings per km of road</text>' +
-        '<line x1="' + avgX + '" y1="18" x2="' + avgX + '" y2="' + (h - 6) + '" stroke="#fafafa" stroke-dasharray="3 3"/>' +
-        '<text x="' + (avgX + 4) + '" y="28" fill="#fafafa">Singapore ' + AREA_STATS.national.crossings_per_km + '</text>';
+    var n = AREA_STATS.rows.length, labelW = 150, colW = 78, barW = 34, w = labelW + n * colW;
+    var top1 = 22, h1 = 70, top2 = top1 + h1 + 34, h2 = 70, nameY = top2 + h2 + 18, h = nameY + 8;
+    var avg = AREA_STATS.national.crossings_per_km, avgY = top2 + h2 - avg / 10 * h2;
+    var svg = '<svg viewBox="0 0 ' + w + ' ' + h + '" width="100%" style="font-size:12px">' +
+        '<text x="0" y="' + (top1 + h1 / 2) + '" fill="#c9ced6">Reported cases</text>' +
+        '<text x="0" y="' + (top2 + h2 / 2 - 7) + '" fill="#c9ced6">Crossings per km</text>' +
+        '<text x="0" y="' + (top2 + h2 / 2 + 9) + '" fill="#c9ced6">of road</text>' +
+        '<line x1="' + labelW + '" y1="' + avgY + '" x2="' + w + '" y2="' + avgY + '" stroke="#fafafa" stroke-dasharray="4 3"/>' +
+        '<line x1="0" y1="' + (top2 + h2 / 2 + 26) + '" x2="22" y2="' + (top2 + h2 / 2 + 26) + '" stroke="#fafafa" stroke-dasharray="4 3"/>' +
+        '<text x="28" y="' + (top2 + h2 / 2 + 30) + '" fill="#fafafa">Singapore ' + avg + '</text>';
     AREA_STATS.rows.forEach(function (r, i) {
-        var y = top + i * rowH, bold = r.name === 'Bukit Batok' ? ' font-weight="700"' : '';
-        svg += '<text x="0" y="' + (y + 13) + '" fill="#fafafa"' + bold + '>' + r.name + '</text>' +
-            '<rect x="' + nameW + '" y="' + (y + 3) + '" width="' + (r.cases / 5 * casesW) + '" height="13" fill="' + SITE.caseColor + '"/>' +
-            '<text x="' + (nameW + r.cases / 5 * casesW + 4) + '" y="' + (y + 13) + '" fill="#fafafa">' + r.cases + '</text>' +
-            '<rect x="' + x2 + '" y="' + (y + 3) + '" width="' + (Math.min(r.crossings_per_km, 10) / 10 * crossW) + '" height="13" fill="' + SITE.markerColors.crossing + '"/>' +
-            '<text x="' + (x2 + Math.min(r.crossings_per_km, 10) / 10 * crossW + 4) + '" y="' + (y + 13) + '" fill="#fafafa">' + r.crossings_per_km.toFixed(1) + '</text>';
+        var cx = labelW + i * colW + colW / 2, bold = r.name === 'Bukit Batok' ? ' font-weight="700"' : '';
+        var c1 = r.cases / 5 * h1, c2 = Math.min(r.crossings_per_km, 10) / 10 * h2;
+        svg += '<rect x="' + (cx - barW / 2) + '" y="' + (top1 + h1 - c1) + '" width="' + barW + '" height="' + c1 + '" fill="' + SITE.caseColor + '"/>' +
+            '<text x="' + cx + '" y="' + (top1 + h1 - c1 - 4) + '" fill="#fafafa" text-anchor="middle">' + r.cases + '</text>' +
+            '<rect x="' + (cx - barW / 2) + '" y="' + (top2 + h2 - c2) + '" width="' + barW + '" height="' + c2 + '" fill="' + SITE.markerColors.crossing + '"/>' +
+            '<text x="' + cx + '" y="' + (top2 + h2 - c2 - 4) + '" fill="#fafafa" text-anchor="middle">' + r.crossings_per_km.toFixed(1) + '</text>' +
+            '<text x="' + cx + '" y="' + nameY + '" fill="#fafafa" text-anchor="middle"' + bold + '>' + r.name + '</text>';
     });
     return svg + '</svg>';
 }
@@ -117,7 +121,7 @@ var config = {
         },
         {
             id: 'by-area',
-            alignment: 'left',
+            alignment: 'center',
             hidden: false,
             title: 'Cases and crossings by planning area',
             description:
@@ -127,7 +131,7 @@ var config = {
                 'More cases do not mean fewer crossings. Bukit Batok has the most reported cases, yet 5.4 crossings per km against 3.8 across Singapore, ' +
                 'and 20% of its road length is more than 200 m from a crossing against 33% nationally. Novena, with four cases, has 2.0 crossings per km.<br><br>' +
                 '<small>Cases come from news and court reports, which favour filmed and widely shared incidents, so the counts are small and not a measure of risk.</small>',
-            location: { center: [103.83, 1.345], zoom: 11.3, pitch: 0, bearing: 0, padding: PAD_LEFT },
+            location: { center: [103.83, 1.345], zoom: 11.3, pitch: 0, bearing: 0, padding: PAD_NONE },
             mapAnimation: 'flyTo',
             rotateAnimation: false,
             callback: '',
