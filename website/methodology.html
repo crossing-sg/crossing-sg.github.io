@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Methodology</title>
-    <link rel="stylesheet" href="css/style.css?v=20261027g">
+    <link rel="stylesheet" href="css/style.css?v=20261028a">
     <meta charset='utf-8' />
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -67,11 +67,19 @@
             <li><a href="data/gap_segments.geojson" download>Crossing gap segments (GeoJSON)</a></li>
             <li><a href="data/detour_blocks.geojson" download>Mean detour ratio by HDB block (GeoJSON)</a></li>
             <li><a href="data/crossing_markers.geojson" download>Existing crossings, overhead bridges and underpasses (GeoJSON)</a></li>
-            <li>Proposals by road segment, aggregated (CSV), available once the form is open</li>
+            <li id="csv-item">Proposals by road segment, aggregated (CSV), available once the form is open</li>
         </ul>
 
         <h2>Reference</h2>
         <p>Loo, B. P. Y., Lian, T., &amp; Frank, L. D. (2024). Walking (in)convenience: An in-depth study of pedestrian detours to daily facilities. <i>Journal of the American Planning Association, 90</i>(4), 742&ndash;757.</p>
     </div>
+    <script src="js/site-config.js?v=20261028a"></script>
+    <script>
+        // Link to the aggregated proposal table served by the Apps Script web app
+        if (SITE.appsScriptUrl) {
+            document.getElementById('csv-item').innerHTML =
+                '<a href="' + SITE.appsScriptUrl + '?view=csv">Proposals by road segment, aggregated (CSV)</a>';
+        }
+    </script>
 </body>
 </html>

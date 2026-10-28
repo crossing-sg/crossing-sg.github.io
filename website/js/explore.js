@@ -168,13 +168,22 @@ function openBlock(postal, fly) {
         .catch(function () { showCard('<span class="close" onclick="closeCard()">x</span>No routes found for this block.'); });
 }
 
-// Proposals come from the Apps Script web app as segment lines with summary fields
+// Proposals come from the Apps Script web app as one summary per road segment (no geometry).
+// The road geometry is taken from the crossing gap file, matched on seg_id.
 function loadProposals() {
     if (!SITE.appsScriptUrl) { return; }
-    fetch(SITE.appsScriptUrl + '?view=segments')
-        .then(function (r) { return r.json(); })
-        .then(function (gj) { map.getSource('proposals').setData(gj); })
-        .catch(function () { });
+    Promise.all([
+        fetch(SITE.appsScriptUrl + '?view=segments').then(function (r) { return r.json(); }),
+        fetch('data/gap_segments.geojson').then(function (r) { return r.json(); })
+    ]).then(function (res) {
+        var bySeg = {};
+        res[0].segments.forEach(function (s) { bySeg[s.seg_id] = s; });
+        var features = res[1].features.filter(function (f) { return bySeg[f.properties.seg_id]; }).map(function (f) {
+            var s = bySeg[f.properties.seg_id];
+            return { type: 'Feature', geometry: f.geometry, properties: Object.assign({}, s, { line: JSON.stringify(s.line) }) };
+        });
+        map.getSource('proposals').setData({ type: 'FeatureCollection', features: features });
+    }).catch(function () { });
 }
 
 function openSegment(p) {

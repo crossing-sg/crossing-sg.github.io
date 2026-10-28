@@ -114,9 +114,17 @@ function addStoryLayers(map) {
         paint: { 'line-color': SITE.proposalColors, 'line-width': 6, 'line-opacity': 0 }
     });
     if (SITE.appsScriptUrl) {
+        // On the island view, each segment is drawn as its representative crossing line
         fetch(SITE.appsScriptUrl + '?view=segments')
             .then(function (r) { return r.json(); })
-            .then(function (gj) { map.getSource('proposals').setData(gj); })
+            .then(function (res) {
+                map.getSource('proposals').setData({
+                    type: 'FeatureCollection',
+                    features: res.segments.map(function (s) {
+                        return { type: 'Feature', geometry: { type: 'LineString', coordinates: s.line }, properties: { count: s.count } };
+                    })
+                });
+            })
             .catch(function () { });
     }
 
@@ -130,7 +138,7 @@ function fillSummaryCards() {
         .then(function (r) { return r.json(); })
         .then(function (s) {
             document.getElementById('stat-proposals').innerText = s.proposals;
-            document.getElementById('stat-segments').innerText = s.segments + ' road segments shown';
+            document.getElementById('stat-segments').innerText = 'proposals from residents, ' + s.segments + ' road segments shown';
             document.getElementById('stat-updated').innerText = s.lastUpdated;
         })
         .catch(function () { });
