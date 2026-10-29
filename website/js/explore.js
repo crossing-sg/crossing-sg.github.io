@@ -15,14 +15,14 @@ map.addControl(new mapboxgl.NavigationControl(), 'top-right');
 var NOTES = {
     gap: 'Each 50 m piece of road is coloured by the straight-line distance to the nearest crossing, overhead bridge or underpass. Expressways are not shown. Click a piece of road to see its distance.',
     detour: 'Each point is an HDB block, coloured by how much longer the walk to nearby bus stops and MRT exits is than the straight distance. 2.0 means twice as far. Click a block to see its routes.',
-    proposals: 'Each line is a crossing proposed by residents, from one side of the road to the other, coloured by the number of proposals on that piece of road. Click a line to read the summary and add your support.'
+    proposals: 'Each white line is a crossing proposed by residents, from one side of the road to the other. The road underneath is coloured by the number of proposals. Click a line to read the summary and add your support.'
 };
 var LEGENDS = {
     gap: [[SITE.classColors[0], 'Under 50 m'], [SITE.classColors[1], '50 to 100 m'], [SITE.classColors[2], '100 to 200 m'], [SITE.classColors[3], 'Over 200 m']],
     detour: [[SITE.classColors[0], 'Under 1.5'], [SITE.classColors[1], '1.5 to 2.0'], [SITE.classColors[2], '2.0 to 2.5'], [SITE.classColors[3], 'Over 2.5']],
     proposals: [[SITE.proposalRamp[0], '1 to 2 proposals'], [SITE.proposalRamp[1], '3 to 4'], [SITE.proposalRamp[2], '5 to 9'], [SITE.proposalRamp[3], '10 or more']]
 };
-var THEME_LAYERS = { gap: ['gap'], detour: ['blocks'], proposals: ['proposals', 'proposal-crossings-casing', 'proposal-crossings', 'proposal-line'] };
+var THEME_LAYERS = { gap: ['gap'], detour: ['blocks'], proposals: ['proposals', 'proposal-crossings', 'proposal-line'] };
 var empty = { type: 'FeatureCollection', features: [] };
 
 // Block names and mean ratios by postal code, used for the block panel title
@@ -51,12 +51,10 @@ map.on('load', function () {
 
     map.addSource('proposals', { type: 'geojson', data: empty });
     map.addLayer({ id: 'proposals', type: 'line', source: 'proposals', paint: { 'line-color': SITE.proposalColors, 'line-width': ['interpolate', ['linear'], ['zoom'], 11, 2, 16, 6], 'line-opacity': 0.45 } });
-    // Proposed crossing lines (mean of point A and point B), coloured by the number of proposals
+    // Proposed crossing lines (mean of point A and point B), drawn thin and white so they stand out
     map.addSource('proposal-crossings', { type: 'geojson', data: empty });
-    map.addLayer({ id: 'proposal-crossings-casing', type: 'line', source: 'proposal-crossings', layout: { 'line-cap': 'round' },
-        paint: { 'line-color': '#FFFFFF', 'line-width': ['interpolate', ['linear'], ['zoom'], 11, 5, 16, 11] } });
     map.addLayer({ id: 'proposal-crossings', type: 'line', source: 'proposal-crossings', layout: { 'line-cap': 'round' },
-        paint: { 'line-color': SITE.proposalColors, 'line-width': ['interpolate', ['linear'], ['zoom'], 11, 3, 16, 7] } });
+        paint: { 'line-color': '#FFFFFF', 'line-width': ['interpolate', ['linear'], ['zoom'], 11, 1.5, 16, 3.5] } });
     map.addSource('proposal-line', { type: 'geojson', data: empty });
     // Selected crossing, outlined in the highlight colour
     map.addLayer({ id: 'proposal-line', type: 'line', source: 'proposal-line', paint: { 'line-color': SITE.highlight, 'line-width': 4, 'line-gap-width': 8 }, layout: { 'line-cap': 'round' } });
