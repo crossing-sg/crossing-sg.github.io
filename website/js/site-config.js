@@ -6,6 +6,8 @@ var SITE = {
     appsScriptUrl: 'https://script.google.com/macros/s/AKfycbzOStvN7hEi2C6oITb1jUaogTegDxq_VWUPlfK3xaegHbo3WDM6wFv0vuD07U7lvBtVHA/exec',
     // Replace with your own Monochrome Dark style from Mapbox Studio (classic template, works with GL JS v2)
     mapStyle: 'mapbox://styles/mapbox/dark-v11',
+    // Satellite imagery with street names for the proposal form, so residents can recognise the actual crossing spot
+    proposeStyle: 'mapbox://styles/mapbox/satellite-streets-v12',
 
     // Colours for a dark basemap. Crossing gap and walking detour share one ramp: grey, yellow, orange, red (worse).
     classColors: ['#5C6370', '#F2C94C', '#F2994A', '#EB5757'],

@@ -8,7 +8,7 @@ var MAX_LENGTH = 80;    // metres between A and B
 
 var map = new mapboxgl.Map({
     container: 'map',
-    style: SITE.mapStyle,
+    style: SITE.proposeStyle,
     center: [103.82, 1.355],
     zoom: 11
 });
