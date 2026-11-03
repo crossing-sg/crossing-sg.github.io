@@ -153,7 +153,8 @@ function submitProposal() {
     if (!segment) { error.innerText = 'Mark point A and point B across a road first.'; return; }
     if (!type) { error.innerText = 'Choose a type of crossing.'; return; }
     if (!reason) { error.innerText = 'Choose the main reason.'; return; }
-    if (!SITE.proposalApiUrl) { error.innerText = 'Submissions are not open yet. You can explore the road network, but no proposal has been sent.'; return; }
+    // Pilot mode (no v2 URL yet) sends to the pilot Apps Script without the v2 handshake
+    var pilot = !SITE.proposalApiUrl, url = pilot ? SITE.appsScriptUrl : SITE.proposalApiUrl;
 
     var round6 = function (p) { return [Number(p[0].toFixed(6)), Number(p[1].toFixed(6))]; };
     if (!submissionId) { submissionId = crypto.randomUUID(); }
@@ -161,6 +162,7 @@ function submitProposal() {
         kind: 'proposal',
         request_id: submissionId,
         seg_id: segment.seg_id,
+        dist_m: segment.dist_m,
         registry_version: roads.manifest.version,
         a: round6(points[0]),
         b: round6(points[1]),
@@ -175,7 +177,7 @@ function submitProposal() {
     submissionBusy = true;
     btn.disabled = true;
     btn.innerText = 'Sending...';
-    ProposalRoads.requireService(SITE.proposalApiUrl, controller.signal).then(function () { return fetch(SITE.proposalApiUrl, {
+    (pilot ? Promise.resolve() : ProposalRoads.requireService(url, controller.signal)).then(function () { return fetch(url, {
         signal: controller.signal,
         method: 'POST',
         // text/plain avoids the CORS preflight that Apps Script does not answer
@@ -188,7 +190,7 @@ function submitProposal() {
                 var spatial = ['segment', 'segment_mismatch', 'ambiguous', 'unmatched', 'restricted_or_grade', 'length', 'location'];
                 throw new Error(spatial.indexOf(res.error) >= 0 ? 'service_geometry' : 'service_unavailable');
             }
-            if (!ProposalRoads.compatible(res)) { throw new Error('Service version mismatch'); }
+            if (!pilot && !ProposalRoads.compatible(res)) { throw new Error('Service version mismatch'); }
             showThanks(null, 'Road segment ' + segment.seg_id);
         })
         .catch(function (err) {
@@ -204,6 +206,11 @@ function showThanks(count, road) {
     document.getElementById('form-page').style.display = 'none';
     document.getElementById('thanks').style.display = 'block';
     document.getElementById('thanks-road').innerText = road || '';
+    if (!SITE.proposalApiUrl) {
+        document.getElementById('thanks-count').innerText = 'Your proposal has been recorded.';
+        document.getElementById('thanks-next').innerText = 'During this pilot every proposal is shown on the map. Individual marked points are not published.';
+        return;
+    }
     document.getElementById('thanks-count').innerText = 'Your proposal is awaiting review.';
     document.getElementById('thanks-next').innerText = 'A road appears publicly only after at least three proposals have been approved. Individual marked points and unreviewed submissions are not published.';
 }

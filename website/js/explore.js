@@ -15,12 +15,14 @@ map.addControl(new mapboxgl.NavigationControl(), 'top-right');
 var NOTES = {
     gap: 'Each 50 m piece of road is coloured by the straight-line distance to the nearest crossing, overhead bridge or underpass. Expressways are not shown. Click a piece of road to see its distance.',
     detour: 'Each point is an HDB block, coloured by how much longer the walk to nearby bus stops and MRT exits is than the straight distance. 2.0 means twice as far. Click a block to see its routes.',
-    proposals: 'Each white line is an approved crossing proposal aggregate, from one side of the road to the other. Roads appear after at least three approved proposals. Click a line to read the summary and add your support.'
+    proposals: !SITE.proposalApiUrl ?
+        'Each white line is a crossing proposed by residents, from one side of the road to the other. During this pilot every proposal is shown. Click a line to read the summary and add your support.' :
+        'Each white line is an approved crossing proposal aggregate, from one side of the road to the other. Roads appear after at least three approved proposals. Click a line to read the summary and add your support.'
 };
 var LEGENDS = {
     gap: [[SITE.classColors[0], 'Under 50 m'], [SITE.classColors[1], '50 to 100 m'], [SITE.classColors[2], '100 to 200 m'], [SITE.classColors[3], 'Over 200 m']],
     detour: [[SITE.classColors[0], 'Under 1.5'], [SITE.classColors[1], '1.5 to 2.0'], [SITE.classColors[2], '2.0 to 2.5'], [SITE.classColors[3], 'Over 2.5']],
-    proposals: [[SITE.proposalRamp[1], '3 to 4 approved proposals'], [SITE.proposalRamp[2], '5 to 9'], [SITE.proposalRamp[3], '10 or more']]
+    proposals: (!SITE.proposalApiUrl ? [[SITE.proposalRamp[0], '1 to 2 proposals']] : []).concat([[SITE.proposalRamp[1], '3 to 4 approved proposals'], [SITE.proposalRamp[2], '5 to 9'], [SITE.proposalRamp[3], '10 or more']])
 };
 var THEME_LAYERS = { gap: ['gap'], detour: ['blocks'], proposals: ['proposals', 'proposal-crossings', 'proposal-line'] };
 var empty = { type: 'FeatureCollection', features: [] };
@@ -178,10 +180,14 @@ function openBlock(postal, fly) {
 
 // Proposals come from the Apps Script web app as one summary per road segment (no geometry).
 // Canonical geometry comes from the versioned proposal registry, including OSM-only IDs.
+var PILOT = !SITE.proposalApiUrl;
 function loadProposals() {
-    if (!SITE.proposalApiUrl) { return; }
-    ProposalRoads.getPublic(SITE.proposalApiUrl, 'segments').then(function (response) {
-        return Promise.all(ProposalRoads.publicSegments(response).map(function (s) {
+    // Pilot mode (no v2 URL yet): read the pilot Apps Script and show every segment with a proposal
+    var request = PILOT ?
+        fetch(SITE.appsScriptUrl + '?view=segments').then(function (r) { return r.json(); }).then(function (r) { return r.segments || []; }) :
+        ProposalRoads.getPublic(SITE.proposalApiUrl, 'segments').then(ProposalRoads.publicSegments);
+    request.then(function (segments) {
+        return Promise.all(segments.map(function (s) {
             return proposalRoads.feature(s.seg_id).then(function (f) {
                 return { type: 'Feature', geometry: f.geometry, properties: Object.assign({}, s, { dist_m: f.properties.dist_m, line: JSON.stringify(s.line) }) };
             }).catch(function () { return null; });
@@ -200,7 +206,7 @@ function loadProposals() {
 }
 
 function openSegment(p) {
-    if (!Number.isSafeInteger(Number(p.seg_id)) || Number(p.count) < 3) { return; }
+    if (!Number.isSafeInteger(Number(p.seg_id)) || (!PILOT && Number(p.count) < 3)) { return; }
     // The mean crossing line exists only for segments with three or more proposals
     var line = typeof p.line === 'string' ? JSON.parse(p.line) : p.line;
     map.getSource('proposal-line').setData(line ? { type: 'Feature', geometry: { type: 'LineString', coordinates: line }, properties: {} } : empty);
@@ -224,16 +230,17 @@ function hasSupported(segId) {
 }
 
 function support(segId) {
-    if (!SITE.proposalApiUrl || hasSupported(segId)) { return; }
+    if (hasSupported(segId)) { return; }
     var btn = document.getElementById('support-btn');
     btn.disabled = true;
     if (!supportRequests[segId]) { supportRequests[segId] = crypto.randomUUID(); }
-    ProposalRoads.requireService(SITE.proposalApiUrl).then(function () { return fetch(SITE.proposalApiUrl, {
+    var url = PILOT ? SITE.appsScriptUrl : SITE.proposalApiUrl;
+    (PILOT ? Promise.resolve() : ProposalRoads.requireService(url)).then(function () { return fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify({ kind: 'support', seg_id: segId, registry_version: SITE.proposalNetworkVersion, request_id: supportRequests[segId] })
     }); }).then(function (response) { return response.json(); }).then(function (response) {
-        if (!response.ok || !ProposalRoads.compatible(response)) { throw new Error('Support unavailable'); }
+        if (!response.ok || (!PILOT && !ProposalRoads.compatible(response))) { throw new Error('Support unavailable'); }
         try {
             var list = JSON.parse(localStorage.getItem('supported') || '[]');
             list.push(segId);
