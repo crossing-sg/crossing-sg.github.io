@@ -195,7 +195,7 @@ var config = {
             mapAnimation: 'flyTo',
             rotateAnimation: false,
             callback: '',
-            onChapterEnter: only({ block: 1, 'routes-other': 0.3, 'route-walk': 1, 'route-straight': 1, stops: 1, 'all-cases': 1, 'ctx-crossings': 0.6 }),
+            onChapterEnter: only({ block: 1, 'routes-other': 0.7, 'route-walk': 1, 'route-straight': 1, stops: 1, 'all-cases': 1, 'ctx-crossings': 0.6 }),
             onChapterExit: []
         },
         {

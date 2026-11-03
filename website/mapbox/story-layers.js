@@ -112,7 +112,7 @@ function addStoryLayers(map) {
     map.addLayer({
         id: 'routes-other', type: 'line', source: 'routes',
         filter: ['all', ['==', ['get', 'kind'], 'walk'], ['!', ['get', 'highlight']]],
-        paint: { 'line-color': SITE.routeWalk, 'line-width': 1.5, 'line-opacity': 0 }
+        paint: { 'line-color': '#9CA3AF', 'line-width': 2.5, 'line-opacity': 0 }
     });
     map.addLayer({
         id: 'route-walk', type: 'line', source: 'routes',
