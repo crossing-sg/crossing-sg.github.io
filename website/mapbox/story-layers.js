@@ -105,6 +105,35 @@ function addStoryLayers(map) {
     });
 
     // Case symbols stay on top of the road and marker layers
+    map.addSource('block', { type: 'geojson', data: data + 'step3_block.geojson' });
+    map.addLayer({ id: 'block', type: 'fill', source: 'block', paint: { 'fill-color': SITE.highlight, 'fill-opacity': 0 } });
+
+    map.addSource('routes', { type: 'geojson', data: data + 'step3_routes.geojson' });
+    map.addLayer({
+        id: 'routes-other', type: 'line', source: 'routes',
+        filter: ['all', ['==', ['get', 'kind'], 'walk'], ['!', ['get', 'highlight']]],
+        paint: { 'line-color': SITE.routeWalk, 'line-width': 1.5, 'line-opacity': 0 }
+    });
+    map.addLayer({
+        id: 'route-walk', type: 'line', source: 'routes',
+        filter: ['all', ['==', ['get', 'kind'], 'walk'], ['get', 'highlight']],
+        paint: { 'line-color': SITE.routeWalk, 'line-width': 4, 'line-opacity': 0 }
+    });
+    map.addLayer({
+        id: 'route-straight', type: 'line', source: 'routes',
+        filter: ['all', ['==', ['get', 'kind'], 'straight'], ['get', 'highlight']],
+        paint: { 'line-color': SITE.routeStraight, 'line-width': 3, 'line-dasharray': [2, 2], 'line-opacity': 0 }
+    });
+
+    map.addSource('stops', { type: 'geojson', data: data + 'step3_destinations.geojson' });
+    map.addLayer({
+        id: 'stops', type: 'circle', source: 'stops',
+        paint: {
+            'circle-radius': 5, 'circle-color': SITE.basemapDark, 'circle-opacity': 0,
+            'circle-stroke-color': SITE.routeWalk, 'circle-stroke-width': 2, 'circle-stroke-opacity': 0
+        }
+    });
+
     map.moveLayer('rv-case');
     map.moveLayer('cases');
 

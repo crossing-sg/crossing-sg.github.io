@@ -2,7 +2,7 @@
 // Each chapter sets the opacity of every story layer when it is entered, so the result
 // does not depend on the order in which scrollama fires enter and exit events.
 var STORY_LAYERS = ['ctx-bus', 'ctx-crossings', 'ctx-mrt', 'area-fill', 'area-line', 'all-cases', 'cases',
-    'rv-buffer-fill', 'rv-buffer-line', 'rv-gap', 'rv-markers', 'rv-case', 'detour-blocks', 'proposals'];
+    'rv-buffer-fill', 'rv-buffer-line', 'rv-gap', 'rv-markers', 'rv-case', 'detour-blocks', 'block', 'routes-other', 'route-walk', 'route-straight', 'stops', 'proposals'];
 var only = function (visible) {
     return STORY_LAYERS.map(function (l) {
         return { layer: l, opacity: visible[l] === undefined ? 0 : visible[l], duration: 800 };
@@ -177,6 +177,23 @@ var config = {
             rotateAnimation: false,
             callback: '',
             onChapterEnter: only({ 'detour-blocks': 1 }),
+            onChapterExit: []
+        },
+        {
+            id: 'bukit-batok',
+            alignment: 'left',
+            hidden: false,
+            title: 'More crossings, longer walks: Blk 121 Bukit Batok',
+            description:
+                'Bukit Batok has more crossings than the Singapore average but the most reported cases. One reason may be where the crossings are. ' +
+                'Blk 121 (blue) is 84 m from a fatal case on Bukit Batok Central. The bus stop opposite is 96 m away in a straight line (dashed), but 548 m on foot (white line).<br><br>' +
+                'The mean detour ratio of Blk 121 is 2.9, against 1.9 for all HDB blocks.<br><br>' +
+                '<a href="../map.html?layer=detour&block=650121" target="_top">Look up another block</a>',
+            location: { center: [103.7479, 1.3510], zoom: 16.8, pitch: 0, bearing: 0, padding: PAD_LEFT },
+            mapAnimation: 'flyTo',
+            rotateAnimation: false,
+            callback: '',
+            onChapterEnter: only({ block: 1, 'routes-other': 0.3, 'route-walk': 1, 'route-straight': 1, stops: 1, 'all-cases': 1, 'ctx-crossings': 0.6 }),
             onChapterExit: []
         },
         {
