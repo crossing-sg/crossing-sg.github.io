@@ -70,9 +70,9 @@ function areaChart() {
 
 // Google Maps Street View at Institution Hill. Paste the src of the embed code from Google Maps
 // (Street View > Share > Embed a map). Leave empty to hide the view.
-var STREETVIEW_RIVER_VALLEY = '';
+var STREETVIEW_RIVER_VALLEY = 'https://www.google.com/maps/embed?pb=!4v1793719959516!6m8!1m7!1seSTQVMTzf1wHWlnoGaaT5A!2m2!1d1.295205080982741!2d103.8399874169741!3f37.10251755951129!4f-1.8725221464593034!5f0.4000000000000002';
 function streetView(src) {
-    return src ? '<iframe class="streetview" src="' + src + '" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>' : '';
+    return src ? '<iframe class="streetview" src="' + src + '" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>' : '';
 }
 
 var config = {
