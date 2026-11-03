@@ -14,6 +14,10 @@ var only = function (visible) {
 // card sits in the middle and no padding is used.
 var PAD_LEFT = { top: 40, bottom: 40, left: Math.round(window.innerWidth * 0.38), right: 40 };
 var PAD_NONE = { top: 0, bottom: 0, left: 0, right: 0 };
+// The first three chapters share one camera, so only the data layers change between them.
+// The lower 42% of the screen is kept for the infographic strip, and the left for the story card.
+var PAD_SG = { top: 20, bottom: Math.round(window.innerHeight * 0.42), left: 20, right: 20 };
+var LOC_SG = { center: [103.82, 1.355], zoom: 10.6, pitch: 0, bearing: 0, padding: PAD_SG };
 var PAD_STRIP = { top: 20, bottom: Math.round(window.innerHeight * 0.42), left: 20, right: 20 };
 // Measures the right edge of the story card and updates PAD_LEFT in place, so every chapter
 // that refers to it uses the current screen size
@@ -24,6 +28,8 @@ function updateStoryPadding() {
     PAD_LEFT.left = wide ? Math.round(right + 40) : 0;
     PAD_LEFT.top = PAD_LEFT.bottom = wide ? 40 : 0;
     PAD_LEFT.right = wide ? 40 : 0;
+    PAD_SG.left = wide ? PAD_LEFT.left : 0;
+    PAD_SG.bottom = wide ? Math.round(window.innerHeight * 0.42) : 0;
 }
 window.addEventListener('load', updateStoryPadding);
 window.addEventListener('resize', updateStoryPadding);
@@ -62,6 +68,21 @@ function barChart(key, max, color, avg) {
     return svg + '</svg>';
 }
 
+// News screenshots for the cases chapter, saved in ../img/news/. A missing file is hidden.
+var NEWS = [
+    { file: 'asiaone-river-valley.png', source: 'AsiaOne, 2024', url: 'https://www.asiaone.com/singapore/maid-jaywalked-4-year-old-girl-who-was-killed-river-valley-accident-traffic-police' },
+    { file: 'malaymail-bukit-batok.png', source: 'Malay Mail, 2018', url: 'https://www.malaymail.com/news/world/2018/12/07/singaporean-jailed-six-weeks-for-causing-death-of-4-year-old-girl/1700941' },
+    { file: 'mustsharenews-queensway.png', source: 'MustShareNews', url: 'https://mustsharenews.com/driver-jailed-jaywalker-queensway/' },
+    { file: 'mothership-sims-ave.png', source: 'Mothership, 2023', url: 'https://mothership.sg/2023/04/cross-road-look-phone-death/' },
+    { file: 'independent-bukit-batok.png', source: 'The Independent SG, 2020', url: 'https://theindependent.sg/elderly-man-dies-after-being-knocked-down-while-crossing-road-in-bukit-batok/' },
+    { file: 'mothership-balestier.png', source: 'Mothership, 2025', url: 'https://mothership.sg/2025/08/woman-jaywalk-balestier-road/' }
+];
+function newsGallery() {
+    return '<div class="news">' + NEWS.map(function (n) {
+        return '<a href="' + n.url + '" target="_blank"><img src="../img/news/' + n.file + '" alt="' + n.source + '" onerror="this.parentNode.remove()"><span>' + n.source + '</span></a>';
+    }).join('') + '</div>';
+}
+
 // Google Maps Street View at Institution Hill. Paste the src of the embed code from Google Maps
 // (Street View > Share > Embed a map). Leave empty to hide the view.
 var STREETVIEW_RIVER_VALLEY = 'https://www.google.com/maps/embed?pb=!4v1793719959516!6m8!1m7!1seSTQVMTzf1wHWlnoGaaT5A!2m2!1d1.295205080982741!2d103.8399874169741!3f37.10251755951129!4f-1.8725221464593034!5f0.4000000000000002';
@@ -96,7 +117,7 @@ var config = {
                 '<span class="dot" style="background:' + SITE.markerColors.underpass + '"></span> underpass<br>' +
                 '<span class="dot" style="background:' + SITE.markerColors.bus + '"></span> bus stop &nbsp; ' +
                 '<span class="dot" style="background:' + SITE.markerColors.mrt + '"></span> MRT exit',
-            location: { center: [103.815, 1.352], zoom: 11.2, pitch: 0, bearing: 0, padding: PAD_LEFT },
+            location: LOC_SG,
             mapAnimation: 'flyTo',
             rotateAnimation: false,
             callback: '',
@@ -107,16 +128,16 @@ var config = {
             id: 'cases',
             alignment: 'left',
             hidden: false,
-            title: 'Reported fatal cases, 2017 to 2024',
+            title: 'Reported cases, 2017 to 2026',
             description:
-                'News and court reports describe five fatal cases in which a pedestrian was hit while crossing away from a crossing or against the signal. ' +
-                'Official statistics count these cases but do not record where they happen, so news reports are the only public source of locations.<br><br>' +
-                'Two of the five cases happened at signalised crossings. Each point marks the road or junction named in the report, not the exact spot.',
-            location: { center: [103.815, 1.322], zoom: 11.2, pitch: 0, bearing: 0, padding: PAD_LEFT },
+                'News and court reports describe 32 cases in which a pedestrian was hit while crossing away from a crossing or against the signal. Seven were fatal (large points).<br><br>' +
+                newsGallery() +
+                '<small>Official statistics do not record where these cases happen, so news reports are the only public source of locations. Each point marks the road named in the report. Hollow points are approximate.</small>',
+            location: LOC_SG,
             mapAnimation: 'flyTo',
             rotateAnimation: false,
             callback: '',
-            onChapterEnter: only({ 'ctx-bus': 0.25, 'ctx-crossings': 0.3, 'ctx-mrt': 0.35, cases: 1 }),
+            onChapterEnter: only({ 'ctx-crossings': 0.3, 'all-cases': 1 }),
             onChapterExit: []
         },
         {
@@ -125,13 +146,13 @@ var config = {
             hidden: false,
             title: 'Fatal cases and crossing provision',
             description:
-                '<div class="strip">' +
+                '<p>Do the cases fall where crossings are few? Areas with a fatal case, compared.</p><div class="strip">' +
                 '<div><h4>Reported cases</h4>' + barChart('cases', 5, SITE.caseColor) +
                 '<p>Bukit Batok and Novena have the most cases in the news sample.</p></div>' +
                 '<div><h4>Crossings per km of road</h4>' + barChart('crossings_per_km', 6, SITE.markerColors.crossing, AREA_STATS.national.crossings_per_km) +
                 '<p>River Valley and Novena have the fewest, below the Singapore average.</p></div>' +
                 '</div><small>Areas with a fatal case. Crossings include bridges and underpasses (LTA DataMall). News counts are small and not a measure of risk.</small>',
-            location: { center: [103.83, 1.35], zoom: 11.1, pitch: 0, bearing: 0, padding: PAD_STRIP },
+            location: LOC_SG,
             mapAnimation: 'flyTo',
             rotateAnimation: false,
             callback: '',
@@ -158,25 +179,6 @@ var config = {
             rotateAnimation: false,
             callback: '',
             onChapterEnter: only({ 'rv-buffer-fill': 0.12, 'rv-buffer-line': 1, 'rv-gap': 1, 'rv-markers': 1, 'rv-case': 1 }),
-            onChapterExit: []
-        },
-        {
-            id: 'detour',
-            alignment: 'left',
-            hidden: false,
-            title: 'Walking detours of HDB residents',
-            description:
-                'Where crossings are not on the way, walks get longer. Each dot is an HDB block, coloured by how much longer the walk to bus stops ' +
-                'and MRT exits within 500 m is than the straight line. A ratio of 2.0 means twice as far.<br><br>' +
-                '<span class="dot" style="background:' + SITE.classColors[0] + '"></span> under 1.5 &nbsp; <span class="dot" style="background:' + SITE.classColors[1] + '"></span> 1.5 to 2.0 &nbsp; ' +
-                '<span class="dot" style="background:' + SITE.classColors[2] + '"></span> 2.0 to 2.5 &nbsp; <span class="dot" style="background:' + SITE.classColors[3] + '"></span> over 2.5' + '<br><br>' +
-                'The mean ratio across all HDB blocks is 1.9. Walking distances are shortest paths on the OpenStreetMap network.<br><br>' +
-                '<a href="../map.html?layer=detour" target="_top">Look up a block on the map</a>',
-            location: { center: [103.815, 1.352], zoom: 11.2, pitch: 0, bearing: 0, padding: PAD_LEFT },
-            mapAnimation: 'flyTo',
-            rotateAnimation: false,
-            callback: '',
-            onChapterEnter: only({ 'detour-blocks': 1 }),
             onChapterExit: []
         },
         {
