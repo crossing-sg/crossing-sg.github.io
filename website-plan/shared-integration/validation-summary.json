@@ -1,0 +1,30 @@
+{
+  "base": "785b7533facdd83e84a40f3d685eae371ca5b890",
+  "dataset_version": "proposal-all-highways-6371b27f223e31d7",
+  "automated_tests": {
+    "legacy": 24,
+    "osm_api": 6,
+    "satellite_and_teammate_preservation": 3,
+    "processing": 4,
+    "total": 37,
+    "passed": true
+  },
+  "browser_cases": 23,
+  "browser_errors": [],
+  "real_mapbox_passed": true,
+  "non_raster_layers_preserved": 85,
+  "google_backend_requests": 0,
+  "source_worktree": {
+    "source_files_checked": 21474,
+    "changed": [],
+    "preserved": true
+  },
+  "upload": {
+    "account": "swiftstrange",
+    "pull": true,
+    "push": false,
+    "attempted_push": false,
+    "pr_created": false
+  },
+  "apps_script_deployment_required": true
+}

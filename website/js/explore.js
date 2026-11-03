@@ -15,15 +15,17 @@ map.addControl(new mapboxgl.NavigationControl(), 'top-right');
 var NOTES = {
     gap: 'Each 50 m piece of road is coloured by the straight-line distance to the nearest crossing, overhead bridge or underpass. Expressways are not shown. Click a piece of road to see its distance.',
     detour: 'Each point is an HDB block, coloured by how much longer the walk to nearby bus stops and MRT exits is than the straight distance. 2.0 means twice as far. Click a block to see its routes.',
-    proposals: 'Each white line is a crossing proposed by residents, from one side of the road to the other. The road underneath is coloured by the number of proposals. Click a line to read the summary and add your support.'
+    proposals: 'Each white line is an approved crossing proposal aggregate, from one side of the road to the other. Roads appear after at least three approved proposals. Click a line to read the summary and add your support.'
 };
 var LEGENDS = {
     gap: [[SITE.classColors[0], 'Under 50 m'], [SITE.classColors[1], '50 to 100 m'], [SITE.classColors[2], '100 to 200 m'], [SITE.classColors[3], 'Over 200 m']],
     detour: [[SITE.classColors[0], 'Under 1.5'], [SITE.classColors[1], '1.5 to 2.0'], [SITE.classColors[2], '2.0 to 2.5'], [SITE.classColors[3], 'Over 2.5']],
-    proposals: [[SITE.proposalRamp[0], '1 to 2 proposals'], [SITE.proposalRamp[1], '3 to 4'], [SITE.proposalRamp[2], '5 to 9'], [SITE.proposalRamp[3], '10 or more']]
+    proposals: [[SITE.proposalRamp[1], '3 to 4 approved proposals'], [SITE.proposalRamp[2], '5 to 9'], [SITE.proposalRamp[3], '10 or more']]
 };
 var THEME_LAYERS = { gap: ['gap'], detour: ['blocks'], proposals: ['proposals', 'proposal-crossings', 'proposal-line'] };
 var empty = { type: 'FeatureCollection', features: [] };
+var proposalRoads = new ProposalRoads.Store(SITE.proposalRoadsBase);
+var supportRequests = {};
 
 // Block names and mean ratios by postal code, used for the block panel title
 var blockInfo = {};
@@ -49,7 +51,7 @@ map.on('load', function () {
     map.addLayer({ id: 'route-walk', type: 'line', source: 'routes', filter: ['==', ['get', 'kind'], 'walk'], paint: { 'line-color': SITE.routeWalk, 'line-width': 3 } });
     map.addLayer({ id: 'route-straight', type: 'line', source: 'routes', filter: ['==', ['get', 'kind'], 'straight'], paint: { 'line-color': SITE.routeStraight, 'line-width': 1.5, 'line-dasharray': [2, 2] } });
 
-    map.addSource('proposals', { type: 'geojson', data: empty });
+    map.addSource('proposals', { type: 'geojson', data: empty, attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a> (ODbL)' });
     map.addLayer({ id: 'proposals', type: 'line', source: 'proposals', paint: { 'line-color': SITE.proposalColors, 'line-width': ['interpolate', ['linear'], ['zoom'], 11, 2, 16, 6], 'line-opacity': 0.45 } });
     // Proposed crossing lines (mean of point A and point B), drawn thin and white so they stand out
     map.addSource('proposal-crossings', { type: 'geojson', data: empty });
@@ -175,37 +177,41 @@ function openBlock(postal, fly) {
 }
 
 // Proposals come from the Apps Script web app as one summary per road segment (no geometry).
-// The road geometry is taken from the crossing gap file, matched on seg_id.
+// Canonical geometry comes from the versioned proposal registry, including OSM-only IDs.
 function loadProposals() {
-    if (!SITE.appsScriptUrl) { return; }
-    Promise.all([
-        fetch(SITE.appsScriptUrl + '?view=segments').then(function (r) { return r.json(); }),
-        fetch('data/gap_segments.geojson').then(function (r) { return r.json(); })
-    ]).then(function (res) {
-        var bySeg = {};
-        res[0].segments.forEach(function (s) { bySeg[s.seg_id] = s; });
-        var features = res[1].features.filter(function (f) { return bySeg[f.properties.seg_id]; }).map(function (f) {
-            var s = bySeg[f.properties.seg_id];
-            return { type: 'Feature', geometry: f.geometry, properties: Object.assign({}, s, { line: JSON.stringify(s.line) }) };
-        });
+    if (!SITE.proposalApiUrl) { return; }
+    ProposalRoads.getPublic(SITE.proposalApiUrl, 'segments').then(function (response) {
+        return Promise.all(ProposalRoads.publicSegments(response).map(function (s) {
+            return proposalRoads.feature(s.seg_id).then(function (f) {
+                return { type: 'Feature', geometry: f.geometry, properties: Object.assign({}, s, { dist_m: f.properties.dist_m, line: JSON.stringify(s.line) }) };
+            }).catch(function () { return null; });
+        }));
+    }).then(function (features) {
+        features = features.filter(Boolean);
         map.getSource('proposals').setData({ type: 'FeatureCollection', features: features });
-        map.getSource('proposal-crossings').setData({ type: 'FeatureCollection', features: res[0].segments.filter(function (s) { return s.line; }).map(function (s) {
-            return { type: 'Feature', geometry: { type: 'LineString', coordinates: s.line }, properties: Object.assign({}, s, { line: JSON.stringify(s.line) }) };
+        map.getSource('proposal-crossings').setData({ type: 'FeatureCollection', features: features.filter(function (f) { return JSON.parse(f.properties.line); }).map(function (f) {
+            return { type: 'Feature', geometry: { type: 'LineString', coordinates: JSON.parse(f.properties.line) }, properties: f.properties };
         }) });
-    }).catch(function () { });
+    }).catch(function () {
+        if (document.querySelector('input[name=layer]:checked').value === 'proposals') {
+            document.getElementById('layer-note').innerText = 'Approved proposal summaries are temporarily unavailable. Please try again later.';
+        }
+    });
 }
 
 function openSegment(p) {
+    if (!Number.isSafeInteger(Number(p.seg_id)) || Number(p.count) < 3) { return; }
     // The mean crossing line exists only for segments with three or more proposals
     var line = typeof p.line === 'string' ? JSON.parse(p.line) : p.line;
     map.getSource('proposal-line').setData(line ? { type: 'Feature', geometry: { type: 'LineString', coordinates: line }, properties: {} } : empty);
     var supported = hasSupported(p.seg_id);
-    showCard('<span class="close" onclick="closeCard()">x</span><b style="font-size:16px">' + p.road + '</b>' +
+    var safe = ProposalRoads.escape;
+    showCard('<span class="close" onclick="closeCard()">x</span><b style="font-size:16px">' + safe(p.road) + '</b>' +
         '<div class="nums"><div><span class="small">PROPOSALS</span><b>' + p.count + '</b></div>' +
         '<div><span class="small">SUPPORT</span><b id="support-count">' + p.support + '</b></div>' +
-        '<div><span class="small">NEAREST CROSSING</span><b>' + p.dist_m + ' m</b></div></div>' +
-        '<div class="small">Most requested type</div><b>' + p.top_type + '</b><br><br>' +
-        '<div class="small">Most common reason</div><b>' + p.top_reason + '</b><br><br>' +
+        '<div><span class="small">NEAREST CROSSING</span><b>' + ProposalRoads.distance(p.dist_m) + '</b></div></div>' +
+        '<div class="small">Most requested type</div><b>' + safe(p.top_type) + '</b><br><br>' +
+        '<div class="small">Most common reason</div><b>' + safe(p.top_reason) + '</b><br><br>' +
         '<button class="btn" id="support-btn" ' + (supported ? 'disabled' : '') + ' onclick="support(' + p.seg_id + ')">' +
         (supported ? 'Support added' : 'I need a crossing here too') + '</button> ' +
         '<a class="btn btn-light" href="propose.html?seg=' + p.seg_id + '">Propose here</a>');
@@ -218,14 +224,16 @@ function hasSupported(segId) {
 }
 
 function support(segId) {
-    if (!SITE.appsScriptUrl || hasSupported(segId)) { return; }
+    if (!SITE.proposalApiUrl || hasSupported(segId)) { return; }
     var btn = document.getElementById('support-btn');
     btn.disabled = true;
-    fetch(SITE.appsScriptUrl, {
+    if (!supportRequests[segId]) { supportRequests[segId] = crypto.randomUUID(); }
+    ProposalRoads.requireService(SITE.proposalApiUrl).then(function () { return fetch(SITE.proposalApiUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify({ kind: 'support', seg_id: segId })
-    }).then(function () {
+        body: JSON.stringify({ kind: 'support', seg_id: segId, registry_version: SITE.proposalNetworkVersion, request_id: supportRequests[segId] })
+    }); }).then(function (response) { return response.json(); }).then(function (response) {
+        if (!response.ok || !ProposalRoads.compatible(response)) { throw new Error('Support unavailable'); }
         try {
             var list = JSON.parse(localStorage.getItem('supported') || '[]');
             list.push(segId);

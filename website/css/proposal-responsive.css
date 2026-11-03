@@ -1,0 +1,16 @@
+/* Narrow-screen map/form support; loaded only by Proposal and Explore. */
+@media (max-width: 700px) {
+  body { padding: 12px; }
+  .topnav { justify-content: center; }
+  .topnav a { font-size: 12px; padding: 8px; }
+  .form-page { position: relative; top: 16px; }
+  .form-map { position: relative; right: auto; height: 52vh; min-height: 320px; }
+  .form-side { position: relative; width: 100%; padding: 20px; overflow: visible; border-left: 0; }
+  .map-page { top: 60px; }
+  .map-page:has(.panel) { display: flex; flex-direction: column; }
+  .map-page .panel { position: relative; width: 100%; height: 220px; flex-shrink: 0; border-right: 0; border-bottom: 1px solid #ddd; }
+  .map-area { position: relative; left: 0; flex: 1; min-height: 320px; }
+  .search { max-width: calc(100% - 70px); }
+  .info-card { max-width: calc(100% - 28px); box-sizing: border-box; }
+  .thanks { padding: 20px; }
+}

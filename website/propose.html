@@ -3,6 +3,7 @@
 <head>
     <title>Propose a crossing</title>
     <link rel="stylesheet" href="css/style.css?v=20261029b">
+    <link rel="stylesheet" href="css/proposal-responsive.css?v=osm-satellite1">
     <meta charset='utf-8' />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js'></script>
@@ -49,7 +50,7 @@
             <label><input type="radio" name="reason" value="Other"> Other</label>
 
             <h4>4 &nbsp;Your experience (optional)</h4>
-            <p style="color:#6b6b6b;font-size:13px;margin-top:0">Reviewed by the team before it appears on the map. Do not include names or vehicle numbers.</p>
+            <p style="color:#6b6b6b;font-size:13px;margin-top:0">Stored privately for review. Do not include names, contact details or vehicle numbers.</p>
             <textarea id="story" maxlength="300" placeholder="What makes crossing here difficult?"></textarea>
             <div style="text-align:right;font-size:12px;color:#9e9e9e"><span id="chars">0</span> / 300</div>
 
@@ -58,7 +59,7 @@
 
             <p class="error" id="error"></p>
             <button class="btn" style="width:100%;padding:12px" id="submit" onclick="submitProposal()">Submit proposal</button>
-            <p style="font-size:12px;color:#6b6b6b">Proposals are shown only as totals per road segment. The exact points you mark are never published.</p>
+            <p style="font-size:12px;color:#6b6b6b">Roads appear after at least three approved proposals. Unreviewed submissions and individual marked points are not published.</p>
         </div>
     </div>
 
@@ -74,8 +75,11 @@
         <p><a href="propose.html">Propose another crossing</a></p>
     </div>
 
-    <script src="js/site-config.js?v=20261029b"></script>
+    <script src="js/site-config.js?v=osm-satellite1"></script>
     <script src="js/search.js?v=20261029b"></script>
-    <script src="js/propose.js?v=20261029b"></script>
+    <script src="js/road-geometry.js?v=osm-satellite1"></script>
+    <script src="js/proposal-roads.js?v=osm-satellite1"></script>
+    <script src="js/proposal-basemap.js?v=osm-satellite1"></script>
+    <script src="js/propose.js?v=osm-satellite1"></script>
 </body>
 </html>
