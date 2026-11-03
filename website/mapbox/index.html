@@ -202,15 +202,13 @@
         #by-area.fully > div { position: sticky; bottom: 20px; width: 92vw; margin: 0 auto; padding: 14px 28px; font-size: 12px;
             background-color: rgba(35, 39, 45, 0.94) !important; }
         #by-area h3 { margin: 0 0 8px; }
-        .strip { display: flex; gap: 32px; align-items: center; }
-        .strip-text { flex: 0 0 34%; line-height: 18px; }
-        #by-area.fully > div > p { margin: 0; }
-        /* the template pads every div inside a card; the strip columns need none */
+        .strip { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
         #by-area .strip, #by-area .strip div { padding: 0; }
-        #by-area .strip-chart svg { max-height: 190px; }
-        .strip-chart { flex: 1; min-width: 0; }
-        @media (max-width: 750px) { .strip { flex-direction: column; } }
-        /* Google Maps Street View embed in a story card */
+        #by-area .strip h4 { margin: 0 0 6px; font-size: 13px; }
+        #by-area .strip p { margin: 4px 0 0; }
+        #by-area .strip svg { max-height: 150px; }
+        #by-area small { display: block; margin-top: 8px; color: #c9ced6; }
+        @media (max-width: 750px) { .strip { grid-template-columns: 1fr; gap: 16px; } }
         .streetview { width: 100%; height: 240px; border: 0; border-radius: 6px; margin-top: 14px; }
         /* Story cards use the template's dark theme to match the dark basemap */
         .dark { background-color: #23272d !important; }
@@ -256,8 +254,8 @@
     </div>
     <div id="story"></div>
 
-    <script src="../js/site-config.js?v=20261103f"></script>
-    <script src="./config.js?v=20261103f"></script>
+    <script src="../js/site-config.js?v=20261103g"></script>
+    <script src="./config.js?v=20261103g"></script>
     <!-- Added for this project: adds the GeoJSON layers used by the chapters -->
     <script src="./story-layers.js?v=20261103e"></script>
     <script>

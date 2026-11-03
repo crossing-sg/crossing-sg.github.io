@@ -42,29 +42,23 @@ var AREA_STATS = {
     ]
 };
 
-// Wide chart drawn as inline SVG for the centred panel. Areas run left to right. The upper row of
-// columns shows reported cases, the lower row crossings per km of road, with a dashed line for the
-// Singapore average. Each row has its own scale, so the two are read separately.
-function areaChart() {
-    var n = AREA_STATS.rows.length, labelW = 150, colW = 96, barW = 34, w = labelW + n * colW;
-    var top1 = 20, h1 = 46, top2 = top1 + h1 + 30, h2 = 50, nameY = top2 + h2 + 18, h = nameY + 6;
-    var avg = AREA_STATS.national.crossings_per_km, avgY = top2 + h2 - avg / 10 * h2;
-    var svg = '<svg viewBox="0 0 ' + w + ' ' + h + '" width="100%" style="font-size:12px">' +
-        '<text x="0" y="' + (top1 + h1 / 2) + '" fill="#c9ced6">Reported cases</text>' +
-        '<text x="0" y="' + (top2 + h2 / 2 - 7) + '" fill="#c9ced6">Crossings per km</text>' +
-        '<text x="0" y="' + (top2 + h2 / 2 + 9) + '" fill="#c9ced6">of road</text>' +
-        '<line x1="' + labelW + '" y1="' + avgY + '" x2="' + w + '" y2="' + avgY + '" stroke="#fafafa" stroke-dasharray="4 3"/>' +
-        '<line x1="0" y1="' + (top2 + h2 / 2 + 26) + '" x2="22" y2="' + (top2 + h2 / 2 + 26) + '" stroke="#fafafa" stroke-dasharray="4 3"/>' +
-        '<text x="28" y="' + (top2 + h2 / 2 + 30) + '" fill="#fafafa">Singapore ' + avg + '</text>';
+// Horizontal bar chart drawn as inline SVG, one bar per area. avg adds a dashed line for the
+// Singapore average.
+function barChart(key, max, color, avg) {
+    var rowH = 24, labelW = 92, barMax = 220, w = labelW + barMax + 36;
+    var h = AREA_STATS.rows.length * rowH + (avg ? 18 : 2);
+    var svg = '<svg viewBox="0 0 ' + w + ' ' + h + '" width="100%" style="font-size:12px">';
     AREA_STATS.rows.forEach(function (r, i) {
-        var cx = labelW + i * colW + colW / 2, bold = r.name === 'River Valley' ? ' font-weight="700"' : '';
-        var c1 = r.cases / 5 * h1, c2 = Math.min(r.crossings_per_km, 10) / 10 * h2;
-        svg += '<rect x="' + (cx - barW / 2) + '" y="' + (top1 + h1 - c1) + '" width="' + barW + '" height="' + c1 + '" fill="' + SITE.caseColor + '"/>' +
-            '<text x="' + cx + '" y="' + (top1 + h1 - c1 - 4) + '" fill="#fafafa" text-anchor="middle">' + r.cases + '</text>' +
-            '<rect x="' + (cx - barW / 2) + '" y="' + (top2 + h2 - c2) + '" width="' + barW + '" height="' + c2 + '" fill="' + SITE.markerColors.crossing + '"/>' +
-            '<text x="' + cx + '" y="' + (top2 + h2 - c2 - 4) + '" fill="#fafafa" text-anchor="middle">' + r.crossings_per_km.toFixed(1) + '</text>' +
-            '<text x="' + cx + '" y="' + nameY + '" fill="#fafafa" text-anchor="middle"' + bold + '>' + r.name + '</text>';
+        var y = i * rowH, v = r[key], bw = v / max * barMax, bold = r.name === 'River Valley' ? ' font-weight="700"' : '';
+        svg += '<text x="' + (labelW - 8) + '" y="' + (y + 15) + '" fill="#fafafa" text-anchor="end"' + bold + '>' + r.name + '</text>' +
+            '<rect x="' + labelW + '" y="' + (y + 4) + '" width="' + bw + '" height="15" fill="' + color + '"/>' +
+            '<text x="' + (labelW + bw + 5) + '" y="' + (y + 15) + '" fill="#fafafa">' + (key === 'cases' ? v : v.toFixed(1)) + '</text>';
     });
+    if (avg) {
+        var x = labelW + avg / max * barMax, yb = AREA_STATS.rows.length * rowH;
+        svg += '<line x1="' + x + '" y1="0" x2="' + x + '" y2="' + yb + '" stroke="#fafafa" stroke-dasharray="4 3"/>' +
+            '<text x="' + x + '" y="' + (yb + 14) + '" fill="#c9ced6" text-anchor="middle">Singapore ' + avg + '</text>';
+    }
     return svg + '</svg>';
 }
 
@@ -131,12 +125,12 @@ var config = {
             hidden: false,
             title: 'Fatal cases and crossing provision',
             description:
-                '<div class="strip"><div class="strip-text">' +
-                'All 32 cases in the news sample are grouped by URA planning area (map). The chart shows the areas with a fatal case. ' +
-                'Crossing provision is the number of road crossings, overhead bridges and underpasses per km of road, from LTA DataMall, with expressways excluded.<br><br>' +
-                'Bukit Batok has the most cases but more crossings than the Singapore average. River Valley and Novena, each with a fatal case, have the fewest.' +
-                '<br><small>News reports favour filmed and widely shared incidents, so the counts are small and not a measure of risk.</small>' +
-                '</div><div class="strip-chart">' + areaChart() + '</div></div>',
+                '<div class="strip">' +
+                '<div><h4>Reported cases</h4>' + barChart('cases', 5, SITE.caseColor) +
+                '<p>Bukit Batok and Novena have the most cases in the news sample.</p></div>' +
+                '<div><h4>Crossings per km of road</h4>' + barChart('crossings_per_km', 6, SITE.markerColors.crossing, AREA_STATS.national.crossings_per_km) +
+                '<p>River Valley and Novena have the fewest, below the Singapore average.</p></div>' +
+                '</div><small>Areas with a fatal case. Crossings include bridges and underpasses (LTA DataMall). News counts are small and not a measure of risk.</small>',
             location: { center: [103.83, 1.35], zoom: 11.1, pitch: 0, bearing: 0, padding: PAD_STRIP },
             mapAnimation: 'flyTo',
             rotateAnimation: false,
