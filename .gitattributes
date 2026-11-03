@@ -1,10 +1,10 @@
 # Hash-pinned processed assets must keep identical bytes across Windows/Linux.
-website/data/proposal-roads/** -text
-website/data/osm-complete/proposal-roads/** -text
-website-plan/osm-complete/*.json -text
+website/data/proposal-roads/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+website/data/osm-complete/proposal-roads/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+website-plan/osm-complete/*.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 website-plan/osm-complete/*.gz -text
 website/data/gap_segments.geojson -text
-website-plan/road-conflation/registry/*.csv -text
-website-plan/road-conflation/registry/*.json -text
+website-plan/road-conflation/registry/*.csv -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+website-plan/road-conflation/registry/*.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 website/js/road-geometry.js text eol=lf
 apps-script/RoadGeometry.gs text eol=lf
