@@ -1,8 +1,10 @@
 """Story data for the River Valley example (case V15, Institution Hill, 2024).
 A 300 m buffer around the case shows the road network and the crossings nearby.
-Writes step2rv_*.geojson to story-data/ and website/data/story/.
-Run: python make_river_valley.py"""
+Writes step2<prefix>_*.geojson to story-data/ and website/data/story/.
+Run: python make_river_valley.py            (River Valley, V15, prefix rv)
+     python make_river_valley.py V01 bb     (Bukit Batok Central, V01)"""
 import os
+import sys
 import warnings
 
 import geopandas as gpd
@@ -12,7 +14,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 DL = r"C:\Users\Gangsar Dwi Saputro\Downloads"
 OUTS = [os.path.join(HERE, "story-data"), os.path.join(ROOT, "website", "data", "story")]
-CASE_ID = "V15"
+CASE_ID = sys.argv[1] if len(sys.argv) > 1 else "V15"
+PREFIX = sys.argv[2] if len(sys.argv) > 2 else "rv"
 RADIUS = 300
 
 inc = gpd.read_file(os.path.join(ROOT, "jaywalking_incidents_sg_v2.geojson")).to_crs(3414)
@@ -34,8 +37,8 @@ print("crossings in buffer", (inside.kind == "crossing").sum(), "bridges/underpa
       "nearest crossing m", round(markers.distance(c).min()))
 
 for out in OUTS:
-    case.to_crs(4326).to_file(os.path.join(out, "step2rv_case.geojson"), driver="GeoJSON")
-    buffer.to_crs(4326).to_file(os.path.join(out, "step2rv_buffer.geojson"), driver="GeoJSON")
-    gap.to_crs(4326).to_file(os.path.join(out, "step2rv_gap_segments.geojson"), driver="GeoJSON")
-    markers.to_crs(4326).to_file(os.path.join(out, "step2rv_markers.geojson"), driver="GeoJSON")
+    case.to_crs(4326).to_file(os.path.join(out, "step2%s_case.geojson" % PREFIX), driver="GeoJSON")
+    buffer.to_crs(4326).to_file(os.path.join(out, "step2%s_buffer.geojson" % PREFIX), driver="GeoJSON")
+    gap.to_crs(4326).to_file(os.path.join(out, "step2%s_gap_segments.geojson" % PREFIX), driver="GeoJSON")
+    markers.to_crs(4326).to_file(os.path.join(out, "step2%s_markers.geojson" % PREFIX), driver="GeoJSON")
 print("centre", [round(v, 5) for v in case.to_crs(4326).geometry.iloc[0].coords[0]])

@@ -73,16 +73,16 @@ function addStoryLayers(map) {
     map.addSource('cases', { type: 'geojson', data: data + 'step1_reported_cases.geojson' });
     map.addLayer({ id: 'cases', type: 'symbol', source: 'cases', layout: warnLayout, paint: { 'icon-opacity': 0 } });
 
-    // River Valley example (case V15): 300 m buffer, roads coloured by distance to the nearest crossing,
+    // Bukit Batok example (case V01): 300 m buffer, roads coloured by distance to the nearest crossing,
     // crossing markers and the case itself
-    map.addSource('rv-buffer', { type: 'geojson', data: data + 'step2rv_buffer.geojson' });
-    map.addLayer({ id: 'rv-buffer-fill', type: 'fill', source: 'rv-buffer', paint: { 'fill-color': '#FFFFFF', 'fill-opacity': 0 } });
-    map.addLayer({ id: 'rv-buffer-line', type: 'line', source: 'rv-buffer', paint: { 'line-color': '#FFFFFF', 'line-width': 2, 'line-dasharray': [3, 2], 'line-opacity': 0 } });
-    map.addSource('rv-gap', { type: 'geojson', data: data + 'step2rv_gap_segments.geojson' });
-    map.addLayer({ id: 'rv-gap', type: 'line', source: 'rv-gap', paint: { 'line-color': SITE.gapColors, 'line-width': 5, 'line-opacity': 0 } });
-    map.addSource('rv-markers', { type: 'geojson', data: data + 'step2rv_markers.geojson' });
+    map.addSource('ex-buffer', { type: 'geojson', data: data + 'step2bb_buffer.geojson' });
+    map.addLayer({ id: 'ex-buffer-fill', type: 'fill', source: 'ex-buffer', paint: { 'fill-color': '#FFFFFF', 'fill-opacity': 0 } });
+    map.addLayer({ id: 'ex-buffer-line', type: 'line', source: 'ex-buffer', paint: { 'line-color': '#FFFFFF', 'line-width': 2, 'line-dasharray': [3, 2], 'line-opacity': 0 } });
+    map.addSource('ex-gap', { type: 'geojson', data: data + 'step2bb_gap_segments.geojson' });
+    map.addLayer({ id: 'ex-gap', type: 'line', source: 'ex-gap', paint: { 'line-color': SITE.gapColors, 'line-width': 5, 'line-opacity': 0 } });
+    map.addSource('ex-markers', { type: 'geojson', data: data + 'step2bb_markers.geojson' });
     map.addLayer({
-        id: 'rv-markers', type: 'circle', source: 'rv-markers',
+        id: 'ex-markers', type: 'circle', source: 'ex-markers',
         paint: {
             'circle-radius': 5,
             'circle-color': ['match', ['get', 'kind'], 'overhead_bridge', SITE.markerColors.overhead_bridge,
@@ -90,8 +90,8 @@ function addStoryLayers(map) {
             'circle-opacity': 0, 'circle-stroke-color': '#FFFFFF', 'circle-stroke-width': 1.5, 'circle-stroke-opacity': 0
         }
     });
-    map.addSource('rv-case', { type: 'geojson', data: data + 'step2rv_case.geojson' });
-    map.addLayer({ id: 'rv-case', type: 'symbol', source: 'rv-case', layout: warnLayout, paint: { 'icon-opacity': 0 } });
+    map.addSource('ex-case', { type: 'geojson', data: data + 'step2bb_case.geojson' });
+    map.addLayer({ id: 'ex-case', type: 'symbol', source: 'ex-case', layout: warnLayout, paint: { 'icon-opacity': 0 } });
 
     // Island-wide walking detour: every HDB block coloured by its mean detour ratio
     map.addSource('detour-blocks', { type: 'geojson', data: '../data/detour_blocks.geojson' });
@@ -134,7 +134,7 @@ function addStoryLayers(map) {
         }
     });
 
-    map.moveLayer('rv-case');
+    map.moveLayer('ex-case');
     map.moveLayer('cases');
 
     // Steps 4 and 5 read live data from the Apps Script web app

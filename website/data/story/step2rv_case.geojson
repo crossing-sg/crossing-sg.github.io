@@ -1,8 +1,0 @@
-{
-"type": "FeatureCollection",
-"name": "step2rv_case",
-"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
-"features": [
-{ "type": "Feature", "properties": { "id": "V15", "status": "verified", "year": 2024.0, "url": "https://www.asiaone.com/singapore/maid-jaywalked-4-year-old-girl-who-was-killed-river-valley-accident-traffic-police" }, "geometry": { "type": "Point", "coordinates": [ 103.840013, 1.295211 ] } }
-]
-}

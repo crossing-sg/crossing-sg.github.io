@@ -2,7 +2,7 @@
 // Each chapter sets the opacity of every story layer when it is entered, so the result
 // does not depend on the order in which scrollama fires enter and exit events.
 var STORY_LAYERS = ['ctx-bus', 'ctx-crossings', 'ctx-mrt', 'area-fill', 'area-line', 'all-cases', 'cases',
-    'rv-buffer-fill', 'rv-buffer-line', 'rv-gap', 'rv-markers', 'rv-case', 'detour-blocks', 'block', 'routes-other', 'route-walk', 'route-straight', 'stops', 'proposals'];
+    'ex-buffer-fill', 'ex-buffer-line', 'ex-gap', 'ex-markers', 'ex-case', 'detour-blocks', 'block', 'routes-other', 'route-walk', 'route-straight', 'stops', 'proposals'];
 var only = function (visible) {
     return STORY_LAYERS.map(function (l) {
         return { layer: l, opacity: visible[l] === undefined ? 0 : visible[l], duration: 800 };
@@ -55,7 +55,7 @@ function barChart(key, max, color, avg) {
     var h = AREA_STATS.rows.length * rowH + (avg ? 18 : 2);
     var svg = '<svg viewBox="0 0 ' + w + ' ' + h + '" width="100%" style="font-size:12px">';
     AREA_STATS.rows.forEach(function (r, i) {
-        var y = i * rowH, v = r[key], bw = v / max * barMax, bold = r.name === 'River Valley' ? ' font-weight="700"' : '';
+        var y = i * rowH, v = r[key], bw = v / max * barMax, bold = r.name === 'Bukit Batok' ? ' font-weight="700"' : '';
         svg += '<text x="' + (labelW - 8) + '" y="' + (y + 15) + '" fill="#fafafa" text-anchor="end"' + bold + '>' + r.name + '</text>' +
             '<rect x="' + labelW + '" y="' + (y + 4) + '" width="' + bw + '" height="15" fill="' + color + '"/>' +
             '<text x="' + (labelW + bw + 5) + '" y="' + (y + 15) + '" fill="#fafafa">' + (key === 'cases' ? v : v.toFixed(1)) + '</text>';
@@ -83,9 +83,9 @@ function newsGallery() {
     }).join('') + '</div>';
 }
 
-// Google Maps Street View at Institution Hill. Paste the src of the embed code from Google Maps
+// Google Maps Street View at Bukit Batok Central. Paste the src of the embed code from Google Maps
 // (Street View > Share > Embed a map). Leave empty to hide the view.
-var STREETVIEW_RIVER_VALLEY = 'https://www.google.com/maps/embed?pb=!4v1793719959516!6m8!1m7!1seSTQVMTzf1wHWlnoGaaT5A!2m2!1d1.295205080982741!2d103.8399874169741!3f37.10251755951129!4f-1.8725221464593034!5f0.4000000000000002';
+var STREETVIEW_BUKIT_BATOK = '';
 function streetView(src) {
     return src ? '<iframe class="streetview" src="' + src + '" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>' : '';
 }
@@ -111,7 +111,7 @@ var config = {
             title: 'Crossings in Singapore',
             description:
                 'LTA records 9,702 road crossings and 771 overhead bridges and underpasses across Singapore. ' +
-                'This story looks at reported pedestrian deaths, at how well crossings are provided where they happen, at one case in River Valley, and at the walking detours of HDB residents.<br><br>' +
+                'This story looks at reported pedestrian deaths, at how well crossings are provided where they happen, at one case in Bukit Batok, and at the walking detours of HDB residents.<br><br>' +
                 '<span class="dot" style="background:' + SITE.markerColors.crossing + '"></span> road crossing &nbsp; ' +
                 '<span class="dot" style="background:' + SITE.markerColors.overhead_bridge + '"></span> overhead bridge &nbsp; ' +
                 '<span class="dot" style="background:' + SITE.markerColors.underpass + '"></span> underpass<br>' +
@@ -160,25 +160,24 @@ var config = {
             onChapterExit: []
         },
         {
-            id: 'river-valley',
+            id: 'bukit-batok-case',
             alignment: 'left',
             hidden: false,
-            title: 'A fatal case in River Valley',
+            title: 'A fatal case in Bukit Batok',
             description:
-                'In January 2024, a four-year-old girl was hit by a car while being walked across Institution Hill, a two-lane road off River Valley Road, ' +
-                'between parked cars. A coroner\'s inquiry heard that the nearest pedestrian crossing was about 200 m away, and that crossing at this point ' +
-                'was the usual route from the preschool.<br><br>' +
-                'Within 300 m of the case (dashed circle) there are 7 road crossings and no overhead bridge or underpass, ' +
-                '2.2 crossings per km of road against 3.8 across Singapore. Roads are coloured by the distance to the nearest crossing.<br><br>' +
+                'In October 2017, a four-year-old girl was hit by a car while her caregiver crossed Bukit Batok Central with her. ' +
+                'The court heard that they crossed the road instead of using the overhead bridge nearby.<br><br>' +
+                'Within 300 m of the case (dashed circle) there are 6 road crossings and 2 overhead bridges or underpasses, 5.2 per km of road against 3.8 across Singapore. ' +
+                'Crossings are provided here, so the question is whether they lie on the routes people walk. Roads are coloured by the distance to the nearest crossing.<br><br>' +
                 '<span class="key" style="background:' + SITE.classColors[0] + '"></span> under 50 m &nbsp; <span class="key" style="background:' + SITE.classColors[1] + '"></span> 50 to 100 m &nbsp; ' +
                 '<span class="key" style="background:' + SITE.classColors[2] + '"></span> 100 to 200 m &nbsp; <span class="key" style="background:' + SITE.classColors[3] + '"></span> over 200 m' +
-                streetView(STREETVIEW_RIVER_VALLEY) +
-                '<br><a href="https://www.asiaone.com/singapore/maid-jaywalked-4-year-old-girl-who-was-killed-river-valley-accident-traffic-police" target="_blank">Source: AsiaOne, 26 June 2024</a>',
-            location: { center: [103.8400, 1.2952], zoom: 16.2, pitch: 0, bearing: 0, padding: PAD_LEFT },
+                streetView(STREETVIEW_BUKIT_BATOK) +
+                '<br><a href="https://www.malaymail.com/news/world/2018/12/07/singaporean-jailed-six-weeks-for-causing-death-of-4-year-old-girl/1700941" target="_blank">Source: Malay Mail, 7 December 2018</a>',
+            location: { center: [103.7484, 1.3524], zoom: 16.2, pitch: 0, bearing: 0, padding: PAD_LEFT },
             mapAnimation: 'flyTo',
             rotateAnimation: false,
             callback: '',
-            onChapterEnter: only({ 'rv-buffer-fill': 0.12, 'rv-buffer-line': 1, 'rv-gap': 1, 'rv-markers': 1, 'rv-case': 1 }),
+            onChapterEnter: only({ 'ex-buffer-fill': 0.12, 'ex-buffer-line': 1, 'ex-gap': 1, 'ex-markers': 1, 'ex-case': 1 }),
             onChapterExit: []
         },
         {
@@ -188,7 +187,7 @@ var config = {
             title: 'More crossings, longer walks: Blk 121 Bukit Batok',
             description:
                 'Bukit Batok has more crossings than the Singapore average but the most reported cases. One reason may be where the crossings are. ' +
-                'Blk 121 (blue) is 84 m from a fatal case on Bukit Batok Central. The bus stop opposite is 96 m away in a straight line (dashed), but 548 m on foot (white line).<br><br>' +
+                'Blk 121 (blue) is 84 m from the same case. The bus stop opposite is 96 m away in a straight line (dashed), but 548 m on foot (white line).<br><br>' +
                 'The mean detour ratio of Blk 121 is 2.9, against 1.9 for all HDB blocks.<br><br>' +
                 '<a href="../map.html?layer=detour&block=650121" target="_top">Look up another block</a>',
             location: { center: [103.7479, 1.3510], zoom: 16.8, pitch: 0, bearing: 0, padding: PAD_LEFT },
