@@ -53,3 +53,5 @@ Raw data is not stored in this repository. Download the files listed below into 
 ## Work outside the course materials
 
 The proposal form, the explore map and the Google Sheets backend are written for this project, because the course tools (Ushahidi, Weavely) do not support a two-point location per submission. The lecturer allowed exploration beyond the course materials.
+
+Complete OSM Proposal integration and deployment: see [integration notes](website-plan/shared-integration/README.md).

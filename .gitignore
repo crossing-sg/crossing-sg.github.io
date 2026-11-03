@@ -14,3 +14,7 @@ __pycache__/
 .DS_Store
 Thumbs.db
 ~$*
+
+/local-data/
+/local-outputs/
+/node_modules/

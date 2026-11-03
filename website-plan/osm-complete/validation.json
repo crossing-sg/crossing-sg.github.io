@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "canonical_segments": 602199,
+  "original_segments_exactly_preserved": 55115,
+  "previous_segments_preserved": 69121,
+  "road_tiles": 1092,
+  "categories": 32,
+  "baseline_files_checked": 13524,
+  "baseline_ref": "785b7533",
+  "intentional_changes": [
+    ".gitignore",
+    "README.md",
+    "apps-script/Code.gs",
+    "apps-script/README.md",
+    "website/README.md",
+    "website/js/explore.js",
+    "website/js/propose.js",
+    "website/js/site-config.js",
+    "website/map.html",
+    "website/propose.html"
+  ]
+}

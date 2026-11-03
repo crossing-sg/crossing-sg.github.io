@@ -1,0 +1,26 @@
+{
+  "name": "crossing-sg-local-integration",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Local-only proposal-road integration tests; no deployment command",
+  "scripts": {
+    "test": "node --test website-plan/road-conflation/test_integration.cjs",
+    "test:osm": "node --test website-plan/osm-complete/test_integration.cjs",
+    "test:shared": "node --test website-plan/shared-integration/test_basemap.cjs",
+    "test:basemap:real": "node website-plan/shared-integration/run_real_basemap.cjs",
+    "fixtures:osm": "node website-plan/osm-complete/fixtures.cjs",
+    "serve:osm": "node website-plan/osm-complete/server.cjs --isolated-tests --port 8766",
+    "test:browser:osm": "node website-plan/osm-complete/run_browser.cjs",
+    "test:coverage": "node website-plan/road-conflation/selection_coverage.cjs",
+    "prepare:browser": "node website-plan/road-conflation/prepare_browser_vendor.cjs",
+    "serve:integration": "node website-plan/road-conflation/integration_server.cjs",
+    "serve:isolated": "node website-plan/road-conflation/integration_server.cjs --isolated-tests --port 8766",
+    "test:browser": "node website-plan/road-conflation/browser_integration.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -24,3 +24,5 @@ DEP5118 Community Data Gathering and Visualization, NUS (Gangsar Dwi Saputro, Xi
 ## Rebuilding the data
 
 Scripts in `../website-plan/`: `make_site_data.py` builds `data/`, `make_story_data.py` builds `data/story/` (copy from `website-plan/story-data`).
+
+Complete OSM Proposal integration and deployment: see [integration notes](../website-plan/shared-integration/README.md).

@@ -1,0 +1,23 @@
+{
+  "base": "785b7533",
+  "realMapbox": true,
+  "googleRequests": 0,
+  "pageErrors": [],
+  "rasterLayers": [
+    {
+      "id": "satellite",
+      "paint": {
+        "raster-saturation": -0.25,
+        "raster-hue-rotate": 40,
+        "raster-contrast": -0.3,
+        "raster-brightness-min": 0,
+        "raster-brightness-max": 0.5
+      }
+    }
+  ],
+  "nonRasterLayersVerified": 85,
+  "renderedLabels": 139,
+  "osmRoadMatched": true,
+  "exploreStyle": "mapbox://styles/mapbox/dark-v11",
+  "passed": true
+}

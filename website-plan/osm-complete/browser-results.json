@@ -1,0 +1,552 @@
+{
+  "version": "proposal-all-highways-6371b27f223e31d7",
+  "browser": "156.0.8078.76",
+  "backend": "Actual Apps Script source; in-memory Sheets only",
+  "basemap": "Offline Mapbox GL rendering; external basemap blocked",
+  "cases": [
+    {
+      "mobile": false,
+      "case": "select existing",
+      "passed": true
+    },
+    {
+      "mobile": false,
+      "case": "select footway",
+      "passed": true
+    },
+    {
+      "mobile": false,
+      "case": "select service",
+      "passed": true
+    },
+    {
+      "mobile": false,
+      "case": "select parking_aisle",
+      "passed": true
+    },
+    {
+      "mobile": false,
+      "case": "select private_access",
+      "passed": true
+    },
+    {
+      "mobile": false,
+      "case": "select motorway",
+      "passed": true
+    },
+    {
+      "mobile": false,
+      "case": "select steps",
+      "passed": true
+    },
+    {
+      "mobile": false,
+      "case": "three private submissions -> approve -> Explore OSM geometry",
+      "passed": true
+    },
+    {
+      "mobile": false,
+      "case": "teammate white crossing lines clear with below-threshold aggregate",
+      "passed": true
+    },
+    {
+      "mobile": false,
+      "case": "Crossing Gap render and Walking Detour route card",
+      "passed": true
+    },
+    {
+      "mobile": false,
+      "case": "canonical deep link; dense viewport; bounded concurrency",
+      "passed": true
+    },
+    {
+      "mobile": true,
+      "case": "select existing",
+      "passed": true
+    },
+    {
+      "mobile": true,
+      "case": "select footway",
+      "passed": true
+    },
+    {
+      "mobile": true,
+      "case": "select service",
+      "passed": true
+    },
+    {
+      "mobile": true,
+      "case": "select parking_aisle",
+      "passed": true
+    },
+    {
+      "mobile": true,
+      "case": "select private_access",
+      "passed": true
+    },
+    {
+      "mobile": true,
+      "case": "select motorway",
+      "passed": true
+    },
+    {
+      "mobile": true,
+      "case": "select steps",
+      "passed": true
+    },
+    {
+      "mobile": true,
+      "case": "three private submissions -> approve -> Explore OSM geometry",
+      "passed": true
+    },
+    {
+      "mobile": true,
+      "case": "teammate white crossing lines clear with below-threshold aggregate",
+      "passed": true
+    },
+    {
+      "mobile": true,
+      "case": "Crossing Gap render and Walking Detour route card",
+      "passed": true
+    },
+    {
+      "mobile": true,
+      "case": "canonical deep link; dense viewport; bounded concurrency",
+      "passed": true
+    },
+    {
+      "mobile": true,
+      "case": "throttled connection and CPU select OSM footway",
+      "passed": true
+    }
+  ],
+  "performance": [
+    {
+      "mobile": false,
+      "stage": "island_startup",
+      "elapsedMs": 443,
+      "requests": 1,
+      "tiles": 0,
+      "bytes": 753434
+    },
+    {
+      "mobile": false,
+      "stage": "legacy",
+      "elapsedMs": 195,
+      "visibleFeatures": 3360,
+      "metrics": {
+        "requests": 5,
+        "tiles": 4,
+        "bytes": 1783906,
+        "peakConcurrent": 2,
+        "sourceUpdates": 2,
+        "lastDisplayUpdateMs": 460.10000014305115
+      },
+      "bytes": 840526
+    },
+    {
+      "mobile": false,
+      "stage": "footway",
+      "elapsedMs": 95,
+      "visibleFeatures": 768,
+      "metrics": {
+        "requests": 10,
+        "tiles": 9,
+        "bytes": 2037669,
+        "peakConcurrent": 4,
+        "sourceUpdates": 3,
+        "lastDisplayUpdateMs": 674.6000001430511
+      },
+      "bytes": 859373
+    },
+    {
+      "mobile": false,
+      "stage": "service",
+      "elapsedMs": 75,
+      "visibleFeatures": 149,
+      "metrics": {
+        "requests": 12,
+        "tiles": 12,
+        "bytes": 2046832,
+        "peakConcurrent": 4,
+        "sourceUpdates": 4,
+        "lastDisplayUpdateMs": 769.4000000953674
+      },
+      "bytes": 860290
+    },
+    {
+      "mobile": false,
+      "stage": "service",
+      "elapsedMs": 69,
+      "visibleFeatures": 149,
+      "metrics": {
+        "requests": 13,
+        "tiles": 15,
+        "bytes": 2046874,
+        "peakConcurrent": 4,
+        "sourceUpdates": 5,
+        "lastDisplayUpdateMs": 839.9000000953674
+      },
+      "bytes": 860348
+    },
+    {
+      "mobile": false,
+      "stage": "service",
+      "elapsedMs": 63,
+      "visibleFeatures": 149,
+      "metrics": {
+        "requests": 13,
+        "tiles": 18,
+        "bytes": 2046874,
+        "peakConcurrent": 4,
+        "sourceUpdates": 6,
+        "lastDisplayUpdateMs": 911.2000000476837
+      },
+      "bytes": 860348
+    },
+    {
+      "mobile": false,
+      "stage": "motorway",
+      "elapsedMs": 88,
+      "visibleFeatures": 2081,
+      "metrics": {
+        "requests": 16,
+        "tiles": 21,
+        "bytes": 2707525,
+        "peakConcurrent": 4,
+        "sourceUpdates": 7,
+        "lastDisplayUpdateMs": 991.6000001430511
+      },
+      "bytes": 913715
+    },
+    {
+      "mobile": false,
+      "stage": "steps",
+      "elapsedMs": 75,
+      "visibleFeatures": 745,
+      "metrics": {
+        "requests": 18,
+        "tiles": 23,
+        "bytes": 2940337,
+        "peakConcurrent": 4,
+        "sourceUpdates": 8,
+        "lastDisplayUpdateMs": 1078.3000001907349
+      },
+      "bytes": 931929
+    },
+    {
+      "mobile": false,
+      "stage": "footway",
+      "elapsedMs": 67,
+      "visibleFeatures": 768,
+      "metrics": {
+        "requests": 18,
+        "tiles": 28,
+        "bytes": 2940337,
+        "peakConcurrent": 4,
+        "sourceUpdates": 9,
+        "lastDisplayUpdateMs": 1145.1000001430511
+      },
+      "bytes": 931929
+    },
+    {
+      "mobile": false,
+      "stage": "footway",
+      "elapsedMs": 121,
+      "visibleFeatures": 768,
+      "metrics": {
+        "requests": 6,
+        "tiles": 5,
+        "bytes": 1007196,
+        "peakConcurrent": 4,
+        "sourceUpdates": 2,
+        "lastDisplayUpdateMs": 175.79999995231628
+      },
+      "bytes": 772281
+    },
+    {
+      "mobile": false,
+      "stage": "footway",
+      "elapsedMs": 120,
+      "visibleFeatures": 768,
+      "metrics": {
+        "requests": 6,
+        "tiles": 5,
+        "bytes": 1007196,
+        "peakConcurrent": 4,
+        "sourceUpdates": 2,
+        "lastDisplayUpdateMs": 143.80000019073486
+      },
+      "bytes": 772281
+    },
+    {
+      "mobile": false,
+      "stage": "footway",
+      "elapsedMs": 90,
+      "visibleFeatures": 768,
+      "metrics": {
+        "requests": 7,
+        "tiles": 71,
+        "bytes": 1050353,
+        "peakConcurrent": 2,
+        "sourceUpdates": 2,
+        "lastDisplayUpdateMs": 1694
+      },
+      "bytes": 776197
+    },
+    {
+      "mobile": false,
+      "stage": "dense_downtown",
+      "features": 3235,
+      "requests": 9,
+      "uploads": 3
+    },
+    {
+      "mobile": true,
+      "stage": "island_startup",
+      "elapsedMs": 184,
+      "requests": 1,
+      "tiles": 0,
+      "bytes": 753434
+    },
+    {
+      "mobile": true,
+      "stage": "legacy",
+      "elapsedMs": 174,
+      "visibleFeatures": 3360,
+      "metrics": {
+        "requests": 5,
+        "tiles": 4,
+        "bytes": 1783906,
+        "peakConcurrent": 2,
+        "sourceUpdates": 2,
+        "lastDisplayUpdateMs": 203
+      },
+      "bytes": 840526
+    },
+    {
+      "mobile": true,
+      "stage": "footway",
+      "elapsedMs": 76,
+      "visibleFeatures": 503,
+      "metrics": {
+        "requests": 8,
+        "tiles": 7,
+        "bytes": 1948857,
+        "peakConcurrent": 2,
+        "sourceUpdates": 3,
+        "lastDisplayUpdateMs": 360.7999999523163
+      },
+      "bytes": 852991
+    },
+    {
+      "mobile": true,
+      "stage": "service",
+      "elapsedMs": 58,
+      "visibleFeatures": 149,
+      "metrics": {
+        "requests": 10,
+        "tiles": 10,
+        "bytes": 1958020,
+        "peakConcurrent": 2,
+        "sourceUpdates": 4,
+        "lastDisplayUpdateMs": 437.2999999523163
+      },
+      "bytes": 853908
+    },
+    {
+      "mobile": true,
+      "stage": "service",
+      "elapsedMs": 59,
+      "visibleFeatures": 128,
+      "metrics": {
+        "requests": 11,
+        "tiles": 12,
+        "bytes": 1958062,
+        "peakConcurrent": 2,
+        "sourceUpdates": 5,
+        "lastDisplayUpdateMs": 491.7000000476837
+      },
+      "bytes": 853966
+    },
+    {
+      "mobile": true,
+      "stage": "service",
+      "elapsedMs": 49,
+      "visibleFeatures": 149,
+      "metrics": {
+        "requests": 11,
+        "tiles": 15,
+        "bytes": 1958062,
+        "peakConcurrent": 2,
+        "sourceUpdates": 6,
+        "lastDisplayUpdateMs": 550.6000001430511
+      },
+      "bytes": 853966
+    },
+    {
+      "mobile": true,
+      "stage": "motorway",
+      "elapsedMs": 61,
+      "visibleFeatures": 925,
+      "metrics": {
+        "requests": 13,
+        "tiles": 17,
+        "bytes": 2243396,
+        "peakConcurrent": 2,
+        "sourceUpdates": 7,
+        "lastDisplayUpdateMs": 609.2000000476837
+      },
+      "bytes": 876305
+    },
+    {
+      "mobile": true,
+      "stage": "steps",
+      "elapsedMs": 59,
+      "visibleFeatures": 745,
+      "metrics": {
+        "requests": 15,
+        "tiles": 19,
+        "bytes": 2476208,
+        "peakConcurrent": 2,
+        "sourceUpdates": 8,
+        "lastDisplayUpdateMs": 671.5
+      },
+      "bytes": 894519
+    },
+    {
+      "mobile": true,
+      "stage": "footway",
+      "elapsedMs": 50,
+      "visibleFeatures": 503,
+      "metrics": {
+        "requests": 15,
+        "tiles": 22,
+        "bytes": 2476208,
+        "peakConcurrent": 2,
+        "sourceUpdates": 9,
+        "lastDisplayUpdateMs": 724.4000000953674
+      },
+      "bytes": 894519
+    },
+    {
+      "mobile": true,
+      "stage": "footway",
+      "elapsedMs": 104,
+      "visibleFeatures": 503,
+      "metrics": {
+        "requests": 4,
+        "tiles": 3,
+        "bytes": 918384,
+        "peakConcurrent": 2,
+        "sourceUpdates": 2,
+        "lastDisplayUpdateMs": 135.79999995231628
+      },
+      "bytes": 765899
+    },
+    {
+      "mobile": true,
+      "stage": "footway",
+      "elapsedMs": 140,
+      "visibleFeatures": 503,
+      "metrics": {
+        "requests": 4,
+        "tiles": 3,
+        "bytes": 918384,
+        "peakConcurrent": 2,
+        "sourceUpdates": 2,
+        "lastDisplayUpdateMs": 138.5
+      },
+      "bytes": 765899
+    },
+    {
+      "mobile": true,
+      "stage": "footway",
+      "elapsedMs": 80,
+      "visibleFeatures": 503,
+      "metrics": {
+        "requests": 7,
+        "tiles": 55,
+        "bytes": 1050353,
+        "peakConcurrent": 2,
+        "sourceUpdates": 3,
+        "lastDisplayUpdateMs": 2998.199999809265
+      },
+      "bytes": 776197
+    },
+    {
+      "mobile": true,
+      "stage": "dense_downtown",
+      "features": 3235,
+      "requests": 9,
+      "uploads": 4
+    },
+    {
+      "mobile": true,
+      "stage": "simulated_1_6Mbps_150ms_4xCPU_startup",
+      "elapsedMs": 4886
+    },
+    {
+      "mobile": true,
+      "stage": "footway",
+      "elapsedMs": 720,
+      "visibleFeatures": 503,
+      "metrics": {
+        "requests": 4,
+        "tiles": 3,
+        "bytes": 918384,
+        "peakConcurrent": 2,
+        "sourceUpdates": 2,
+        "lastDisplayUpdateMs": 5117
+      },
+      "bytes": 765899
+    }
+  ],
+  "errors": [],
+  "blocked": [
+    "https://fonts.googleapis.com",
+    "https://events.mapbox.com",
+    "https://events.mapbox.com",
+    "https://api.mapbox.com",
+    "https://fonts.googleapis.com",
+    "https://events.mapbox.com",
+    "https://events.mapbox.com",
+    "https://api.mapbox.com",
+    "https://fonts.googleapis.com",
+    "https://events.mapbox.com",
+    "https://events.mapbox.com",
+    "https://api.mapbox.com",
+    "https://fonts.googleapis.com",
+    "https://events.mapbox.com",
+    "https://events.mapbox.com",
+    "https://api.mapbox.com",
+    "https://fonts.googleapis.com",
+    "https://events.mapbox.com",
+    "https://events.mapbox.com",
+    "https://api.mapbox.com",
+    "https://fonts.googleapis.com",
+    "https://events.mapbox.com",
+    "https://events.mapbox.com",
+    "https://api.mapbox.com",
+    "https://fonts.googleapis.com",
+    "https://events.mapbox.com",
+    "https://events.mapbox.com",
+    "https://api.mapbox.com",
+    "https://fonts.googleapis.com",
+    "https://events.mapbox.com",
+    "https://events.mapbox.com",
+    "https://api.mapbox.com",
+    "https://fonts.googleapis.com",
+    "https://events.mapbox.com",
+    "https://events.mapbox.com",
+    "https://api.mapbox.com",
+    "https://fonts.googleapis.com",
+    "https://events.mapbox.com",
+    "https://events.mapbox.com",
+    "https://api.mapbox.com",
+    "https://fonts.googleapis.com",
+    "https://events.mapbox.com",
+    "https://events.mapbox.com",
+    "https://api.mapbox.com"
+  ]
+}
