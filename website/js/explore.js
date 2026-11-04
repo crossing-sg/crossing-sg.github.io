@@ -51,7 +51,7 @@ map.on('load', function () {
 
     map.addSource('routes', { type: 'geojson', data: empty });
     map.addLayer({ id: 'route-walk', type: 'line', source: 'routes', filter: ['==', ['get', 'kind'], 'walk'], paint: { 'line-color': SITE.routeWalk, 'line-width': 3 } });
-    map.addLayer({ id: 'route-straight', type: 'line', source: 'routes', filter: ['==', ['get', 'kind'], 'straight'], paint: { 'line-color': SITE.routeStraight, 'line-width': 1.5, 'line-dasharray': [2, 2] } });
+    map.addLayer({ id: 'route-straight', type: 'line', source: 'routes', filter: ['==', ['get', 'kind'], 'straight'], paint: { 'line-color': SITE.routeShortcut, 'line-width': 1.5, 'line-dasharray': [2, 2] } });
 
     map.addSource('proposals', { type: 'geojson', data: empty, attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a> (ODbL)' });
     map.addLayer({ id: 'proposals', type: 'line', source: 'proposals', paint: { 'line-color': SITE.proposalColors, 'line-width': ['interpolate', ['linear'], ['zoom'], 11, 2, 16, 6], 'line-opacity': 0.45 } });

@@ -18,6 +18,8 @@ var SITE = {
     proposalRamp: ['#5B4B8A', '#7C6BC4', '#A897F0', '#D2C3FF'],
     routeWalk: '#FFFFFF',
     routeStraight: '#D1D5DB',
+    // Straight-line shortcut from a block to a stop, drawn dashed on the detour maps
+    routeShortcut: '#EF4444',
     caseColor: '#FF3B30',
     highlight: '#38BDF8',
     basemapDark: '#1B1E23',

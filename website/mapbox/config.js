@@ -189,7 +189,7 @@ var config = {
             hidden: false,
             title: 'Walking route from Blk 121',
             description:
-                'Blk 121 (blue) is 84 m from the same case. The bus stop opposite is 96 m away in a straight line (dashed), but 548 m on foot (white line).<br><br>' +
+                'Blk 121 (blue) is 84 m from the same case. The bus stop opposite is 96 m away in a straight line (red dashed line), but 548 m on foot (white line).<br><br>' +
                 'The mean detour ratio of Blk 121 is 2.9, against 1.9 for all HDB blocks.<br><br>' +
                 streetView(STREETVIEW_BLK121) + '<br>' +
                 '<a href="../map.html?layer=detour&block=650121" target="_top">Look up another block</a>',

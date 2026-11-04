@@ -122,7 +122,7 @@ function addStoryLayers(map) {
     map.addLayer({
         id: 'route-straight', type: 'line', source: 'routes',
         filter: ['all', ['==', ['get', 'kind'], 'straight'], ['get', 'highlight']],
-        paint: { 'line-color': SITE.routeStraight, 'line-width': 3, 'line-dasharray': [2, 2], 'line-opacity': 0 }
+        paint: { 'line-color': SITE.routeShortcut, 'line-width': 3, 'line-dasharray': [2, 2], 'line-opacity': 0 }
     });
 
     map.addSource('stops', { type: 'geojson', data: data + 'step3_destinations.geojson' });
