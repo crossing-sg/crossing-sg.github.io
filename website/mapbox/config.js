@@ -53,7 +53,7 @@ var AREA_STATS = {
 function barChart(key, max, color, avg) {
     var rowH = 24, labelW = 92, barMax = 220, w = labelW + barMax + 36;
     var h = AREA_STATS.rows.length * rowH + (avg ? 18 : 2);
-    var svg = '<svg viewBox="0 0 ' + w + ' ' + h + '" width="100%" style="font-size:12px">';
+    var svg = '<svg viewBox="0 0 ' + w + ' ' + h + '" width="100%" style="font-size:13px">';
     AREA_STATS.rows.forEach(function (r, i) {
         var y = i * rowH, v = r[key], bw = v / max * barMax, bold = r.name === 'Bukit Batok' ? ' font-weight="700"' : '';
         svg += '<text x="' + (labelW - 8) + '" y="' + (y + 15) + '" fill="#fafafa" text-anchor="end"' + bold + '>' + r.name + '</text>' +
@@ -165,9 +165,13 @@ var config = {
             hidden: false,
             title: 'A fatal case in Bukit Batok',
             description:
-                'In October 2017, a four-year-old girl was hit by a car while her caregiver crossed Bukit Batok Central with her. ' +
-                'The court heard that they crossed the road instead of using the overhead bridge nearby.<br><br>' +
+                'On 9 October 2017, a four-year-old girl and her caregiver were hit by a car while crossing Bukit Batok Central, towards Bukit Batok West Avenue 2. ' +
+                'The girl died, and the caregiver was in hospital for about two and a half weeks. ' +
+                'The court heard that they crossed the road instead of using the overhead bridge nearby. Malay Mail reported the case when the sentence was passed in December 2018.<br><br>' +
+                'The road runs through an HDB estate, with blocks, Bukit Batok Polyclinic and bus stops along it. ' +
                 'Within 300 m of the case (dashed circle) there are 6 road crossings and 2 overhead bridges or underpasses, 5.2 per km of road against 3.8 across Singapore. ' +
+                'The point marks the junction named in the report, not the exact spot.<br><br>' +
+                'The next section looks at how far residents of a nearby block walk to reach a bus stop.<br><br>' +
                 'Roads are coloured by the distance to the nearest crossing.<br><br>' +
                 '<span class="key" style="background:' + SITE.classColors[0] + '"></span> under 50 m &nbsp; <span class="key" style="background:' + SITE.classColors[1] + '"></span> 50 to 100 m &nbsp; ' +
                 '<span class="key" style="background:' + SITE.classColors[2] + '"></span> 100 to 200 m &nbsp; <span class="key" style="background:' + SITE.classColors[3] + '"></span> over 200 m' +
