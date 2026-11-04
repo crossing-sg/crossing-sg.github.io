@@ -14,10 +14,8 @@ var only = function (visible) {
 // card sits in the middle and no padding is used.
 var PAD_LEFT = { top: 40, bottom: 40, left: Math.round(window.innerWidth * 0.38), right: 40 };
 var PAD_NONE = { top: 0, bottom: 0, left: 0, right: 0 };
-// The first three chapters share one camera, so only the data layers change between them.
-// The lower 30% of the screen is kept for the infographic strip, and the left for the story card.
-var PAD_SG = { top: 40, bottom: Math.round(window.innerHeight * 0.3), left: 20, right: 20 };
-var LOC_SG = { center: [103.84, 1.38], zoom: 10.6, pitch: 0, bearing: 0, padding: PAD_SG };
+// The first three chapters share one camera, so only the data layers change between them
+var LOC_SG = { center: [103.82, 1.352], zoom: 10.9, pitch: 0, bearing: 0, padding: PAD_LEFT };
 var PAD_STRIP = { top: 20, bottom: Math.round(window.innerHeight * 0.42), left: 20, right: 20 };
 // Measures the right edge of the story card and updates PAD_LEFT in place, so every chapter
 // that refers to it uses the current screen size
@@ -28,8 +26,6 @@ function updateStoryPadding() {
     PAD_LEFT.left = wide ? Math.round(right + 40) : 0;
     PAD_LEFT.top = PAD_LEFT.bottom = wide ? 40 : 0;
     PAD_LEFT.right = wide ? 40 : 0;
-    PAD_SG.left = wide ? PAD_LEFT.left : 0;
-    PAD_SG.bottom = wide ? Math.round(window.innerHeight * 0.3) : 0;
 }
 window.addEventListener('load', updateStoryPadding);
 window.addEventListener('resize', updateStoryPadding);
@@ -142,7 +138,7 @@ var config = {
         },
         {
             id: 'by-area',
-            alignment: 'full',
+            alignment: 'left',
             hidden: false,
             title: 'Fatal cases and crossing provision',
             description:
