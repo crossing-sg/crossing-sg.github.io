@@ -18,6 +18,11 @@ var ProposalBasemap = (function () {
         (style.layers || []).filter(function (layer) { return layer.type === 'raster'; }).forEach(function (layer) {
             Object.keys(paint).forEach(function (property) { map.setPaintProperty(layer.id, property, paint[property]); });
         });
+        // Keep the imagery clean: the proposal road network is drawn on top, so the style's own road
+        // lines, place and shop labels and icons are hidden. Only road names stay, to help find a road.
+        (style.layers || []).filter(function (layer) {
+            return layer.source === 'composite' && (layer.type === 'line' || (layer.type === 'symbol' && layer.id.indexOf('road-label') !== 0));
+        }).forEach(function (layer) { map.setLayoutProperty(layer.id, 'visibility', 'none'); });
     }
     return { apply: apply };
 }());
