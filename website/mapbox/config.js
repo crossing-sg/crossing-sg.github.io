@@ -111,7 +111,7 @@ var config = {
             title: 'Crossings in Singapore',
             description:
                 'LTA records 9,702 road crossings and 771 overhead bridges and underpasses across Singapore. ' +
-                'This story looks at reported pedestrian deaths, at how well crossings are provided where they happen, at one case in Bukit Batok, and at the walking detours of HDB residents.<br><br>' +
+                'The map shows where they are. The next sections compare them with reported pedestrian cases and look at one case in Bukit Batok.<br><br>' +
                 '<span class="dot" style="background:' + SITE.markerColors.crossing + '"></span> road crossing &nbsp; ' +
                 '<span class="dot" style="background:' + SITE.markerColors.overhead_bridge + '"></span> overhead bridge &nbsp; ' +
                 '<span class="dot" style="background:' + SITE.markerColors.underpass + '"></span> underpass<br>' +
@@ -146,7 +146,7 @@ var config = {
             hidden: false,
             title: 'Fatal cases and crossing provision',
             description:
-                '<p>Do the cases fall where crossings are few? Areas with a fatal case, compared.</p><div class="strip">' +
+                '<p>The charts compare the planning areas that have a fatal case.</p><div class="strip">' +
                 '<div><h4>Reported cases</h4>' + barChart('cases', 5, SITE.caseColor) +
                 '<p>Bukit Batok and Novena have the most cases in the news sample.</p></div>' +
                 '<div><h4>Crossings per km of road</h4>' + barChart('crossings_per_km', 6, SITE.markerColors.crossing, AREA_STATS.national.crossings_per_km) +
@@ -168,7 +168,7 @@ var config = {
                 'In October 2017, a four-year-old girl was hit by a car while her caregiver crossed Bukit Batok Central with her. ' +
                 'The court heard that they crossed the road instead of using the overhead bridge nearby.<br><br>' +
                 'Within 300 m of the case (dashed circle) there are 6 road crossings and 2 overhead bridges or underpasses, 5.2 per km of road against 3.8 across Singapore. ' +
-                'Crossings are provided here, so the question is whether they lie on the routes people walk. Roads are coloured by the distance to the nearest crossing.<br><br>' +
+                'Roads are coloured by the distance to the nearest crossing.<br><br>' +
                 '<span class="key" style="background:' + SITE.classColors[0] + '"></span> under 50 m &nbsp; <span class="key" style="background:' + SITE.classColors[1] + '"></span> 50 to 100 m &nbsp; ' +
                 '<span class="key" style="background:' + SITE.classColors[2] + '"></span> 100 to 200 m &nbsp; <span class="key" style="background:' + SITE.classColors[3] + '"></span> over 200 m' +
                 '<br><a href="https://www.malaymail.com/news/world/2018/12/07/singaporean-jailed-six-weeks-for-causing-death-of-4-year-old-girl/1700941" target="_blank">Source: Malay Mail, 7 December 2018</a>',
@@ -183,9 +183,8 @@ var config = {
             id: 'bukit-batok',
             alignment: 'left',
             hidden: false,
-            title: 'More crossings, longer walks: Blk 121 Bukit Batok',
+            title: 'Walking route from Blk 121',
             description:
-                'Bukit Batok has more crossings than the Singapore average but the most reported cases. One reason may be where the crossings are. ' +
                 'Blk 121 (blue) is 84 m from the same case. The bus stop opposite is 96 m away in a straight line (dashed), but 548 m on foot (white line).<br><br>' +
                 'The mean detour ratio of Blk 121 is 2.9, against 1.9 for all HDB blocks.<br><br>' +
                 streetView(STREETVIEW_BLK121) + '<br>' +
