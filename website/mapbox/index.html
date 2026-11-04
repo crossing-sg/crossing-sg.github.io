@@ -175,8 +175,8 @@
         .hero-image { position: relative; box-sizing: border-box; padding-bottom: 90px; height: 74vh; } /* room between the buttons and the cards */
         .credit { position: absolute; right: 16px; bottom: 66px; margin: 0; font-size: 11px; color: rgba(255, 255, 255, 0.8); }
         .credit a, .credit a:visited { color: rgba(255, 255, 255, 0.8); }
-        .hero-text { width: 70vw; text-align: center; color: #fff; }
-        .hero-text h1 { font-size: 52px; line-height: 60px; margin: 6px 0 6px; }
+        .hero-text { width: 90vw; text-align: center; color: #fff; }
+        .hero-text h1 { font-size: clamp(32px, 3.4vw, 52px); line-height: 1.2; white-space: nowrap; margin: 6px 0 6px; }
         .hero-text .subtitle { font-style: italic; font-size: 22px !important; margin-bottom: 18px !important; }
         .hero-text p { font-size: 16px; line-height: 26px; margin: 0 auto; max-width: 720px; }
         .tag { font-size: 12px !important; letter-spacing: 0.12em; font-weight: 700; }
@@ -194,7 +194,7 @@
         .hint { color: #777; font-size: 12px; text-align: center; margin-top: 24px; }
         @media (max-width: 750px) {
             .hero-text { width: auto; margin: 0 4vw; }
-            .hero-text h1 { font-size: 32px; line-height: 38px; }
+            .hero-text h1 { font-size: 32px; line-height: 38px; white-space: normal; }
             .cards { grid-template-columns: 1fr 1fr; width: 92vw; }
         }
         .key { display: inline-block; width: 18px; height: 6px; vertical-align: middle; }
