@@ -1,0 +1,122 @@
+{
+  "version": "proposal-roads-v1-d2613da19116bd06-web1",
+  "positive": {
+    "Kent Ridge Crescent": {
+      "a": [
+        103.77453828938006,
+        1.2993500416869834
+      ],
+      "b": [
+        103.77438715714746,
+        1.2991952134275466
+      ],
+      "seg_id": 61239,
+      "dist_m": null,
+      "name": "Kent Ridge Crescent"
+    },
+    "Kent Ridge Drive": {
+      "a": [
+        103.77082056522252,
+        1.2963595745285668
+      ],
+      "b": [
+        103.77103143477518,
+        1.296314125466991
+      ],
+      "seg_id": 59779,
+      "dist_m": null,
+      "name": "Kent Ridge Drive"
+    },
+    "Engineering Drive 1": {
+      "a": [
+        103.77191861519815,
+        1.3007457341095714
+      ],
+      "b": [
+        103.7721159592293,
+        1.3008332488408687
+      ],
+      "seg_id": 66130,
+      "dist_m": null,
+      "name": "Engineering Drive 1"
+    },
+    "Engineering Drive 2": {
+      "a": [
+        103.77043661456827,
+        1.2991142951525416
+      ],
+      "b": [
+        103.77026876124708,
+        1.2992505620790296
+      ],
+      "seg_id": 62209,
+      "dist_m": null,
+      "name": "Engineering Drive 2"
+    },
+    "Computing Drive": {
+      "a": [
+        103.77252115506778,
+        1.2942630556583996
+      ],
+      "b": [
+        103.77266647300563,
+        1.2941026881020636
+      ],
+      "seg_id": 71638,
+      "dist_m": null,
+      "name": "Computing Drive"
+    },
+    "existing": {
+      "a": [
+        103.90163294103168,
+        1.3147265624326878
+      ],
+      "b": [
+        103.9016670589683,
+        1.3145134375673124
+      ],
+      "seg_id": 0,
+      "dist_m": 272,
+      "name": "Existing website road"
+    }
+  },
+  "negative": {
+    "ambiguous": {
+      "a": [
+        103.76987722955477,
+        1.2960508044057701
+      ],
+      "b": [
+        103.76981804767014,
+        1.2962595184704941
+      ],
+      "name": "Kent Ridge Crescent",
+      "reason": "ambiguous"
+    },
+    "restricted_or_grade": {
+      "a": [
+        103.77346633358758,
+        1.2925309257798423
+      ],
+      "b": [
+        103.7736241165421,
+        1.2926788799911686
+      ],
+      "name": "Kent Ridge Drive",
+      "reason": "restricted_or_grade"
+    },
+    "unmatched": {
+      "a": [
+        103.77483746890464,
+        1.2950256702717604
+      ],
+      "b": [
+        103.77503604090846,
+        1.2951103234606947
+      ],
+      "name": "Research Link",
+      "reason": "unmatched"
+    }
+  },
+  "note": "Synthetic A/B placements on public road geometry, not real resident submissions."
+}

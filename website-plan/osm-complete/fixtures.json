@@ -1,0 +1,929 @@
+{
+  "version": "proposal-all-highways-6371b27f223e31d7",
+  "positive": {
+    "service": {
+      "a": [
+        103.674786,
+        1.224125
+      ],
+      "b": [
+        103.674823,
+        1.224164
+      ],
+      "seg_id": 229595,
+      "dist_m": null,
+      "properties": {
+        "seg_id": 229595,
+        "dist_m": null,
+        "source": "osm",
+        "osm_id": 540276407,
+        "osm_type": "way",
+        "highway": "service",
+        "service": null,
+        "access": "private",
+        "name": null,
+        "layer": null,
+        "bridge": null,
+        "tunnel": null
+      }
+    },
+    "private_access": {
+      "a": [
+        103.674786,
+        1.224125
+      ],
+      "b": [
+        103.674823,
+        1.224164
+      ],
+      "seg_id": 229595,
+      "dist_m": null,
+      "properties": {
+        "seg_id": 229595,
+        "dist_m": null,
+        "source": "osm",
+        "osm_id": 540276407,
+        "osm_type": "way",
+        "highway": "service",
+        "service": null,
+        "access": "private",
+        "name": null,
+        "layer": null,
+        "bridge": null,
+        "tunnel": null
+      }
+    },
+    "tertiary": {
+      "a": [
+        103.675647,
+        1.233506
+      ],
+      "b": [
+        103.675693,
+        1.233478
+      ],
+      "seg_id": 110463,
+      "dist_m": null,
+      "properties": {
+        "seg_id": 110463,
+        "dist_m": null,
+        "source": "osm",
+        "osm_id": 168423195,
+        "osm_type": "way",
+        "highway": "tertiary",
+        "service": null,
+        "access": "private",
+        "name": "Meranti Crescent",
+        "layer": null,
+        "bridge": null,
+        "tunnel": null
+      }
+    },
+    "parking_aisle": {
+      "a": [
+        103.679709,
+        1.22896
+      ],
+      "b": [
+        103.679671,
+        1.228998
+      ],
+      "seg_id": 229613,
+      "dist_m": null,
+      "properties": {
+        "seg_id": 229613,
+        "dist_m": null,
+        "source": "osm",
+        "osm_id": 540276412,
+        "osm_type": "way",
+        "highway": "service",
+        "service": "parking_aisle",
+        "access": "private",
+        "name": null,
+        "layer": null,
+        "bridge": null,
+        "tunnel": null
+      }
+    },
+    "footway": {
+      "a": [
+        103.679542,
+        1.233533
+      ],
+      "b": [
+        103.679591,
+        1.233556
+      ],
+      "seg_id": 473936,
+      "dist_m": null,
+      "properties": {
+        "seg_id": 473936,
+        "dist_m": null,
+        "source": "osm",
+        "osm_id": 887385624,
+        "osm_type": "way",
+        "highway": "footway",
+        "service": null,
+        "access": null,
+        "name": null,
+        "layer": null,
+        "bridge": null,
+        "tunnel": null
+      }
+    },
+    "tertiary_link": {
+      "a": [
+        103.678672,
+        1.235552
+      ],
+      "b": [
+        103.678703,
+        1.235596
+      ],
+      "seg_id": 205480,
+      "dist_m": null,
+      "properties": {
+        "seg_id": 205480,
+        "dist_m": null,
+        "source": "osm",
+        "osm_id": 530127354,
+        "osm_type": "way",
+        "highway": "tertiary_link",
+        "service": null,
+        "access": "private",
+        "name": null,
+        "layer": null,
+        "bridge": null,
+        "tunnel": null
+      }
+    },
+    "driveway": {
+      "a": [
+        103.678984,
+        1.256504
+      ],
+      "b": [
+        103.679013,
+        1.256458
+      ],
+      "seg_id": 519632,
+      "dist_m": null,
+      "properties": {
+        "seg_id": 519632,
+        "dist_m": null,
+        "source": "osm",
+        "osm_id": 1052009277,
+        "osm_type": "way",
+        "highway": "service",
+        "service": "driveway",
+        "access": "private",
+        "name": null,
+        "layer": null,
+        "bridge": null,
+        "tunnel": null
+      }
+    },
+    "primary_link": {
+      "a": [
+        103.680432,
+        1.277568
+      ],
+      "b": [
+        103.680405,
+        1.277521
+      ],
+      "seg_id": 175804,
+      "dist_m": null,
+      "properties": {
+        "seg_id": 175804,
+        "dist_m": null,
+        "source": "osm",
+        "osm_id": 469047789,
+        "osm_type": "way",
+        "highway": "primary_link",
+        "service": null,
+        "access": "private",
+        "name": null,
+        "layer": null,
+        "bridge": null,
+        "tunnel": null
+      }
+    },
+    "primary": {
+      "a": [
+        103.67995,
+        1.278324
+      ],
+      "b": [
+        103.679905,
+        1.278294
+      ],
+      "seg_id": 175807,
+      "dist_m": null,
+      "properties": {
+        "seg_id": 175807,
+        "dist_m": null,
+        "source": "osm",
+        "osm_id": 469047793,
+        "osm_type": "way",
+        "highway": "primary",
+        "service": null,
+        "access": "private",
+        "name": "Jurong Island Highway",
+        "layer": null,
+        "bridge": null,
+        "tunnel": null
+      }
+    },
+    "unclassified": {
+      "a": [
+        103.679041,
+        1.305392
+      ],
+      "b": [
+        103.679095,
+        1.305398
+      ],
+      "seg_id": 77837,
+      "dist_m": null,
+      "properties": {
+        "seg_id": 77837,
+        "dist_m": null,
+        "source": "osm",
+        "osm_id": 32633643,
+        "osm_type": "way",
+        "highway": "unclassified",
+        "service": null,
+        "access": null,
+        "name": "Benoi Road",
+        "layer": null,
+        "bridge": null,
+        "tunnel": null
+      }
+    },
+    "residential": {
+      "a": [
+        103.673913,
+        1.305028
+      ],
+      "b": [
+        103.673921,
+        1.304975
+      ],
+      "seg_id": 77838,
+      "dist_m": null,
+      "properties": {
+        "seg_id": 77838,
+        "dist_m": null,
+        "source": "osm",
+        "osm_id": 32633647,
+        "osm_type": "way",
+        "highway": "residential",
+        "service": null,
+        "access": null,
+        "name": "Benoi Lane",
+        "layer": null,
+        "bridge": null,
+        "tunnel": null
+      }
+    },
+    "secondary": {
+      "a": [
+        103.678625,
+        1.309754
+      ],
+      "b": [
+        103.678679,
+        1.309755
+      ],
+      "seg_id": 77815,
+      "dist_m": null,
+      "properties": {
+        "seg_id": 77815,
+        "dist_m": null,
+        "source": "osm",
+        "osm_id": 32630702,
+        "osm_type": "way",
+        "highway": "secondary",
+        "service": null,
+        "access": null,
+        "name": "Benoi Road",
+        "layer": null,
+        "bridge": null,
+        "tunnel": null
+      }
+    },
+    "steps": {
+      "a": [
+        103.678895,
+        1.312557
+      ],
+      "b": [
+        103.678841,
+        1.31256
+      ],
+      "seg_id": 223448,
+      "dist_m": null,
+      "properties": {
+        "seg_id": 223448,
+        "dist_m": null,
+        "source": "osm",
+        "osm_id": 539502707,
+        "osm_type": "way",
+        "highway": "steps",
+        "service": null,
+        "access": null,
+        "name": null,
+        "layer": null,
+        "bridge": null,
+        "tunnel": null
+      }
+    },
+    "motorway": {
+      "a": [
+        103.678451,
+        1.32264
+      ],
+      "b": [
+        103.678456,
+        1.322586
+      ],
+      "seg_id": 83518,
+      "dist_m": null,
+      "properties": {
+        "seg_id": 83518,
+        "dist_m": null,
+        "source": "osm",
+        "osm_id": 44638496,
+        "osm_type": "way",
+        "highway": "motorway",
+        "service": null,
+        "access": null,
+        "name": "Ayer Rajah Expressway",
+        "layer": null,
+        "bridge": null,
+        "tunnel": null
+      }
+    },
+    "motorway_link": {
+      "a": [
+        103.674781,
+        1.322502
+      ],
+      "b": [
+        103.674768,
+        1.322555
+      ],
+      "seg_id": 97192,
+      "dist_m": null,
+      "properties": {
+        "seg_id": 97192,
+        "dist_m": null,
+        "source": "osm",
+        "osm_id": 119885170,
+        "osm_type": "way",
+        "highway": "motorway_link",
+        "service": null,
+        "access": null,
+        "name": "Jalan Ahmad Ibrahim",
+        "layer": null,
+        "bridge": null,
+        "tunnel": null
+      }
+    },
+    "secondary_link": {
+      "a": [
+        103.67948,
+        1.328064
+      ],
+      "b": [
+        103.679528,
+        1.328088
+      ],
+      "seg_id": 172155,
+      "dist_m": null,
+      "properties": {
+        "seg_id": 172155,
+        "dist_m": null,
+        "source": "osm",
+        "osm_id": 465657483,
+        "osm_type": "way",
+        "highway": "secondary_link",
+        "service": null,
+        "access": null,
+        "name": null,
+        "layer": null,
+        "bridge": null,
+        "tunnel": null
+      }
+    },
+    "pedestrian": {
+      "a": [
+        103.67311,
+        1.332484
+      ],
+      "b": [
+        103.673139,
+        1.33253
+      ],
+      "seg_id": 378940,
+      "dist_m": null,
+      "properties": {
+        "seg_id": 378940,
+        "dist_m": null,
+        "source": "osm",
+        "osm_id": 733840722,
+        "osm_type": "way",
+        "highway": "pedestrian",
+        "service": null,
+        "access": null,
+        "name": "Leaders Square",
+        "layer": null,
+        "bridge": null,
+        "tunnel": null
+      }
+    },
+    "corridor": {
+      "a": [
+        103.678764,
+        1.332283
+      ],
+      "b": [
+        103.678726,
+        1.332321
+      ],
+      "seg_id": 526835,
+      "dist_m": null,
+      "properties": {
+        "seg_id": 526835,
+        "dist_m": null,
+        "source": "osm",
+        "osm_id": 1124342326,
+        "osm_type": "way",
+        "highway": "corridor",
+        "service": null,
+        "access": null,
+        "name": null,
+        "layer": null,
+        "bridge": null,
+        "tunnel": null
+      }
+    },
+    "track": {
+      "a": [
+        103.671534,
+        1.341212
+      ],
+      "b": [
+        103.671517,
+        1.341263
+      ],
+      "seg_id": 156089,
+      "dist_m": null,
+      "properties": {
+        "seg_id": 156089,
+        "dist_m": null,
+        "source": "osm",
+        "osm_id": 451996867,
+        "osm_type": "way",
+        "highway": "track",
+        "service": null,
+        "access": "no",
+        "name": null,
+        "layer": null,
+        "bridge": null,
+        "tunnel": null
+      }
+    },
+    "busway": {
+      "a": [
+        103.679176,
+        1.341901
+      ],
+      "b": [
+        103.67923,
+        1.341895
+      ],
+      "seg_id": 603206,
+      "dist_m": null,
+      "properties": {
+        "seg_id": 603206,
+        "dist_m": null,
+        "source": "osm",
+        "osm_id": 1568133408,
+        "osm_type": "way",
+        "highway": "busway",
+        "service": null,
+        "access": null,
+        "name": null,
+        "layer": null,
+        "bridge": null,
+        "tunnel": null
+      }
+    },
+    "path": {
+      "a": [
+        103.675947,
+        1.423441
+      ],
+      "b": [
+        103.675955,
+        1.423495
+      ],
+      "seg_id": 548114,
+      "dist_m": null,
+      "properties": {
+        "seg_id": 548114,
+        "dist_m": null,
+        "source": "osm",
+        "osm_id": 1285026871,
+        "osm_type": "way",
+        "highway": "path",
+        "service": null,
+        "access": null,
+        "name": null,
+        "layer": null,
+        "bridge": null,
+        "tunnel": null
+      }
+    },
+    "raceway": {
+      "a": [
+        103.682616,
+        1.329173
+      ],
+      "b": [
+        103.682621,
+        1.329227
+      ],
+      "seg_id": 132999,
+      "dist_m": null,
+      "properties": {
+        "seg_id": 132999,
+        "dist_m": null,
+        "source": "osm",
+        "osm_id": 260182985,
+        "osm_type": "way",
+        "highway": "raceway",
+        "service": null,
+        "access": null,
+        "name": null,
+        "layer": null,
+        "bridge": null,
+        "tunnel": null
+      }
+    },
+    "cycleway": {
+      "a": [
+        103.686944,
+        1.340259
+      ],
+      "b": [
+        103.686998,
+        1.340252
+      ],
+      "seg_id": 386139,
+      "dist_m": null,
+      "properties": {
+        "seg_id": 386139,
+        "dist_m": null,
+        "source": "osm",
+        "osm_id": 745622832,
+        "osm_type": "way",
+        "highway": "cycleway",
+        "service": null,
+        "access": null,
+        "name": null,
+        "layer": null,
+        "bridge": null,
+        "tunnel": null
+      }
+    },
+    "construction": {
+      "a": [
+        103.684159,
+        1.383538
+      ],
+      "b": [
+        103.684171,
+        1.383591
+      ],
+      "seg_id": 561769,
+      "dist_m": null,
+      "properties": {
+        "seg_id": 561769,
+        "dist_m": null,
+        "source": "osm",
+        "osm_id": 1378942407,
+        "osm_type": "way",
+        "highway": "construction",
+        "service": null,
+        "access": null,
+        "name": null,
+        "layer": null,
+        "bridge": null,
+        "tunnel": null
+      }
+    },
+    "bus_stop": {
+      "a": [
+        103.705788,
+        1.320567
+      ],
+      "b": [
+        103.705772,
+        1.320618
+      ],
+      "seg_id": 128489,
+      "dist_m": null,
+      "properties": {
+        "seg_id": 128489,
+        "dist_m": null,
+        "source": "osm",
+        "osm_id": 238925194,
+        "osm_type": "way",
+        "highway": "bus_stop",
+        "service": null,
+        "access": null,
+        "name": "Main Station",
+        "layer": null,
+        "bridge": null,
+        "tunnel": null
+      }
+    },
+    "trunk": {
+      "a": [
+        103.700479,
+        1.473139
+      ],
+      "b": [
+        103.700518,
+        1.473102
+      ],
+      "seg_id": 198039,
+      "dist_m": null,
+      "properties": {
+        "seg_id": 198039,
+        "dist_m": null,
+        "source": "osm",
+        "osm_id": 509157400,
+        "osm_type": "way",
+        "highway": "trunk",
+        "service": null,
+        "access": null,
+        "name": "Lebuhraya Pesisir Pantai Iskandar",
+        "layer": null,
+        "bridge": null,
+        "tunnel": null
+      }
+    },
+    "trunk_link": {
+      "a": [
+        103.710168,
+        1.313757
+      ],
+      "b": [
+        103.71021,
+        1.313723
+      ],
+      "seg_id": 97241,
+      "dist_m": null,
+      "properties": {
+        "seg_id": 97241,
+        "dist_m": null,
+        "source": "osm",
+        "osm_id": 119933240,
+        "osm_type": "way",
+        "highway": "trunk_link",
+        "service": null,
+        "access": null,
+        "name": null,
+        "layer": null,
+        "bridge": null,
+        "tunnel": null
+      }
+    },
+    "proposed": {
+      "a": [
+        103.715,
+        1.318956
+      ],
+      "b": [
+        103.714946,
+        1.318951
+      ],
+      "seg_id": 600913,
+      "dist_m": null,
+      "properties": {
+        "seg_id": 600913,
+        "dist_m": null,
+        "source": "osm",
+        "osm_id": 1563539492,
+        "osm_type": "way",
+        "highway": "proposed",
+        "service": null,
+        "access": null,
+        "name": "Jalan Buroh",
+        "layer": null,
+        "bridge": null,
+        "tunnel": null
+      }
+    },
+    "elevator": {
+      "a": [
+        103.749105,
+        1.318897
+      ],
+      "b": [
+        103.749052,
+        1.318908
+      ],
+      "seg_id": 527699,
+      "dist_m": null,
+      "properties": {
+        "seg_id": 527699,
+        "dist_m": null,
+        "source": "osm",
+        "osm_id": 1136655505,
+        "osm_type": "way",
+        "highway": "elevator",
+        "service": null,
+        "access": "yes",
+        "name": null,
+        "layer": null,
+        "bridge": null,
+        "tunnel": null
+      }
+    },
+    "bridleway": {
+      "a": [
+        103.773914,
+        1.288784
+      ],
+      "b": [
+        103.773924,
+        1.288837
+      ],
+      "seg_id": 104942,
+      "dist_m": null,
+      "properties": {
+        "seg_id": 104942,
+        "dist_m": null,
+        "source": "osm",
+        "osm_id": 157966992,
+        "osm_type": "way",
+        "highway": "bridleway",
+        "service": null,
+        "access": null,
+        "name": null,
+        "layer": null,
+        "bridge": null,
+        "tunnel": null
+      }
+    },
+    "living_street": {
+      "a": [
+        103.788186,
+        1.287087
+      ],
+      "b": [
+        103.788132,
+        1.287089
+      ],
+      "seg_id": 84849,
+      "dist_m": null,
+      "properties": {
+        "seg_id": 84849,
+        "dist_m": null,
+        "source": "osm",
+        "osm_id": 46650509,
+        "osm_type": "way",
+        "highway": "living_street",
+        "service": null,
+        "access": "private",
+        "name": null,
+        "layer": null,
+        "bridge": null,
+        "tunnel": null
+      }
+    },
+    "rest_area": {
+      "a": [
+        103.808495,
+        1.405341
+      ],
+      "b": [
+        103.808545,
+        1.405321
+      ],
+      "seg_id": 396466,
+      "dist_m": null,
+      "properties": {
+        "seg_id": 396466,
+        "dist_m": null,
+        "source": "osm",
+        "osm_id": 758525386,
+        "osm_type": "way",
+        "highway": "rest_area",
+        "service": null,
+        "access": null,
+        "name": null,
+        "layer": null,
+        "bridge": null,
+        "tunnel": null
+      }
+    },
+    "road": {
+      "a": [
+        103.846714,
+        1.283447
+      ],
+      "b": [
+        103.846687,
+        1.2834
+      ],
+      "seg_id": 370245,
+      "dist_m": null,
+      "properties": {
+        "seg_id": 370245,
+        "dist_m": null,
+        "source": "osm",
+        "osm_id": 715205517,
+        "osm_type": "way",
+        "highway": "road",
+        "service": null,
+        "access": "no",
+        "name": null,
+        "layer": null,
+        "bridge": null,
+        "tunnel": "building_passage"
+      }
+    },
+    "crossing": {
+      "a": [
+        103.893976,
+        1.372832
+      ],
+      "b": [
+        103.894023,
+        1.372805
+      ],
+      "seg_id": 536202,
+      "dist_m": null,
+      "properties": {
+        "seg_id": 536202,
+        "dist_m": null,
+        "source": "osm",
+        "osm_id": 1186030251,
+        "osm_type": "way",
+        "highway": "crossing",
+        "service": null,
+        "access": null,
+        "name": null,
+        "layer": null,
+        "bridge": null,
+        "tunnel": null
+      }
+    },
+    "services": {
+      "a": [
+        103.990298,
+        1.359669
+      ],
+      "b": [
+        103.990343,
+        1.359698
+      ],
+      "seg_id": 384237,
+      "dist_m": null,
+      "properties": {
+        "seg_id": 384237,
+        "dist_m": null,
+        "source": "osm",
+        "osm_id": 743758487,
+        "osm_type": "way",
+        "highway": "services",
+        "service": null,
+        "access": null,
+        "name": "Baggage Storage",
+        "layer": null,
+        "bridge": null,
+        "tunnel": null
+      }
+    },
+    "existing": {
+      "a": [
+        103.90163294103168,
+        1.3147265624326878
+      ],
+      "b": [
+        103.9016670589683,
+        1.3145134375673124
+      ],
+      "seg_id": 0,
+      "dist_m": 272,
+      "name": "Existing website road"
+    }
+  },
+  "note": "Synthetic test placements, never sent to a live backend."
+}

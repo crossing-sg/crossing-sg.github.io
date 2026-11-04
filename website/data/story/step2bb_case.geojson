@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "step2bb_case",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "id": "V01", "status": "verified", "year": 2017.0, "url": "https://www.malaymail.com/news/world/2018/12/07/singaporean-jailed-six-weeks-for-causing-death-of-4-year-old-girl/1700941" }, "geometry": { "type": "Point", "coordinates": [ 103.748399, 1.352411 ] } }
+]
+}

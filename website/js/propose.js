@@ -1,6 +1,6 @@
 // Proposal form: the resident clicks point A and point B across a road.
-// The road segment is found with map.queryRenderedFeatures on the crossing gap layer,
-// so only the segment id and the rounded points are sent to the Apps Script web app.
+// Canonical proposal roads are loaded for the visible area. The server repeats
+// intersection, ambiguity, grade/access and identifier checks before storing.
 
 mapboxgl.accessToken = SITE.mapboxToken;
 var MIN_ZOOM = 16;      // points must be marked close in, so the segment match is reliable
@@ -13,17 +13,23 @@ var map = new mapboxgl.Map({
     zoom: 11
 });
 map.addControl(new mapboxgl.NavigationControl(), 'top-right');
+map.on('style.load', function () { ProposalBasemap.apply(map); });
 
 var points = [];
 var segment = null;
 var empty = { type: 'FeatureCollection', features: [] };
+var roads = new ProposalRoads.Store(SITE.proposalRoadsBase || 'data/proposal-roads');
+var selectionGeneration = 0;
+var submissionId = null;
+var submissionBusy = false;
 
-map.on('load', function () {
-    map.addSource('gap', { type: 'geojson', data: 'data/gap_segments.geojson' });
+map.once('style.load', function () {
+    map.addSource('gap', { type: 'geojson', data: empty,
+        attribution: 'Proposal road data: © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a> (ODbL)' });
     map.addLayer({ id: 'gap', type: 'line', source: 'gap', paint: { 'line-color': SITE.routeStraight, 'line-width': ['interpolate', ['linear'], ['zoom'], 11, 0.6, 16, 6], 'line-opacity': ['interpolate', ['linear'], ['zoom'], 11, 0.2, 16, 0.45] } });
     map.addLayer({ id: 'gap-selected', type: 'line', source: 'gap', filter: ['==', ['get', 'seg_id'], -1], paint: { 'line-color': SITE.highlight, 'line-width': 8 } });
     map.addSource('draft', { type: 'geojson', data: empty });
-    map.addLayer({ id: 'draft-line', type: 'line', source: 'draft', paint: { 'line-color': SITE.routeWalk, 'line-width': 4, 'line-dasharray': [1.5, 1.5] } });
+    map.addLayer({ id: 'draft-line', type: 'line', source: 'draft', filter: ['==', ['geometry-type'], 'LineString'], paint: { 'line-color': SITE.routeWalk, 'line-width': 4, 'line-dasharray': [1.5, 1.5] } });
     map.addLayer({
         id: 'draft-points', type: 'circle', source: 'draft', filter: ['==', ['geometry-type'], 'Point'],
         paint: { 'circle-radius': 9, 'circle-color': SITE.basemapDark, 'circle-stroke-color': SITE.routeWalk, 'circle-stroke-width': 3 }
@@ -34,13 +40,21 @@ map.on('load', function () {
         paint: { 'text-color': SITE.routeWalk }
     });
 
-    // Opened from a segment card on the map page
+    roads.attach(map, 'gap', function (status) {
+        if (!points.length && status === 'error') { showWhere('Road data could not load. Please try again after checking your connection.'); }
+    });
+    // Opened from a segment card on the map page, including supplementary IDs.
     var seg = new URLSearchParams(window.location.search).get('seg');
-    if (seg) {
-        fetch('data/gap_segments.geojson').then(function (r) { return r.json(); }).then(function (gj) {
-            var f = gj.features.find(function (x) { return String(x.properties.seg_id) === seg; });
-            if (f) { map.flyTo({ center: f.geometry.coordinates[0], zoom: 17.5 }); }
-        });
+    if (seg !== null) {
+        roads.feature(seg).then(function (f) {
+            var coords = f.geometry.type === 'LineString' ? f.geometry.coordinates : f.geometry.coordinates[0];
+            // An explicit deep link can warm its destination road tiles while the
+            // camera animates. Guard checks remain mandatory when A/B is selected.
+            var xs = coords.map(function (p) { return p[0]; }), ys = coords.map(function (p) { return p[1]; });
+            roads.area([Math.min.apply(null, xs) - .00005, Math.min.apply(null, ys) - .00005,
+                Math.max.apply(null, xs) + .00005, Math.max.apply(null, ys) + .00005], { displayOnly: true }).catch(function () {});
+            map.flyTo({ center: coords[Math.floor(coords.length / 2)], zoom: 17.5 });
+        }).catch(function () { showWhere('This road could not be found. Search for the location and mark points again.'); });
     }
 });
 
@@ -50,13 +64,14 @@ addSearch(document.getElementById('search'), document.getElementById('results'),
 });
 
 map.on('click', function (e) {
+    if (submissionBusy) { return; }
     if (!map.getSource('draft')) { return; }   // map layers are still loading
     if (map.getZoom() < MIN_ZOOM) {
         showWhere('Zoom in further before marking points.');
         return;
     }
     if (points.length === 2) { resetPoints(); }
-    points.push([e.lngLat.lng, e.lngLat.lat]);
+    points.push([Number(e.lngLat.lng.toFixed(6)), Number(e.lngLat.lat.toFixed(6))]);
     if (points.length === 2) { findSegment(); }
     drawDraft();
 });
@@ -70,45 +85,43 @@ function drawDraft() {
     if (points.length === 1) { showWhere('Point A marked. Now click the other side of the road.'); }
 }
 
-// The segment is the gap layer feature that the A to B line crosses, closest to its midpoint
+// Use full original geometry, not queryRenderedFeatures or nearest vertices.
 function findSegment() {
-    var a = map.project(points[0]);
-    var b = map.project(points[1]);
-    var box = [[Math.min(a.x, b.x) - 4, Math.min(a.y, b.y) - 4], [Math.max(a.x, b.x) + 4, Math.max(a.y, b.y) + 4]];
-    var mid = { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 };
-    var found = map.queryRenderedFeatures(box, { layers: ['gap'] });
-    var length = metres(points[0], points[1]);
-    segment = null;
+    var token = ++selectionGeneration, marked = points.map(function (p) { return p.slice(); });
+    var length = RoadGeometry.metres(marked[0], marked[1]);
+    segment = null; map.setFilter('gap-selected', ['==', ['get', 'seg_id'], -1]);
     if (length > MAX_LENGTH) {
         showWhere('The two points are ' + Math.round(length) + ' m apart. Mark them on opposite sides of one road, no more than ' + MAX_LENGTH + ' m apart.');
         return;
     }
-    if (!found.length) {
-        showWhere('No road found between the two points. Mark one point on each side of a road.');
-        return;
-    }
-    found.sort(function (f, g) { return pixelDist(f, mid) - pixelDist(g, mid); });
-    segment = found[0].properties;
-    map.setFilter('gap-selected', ['==', ['get', 'seg_id'], segment.seg_id]);
-    showWhere('Points A and B marked, ' + Math.round(length) + ' m apart.<br>Nearest existing crossing: ' + segment.dist_m + ' m.');
-}
-
-function pixelDist(feature, p) {
-    var coords = feature.geometry.type === 'LineString' ? feature.geometry.coordinates : feature.geometry.coordinates[0];
-    return Math.min.apply(null, coords.map(function (c) {
-        var q = map.project(c);
-        return Math.hypot(q.x - p.x, q.y - p.y);
-    }));
-}
-
-function metres(p, q) {
-    var R = 6371000, rad = Math.PI / 180;
-    var dLat = (q[1] - p[1]) * rad, dLng = (q[0] - p[0]) * rad;
-    var h = Math.sin(dLat / 2) ** 2 + Math.cos(p[1] * rad) * Math.cos(q[1] * rad) * Math.sin(dLng / 2) ** 2;
-    return 2 * R * Math.asin(Math.sqrt(h));
+    showWhere('Checking the road between A and B…');
+    var pad = .00005;
+    roads.area([Math.min(marked[0][0], marked[1][0]) - pad, Math.min(marked[0][1], marked[1][1]) - pad,
+        Math.max(marked[0][0], marked[1][0]) + pad, Math.max(marked[0][1], marked[1][1]) + pad]).then(function (data) {
+        if (token !== selectionGeneration) { return; }
+        if (data.guardsReady !== true) { throw new Error('Road restrictions have not loaded'); }
+        var result = RoadGeometry.choose(marked[0], marked[1], data.features, data.guards);
+        if (!result.ok) {
+            var messages = {
+                unmatched: 'No mapped road or path crosses the marked line. Put A and B on opposite sides of one road or path.',
+                ambiguous: 'This line crosses more than one road or an ambiguous intersection. Move A and B closer around one road. This location needs review if it still cannot be matched.',
+                restricted_or_grade: 'This location has restricted pedestrian access or grade-separated geometry and needs review. It cannot be submitted automatically.',
+                length: 'Mark two distinct points, at least 2 m and no more than 80 m apart, on opposite sides of one road.'
+            };
+            showWhere(messages[result.reason] || 'This location could not be matched reliably. Mark the points again.'); return;
+        }
+        segment = result.feature.properties;
+        map.setFilter('gap-selected', ['==', ['get', 'seg_id'], segment.seg_id]);
+        showWhere('Points A and B marked, ' + Math.round(length) + ' m apart.<br>Nearest existing crossing: ' + ProposalRoads.distance(segment.dist_m) + '.');
+    }).catch(function () {
+        if (token === selectionGeneration) { showWhere('Road data could not load. Your location has not been assigned. Please check your connection and mark again.'); }
+    });
 }
 
 function resetPoints() {
+    if (submissionBusy) { return; }
+    selectionGeneration++;
+    submissionId = null;
     points = [];
     segment = null;
     if (map.getSource('draft')) {
@@ -133,57 +146,77 @@ function checked(name) {
 }
 
 function submitProposal() {
+    if (submissionBusy) { return; }
     var error = document.getElementById('error');
     var type = checked('type');
     var reason = checked('reason');
     if (!segment) { error.innerText = 'Mark point A and point B across a road first.'; return; }
     if (!type) { error.innerText = 'Choose a type of crossing.'; return; }
     if (!reason) { error.innerText = 'Choose the main reason.'; return; }
-    if (!SITE.appsScriptUrl) { error.innerText = 'The form is not connected yet. Add the Apps Script URL in js/site-config.js.'; return; }
+    // Pilot mode (no v2 URL yet) sends to the pilot Apps Script without the v2 handshake
+    var pilot = !SITE.proposalApiUrl, url = pilot ? SITE.appsScriptUrl : SITE.proposalApiUrl;
 
-    var round4 = function (p) { return [Number(p[0].toFixed(4)), Number(p[1].toFixed(4))]; };
+    var round6 = function (p) { return [Number(p[0].toFixed(6)), Number(p[1].toFixed(6))]; };
+    if (!submissionId) { submissionId = crypto.randomUUID(); }
     var body = {
         kind: 'proposal',
+        request_id: submissionId,
         seg_id: segment.seg_id,
         dist_m: segment.dist_m,
-        a: round4(points[0]),
-        b: round4(points[1]),
+        registry_version: roads.manifest.version,
+        a: round6(points[0]),
+        b: round6(points[1]),
         type: type,
         reason: reason,
         story: document.getElementById('story').value.trim(),
         website: document.getElementById('website').value
     };
     var btn = document.getElementById('submit');
+    var controller = new AbortController();
+    var timeout = setTimeout(function () { controller.abort(); }, 30000);
+    submissionBusy = true;
     btn.disabled = true;
     btn.innerText = 'Sending...';
-    fetch(SITE.appsScriptUrl, {
+    (pilot ? Promise.resolve() : ProposalRoads.requireService(url, controller.signal)).then(function () { return fetch(url, {
+        signal: controller.signal,
         method: 'POST',
         // text/plain avoids the CORS preflight that Apps Script does not answer
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify(body)
-    })
+    }); })
         .then(function (r) { return r.json(); })
         .then(function (res) {
-            if (!res.ok) { throw new Error(res.error || 'error'); }
-            showThanks(res.count, res.road);
+            if (!res.ok) {
+                var spatial = ['segment', 'segment_mismatch', 'ambiguous', 'unmatched', 'restricted_or_grade', 'length', 'location'];
+                throw new Error(spatial.indexOf(res.error) >= 0 ? 'service_geometry' : 'service_unavailable');
+            }
+            if (!pilot && !ProposalRoads.compatible(res)) { throw new Error('Service version mismatch'); }
+            showThanks(null, 'Road segment ' + segment.seg_id);
         })
-        .catch(function () {
+        .catch(function (err) {
             btn.disabled = false;
             btn.innerText = 'Submit proposal';
-            error.innerText = 'Could not send the proposal. Check the connection and try again.';
-        });
+            error.innerText = err && err.message === 'service_geometry' ?
+                'The service could not confirm this road match. Mark the points again; this location may need review.' :
+                'Could not record the proposal. Check the connection and try again. No public proposal has been created.';
+        }).finally(function () { submissionBusy = false; clearTimeout(timeout); });
 }
 
 function showThanks(count, road) {
     document.getElementById('form-page').style.display = 'none';
     document.getElementById('thanks').style.display = 'block';
     document.getElementById('thanks-road').innerText = road || '';
-    document.getElementById('thanks-count').innerText = 'This road segment now has ' + count + (count === 1 ? ' proposal' : ' proposals');
-    document.getElementById('thanks-next').innerText = 'Your proposal is on the public map now. Share the link so neighbours can add theirs.';
+    if (!SITE.proposalApiUrl) {
+        document.getElementById('thanks-count').innerText = 'Your proposal has been recorded.';
+        document.getElementById('thanks-next').innerText = 'During this pilot every proposal is shown on the map. Individual marked points are not published.';
+        return;
+    }
+    document.getElementById('thanks-count').innerText = 'Your proposal is awaiting review.';
+    document.getElementById('thanks-next').innerText = 'A road appears publicly only after at least three proposals have been approved. Individual marked points and unreviewed submissions are not published.';
 }
 
 function shareLink() {
-    var url = window.location.origin + window.location.pathname;
+    var url = window.location.origin + window.location.pathname + (segment ? '?seg=' + segment.seg_id : '');
     navigator.clipboard.writeText(url).then(function () {
         document.getElementById('share').innerText = 'Link copied';
     });

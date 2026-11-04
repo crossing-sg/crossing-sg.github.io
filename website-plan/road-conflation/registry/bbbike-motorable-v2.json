@@ -1,0 +1,11 @@
+{
+  "version": "proposal-bbbike-motorable-v2-a4c023f624c2e026",
+  "next_id": 822291,
+  "allocation_records": 286332,
+  "active_records": 286213,
+  "csv_sha256": "35f705597b5f85e4ed7ac16ed2b01d7ed050cfb4c1606249da51b1c9e511fbfd",
+  "gzip_sha256": "a5a79765b1b915e610ea5e0f6baf570629b8b10422eca37151bc883bc37259be",
+  "manifest_sha256": "b12a9587e8271813492af4e7cacca31028c44bb0a6ae8e7eb9b40bb0efd98f82",
+  "reserved_complete_osm_floor": 605080,
+  "policy": "append-only; preserve inactive records and holes; seed later rebuilds from this snapshot; never recycle IDs"
+}
