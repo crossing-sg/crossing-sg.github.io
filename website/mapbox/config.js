@@ -142,7 +142,7 @@ var config = {
         },
         {
             id: 'by-area',
-            alignment: 'right',
+            alignment: 'left',
             hidden: false,
             title: 'Fatal cases and crossing provision',
             description:
@@ -152,7 +152,7 @@ var config = {
                 '<div><h4>Crossings per km of road</h4>' + barChart('crossings_per_km', 6, SITE.markerColors.crossing, AREA_STATS.national.crossings_per_km) +
                 '<p>River Valley and Novena have the fewest, below the Singapore average.</p></div>' +
                 '</div><small>Areas with a fatal case. Crossings include bridges and underpasses (LTA DataMall). News counts are small and not a measure of risk.</small>',
-            location: { center: LOC_SG.center, zoom: LOC_SG.zoom, pitch: 0, bearing: 0, padding: PAD_RIGHT },
+            location: LOC_SG,
             mapAnimation: 'flyTo',
             rotateAnimation: false,
             callback: '',
