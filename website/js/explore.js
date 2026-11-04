@@ -117,7 +117,11 @@ map.on('load', function () {
             .setHTML('<b>' + p.dist_m + ' m</b> to the nearest crossing, bridge or underpass')
             .addTo(map);
     });
-    map.on('click', 'blocks', function (e) { openBlock(e.features[0].properties.postal, false); });
+    // Clicking the open block again closes its routes
+    map.on('click', 'blocks', function (e) {
+        var postal = String(e.features[0].properties.postal);
+        if (postal === openPostal) { closeCard(); } else { openBlock(postal, false); }
+    });
     map.on('click', 'proposals', function (e) { openSegment(e.features[0].properties); });
     map.on('click', 'proposal-crossings', function (e) { openSegment(e.features[0].properties); });
     ['gap', 'blocks', 'proposals', 'proposal-crossings'].forEach(function (id) {
@@ -149,7 +153,9 @@ function updateRefs() {
 }
 
 // Detour: load the routes of one block from data/routes/<postal>.json
+var openPostal = null;
 function openBlock(postal, fly) {
+    openPostal = String(postal);
     blocksReady
         .then(function () { return fetch('data/routes/' + postal + '.json'); })
         .then(function (r) { return r.json(); })
@@ -264,6 +270,8 @@ function showCard(html) {
 function closeCard() {
     document.getElementById('info').style.display = 'none';
     if (map.getSource('proposal-line')) { map.getSource('proposal-line').setData(empty); }
+    if (map.getSource('routes')) { map.getSource('routes').setData(empty); }
+    openPostal = null;
 }
 
 // Address search (js/search.js). In the detour layer, picking an HDB address also opens its routes.
