@@ -83,9 +83,9 @@ function newsGallery() {
     }).join('') + '</div>';
 }
 
-// Google Maps Street View at Bukit Batok Central. Paste the src of the embed code from Google Maps
+// Google Maps Street View at the bus stop opposite Blk 121. Paste the src of the embed code from Google Maps
 // (Street View > Share > Embed a map). Leave empty to hide the view.
-var STREETVIEW_BUKIT_BATOK = '';
+var STREETVIEW_BLK121 = 'https://www.google.com/maps/embed?pb=!4v1793753645399!6m8!1m7!1stRK7nQzHugoyyj7BWKnS0g!2m2!1d1.350669687478743!2d103.7480470536054!3f0!4f0!5f0.4000000000000002';
 function streetView(src) {
     return src ? '<iframe class="streetview" src="' + src + '" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>' : '';
 }
@@ -171,7 +171,6 @@ var config = {
                 'Crossings are provided here, so the question is whether they lie on the routes people walk. Roads are coloured by the distance to the nearest crossing.<br><br>' +
                 '<span class="key" style="background:' + SITE.classColors[0] + '"></span> under 50 m &nbsp; <span class="key" style="background:' + SITE.classColors[1] + '"></span> 50 to 100 m &nbsp; ' +
                 '<span class="key" style="background:' + SITE.classColors[2] + '"></span> 100 to 200 m &nbsp; <span class="key" style="background:' + SITE.classColors[3] + '"></span> over 200 m' +
-                streetView(STREETVIEW_BUKIT_BATOK) +
                 '<br><a href="https://www.malaymail.com/news/world/2018/12/07/singaporean-jailed-six-weeks-for-causing-death-of-4-year-old-girl/1700941" target="_blank">Source: Malay Mail, 7 December 2018</a>',
             location: { center: [103.7484, 1.3524], zoom: 16.2, pitch: 0, bearing: 0, padding: PAD_LEFT },
             mapAnimation: 'flyTo',
@@ -189,6 +188,7 @@ var config = {
                 'Bukit Batok has more crossings than the Singapore average but the most reported cases. One reason may be where the crossings are. ' +
                 'Blk 121 (blue) is 84 m from the same case. The bus stop opposite is 96 m away in a straight line (dashed), but 548 m on foot (white line).<br><br>' +
                 'The mean detour ratio of Blk 121 is 2.9, against 1.9 for all HDB blocks.<br><br>' +
+                streetView(STREETVIEW_BLK121) + '<br>' +
                 '<a href="../map.html?layer=detour&block=650121" target="_top">Look up another block</a>',
             location: { center: [103.7479, 1.3510], zoom: 16.8, pitch: 0, bearing: 0, padding: PAD_LEFT },
             mapAnimation: 'flyTo',
