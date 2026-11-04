@@ -13,6 +13,7 @@ var only = function (visible) {
 // wide screen, so the camera centres the data in the remaining area. On narrow screens the
 // card sits in the middle and no padding is used.
 var PAD_LEFT = { top: 40, bottom: 40, left: Math.round(window.innerWidth * 0.38), right: 40 };
+var PAD_RIGHT = { top: 40, bottom: 40, left: 40, right: Math.round(window.innerWidth * 0.38) };
 var PAD_NONE = { top: 0, bottom: 0, left: 0, right: 0 };
 // The first three chapters share one camera, so only the data layers change between them
 var LOC_SG = { center: [103.82, 1.352], zoom: 10.9, pitch: 0, bearing: 0, padding: PAD_LEFT };
@@ -26,6 +27,9 @@ function updateStoryPadding() {
     PAD_LEFT.left = wide ? Math.round(right + 40) : 0;
     PAD_LEFT.top = PAD_LEFT.bottom = wide ? 40 : 0;
     PAD_LEFT.right = wide ? 40 : 0;
+    var rcard = document.querySelector('.step.righty > div');
+    PAD_RIGHT.right = wide ? Math.round(window.innerWidth - (rcard ? rcard.getBoundingClientRect().left : window.innerWidth * 0.62) + 40) : 0;
+    PAD_RIGHT.left = PAD_RIGHT.top = PAD_RIGHT.bottom = wide ? 40 : 0;
 }
 window.addEventListener('load', updateStoryPadding);
 window.addEventListener('resize', updateStoryPadding);
@@ -138,7 +142,7 @@ var config = {
         },
         {
             id: 'by-area',
-            alignment: 'left',
+            alignment: 'right',
             hidden: false,
             title: 'Fatal cases and crossing provision',
             description:
@@ -148,7 +152,7 @@ var config = {
                 '<div><h4>Crossings per km of road</h4>' + barChart('crossings_per_km', 6, SITE.markerColors.crossing, AREA_STATS.national.crossings_per_km) +
                 '<p>River Valley and Novena have the fewest, below the Singapore average.</p></div>' +
                 '</div><small>Areas with a fatal case. Crossings include bridges and underpasses (LTA DataMall). News counts are small and not a measure of risk.</small>',
-            location: LOC_SG,
+            location: { center: LOC_SG.center, zoom: LOC_SG.zoom, pitch: 0, bearing: 0, padding: PAD_RIGHT },
             mapAnimation: 'flyTo',
             rotateAnimation: false,
             callback: '',
