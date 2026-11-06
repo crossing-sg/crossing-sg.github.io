@@ -27,7 +27,7 @@ var serviceCapabilities = null;
 var capabilityRequest = null;
 var validation = null;
 if (SITE.proposalApiUrl) {
-    document.getElementById('proposal-publication-note').textContent = 'Every proposal awaits validation and moderation. Public road summaries require at least three approved, validated proposals. Individual marked points and pending records are not published.';
+    document.getElementById('proposal-publication-note').textContent = 'Every new proposal awaits validation and moderation. A road appears after its first approved proposal. Eligible pilot imports may also count. With one proposal, the rounded crossing line can reveal an approximate marked location; pending records and stories remain private.';
 }
 function proposalCapabilities() {
     if (!SITE.proposalApiUrl) { return Promise.resolve(null); }
@@ -287,7 +287,7 @@ function showThanks(count, road) {
         return;
     }
     document.getElementById('thanks-count').innerText = 'Your proposal is awaiting review.';
-    document.getElementById('thanks-next').innerText = 'A road appears publicly only after at least three proposals have been approved. Individual marked points and unreviewed submissions are not published.';
+    document.getElementById('thanks-next').innerText = 'A road appears publicly after its first proposal is approved. An approximate crossing line may be shown from that one proposal; pending submissions and stories remain private.';
 }
 
 function shareLink() {
