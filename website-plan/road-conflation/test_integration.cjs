@@ -49,23 +49,24 @@ test('first, second, third PENDING proposals remain private on every GET surface
         assert.equal(b.get('csv').split('\n').length,1);
     }
 });
-test('only the third APPROVED proposal exposes an aggregate on segments, summary and CSV',()=>{
+test('first APPROVED proposal exposes its road, approximate line, summary and CSV',()=>{
     const b=createBackend(),f=fixtures['Engineering Drive 1'];
     for(let i=0;i<3;i++){
         assert.equal(b.post(body(f)).ok,true);b.approve(i);
-        const res=b.get();assert.equal(res.segments.length,i===2?1:0);
-        assert.equal(b.get('summary').proposals,i===2?3:0);
-        assert.equal(b.get('csv').split('\n').length,i===2?2:1);
+        const res=b.get();assert.equal(res.segments.length,1);
+        assert.equal(b.get('summary').proposals,i+1);
+        assert.equal(b.get('csv').split('\n').length,2);
     }
     const s=b.get().segments[0];assert.equal(s.seg_id,f.seg_id);assert.equal(s.dist_m,null);assert.equal(s.count,3);assert.equal(s.reviewed,true);
-    assert.equal('a_lng' in s,false);assert.equal('story' in s,false);assert.equal(b.get('csv').includes('"null"'),false);
+    assert.ok(Array.isArray(s.line));assert.equal('a_lng' in s,false);assert.equal('story' in s,false);assert.equal(b.get('csv').includes('"null"'),false);
 });
 test('pending activity on another segment cannot change public counts or last-updated',()=>{
     const b=createBackend();for(let i=0;i<3;i++)b.post(body(fixtures.existing));b.approveAll();
     const before=b.get('summary');b.post(body(fixtures['Computing Drive']));assert.deepEqual(b.get('summary'),before);
 });
-test('rejection below three removes geometry, CSV and all public summary contribution',()=>{
+test('rejection of the only approved row removes geometry, CSV and summary contribution',()=>{
     const b=createBackend();for(let i=0;i<3;i++)b.post(body(fixtures.existing));b.approveAll();
+    b.sheets.get('proposals').values.slice(2).forEach(r=>r[11]='rejected');assert.equal(b.get().segments.length,1);
     b.sheets.get('proposals').values[1][11]='rejected';assert.equal(b.get().segments.length,0);assert.equal(b.get('summary').proposals,0);
     assert.equal(b.get('csv').split('\n').length,1);
 });
@@ -117,15 +118,17 @@ test('support works only on published segments and retries are idempotent',()=>{
     for(let i=0;i<3;i++)b.post(body(f));b.approveAll();assert.equal(b.post(support).ok,true);assert.equal(b.post(support).ok,true);
     assert.equal(b.get().segments[0].support,1);
 });
-test('legacy rows survive setup but need explicit review and never leak old individual lines',()=>{
+test('pilot status=ok imports publish immediately, but new rows remain moderated',()=>{
     const b=createBackend(),f=fixtures.existing,sh=b.sheets.get('proposals');
     sh.values=[Array.from(b.ctx.PROPOSAL_HEADERS).slice(0,12)];
     for(let i=0;i<3;i++)sh.appendRow([new Date(),f.seg_id,f.dist_m,...f.a,...f.b,'Zebra crossing','Other','','','ok']);
-    b.ctx.setup();assert.equal(sh.values.length,4);assert.equal(b.get().segments.length,0);
-    b.approveAll();assert.equal(b.get().segments[0].count,3);assert.equal(b.get().segments[0].line,null);
+    b.ctx.setup();assert.equal(sh.values.length,4);assert.equal(b.get().segments.length,1);
+    assert.equal(b.get().segments[0].count,3); // Legacy rounded lines may be unavailable when geometry fails validation.
+    sh.values[1][11]='rejected';sh.values[2][11]='rejected';assert.equal(b.get().segments[0].count,1);
+    sh.values[1][11]='pending';sh.values[2][11]='pending';assert.equal(b.get().segments[0].count,1);
 });
-test('backend fails closed for a pilot threshold or corrupt static data',()=>{
-    const b=createBackend();b.ctx.MIN_PROPOSALS=1;assert.equal(b.get().ok,false);
+test('backend rejects zero thresholds and corrupt static data',()=>{
+    const b=createBackend();b.ctx.MIN_PROPOSALS=0;assert.equal(b.get().ok,false);
     const c=createBackend();c.cache.set('roads:'+c.ctx.ROAD_MANIFEST_SHA256,'{}');assert.equal(c.post(body(fixtures.existing)).ok,false);
 });
 test('capabilities exposes policy without hidden proposal activity',()=>{
@@ -136,9 +139,9 @@ test('capabilities exposes policy without hidden proposal activity',()=>{
 test('client refuses pilot/unreviewed aggregates and stale versions',()=>{
     global.SITE={proposalNetworkVersion:manifest.version};
     assert.throws(()=>roads.publicSegments({segments:[{seg_id:1,count:1}]}));
-    const res={api_version:'proposal-api-v2',registry_version:manifest.version,publication_min:3,line_min:3,
-        segments:[{seg_id:1,count:3,reviewed:true},{seg_id:2,count:2,reviewed:true},{seg_id:3,count:20,reviewed:false}]};
-    assert.deepEqual(roads.publicSegments(res).map(s=>s.seg_id),[1]);
+    const res={api_version:'proposal-api-v2',registry_version:manifest.version,publication_min:1,line_min:1,
+        segments:[{seg_id:1,count:1,reviewed:true},{seg_id:2,count:2,reviewed:true},{seg_id:3,count:20,reviewed:false}]};
+    assert.deepEqual(roads.publicSegments(res).map(s=>s.seg_id),[1,2]);
 });
 test('tile loader fetches visible tiles only, deduplicates boundaries and caps concurrency',async()=>{
     global.SITE={proposalNetworkVersion:manifest.version};const seen=[];

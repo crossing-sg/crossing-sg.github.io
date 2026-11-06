@@ -17,12 +17,12 @@ var NOTES = {
     detour: 'Each point is an HDB block, coloured by how much longer the walk to nearby bus stops and MRT exits is than the straight distance. 2.0 means twice as far. Click a block to see its routes.',
     proposals: !SITE.proposalApiUrl ?
         'Each white line is a crossing proposed by residents, from one side of the road to the other. During this pilot every proposal is shown. Click a line to read the summary and add your support.' :
-        'Each white line is an approved crossing proposal aggregate, from one side of the road to the other. Roads appear after at least three approved proposals. Click a line to read the summary and add your support.'
+        'Each white line is an approved crossing proposal aggregate, from one side of the road to the other. Roads appear from the first accepted proposal, including eligible pilot imports. Single-proposal lines are approximate, not multi-person aggregates. Click a line to read the summary and add your support.'
 };
 var LEGENDS = {
     gap: [[SITE.classColors[0], 'Under 50 m'], [SITE.classColors[1], '50 to 100 m'], [SITE.classColors[2], '100 to 200 m'], [SITE.classColors[3], 'Over 200 m']],
     detour: [[SITE.classColors[0], 'Under 1.5'], [SITE.classColors[1], '1.5 to 2.0'], [SITE.classColors[2], '2.0 to 2.5'], [SITE.classColors[3], 'Over 2.5']],
-    proposals: (!SITE.proposalApiUrl ? [[SITE.proposalRamp[0], '1 to 2 proposals']] : []).concat([[SITE.proposalRamp[1], '3 to 4 approved proposals'], [SITE.proposalRamp[2], '5 to 9'], [SITE.proposalRamp[3], '10 or more']])
+    proposals: [[SITE.proposalRamp[0], !SITE.proposalApiUrl ? '1 to 2 proposals' : '1 to 2 accepted proposals'], [SITE.proposalRamp[1], '3 to 4'], [SITE.proposalRamp[2], '5 to 9'], [SITE.proposalRamp[3], '10 or more']]
 };
 var THEME_LAYERS = { gap: ['gap'], detour: ['blocks'], proposals: ['proposals', 'proposal-crossings', 'proposal-line'] };
 var empty = { type: 'FeatureCollection', features: [] };
@@ -207,7 +207,7 @@ function loadProposals() {
         proposalPublication = publication;
         var stats = document.getElementById('proposal-statistics');
         if (stats && publication.summary) {
-            stats.textContent = publication.summary.proposals + ' approved, validated proposals · ' + publication.summary.road_memberships +
+            stats.textContent = publication.summary.proposals + ' accepted proposals (including eligible pilot imports) · ' + publication.summary.road_memberships +
                 ' proposal-to-road associations · ' + publication.summary.segments + ' published roads. One proposal can support several roads.';
             stats.hidden = document.querySelector('input[name=layer]:checked').value !== 'proposals';
         }
@@ -259,14 +259,14 @@ function openMultiCrossing(p) {
     var safe = ProposalRoads.escape;
     showCard('<span class="close" onclick="closeCard()">x</span><b style="font-size:16px">Multi-road crossing proposal</b>' +
         '<p>One approved Proposal associated with ' + ids.length + ' road segments. This line is drawn once for the Proposal.</p>' +
-        '<p>Displayed coordinates are shared approved-cohort averages; individual marked points are not published.</p>' +
+        '<p>With several proposals, the line is their average. A single-proposal line is approximate but may reflect its marked location.</p>' +
         allowed.map(function (s) { return '<div>Road ' + safe(s.seg_id) + ': ' + safe(s.count) + ' approved proposals</div>'; }).join('') +
         '<p>Road-level counts include shared Proposals. They must not be added together as the overall Proposal total.</p>');
 }
 
 function openSegment(p) {
-    if (!Number.isSafeInteger(Number(p.seg_id)) || (!PILOT && Number(p.count) < 3)) { return; }
-    // The mean crossing line exists only for segments with three or more proposals
+    if (!Number.isSafeInteger(Number(p.seg_id)) || (!PILOT && Number(p.count) < 1)) { return; }
+    // A representative crossing line can be displayed from the first accepted proposal.
     var line = typeof p.line === 'string' ? JSON.parse(p.line) : p.line;
     map.getSource('proposal-line').setData(line ? { type: 'Feature', geometry: { type: 'LineString', coordinates: line }, properties: {} } : empty);
     var supported = hasSupported(p.seg_id);

@@ -8,11 +8,17 @@ const fixtures=JSON.parse(fs.readFileSync(path.join(__dirname,'fixtures.json')))
 const backend=()=>createBackend({dataDirectory:directory});
 const request=(f,patch={})=>body(f,{registry_version:manifest.version,...patch});
 
-test('generated backend pin and frontend configuration identify the exact new release',()=>{
+test('production backend pin and frontend match the active PBF road release',()=>{
+    // Keep the old OSM fixtures for regression tests below, but pin the
+    // deployment assertions to the active site registry rather than this fixture.
+    const activeDirectory=path.join(ROOT,'website/data/pbf-motorable-v1/proposal-roads');
+    const activeBytes=fs.readFileSync(path.join(activeDirectory,'manifest.json'));
+    const activeManifest=JSON.parse(activeBytes);
     const source=fs.readFileSync(path.join(ROOT,'apps-script/RegistryConfig.gs'),'utf8');
-    assert.ok(source.includes(manifest.version));
-    assert.ok(source.includes(crypto.createHash('sha256').update(fs.readFileSync(path.join(directory,'manifest.json'))).digest('hex')));
-    assert.ok(fs.readFileSync(path.join(ROOT,'website/js/site-config.js'),'utf8').includes(manifest.version));
+    const site=fs.readFileSync(path.join(ROOT,'website/js/site-config.js'),'utf8');
+    assert.ok(source.includes(activeManifest.version));
+    assert.ok(source.includes(crypto.createHash('sha256').update(activeBytes).digest('hex')));
+    assert.ok(site.includes(activeManifest.version));
 });
 test('all available highway categories and previously excluded service/access fixtures submit privately',()=>{
     const b=backend();
