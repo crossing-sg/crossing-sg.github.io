@@ -1,0 +1,52 @@
+name: Smoke test live crossing demo
+
+on:
+  push:
+    branches: [qa/live-demo-smoke-20261106]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Verify published website and immutable assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="https://crossing-sg.github.io"
+          curl --retry 3 --max-time 60 -fsSL "$base/map.html" -o /tmp/crossing-map.html
+          curl --retry 3 --max-time 60 -fsSL "$base/js/site-config.js" -o /tmp/crossing-site-config.js
+          curl --retry 3 --max-time 60 -fsSL "$base/js/explore.js" -o /tmp/crossing-explore.js
+          curl --retry 3 --max-time 60 -fsSL "$base/data/pbf-motorable-v1/proposal-roads/manifest.json" -o /tmp/crossing-manifest.json
+          curl --retry 3 --max-time 60 -fsSL "$base/data/pbf-motorable-v1/selection-validation/manifest.json" -o /tmp/crossing-validation.json
+          grep -q 'Single-proposal lines are approximate' /tmp/crossing-explore.js
+          echo "Website and new release assets: HTTP success"
+      - name: Verify current pilot GET and report visibility (no row writes)
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs=require('node:fs'),crypto=require('node:crypto');
+          const cfg=fs.readFileSync('/tmp/crossing-site-config.js','utf8');
+          const match=cfg.match(/appsScriptUrl:\s*'([^']+)'/);
+          if(!match)throw Error('Pilot URL missing');
+          const next=cfg.match(/proposalApiUrl:\s*'([^']*)'/);
+          const roadmap=JSON.parse(fs.readFileSync('/tmp/crossing-manifest.json'));
+          const val=JSON.parse(fs.readFileSync('/tmp/crossing-validation.json'));
+          const hash=file=>crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+          if(hash('/tmp/crossing-manifest.json')!=='ca47962548593fc62f6b9e4157368d00b405f9575319ae9b185f257a3a2fc742')throw Error('Road manifest hash mismatch');
+          if(hash('/tmp/crossing-validation.json')!=='3f057c690653a670e29b62d6d80e8000e96b0c7a9fe04b9a4a4685c94a127e1d')throw Error('Validation manifest hash mismatch');
+          console.log('Registry verified:',roadmap.version);
+          console.log('Validation verified:',val.version);
+          console.log('Live API mode:',next&&next[1]?'new backend':'pilot');
+          (async()=>{
+            const response=await fetch(match[1]+'?view=segments',{signal:AbortSignal.timeout(45000)});
+            if(!response.ok)throw Error('Live pilot API HTTP '+response.status);
+            const payload=await response.json();
+            if(!Array.isArray(payload.segments))throw Error('Pilot API does not return segments array');
+            console.log('Pilot publicly visible roads:',payload.segments.length);
+            if(!payload.segments.length)throw Error('Pilot map currently has no proposal roads for demo');
+          })().catch(e=>{console.error(e.message);process.exitCode=1;});
+          NODE
