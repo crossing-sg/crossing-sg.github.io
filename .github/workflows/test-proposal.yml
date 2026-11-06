@@ -1,0 +1,40 @@
+name: Test crossing proposal release
+
+on:
+  push:
+    branches:
+      - fix/first-approved-proposal-demo
+  pull_request:
+    paths:
+      - 'apps-script/**'
+      - 'website/js/**'
+      - 'website-plan/road-conflation/**'
+      - 'website-plan/osm-complete/**'
+      - 'website-plan/shared-integration/**'
+      - '.github/workflows/test-proposal.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check JavaScript syntax
+        run: |
+          node --check website/js/proposal-roads.js
+          node --check website/js/explore.js
+          node --check website/js/propose.js
+          node --check website-plan/road-conflation/test_integration.cjs
+      - name: Backend and frontend integration tests
+        run: npm test
+      - name: OSM integration tests
+        run: npm run test:osm
+      - name: Basemap integration tests
+        run: npm run test:shared
