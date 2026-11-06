@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-11-06 — PBF road network and Multi-road Crossing
+
+- Staged the 242,112-segment LTA-first network built from the original OSM France PBF, replacing the BBBike Shapefile-derived dataset at cutover. The candidate preserves all 55,115 original LTA segments and 142,989 geometry-stable supplementary IDs. It reserves 88,109 retired supplementary IDs and adds 44,008 new IDs. Both releases are retained.
+- Proposal can associate one A–B crossing with multiple road segments. Apps Script recomputes the selection, keeps one parent with unique road memberships, and preserves literal text through retries and moderation. Unknown-grade crossings remain unvalidated. Explore distinguishes overall Proposals from per-road support and retains its three-approved-Proposal threshold.
+- Isolated Google TEST coverage included 64 HTTP checks, 18 Apps Script tests, and browser checks for Proposal and Explore. The final offline integration check verified the frozen asset bytes, explicit Sheet binding, pilot submission compatibility, two-road submission and retry, historical visibility and analytical layer switching. Public browser access and production history cutover remain release gates.
+- The new code and data are staged with the current pilot configuration. The [release runbook](apps-script/RELEASE_MULTI_ROAD.md) covers production activation, historical records and rollback.
+
 ## 2026-11-04 — Revised BBBike Proposal Road Network
 
 - Restored the previous BBBike Singapore shapefile/PBF sources and LTA-first

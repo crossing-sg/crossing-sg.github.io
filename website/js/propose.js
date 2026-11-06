@@ -9,8 +9,8 @@ var MAX_LENGTH = 80;    // metres between A and B
 var map = new mapboxgl.Map({
     container: 'map',
     style: SITE.proposeStyle,
-    center: [103.82, 1.355],
-    zoom: 11
+    center: SITE.proposalInitialCenter || [103.82, 1.355],
+    zoom: SITE.proposalInitialZoom || 11
 });
 map.addControl(new mapboxgl.NavigationControl(), 'top-right');
 map.on('style.load', function () { ProposalBasemap.apply(map); });
@@ -22,6 +22,28 @@ var roads = new ProposalRoads.Store(SITE.proposalRoadsBase || 'data/proposal-roa
 var selectionGeneration = 0;
 var submissionId = null;
 var submissionBusy = false;
+var selection = null;
+var serviceCapabilities = null;
+var capabilityRequest = null;
+var validation = null;
+if (SITE.proposalApiUrl) {
+    document.getElementById('proposal-publication-note').textContent = 'Every proposal awaits validation and moderation. Public road summaries require at least three approved, validated proposals. Individual marked points and pending records are not published.';
+}
+function proposalCapabilities() {
+    if (!SITE.proposalApiUrl) { return Promise.resolve(null); }
+    if (!capabilityRequest) {
+        capabilityRequest = ProposalRoads.requireService(SITE.proposalApiUrl).then(function (caps) {
+            if (caps.multi_road === true) {
+                if (caps.multi_schema_version !== 'proposal-multi-v1' || !caps.validation) { throw new Error('Multi-road service version mismatch'); }
+                validation = new ProposalValidation.Store({ validationBase: SITE.proposalValidationBase || caps.validation.base,
+                    validationVersion: caps.validation.version, validationManifestSha256: caps.validation.manifest_sha256,
+                    networkManifestSha256: caps.validation.network_manifest_sha256, networkTotalCount: caps.validation.total_count });
+            }
+            serviceCapabilities = caps; return caps;
+        }).catch(function (error) { capabilityRequest = null; serviceCapabilities = null; throw error; });
+    }
+    return capabilityRequest;
+}
 
 map.once('style.load', function () {
     map.addSource('gap', { type: 'geojson', data: empty,
@@ -89,7 +111,7 @@ function drawDraft() {
 function findSegment() {
     var token = ++selectionGeneration, marked = points.map(function (p) { return p.slice(); });
     var length = RoadGeometry.metres(marked[0], marked[1]);
-    segment = null; map.setFilter('gap-selected', ['==', ['get', 'seg_id'], -1]);
+    segment = null; selection = null; map.setFilter('gap-selected', ['==', ['get', 'seg_id'], -1]);
     if (length > MAX_LENGTH) {
         showWhere('The two points are ' + Math.round(length) + ' m apart. Mark them on opposite sides of one road, no more than ' + MAX_LENGTH + ' m apart.');
         return;
@@ -100,22 +122,36 @@ function findSegment() {
         Math.max(marked[0][0], marked[1][0]) + pad, Math.max(marked[0][1], marked[1][1]) + pad]).then(function (data) {
         if (token !== selectionGeneration) { return; }
         if (data.guardsReady !== true) { throw new Error('Road restrictions have not loaded'); }
-        var result = RoadGeometry.choose(marked[0], marked[1], data.features, data.guards);
-        if (!result.ok) {
-            var messages = {
-                unmatched: 'No mapped road or path crosses the marked line. Put A and B on opposite sides of one road or path.',
-                ambiguous: 'This line crosses more than one road or an ambiguous intersection. Move A and B closer around one road. This location needs review if it still cannot be matched.',
-                restricted_or_grade: 'This location has restricted pedestrian access or grade-separated geometry and needs review. It cannot be submitted automatically.',
-                length: 'Mark two distinct points, at least 2 m and no more than 80 m apart, on opposite sides of one road.'
-            };
-            showWhere(messages[result.reason] || 'This location could not be matched reliably. Mark the points again.'); return;
-        }
-        segment = result.feature.properties;
-        map.setFilter('gap-selected', ['==', ['get', 'seg_id'], segment.seg_id]);
-        showWhere('Points A and B marked, ' + Math.round(length) + ' m apart.<br>Nearest existing crossing: ' + ProposalRoads.distance(segment.dist_m) + '.');
+        return proposalCapabilities().then(function (caps) {
+            if (token !== selectionGeneration) { return; }
+            if (caps && caps.multi_road === true) {
+                return validation.context(marked[0], marked[1], data.features).then(function (evidence) {
+                    if (token !== selectionGeneration) { return; }
+                    showMultiSelection(RoadGeometry.select(marked[0], marked[1], data.features, evidence));
+                });
+            }
+            applySingleSelection(marked, data);
+        });
     }).catch(function () {
         if (token === selectionGeneration) { showWhere('Road data could not load. Your location has not been assigned. Please check your connection and mark again.'); }
     });
+}
+
+function applySingleSelection(marked, data) {
+    var length = RoadGeometry.metres(marked[0], marked[1]);
+    var result = RoadGeometry.choose(marked[0], marked[1], data.features, data.guards);
+    if (!result.ok) {
+        var messages = {
+            unmatched: 'No mapped road or path crosses the marked line. Put A and B on opposite sides of one road or path.',
+            ambiguous: 'This line crosses more than one road or an ambiguous intersection. Move A and B closer around one road. This location needs review if it still cannot be matched.',
+            restricted_or_grade: 'This location has restricted pedestrian access or grade-separated geometry and needs review. It cannot be submitted automatically.',
+            length: 'Mark two distinct points, at least 2 m and no more than 80 m apart, on opposite sides of one road.'
+        };
+        showWhere(messages[result.reason] || 'This location could not be matched reliably. Mark the points again.'); return;
+    }
+    segment = result.feature.properties;
+    map.setFilter('gap-selected', ['==', ['get', 'seg_id'], segment.seg_id]);
+    showWhere('Points A and B marked, ' + Math.round(length) + ' m apart.<br>Nearest existing crossing: ' + ProposalRoads.distance(segment.dist_m) + '.');
 }
 
 function resetPoints() {
@@ -124,6 +160,9 @@ function resetPoints() {
     submissionId = null;
     points = [];
     segment = null;
+    selection = null;
+    document.getElementById('submit').innerText = 'Submit proposal';
+    document.getElementById('error').innerText = '';
     if (map.getSource('draft')) {
         map.getSource('draft').setData(empty);
         map.setFilter('gap-selected', ['==', ['get', 'seg_id'], -1]);
@@ -131,13 +170,42 @@ function resetPoints() {
     showWhere('Search or zoom in to a road, then click one side of the road and then the other.');
 }
 
+function showMultiSelection(result) {
+    selection = result;
+    segment = result.feature ? result.feature.properties : null;
+    if (!result.ok) {
+        var invalid = { length: 'Mark two distinct points, at least 2 m and no more than 80 m apart.',
+            unmatched: 'No road centreline crosses A–B. Mark opposite sides of the road.',
+            collinear: 'A–B follows a road instead of crossing it. Mark opposite sides of the road.' };
+        showWhere(invalid[result.reason] || 'This selection is invalid. Please mark the points again.');
+        document.getElementById('submit').innerText = 'Submit proposal'; return;
+    }
+    map.setFilter('gap-selected', ['in', ['get', 'seg_id'], ['literal', result.segment_ids]]);
+    var count = result.crossings.length, message = 'Points A and B marked, ' + Math.round(result.length_m) + ' m apart.<br>' +
+        count + ' crossing group' + (count === 1 ? '' : 's') + ' · ' + result.segment_ids.length + ' road segment' + (result.segment_ids.length === 1 ? '' : 's') + '.';
+    if (result.status === 'needs_review') {
+        var labels = { unknown_grade: 'grade unknown', source_metadata_unavailable: 'source metadata unavailable', validation_unavailable: 'validation data unavailable',
+            bridge: 'bridge', tunnel: 'tunnel', non_reference_level: 'non-reference road level', pedestrian_restriction: 'pedestrian restriction',
+            controlled_access_carriageway: 'controlled-access carriageway', nearby_grade_or_access_guard: 'nearby grade/access guard', access_requires_review: 'access requires review' };
+        var reasons = Array.from(new Set(result.review_reasons.map(function (r) { return labels[r.code] || r.code.replace(/_/g, ' '); })));
+        message += '<br><strong>Needs review — unvalidated.</strong> ' + ProposalRoads.escape(reasons.join('; ')) + '.<br>Your proposal can enter review. It is not publicly counted until validation and approval.';
+        document.getElementById('submit').innerText = 'Submit for review';
+    } else {
+        message += '<br>Validation checks passed. Your proposal still awaits moderation.';
+        document.getElementById('submit').innerText = 'Submit proposal';
+    }
+    if (result.segment_ids.length === 1) { message += '<br>Nearest existing crossing: ' + ProposalRoads.distance(result.features[0].properties.dist_m) + '.'; }
+    showWhere(message);
+}
+
 function showWhere(html) { document.getElementById('where').innerHTML = html; }
 
 document.getElementById('story').addEventListener('input', function () {
     document.getElementById('chars').innerText = this.value.length;
+    if (!submissionBusy) { submissionId = null; }
 });
 document.querySelectorAll('input[type=radio]').forEach(function (r) {
-    r.addEventListener('change', function () { document.getElementById('error').innerText = ''; });
+    r.addEventListener('change', function () { document.getElementById('error').innerText = ''; if (!submissionBusy) { submissionId = null; } });
 });
 
 function checked(name) {
@@ -150,7 +218,7 @@ function submitProposal() {
     var error = document.getElementById('error');
     var type = checked('type');
     var reason = checked('reason');
-    if (!segment) { error.innerText = 'Mark point A and point B across a road first.'; return; }
+    if (!segment && !(selection && selection.ok)) { error.innerText = 'Mark point A and point B across a road first.'; return; }
     if (!type) { error.innerText = 'Choose a type of crossing.'; return; }
     if (!reason) { error.innerText = 'Choose the main reason.'; return; }
     // Pilot mode (no v2 URL yet) sends to the pilot Apps Script without the v2 handshake
@@ -161,8 +229,8 @@ function submitProposal() {
     var body = {
         kind: 'proposal',
         request_id: submissionId,
-        seg_id: segment.seg_id,
-        dist_m: segment.dist_m,
+        seg_id: segment ? segment.seg_id : undefined,
+        dist_m: segment ? segment.dist_m : null,
         registry_version: roads.manifest.version,
         a: round6(points[0]),
         b: round6(points[1]),
@@ -171,13 +239,20 @@ function submitProposal() {
         story: document.getElementById('story').value.trim(),
         website: document.getElementById('website').value
     };
+    if (selection) {
+        if (pilot || !serviceCapabilities || serviceCapabilities.multi_road !== true) { error.innerText = 'The service has not advertised multi-road support. Please try again later.'; return; }
+        body.schema_version = serviceCapabilities.multi_schema_version;
+        body.validation_version = selection.validation_version;
+        body.segment_ids = selection.segment_ids.slice(); body.crossings = selection.crossings;
+        body.validation_status = selection.status; body.review_requested = selection.status === 'needs_review';
+    }
     var btn = document.getElementById('submit');
     var controller = new AbortController();
     var timeout = setTimeout(function () { controller.abort(); }, 30000);
     submissionBusy = true;
     btn.disabled = true;
     btn.innerText = 'Sending...';
-    (pilot ? Promise.resolve() : ProposalRoads.requireService(url, controller.signal)).then(function () { return fetch(url, {
+    (pilot ? Promise.resolve() : ProposalRoads.requireService(url, controller.signal)).then(function (caps) { if (selection && (!caps || caps.multi_road !== true || caps.multi_schema_version !== body.schema_version)) { throw new Error('Multi-road capability unavailable'); } return fetch(url, {
         signal: controller.signal,
         method: 'POST',
         // text/plain avoids the CORS preflight that Apps Script does not answer
@@ -191,7 +266,7 @@ function submitProposal() {
                 throw new Error(spatial.indexOf(res.error) >= 0 ? 'service_geometry' : 'service_unavailable');
             }
             if (!pilot && !ProposalRoads.compatible(res)) { throw new Error('Service version mismatch'); }
-            showThanks(null, 'Road segment ' + segment.seg_id);
+            showThanks(null, selection ? 'One proposal · ' + selection.segment_ids.length + ' associated road segment' + (selection.segment_ids.length === 1 ? '' : 's') : 'Road segment ' + segment.seg_id);
         })
         .catch(function (err) {
             btn.disabled = false;

@@ -3,16 +3,17 @@
  */
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),crypto=require('node:crypto');
 const ROOT=path.resolve(__dirname,'../..');
+function cell(v){if(typeof v!=='string')return v;if(v.startsWith("'"))return v.slice(1);if(v==='=1+1')return 2;if(v==='TRUE')return true;if(v==='FALSE')return false;if(/^[-+]?\d+(\.\d+)?$/.test(v))return Number(v);return v;}
 class Sheet {
     constructor(name){this.name=name;this.values=[];}
     getLastRow(){return this.values.length;}
     setFrozenRows(){return this;}
-    appendRow(row){this.values.push(Array.from(row));}
+    appendRow(row){this.values.push(Array.from(row,cell));}
     getRange(row,col,n=1,m=1){
         if(typeof row==='string')return {setDataValidation(){return this;}};
         const sheet=this;
         return {getValues(){return Array.from({length:n},(_,i)=>Array.from({length:m},(_,j)=>sheet.values[row-1+i]?.[col-1+j]??''));},
-            setValues(values){values.forEach((line,i)=>{sheet.values[row-1+i]??=[];line.forEach((v,j)=>sheet.values[row-1+i][col-1+j]=v);});return this;},
+            setValues(values){values.forEach((line,i)=>{sheet.values[row-1+i]??=[];line.forEach((v,j)=>sheet.values[row-1+i][col-1+j]=cell(v));});return this;},
             setFontWeight(){return this;},setDataValidation(){return this;}};
     }
 }
@@ -21,7 +22,7 @@ function createBackend(options={}){
     const sheets=new Map(),cache=new Map(),calls=[];
     const ss={getSheetByName:name=>sheets.get(name),insertSheet(name){const sh=new Sheet(name);sheets.set(name,sh);return sh;}};
     const ctx=vm.createContext({console,SpreadsheetApp:{getActiveSpreadsheet:()=>ss,newDataValidation:()=>({requireValueInList(){return this;},build(){return {};}})},
-        PropertiesService:{getScriptProperties:()=>({getProperty:()=> 'https://fixture.invalid/data/proposal-roads'})},
+        PropertiesService:{getScriptProperties:()=>({getProperty:key=>key==='PROPOSAL_DATA_BASE_URL'?'https://fixture.invalid/data/proposal-roads':null})},
         CacheService:{getScriptCache:()=>({get:key=>cache.get(key)||null,put:(key,v)=>cache.set(key,v)})},
         LockService:{getScriptLock:()=>({waitLock(){},releaseLock(){}})},
         Utilities:{DigestAlgorithm:{SHA_256:'sha256'},Charset:{UTF_8:'utf8'},
@@ -36,7 +37,7 @@ function createBackend(options={}){
             if(!file.startsWith(dataDirectory+path.sep))throw Error('Traversal');
             calls.push(suffix);const bytes=fs.readFileSync(file);return {getResponseCode:()=>200,getContentText:()=>bytes.toString('utf8'),getBlob:()=>bytes};
         }},ContentService:{MimeType:{JSON:'json',CSV:'csv'},createTextOutput:text=>({text,mime:null,setMimeType(mime){this.mime=mime;return this;}})}});
-    for(const name of ['RegistryConfig.gs','RoadGeometry.gs','Code.gs'])vm.runInContext(fs.readFileSync(path.join(ROOT,'apps-script',name),'utf8'),ctx,{filename:name});
+    for(const name of ['RegistryConfig.gs','ValidationConfig.gs','RoadGeometry.gs','Code.gs','MultiRoad.gs'])vm.runInContext(fs.readFileSync(path.join(ROOT,'apps-script',name),'utf8'),ctx,{filename:name});
     // Each suite pins its own immutable release; never use a remote URL.
     const manifestBytes=fs.readFileSync(path.join(dataDirectory,'manifest.json'));
     ctx.ROAD_REGISTRY_VERSION=JSON.parse(manifestBytes).version;

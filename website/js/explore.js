@@ -123,7 +123,10 @@ map.on('load', function () {
         if (postal === openPostal) { closeCard(); } else { openBlock(postal, false); }
     });
     map.on('click', 'proposals', function (e) { openSegment(e.features[0].properties); });
-    map.on('click', 'proposal-crossings', function (e) { openSegment(e.features[0].properties); });
+    map.on('click', 'proposal-crossings', function (e) {
+        var p = e.features[0].properties;
+        if (p.crossing_id) { openMultiCrossing(p); } else { openSegment(p); }
+    });
     ['gap', 'blocks', 'proposals', 'proposal-crossings'].forEach(function (id) {
         map.on('mouseenter', id, function () { map.getCanvas().style.cursor = 'pointer'; });
         map.on('mouseleave', id, function () { map.getCanvas().style.cursor = ''; });
@@ -140,6 +143,8 @@ function setTheme(theme) {
     map.setLayoutProperty('route-walk', 'visibility', routesOn);
     map.setLayoutProperty('route-straight', 'visibility', routesOn);
     document.getElementById('layer-note').innerText = NOTES[theme];
+    var proposalStats = document.getElementById('proposal-statistics');
+    if (proposalStats) { proposalStats.hidden = theme !== 'proposals' || !proposalPublication || !proposalPublication.summary; }
     document.getElementById('legend').innerHTML = LEGENDS[theme].map(function (row) {
         return '<div style="margin:6px 0"><span class="key" style="background:' + row[0] + '"></span>' + row[1] + '</div>';
     }).join('');
@@ -187,28 +192,76 @@ function openBlock(postal, fly) {
 // Proposals come from the Apps Script web app as one summary per road segment (no geometry).
 // Canonical geometry comes from the versioned proposal registry, including OSM-only IDs.
 var PILOT = !SITE.proposalApiUrl;
+var proposalPublication = null;
+var proposalPublicationGeneration = 0;
 function loadProposals() {
+    var generation = ++proposalPublicationGeneration;
     // Pilot mode (no v2 URL yet): read the pilot Apps Script and show every segment with a proposal
     var request = PILOT ?
-        fetch(SITE.appsScriptUrl + '?view=segments').then(function (r) { return r.json(); }).then(function (r) { return r.segments || []; }) :
-        ProposalRoads.getPublic(SITE.proposalApiUrl, 'segments').then(ProposalRoads.publicSegments);
-    request.then(function (segments) {
+        fetch(SITE.appsScriptUrl + '?view=segments').then(function (r) { return r.json(); }).then(function (r) { return { segments: r.segments || [], crossings: [], summary: null }; }) :
+        ProposalRoads.getPublic(SITE.proposalApiUrl, 'segments').then(function (r) {
+            return { segments: ProposalRoads.publicSegments(r), crossings: ProposalRoads.publicCrossings(r), summary: r.summary || null };
+        });
+    request.then(function (publication) {
+        if (generation !== proposalPublicationGeneration) { return []; }
+        proposalPublication = publication;
+        var stats = document.getElementById('proposal-statistics');
+        if (stats && publication.summary) {
+            stats.textContent = publication.summary.proposals + ' approved, validated proposals · ' + publication.summary.road_memberships +
+                ' proposal-to-road associations · ' + publication.summary.segments + ' published roads. One proposal can support several roads.';
+            stats.hidden = document.querySelector('input[name=layer]:checked').value !== 'proposals';
+        }
+        var segments = publication.segments;
         return Promise.all(segments.map(function (s) {
             return proposalRoads.feature(s.seg_id).then(function (f) {
                 return { type: 'Feature', geometry: f.geometry, properties: Object.assign({}, s, { dist_m: f.properties.dist_m, line: JSON.stringify(s.line) }) };
             }).catch(function () { return null; });
         }));
     }).then(function (features) {
+        if (generation !== proposalPublicationGeneration) { return; }
+        if (!PILOT && features.some(function (f) { return !f; })) { throw new Error('Canonical road data unavailable'); }
         features = features.filter(Boolean);
         map.getSource('proposals').setData({ type: 'FeatureCollection', features: features });
-        map.getSource('proposal-crossings').setData({ type: 'FeatureCollection', features: features.filter(function (f) { return JSON.parse(f.properties.line); }).map(function (f) {
+        var crossings = features.filter(function (f) { return JSON.parse(f.properties.line); }).map(function (f) {
             return { type: 'Feature', geometry: { type: 'LineString', coordinates: JSON.parse(f.properties.line) }, properties: f.properties };
-        }) });
+        });
+        var seen = new Set();
+        (proposalPublication.crossings || []).forEach(function (c) {
+            if (seen.has(c.id)) { return; } seen.add(c.id);
+            crossings.push({ type: 'Feature', id: c.id, geometry: c.geometry, properties: { crossing_id: c.id,
+                segment_ids: JSON.stringify(c.segment_ids), cohort_count: c.cohort_count, coordinate_basis: c.coordinate_basis } });
+        });
+        map.getSource('proposal-crossings').setData({ type: 'FeatureCollection', features: crossings });
+        if (document.querySelector('input[name=layer]:checked').value === 'proposals') { closeCard(); }
     }).catch(function () {
+        if (generation !== proposalPublicationGeneration) { return; }
+        if (!PILOT) {
+            map.getSource('proposals').setData(empty);
+            map.getSource('proposal-crossings').setData(empty);
+            var failedStats = document.getElementById('proposal-statistics');
+            if (failedStats) { failedStats.hidden = true; }
+        }
         if (document.querySelector('input[name=layer]:checked').value === 'proposals') {
             document.getElementById('layer-note').innerText = 'Approved proposal summaries are temporarily unavailable. Please try again later.';
         }
     });
+}
+
+function openMultiCrossing(p) {
+    var ids;
+    try { ids = typeof p.segment_ids === 'string' ? JSON.parse(p.segment_ids) : p.segment_ids; } catch (e) { return; }
+    if (!Array.isArray(ids) || !proposalPublication) { return; }
+    var allowed = proposalPublication.segments.filter(function (s) { return ids.indexOf(s.seg_id) >= 0; });
+    if (allowed.length !== ids.length) { return; }
+    var crossing = proposalPublication.crossings.find(function (c) { return c.id === p.crossing_id; });
+    if (!crossing) { return; }
+    map.getSource('proposal-line').setData({ type: 'Feature', geometry: crossing.geometry, properties: {} });
+    var safe = ProposalRoads.escape;
+    showCard('<span class="close" onclick="closeCard()">x</span><b style="font-size:16px">Multi-road crossing proposal</b>' +
+        '<p>One approved Proposal associated with ' + ids.length + ' road segments. This line is drawn once for the Proposal.</p>' +
+        '<p>Displayed coordinates are shared approved-cohort averages; individual marked points are not published.</p>' +
+        allowed.map(function (s) { return '<div>Road ' + safe(s.seg_id) + ': ' + safe(s.count) + ' approved proposals</div>'; }).join('') +
+        '<p>Road-level counts include shared Proposals. They must not be added together as the overall Proposal total.</p>');
 }
 
 function openSegment(p) {

@@ -124,6 +124,18 @@ var ProposalRoads = (function () {
             return s.reviewed === true && Number.isSafeInteger(s.seg_id) && s.count >= 3;
         });
     }
+    function publicCrossings(response) {
+        var allowed = new Set(publicSegments(response).map(function (s) { return s.seg_id; })), seen = new Set();
+        return (response.crossings || []).filter(function (c) {
+            if (!c || typeof c.id !== 'string' || seen.has(c.id) || c.reviewed !== true || c.validation_status !== 'validated' ||
+                !Array.isArray(c.segment_ids) || c.segment_ids.length < 2 || new Set(c.segment_ids).size !== c.segment_ids.length ||
+                !c.segment_ids.every(function (id) { return Number.isSafeInteger(id) && allowed.has(id); }) ||
+                !c.geometry || c.geometry.type !== 'LineString' || !Array.isArray(c.geometry.coordinates) || c.geometry.coordinates.length !== 2 ||
+                !c.geometry.coordinates.every(function (p) { return Array.isArray(p) && p.length === 2 && p.every(Number.isFinite) &&
+                    p[0] > 103.48 && p[0] < 104.60 && p[1] > 1.10 && p[1] < 1.55; })) { return false; }
+            seen.add(c.id); return true;
+        });
+    }
     function getPublic(url, view, signal) {
         return fetch(url + (url.indexOf('?') < 0 ? '?' : '&') + 'view=' + view, { signal: signal }).then(function (r) {
             if (!r.ok) { throw new Error('Proposal service unavailable'); } return r.json();
@@ -137,7 +149,7 @@ var ProposalRoads = (function () {
             return res;
         });
     }
-    return { Store: Store, collection: collection, publicSegments: publicSegments, getPublic: getPublic, requireService: requireService, compatible: compatible,
+    return { Store: Store, collection: collection, publicSegments: publicSegments, publicCrossings: publicCrossings, getPublic: getPublic, requireService: requireService, compatible: compatible,
         distance: distance, escape: escape, overlap: overlap };
 }());
 if (typeof module !== 'undefined' && module.exports) { module.exports = ProposalRoads; }

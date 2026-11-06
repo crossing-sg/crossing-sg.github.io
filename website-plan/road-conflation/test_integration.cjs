@@ -109,7 +109,7 @@ test('real grade/access and ambiguous NUS crossings are refused server-side',()=
 test('idempotent retries do not inflate the publication count; formulas are text',()=>{
     const b=createBackend(),d=body(fixtures.existing,{story:'=IMPORTXML("http://example.invalid","x")'});
     assert.equal(b.post(d).ok,true);assert.equal(b.post(d).ok,true);assert.equal(b.sheets.get('proposals').values.length,2);
-    assert.equal(b.sheets.get('proposals').values[1][9][0],"'");
+    assert.equal(b.sheets.get('proposals').values[1][9],d.story);
 });
 test('support works only on published segments and retries are idempotent',()=>{
     const b=createBackend(),f=fixtures.existing;

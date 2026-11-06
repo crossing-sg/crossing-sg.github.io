@@ -1,4 +1,4 @@
-> Shared integration uses `SITE.proposalApiUrl` for this v2 backend and preserves the existing `SITE.appsScriptUrl` for legacy Home/Story reads. See [deployment notes](../website-plan/shared-integration/README.md).
+> For the 242,112-segment PBF and Multi-road Crossing release, follow the [production cutover and rollback runbook](RELEASE_MULTI_ROAD.md). The older single-road guide below describes the earlier integration.
 
 # Apps Script v2: isolated review and deployment guide
 
