@@ -4,8 +4,9 @@
  * Set PROPOSAL_SPREADSHEET_ID and both HTTPS asset bases in Script Properties.
  * setup() appends schema columns without deleting old rows. All new rows await review.
  */
-var MIN_PROPOSALS = 3;
-var LINE_MIN = 3;
+// Demo publication: display a road and an approximate line from its first accepted proposal.
+var MIN_PROPOSALS = 1;
+var LINE_MIN = 1;
 var API_VERSION = 'proposal-api-v2';
 var TYPES = ['Zebra crossing', 'Signalised crossing', 'Overhead bridge with lift', 'Underpass', 'Not sure'];
 var REASONS = ['Nearest crossing is too far', 'Stairs at the overhead bridge', 'Long wait at the lights', 'Existing crossing is not on the way', 'Other'];
@@ -38,7 +39,7 @@ function setup() {
 }
 
 function policy() {
-  if (MIN_PROPOSALS < 3 || LINE_MIN < 3) { throw new Error('publication_policy'); }
+  if (!Number.isSafeInteger(MIN_PROPOSALS) || MIN_PROPOSALS < 1 || !Number.isSafeInteger(LINE_MIN) || LINE_MIN < 1) { throw new Error('publication_policy'); }
 }
 function envelope(obj) {
   obj.api_version = API_VERSION; obj.registry_version = ROAD_REGISTRY_VERSION;
