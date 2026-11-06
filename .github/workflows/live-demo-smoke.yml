@@ -48,5 +48,23 @@ jobs:
             if(!Array.isArray(payload.segments))throw Error('Pilot API does not return segments array');
             console.log('Pilot publicly visible roads:',payload.segments.length);
             if(!payload.segments.length)throw Error('Pilot map currently has no proposal roads for demo');
+            const zlib=require('node:zlib');
+            const ids=[...new Set(payload.segments.map(s=>Number(s.seg_id)))];
+            let compatible=0;
+            for(const id of ids){
+              if(!Number.isSafeInteger(id)||id<0)continue;
+              const block=String(Math.floor(id/roadmap.registry_block_size));
+              if(!roadmap.registry_blocks[block])continue;
+              const suffix=roadmap.registry_suffix||'.json';
+              const url='https://crossing-sg.github.io/data/pbf-motorable-v1/proposal-roads/registry/'+block+suffix;
+              const res=await fetch(url,{signal:AbortSignal.timeout(45000)});
+              if(!res.ok)throw Error('Registry block not fetchable');
+              const bytes=Buffer.from(await res.arrayBuffer());
+              const raw=bytes[0]===31&&bytes[1]===139?zlib.gunzipSync(bytes):bytes;
+              if(crypto.createHash('sha256').update(raw).digest('hex')!==roadmap.registry_blocks[block])throw Error('Road registry block checksum mismatch');
+              const entries=JSON.parse(raw.toString('utf8')).segments;
+              if(entries[String(id)])compatible++;
+            }
+            console.log('Pilot road IDs still present in active PBF registry:',compatible,'of',ids.length);
           })().catch(e=>{console.error(e.message);process.exitCode=1;});
           NODE
