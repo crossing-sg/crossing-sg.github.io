@@ -169,11 +169,15 @@ function reviewProposalRecord(request,decision,evidence) {
     updateParent(r,patch);return {ok:true};
   }finally{lock.releaseLock();}
 }
+// Only pilot imports have empty schema and review state; new rows still require moderation.
+function acceptedForPublication(r) {
+  return r.status==='ok' && (r.review_status==='approved' || (r.schema_version==='' && r.review_status===''));
+}
 function approvedParents() {
   var list=rows('proposals',PROPOSAL_HEADERS),counts={};
   list.forEach(function(r){var key=parentIdentity(r);counts[key]=(counts[key]||0)+1;});
   var seen={};return list.filter(function(r){
-    if(r.status!=='ok'||r.review_status!=='approved'||TYPES.indexOf(r.type)<0||REASONS.indexOf(r.reason)<0)return false;
+    if(!acceptedForPublication(r)||TYPES.indexOf(r.type)<0||REASONS.indexOf(r.reason)<0)return false;
     var key=parentIdentity(r);if(seen[key])return false;
     if(r.schema_version===PROPOSAL_SCHEMA){
       if(counts[key]!==1||r.ingestion_status!=='complete'||r.registry_version!==ROAD_REGISTRY_VERSION||r.validation_version!==ROAD_VALIDATION_VERSION||!membershipsComplete(r)||!storedParentIntact(r,true)||hardReviewReasons(r))return false;
@@ -187,7 +191,7 @@ function approvedParents() {
   });
 }
 function singleAggregateLine(list,canonical) {
-  var usable=list.filter(function(r){return r._ids.length===1&&(r.schema_version===API_VERSION||r.schema_version===PROPOSAL_SCHEMA)&&RoadGeometry.validPoint([r.a_lng,r.a_lat])&&RoadGeometry.validPoint([r.b_lng,r.b_lat]);});
+  var usable=list.filter(function(r){return r._ids.length===1&&(r.schema_version===''||r.schema_version===API_VERSION||r.schema_version===PROPOSAL_SCHEMA)&&RoadGeometry.validPoint([r.a_lng,r.a_lat])&&RoadGeometry.validPoint([r.b_lng,r.b_lat]);});
   if(usable.length<LINE_MIN)return null;
   var pairs=usable.map(function(r){var a=[r.a_lng,r.a_lat],b=[r.b_lng,r.b_lat];return a[0]>b[0]||(a[0]===b[0]&&a[1]>b[1])?[b,a]:[a,b];});
   function mean(i,j){return round4(pairs.reduce(function(n,p){return n+Number(p[i][j]);},0)/pairs.length);}
@@ -218,8 +222,8 @@ function publicationState() {
     if(!displayMatch.ok||hardReviewReasons({review_reasons_json:JSON.stringify(displayMatch.review_reasons)}))return;
     if(JSON.stringify(displayMatch.crossings.map(function(g){return sortedIds(g.segment_ids);}))!==JSON.stringify(JSON.parse(k)[1]))return;
     // At most one feature per approved parent, never one per road membership.
-    // Coordinates are a >=3-parent cohort aggregate, not individual input points.
-    list.forEach(function(r){crossings.push({id:'proposal-'+digest(r._identity+'|'+ROAD_REGISTRY_VERSION).slice(0,24),segment_ids:displayMatch.segment_ids.slice(),geometry:{type:'LineString',coordinates:line},reviewed:true,validation_status:'validated',coordinate_basis:'approved_cohort_aggregate',cohort_count:list.length});});
+    // A one-proposal cohort is only rounded, not a multi-person aggregate.
+    list.forEach(function(r){crossings.push({id:'proposal-'+digest(r._identity+'|'+ROAD_REGISTRY_VERSION).slice(0,24),segment_ids:displayMatch.segment_ids.slice(),geometry:{type:'LineString',coordinates:line},reviewed:true,validation_status:'validated',coordinate_basis:list.length===1?'rounded_approved_proposal':'approved_cohort_aggregate',cohort_count:list.length});});
   });
   var visibleParents=Object.keys(visible).map(function(k){return visible[k];}),latest=visibleParents.reduce(function(n,r){var t=new Date(r.received).getTime();return isFinite(t)?Math.max(n,t):n;},0);
   return {segments:segments,crossings:crossings,summary:{ok:true,scope:'published_only',proposals:visibleParents.length,segments:segments.length,road_memberships:segments.reduce(function(n,s){return n+s.count;},0),crossings:crossings.length,lastUpdated:latest?Utilities.formatDate(new Date(latest),'Asia/Singapore','d MMM yyyy'):'-'}};
