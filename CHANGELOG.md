@@ -1,5 +1,37 @@
 # Changelog
 
+## 2026-11-07 — Retrospective website and demo change-log backfill
+
+These entries document changes already present in repository history but not described individually in the earlier change log. They do not imply that the successor Apps Script deployment or the local background-style editor has been published.
+
+### Demo publication, registry and site identity (6 November)
+
+- Changed the successor backend source to allow a road to appear after its **first accepted** proposal, with `MIN_PROPOSALS = 1` and `LINE_MIN = 1`, instead of enforcing a minimum of three. Updated the publication policy, frontend compatibility checks, map filters, legends, tooltips and submission messages for the one-proposal threshold.
+- Imported pilot rows with `status=ok` and blank legacy schema/review fields are eligible to count as previously accepted. New submissions continue to require explicit moderation; rejected, mismatched or unsafe records do not automatically become public. A line produced from just one proposal is an approximate rounded location, **not** a multi-person aggregate, and may disclose the suggested crossing location.
+- Switched the **frontend** Proposal road registry to the 242,112-segment Clean PBF release. The separate v2 Apps Script endpoint remains unconfigured in `site-config.js`, so its source-code change does not by itself constitute production backend cutover or historical migration.
+- Added the pedestrian-crossing favicon and its HTML references across Home, Explore, Proposal, Methodology and About. Updated the handoff/release guidance for the new registry and the one-proposal demo policy.
+
+### Storytelling, maps and visual refinements (3–4 November)
+
+- Kept the wide-screen Home headline on one line; enlarged the reported-case news screenshots to use the full card width. Adjusted story typography, readability, card stacking and scroll/section activation so long chapters and the charts remain visible.
+- Kept the two planning-area bar charts together in the left story panel, with short captions. Restored story cards above the map while scrolling, positioned the next-section link below the legend, and adjusted the opening map view/card placement.
+- Expanded the case-study narrative: reported fatal cases with news screenshots, a River Valley case and Street View reference, and the Bukit Batok Central case near Block 121, with its walking-detour routes and Street View. Shared the camera across the early chapters, revised the story sequence and made walking routes easier to distinguish.
+- Refined the Proposal satellite basemap by suppressing unnecessary road lines, place labels and icons; kept the address-search and crossing-selection interface. Drew proposed crossings as thin white lines, and the direct shortcut on walking-detour examples as a red dashed line.
+- Made Explore's selected block routes dismissible by clicking the block again or closing its card. Refined map layer interactions, chapter visibility and site layout without altering the underlying Crossing Gap or Walking Detour computations.
+
+### Initial website and pilot interaction work (26–29 October)
+
+- Built the public GitHub Pages website and project data-processing structure, including Home Storytelling, Explore, Proposal, Methodology and About, a shared navigation/CSS system and the Mapbox-based interactive maps.
+- Added the first proposal form and Apps Script/Google Sheet pilot flow, two-point crossing input, address lookup, support handling, and pilot-mode visibility of each submitted crossing. The pilot backend was preserved separately when developing the replacement API.
+- Added island-wide reference layers for crossings, bus stops and MRT exits, reference-point pictograms, crossing-gap and detour symbology using a consistent ramp, warning markers for reported cases, and the planning-area infographic.
+- Switched the proposal map to satellite imagery, adjusted map hints/instructions, and established the white crossing-line styling and detour route visualization subsequently refined in November.
+
+### Local background-style preview (not yet included in the published repository)
+
+- A Chinese-language `background-style-editor.html` was used locally to preview separate images for Methodology and About, with position, scale, filter and overlay controls. The agreed design preserves all text/layout/navigation and applies backgrounds **only below** the white navigation bar. The Methodology preview was fixed to the user's approved black-and-white appearance; its numeric settings are not available in this repository.
+- The approved About screenshot shows scale **1×**, horizontal position **50%**, vertical position **65%**, brightness **90%**, contrast **130%**, saturation **51%**, blur **0 px**, and a **light overlay at 70% opacity**, with a black-and-white source appearance. The original background image, final Methodology settings and editor's exported JSON/CSS are still local-only. This preview is **not** evidence that the published website background has changed.
+
+
 ## 2026-11-06 — PBF road network and Multi-road Crossing
 
 - Staged the 242,112-segment LTA-first network built from the original OSM France PBF, replacing the BBBike Shapefile-derived dataset at cutover. The candidate preserves all 55,115 original LTA segments and 142,989 geometry-stable supplementary IDs. It reserves 88,109 retired supplementary IDs and adds 44,008 new IDs. Both releases are retained.
