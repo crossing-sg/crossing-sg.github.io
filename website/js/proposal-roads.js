@@ -115,13 +115,14 @@ var ProposalRoads = (function () {
         self.init().catch(function () { if (status) { status('error'); } });
     };
     function compatible(response) {
-        return response && response.api_version === 'proposal-api-v2' && response.publication_min >= 3 &&
-            response.line_min >= 3 && response.registry_version === SITE.proposalNetworkVersion;
+        return response && response.api_version === 'proposal-api-v2' && Number.isSafeInteger(response.publication_min) &&
+            response.publication_min >= 1 && Number.isSafeInteger(response.line_min) && response.line_min >= 1 &&
+            response.registry_version === SITE.proposalNetworkVersion;
     }
     function publicSegments(response) {
         if (!compatible(response)) { throw new Error('The proposal service is not ready for this road network'); }
         return (response.segments || []).filter(function (s) {
-            return s.reviewed === true && Number.isSafeInteger(s.seg_id) && s.count >= 3;
+            return s.reviewed === true && Number.isSafeInteger(s.seg_id) && s.count >= response.publication_min;
         });
     }
     function publicCrossings(response) {
