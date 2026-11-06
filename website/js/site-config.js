@@ -6,8 +6,8 @@ var SITE = {
     appsScriptUrl: 'https://script.google.com/macros/s/AKfycbzOStvN7hEi2C6oITb1jUaogTegDxq_VWUPlfK3xaegHbo3WDM6wFv0vuD07U7lvBtVHA/exec',
     // Enable after separately deploying the v2 Apps Script with this pinned registry.
     proposalApiUrl: '',
-    proposalNetworkVersion: 'proposal-bbbike-motorable-v2-a4c023f624c2e026',
-    proposalRoadsBase: 'data/bbbike-motorable/proposal-roads',
+    proposalNetworkVersion: 'proposal-pbf-france-experimental-3d1457efd477ae74',
+    proposalRoadsBase: 'data/pbf-motorable-v1/proposal-roads',
     // Replace with your own Monochrome Dark style from Mapbox Studio (classic template, works with GL JS v2)
     mapStyle: 'mapbox://styles/mapbox/dark-v11',
     // Satellite imagery with street names for the proposal form, so residents can recognise the actual crossing spot
