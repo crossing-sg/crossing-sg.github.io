@@ -2,7 +2,7 @@
 
 ## 2026-11-07 — Retrospective website and demo change-log backfill
 
-These entries document changes already present in repository history but not described individually in the earlier change log. They do not imply that the successor Apps Script deployment or the local background-style editor has been published.
+These entries document changes already present in repository history but not described individually in the earlier change log. The successor Apps Script deployment remains separate.
 
 ### Demo publication, registry and site identity (6 November)
 
@@ -26,11 +26,12 @@ These entries document changes already present in repository history but not des
 - Added island-wide reference layers for crossings, bus stops and MRT exits, reference-point pictograms, crossing-gap and detour symbology using a consistent ramp, warning markers for reported cases, and the planning-area infographic.
 - Switched the proposal map to satellite imagery, adjusted map hints/instructions, and established the white crossing-line styling and detour route visualization subsequently refined in November.
 
-### Local background-style preview (not yet included in the published repository)
+## 2026-11-07 — Website visual refinements
 
-- A Chinese-language `background-style-editor.html` was used locally to preview separate images for Methodology and About, with position, scale, filter and overlay controls. The agreed design preserves all text/layout/navigation and applies backgrounds **only below** the white navigation bar. The Methodology preview was fixed to the user's approved black-and-white appearance; its numeric settings are not available in this repository.
-- The approved About screenshot shows scale **1×**, horizontal position **50%**, vertical position **65%**, brightness **90%**, contrast **130%**, saturation **51%**, blur **0 px**, and a **light overlay at 70% opacity**, with a black-and-white source appearance. The original background image, final Methodology settings and editor's exported JSON/CSS are still local-only. This preview is **not** evidence that the published website background has changed.
-
+- Published the approved navigation on Home, Explore, Proposal, Methodology, About and standalone Storytelling. The uppercase `CROSSING SG` title links to Home, and the active page remains marked. Shared `website/css/navigation.css` adds 200 ms colour transitions for navigation and page CTAs, keyboard focus indicators and reduced-motion support. The Home iframe uses the outer navigation bar.
+- Updated `website/css/style.css`, `website/css/proposal-responsive.css` and `website/mapbox/index.html` to keep Home's final story card centred at the end of scrolling, prevent overscroll there and centre its two CTAs with a wider gap. Explore's narrow-screen map begins below the navigation.
+- Published the previously previewed Methodology and About backgrounds. `website/css/photo-pages.css` stores the approved settings, `website/js/photo-backdrop.js` positions the backgrounds below the white navigation bar, and `website/assets/` contains the two final photos. Methodology uses 1× zoom, 100% / 0% desktop position, 50% / 50% mobile position, 70% brightness, 120% contrast, 126% saturation, 0 px blur and a 70% white overlay. About uses 1× zoom, 50% / 65% position, grayscale, 90% brightness, 130% contrast, 51% saturation, 0 px blur and a 70% white overlay. The Chinese editor remains a local tool.
+- Browser checks covered navigation on all six pages, hover and keyboard focus on 42 links, reduced motion, the final Home scroll position with wheel and touch input, and matching text, layout and navigation pixels with and without the photo layer at 1440, 390 and 320 px. Proposal and map regression suites passed with Windows line endings normalised for the source-text comparison. The website changes retain the latest Methodology text, map layers, road data and submission configuration.
 
 ## 2026-11-06 — PBF road network and Multi-road Crossing
 

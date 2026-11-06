@@ -7,6 +7,7 @@
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <link rel="icon" type="image/x-icon" href="../favicon.ico">
     <link rel="icon" type="image/png" sizes="200x200" href="../favicon.png">
+    <link rel="stylesheet" href="../css/navigation.css?v=20261106-nav3a">
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css' rel='stylesheet' />
     <script src="https://unpkg.com/intersection-observer@0.12.0/intersection-observer.js"></script>
@@ -19,6 +20,12 @@
             padding: 0;
             font-family: 'Karla', sans-serif;
         }
+
+        /* Home's iframe is the scroll container. Handle the boundary inside it. */
+        html.story-embedded,
+        .story-embedded body { overscroll-behavior-y: none; }
+
+        .story-nav { position: sticky; top: 0; z-index: 10; }
 
         a,
         a:hover,
@@ -94,7 +101,6 @@
 
         #features {
             padding-top: 10vh;
-            padding-bottom: 10vh;
         }
 
         .hidden {
@@ -223,6 +229,37 @@
         .dark .btn-light, .dark .btn-light:visited { background: transparent; color: #fafafa; border-color: #fafafa; }
         #footer.dark { background-color: #1b1e23 !important; }
 
+        /* At the end of the scroll, equal tracks keep the whole final card centred.
+           The embed already ends at the viewport edge below Home's navigation. */
+        .story-ending {
+            --ending-height: calc(100dvh - var(--story-nav-height, 0px));
+            display: grid;
+            grid-template-columns: minmax(0, 1fr);
+            grid-template-rows: 1fr auto 1fr;
+            min-height: var(--ending-height);
+        }
+        .story-ending #propose { grid-row: 2; padding-bottom: 0; }
+        .story-ending #footer { grid-row: 3; align-self: end; }
+        #propose .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px 28px;
+            margin-top: 32px !important;
+        }
+        #propose .buttons .btn { margin: 0; }
+
+        /* On short screens, keep the credits in the scroll just above the final
+           viewport so they do not compete with the card for its resting space. */
+        .story-ending--compact { grid-template-rows: auto auto; min-height: 0; }
+        .story-ending--compact #footer { grid-row: 1; }
+        .story-ending--compact #propose {
+            min-height: var(--ending-height);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
         /* Fix issue on mobile browser where scroll breaks  */
         .mapboxgl-canvas-container.mapboxgl-touch-zoom-rotate.mapboxgl-touch-drag-pan,
         .mapboxgl-canvas-container.mapboxgl-touch-zoom-rotate.mapboxgl-touch-drag-pan .mapboxgl-canvas {
@@ -232,6 +269,19 @@
 </head>
 
 <body>
+
+    <template id="story-navigation">
+        <nav class="topnav topnav--banner story-nav" aria-label="Main navigation">
+            <a class="site-title" href="../index.html">CROSSING SG</a>
+            <div class="topnav-links">
+                <a href="../index.html">Home</a>
+                <a href="../map.html">Map</a>
+                <a href="../propose.html">Propose</a>
+                <a href="../methodology.html">Methodology</a>
+                <a href="../about.html">About</a>
+            </div>
+        </nav>
+    </template>
 
     <div id="map"></div>
     <div id="mapInset"></div>
@@ -265,6 +315,14 @@
     <!-- Added for this project: adds the GeoJSON layers used by the chapters -->
     <script src="./story-layers.js?v=20261104k"></script>
     <script>
+        let storyNav = null;
+        if (window.self === window.top) {
+            storyNav = document.getElementById('story-navigation').content.firstElementChild.cloneNode(true);
+            document.body.prepend(storyNav);
+        } else {
+            document.documentElement.classList.add('story-embedded');
+        }
+
         var initLoad = true;
         var layerTypes = {
             'fill': ['fill-opacity'],
@@ -304,6 +362,8 @@
         var story = document.getElementById('story');
         var features = document.createElement('div');
         features.setAttribute('id', 'features');
+        var ending = document.createElement('div');
+        ending.className = 'story-ending';
 
         var header = document.createElement('div');
 
@@ -365,10 +425,11 @@
             if (record.hidden) {
                 container.classList.add('hidden');
             }
-            features.appendChild(container);
+            (record.id === 'propose' ? ending : features).appendChild(container);
         });
 
         story.appendChild(features);
+        story.appendChild(ending);
 
         var footer = document.createElement('div');
 
@@ -381,7 +442,29 @@
         if (footer.innerText.length > 0) {
             footer.classList.add(config.theme);
             footer.setAttribute('id', 'footer');
-            story.appendChild(footer);
+            ending.appendChild(footer);
+        }
+
+        const finalPanel = ending.querySelector('#propose > div');
+        function updateEndingLayout() {
+            const navHeight = storyNav ? storyNav.offsetHeight : 0;
+            ending.style.setProperty('--story-nav-height', navHeight + 'px');
+            const visibleHeight = window.innerHeight - navHeight;
+            const centeredHeight = finalPanel.getBoundingClientRect().height + 2 * footer.getBoundingClientRect().height;
+            const compact = centeredHeight > visibleHeight;
+            ending.classList.toggle('story-ending--compact', compact);
+            if (footer.parentNode === ending) {
+                if (compact && footer.previousElementSibling) ending.prepend(footer);
+                if (!compact && footer.nextElementSibling) ending.appendChild(footer);
+            }
+        }
+        if (finalPanel) {
+            const endingObserver = new ResizeObserver(updateEndingLayout);
+            endingObserver.observe(finalPanel);
+            endingObserver.observe(footer);
+            if (storyNav) endingObserver.observe(storyNav);
+            window.addEventListener('resize', updateEndingLayout);
+            updateEndingLayout();
         }
 
         mapboxgl.accessToken = config.accessToken;
@@ -623,9 +706,6 @@
         }
 
 
-
-        // setup resize event
-        window.addEventListener('resize', scroller.resize);
 
     </script>
 

@@ -1,0 +1,76 @@
+/* The editor reads these starting values from the actual pages. */
+.photo-page {
+  --photo-zoom: 1;
+  --photo-x: 50%;
+  --photo-y: 50%;
+  --photo-mobile-zoom: 1;
+  --photo-mobile-x: 50%;
+  --photo-mobile-y: 50%;
+  --photo-brightness: 100%;
+  --photo-contrast: 100%;
+  --photo-saturation: 100%;
+  --photo-blur: 0px;
+  --photo-overlay-color: #ffffff;
+  --photo-overlay-opacity: 82%;
+  --cover-zoom: var(--photo-zoom);
+  --cover-x: var(--photo-x);
+  --cover-y: var(--photo-y);
+}
+
+.photo-methodology {
+  --photo-image: url('../assets/methodology-background.jpg');
+  --photo-x: 100%;
+  --photo-y: 0%;
+  --photo-brightness: 70%;
+  --photo-contrast: 120%;
+  --photo-saturation: 126%;
+  --photo-overlay-opacity: 70%;
+}
+
+.photo-about {
+  --photo-image: url('../assets/about-zebra-crossing.jpg');
+  --photo-y: 65%;
+  --photo-mobile-y: 65%;
+  --photo-grayscale: 100%;
+  --photo-brightness: 90%;
+  --photo-contrast: 130%;
+  --photo-saturation: 51%;
+  --photo-overlay-opacity: 70%;
+}
+
+.photo-backdrop {
+  position: fixed;
+  inset: var(--photo-top, 100%) 0 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background: #555;
+}
+
+.photo-backdrop::before,
+.photo-backdrop::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.photo-backdrop::before {
+  background: var(--photo-image) var(--cover-x) var(--cover-y) / cover no-repeat;
+  transform: scale(var(--cover-zoom));
+  transform-origin: var(--cover-x) var(--cover-y);
+  filter: grayscale(var(--photo-grayscale, 0%))
+          brightness(var(--photo-brightness)) contrast(var(--photo-contrast))
+          saturate(var(--photo-saturation)) blur(var(--photo-blur));
+}
+
+.photo-backdrop::after {
+  background: color-mix(in srgb, var(--photo-overlay-color) var(--photo-overlay-opacity), transparent);
+}
+
+@media (max-width: 600px) {
+  .photo-page {
+    --cover-zoom: var(--photo-mobile-zoom);
+    --cover-x: var(--photo-mobile-x);
+    --cover-y: var(--photo-mobile-y);
+  }
+}
