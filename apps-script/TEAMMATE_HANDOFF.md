@@ -1,10 +1,10 @@
 # Multi-road Crossing handoff for the Apps Script owner
 
-The GitHub integration stages the new code and the 242,112-segment road and validation assets. The site continues to use the existing pilot endpoint and BBBike registry until a separate cutover. This handoff covers the owner’s work for that cutover. See the [release runbook](RELEASE_MULTI_ROAD.md) for the full procedure and integrity hashes.
+The GitHub integration stages the new code and the 242,112-segment road and validation assets. The published site still reads the pilot endpoint; the new PBF registry assets are already online, but the successor API cutover is pending. This handoff covers the owner’s work for that cutover. See the [release runbook](RELEASE_MULTI_ROAD.md) for the full procedure and integrity hashes.
 
 ## What changes
 
-A resident still marks A and B and submits one Proposal. The new backend recomputes which motorable roads were crossed, stores one request with a link to each road, and handles retries without duplicating those links. Unknown grade remains unvalidated and requires actual evidence before approval. Explore counts each Proposal once overall and once per associated road. A road needs three eligible approved Proposals to appear.
+A resident still marks A and B and submits one Proposal. The new backend recomputes which motorable roads were crossed, stores one request with a link to each road, and handles retries without duplicating those links. Unknown grade remains unvalidated and requires actual evidence before approval. Explore counts each Proposal once overall and once per associated road. A road appears from its first eligible accepted Proposal. New submissions require moderation; imported pilot rows with `status=ok` and blank schema/review fields count as previously accepted.
 
 | Sheet tab | Existing pilot source | Successor schema |
 | --- | --- | --- |
@@ -26,7 +26,7 @@ A resident still marks A and B and submits one Proposal. The new backend recompu
    | `PROPOSAL_VALIDATION_BASE_URL` | `https://crossing-sg.github.io/data/pbf-motorable-v1/selection-validation` |
    | `ENABLE_MULTI_ROAD` | `false` during setup |
 
-5. Verify the target Sheet, select `setup` in the Apps Script editor and click **Run**. Review and grant Sheets and external request permissions with the owner account. Confirm the three tabs and their column counts. Copy historical Proposal and support values by **matching header names**, preserving row order, IDs, versions, dates, coordinates and statuses. Import text as literal values and leave fields absent from the source blank. Check mapped values and row counts against the backup. Old pilot `status=ok` alone is insufficient for publication. Review retired and incompatible road references privately, retaining the original rows and IDs. Keep unresolved associations out of public totals.
+5. Verify the target Sheet, select `setup` in the Apps Script editor and click **Run**. Review and grant Sheets and external request permissions with the owner account. Confirm the three tabs and their column counts. Copy historical Proposal and support values by **matching header names**, preserving row order, IDs, versions, dates, coordinates and statuses. Import text as literal values and leave fields absent from the source blank. Check mapped values and row counts against the backup. Pilot rows with `status=ok` and blank schema/review columns are eligible for publication without a second moderation step, provided the original IDs resolve to the active registry. Review retired and incompatible road references privately, retaining original rows and IDs. Keep unresolved associations out of public totals.
 
 ## Coordinate deployment and cutover
 
