@@ -37,7 +37,7 @@ test('only Proposal loads/applies the imagery helper; latest satellite selection
     const ctx={};vm.runInNewContext(fs.readFileSync(path.join(ROOT,'website/js/site-config.js'),'utf8'),ctx);
     assert.equal(ctx.SITE.proposeStyle,'mapbox://styles/mapbox/satellite-streets-v12');
     assert.equal(ctx.SITE.mapStyle,'mapbox://styles/mapbox/dark-v11');
-    assert.match(ctx.SITE.appsScriptUrl,/^https:\/\/script.google.com\//);assert.equal(ctx.SITE.proposalApiUrl,'');
+    assert.match(ctx.SITE.appsScriptUrl,/^https:\/\/script.google.com\//);assert.match(ctx.SITE.proposalApiUrl,/^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/);
     assert.match(fs.readFileSync(path.join(ROOT,'website/js/propose.js'),'utf8'),/style: SITE.proposeStyle/);
     for(const file of ['website/index.html','website/map.html','website/mapbox/index.html']){
         assert.ok(!fs.readFileSync(path.join(ROOT,file),'utf8').includes('proposal-basemap.js'));

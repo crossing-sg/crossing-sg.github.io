@@ -162,6 +162,16 @@ function addStoryLayers(map) {
             .catch(function () { });
     }
 
+    // Resident accounts for the "voices" chapter. HTML markers stay clickable while the
+    // story map itself is not interactive. They show only when that chapter is active.
+    var storiesApi = SITE.proposalApiUrl || '';
+    if (storiesApi) {
+        fetch(storiesApi + '?view=stories')
+            .then(function (r) { return r.json(); })
+            .then(function (res) { (res.stories || []).forEach(function (g) { addVoiceMarker(map, g); }); })
+            .catch(function () { });
+    }
+
 }
 
 // The summary cards sit above the map, so they are filled as soon as the page loads
@@ -177,4 +187,22 @@ function fillSummaryCards() {
             document.getElementById('stat-updated').innerText = s.lastUpdated;
         })
         .catch(function () { });
+}
+
+function escapeHtml(t) {
+    return String(t).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; });
+}
+
+function addVoiceMarker(map, group) {
+    var el = document.createElement('button');
+    el.type = 'button';
+    el.className = 'voice-marker';
+    el.setAttribute('aria-label', 'Read the account from residents near this road');
+    if (group.stories.length > 1) { el.textContent = group.stories.length; }
+    var html = group.stories.map(function (s) {
+        var meta = [s.type, s.reason, s.month].filter(Boolean).map(escapeHtml).join(', ');
+        return '<blockquote>' + escapeHtml(s.text) + '</blockquote><small>' + meta + '</small>';
+    }).join('<hr>');
+    var popup = new mapboxgl.Popup({ offset: 14, maxWidth: '300px', className: 'voice-popup' }).setHTML(html);
+    new mapboxgl.Marker({ element: el }).setLngLat(group.center).setPopup(popup).addTo(map);
 }
