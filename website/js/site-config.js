@@ -4,10 +4,11 @@ var SITE = {
     mapboxToken: 'pk.eyJ1IjoiZ2FuZ3NhcmR3aXNhcHV0cm8iLCJhIjoiY212cXFkNTNzMDFraDJ6c2pqdTJnMmQxbCJ9.nwxMvYgUP9OHtwllgaJDVQ',
     // Web app URL of the Google Apps Script deployment (ends with /exec). Leave empty until the script is deployed.
     appsScriptUrl: 'https://script.google.com/macros/s/AKfycbzOStvN7hEi2C6oITb1jUaogTegDxq_VWUPlfK3xaegHbo3WDM6wFv0vuD07U7lvBtVHA/exec',
-    // Enable after separately deploying the v2 Apps Script with this pinned registry.
-    proposalApiUrl: '',
+    // v2 Apps Script (Multi-road) deployed with this pinned registry.
+    proposalApiUrl: 'https://script.google.com/macros/s/AKfycbwTPfEN4NDWkKA9j8xdHhnQ6XP_sAUJ7wCCIwYQHdJoH0mhTyqYSvN4gFK_kP9-CFbkag/exec',
     proposalNetworkVersion: 'proposal-pbf-france-experimental-3d1457efd477ae74',
     proposalRoadsBase: 'data/pbf-motorable-v1/proposal-roads',
+    proposalValidationBase: 'data/pbf-motorable-v1/selection-validation',
     // Replace with your own Monochrome Dark style from Mapbox Studio (classic template, works with GL JS v2)
     mapStyle: 'mapbox://styles/mapbox/dark-v11',
     // Satellite imagery with street names for the proposal form, so residents can recognise the actual crossing spot
