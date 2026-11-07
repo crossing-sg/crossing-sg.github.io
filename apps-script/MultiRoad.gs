@@ -231,3 +231,17 @@ function publicationState() {
   var visibleParents=Object.keys(visible).map(function(k){return visible[k];}),latest=visibleParents.reduce(function(n,r){var t=new Date(r.received).getTime();return isFinite(t)?Math.max(n,t):n;},0);
   return {segments:segments,crossings:crossings,summary:{ok:true,scope:'published_only',proposals:visibleParents.length,segments:segments.length,road_memberships:segments.reduce(function(n,s){return n+s.count;},0),crossings:crossings.length,lastUpdated:latest?Utilities.formatDate(new Date(latest),'Asia/Singapore','d MMM yyyy'):'-'}};
 }
+// Resident accounts for the story map. Only stories the team marked approved, on a
+// published proposal, placed at the road segment centre (about 100 m). No A/B points.
+function storiesState() {
+  var published={};publicationState().segments.forEach(function(s){published[s.seg_id]=s;});
+  var bySeg={},order=[];
+  approvedParents().forEach(function(r){
+    var text=String(r.story||'').trim();if(r.story_status!=='approved'||!text)return;
+    var id=null;r._ids.forEach(function(x){if(id===null&&published[x])id=x;});if(id===null)return;
+    if(!bySeg[id]){bySeg[id]={seg_id:id,center:published[id].center,stories:[]};order.push(id);}
+    var t=new Date(r.received).getTime();
+    bySeg[id].stories.push({text:text.slice(0,300),type:r.type,reason:r.reason,month:isFinite(t)?Utilities.formatDate(new Date(t),'Asia/Singapore','MMM yyyy'):''});
+  });
+  return {ok:true,stories:order.map(function(id){return bySeg[id];})};
+}

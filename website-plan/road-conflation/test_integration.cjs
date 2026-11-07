@@ -183,3 +183,13 @@ test('small pans reuse the uploaded tile set and zooming out clears it only once
     zoom=15;handlers.moveend();assert.equal(uploads.length,2);assert.equal(uploads[1].features.length,0);
     handlers.moveend();assert.equal(uploads.length,2);
 });
+test('stories view shows only approved stories at the segment centre, without A/B points',()=>{
+    const b=createBackend(),f=fixtures['Engineering Drive 1'];
+    assert.equal(b.post(body(f,{story:'The bridge has stairs only'})).ok,true);b.approve(0);
+    assert.deepEqual(b.get('stories').stories,[]);
+    b.sheets.get('proposals').values[1][10]='approved';
+    const s=b.get('stories').stories;assert.equal(s.length,1);assert.equal(s[0].seg_id,f.seg_id);
+    assert.equal(s[0].stories[0].text,'The bridge has stairs only');assert.deepEqual(s[0].center,b.get().segments[0].center);
+    assert.equal(JSON.stringify(s).includes('a_lng'),false);assert.equal('request_id' in s[0].stories[0],false);
+    b.sheets.get('proposals').values[1][11]='rejected';assert.deepEqual(b.get('stories').stories,[]);
+});

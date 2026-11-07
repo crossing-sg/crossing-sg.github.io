@@ -203,11 +203,12 @@ var config = {
         {
             id: 'voices',
             alignment: 'left',
-            // Set to false once there are approved experiences to show
-            hidden: true,
+            hidden: false,
             title: 'Experiences from residents',
-            description: 'Short accounts shared through the proposal form. Each one is reviewed by the team and placed on the nearest road segment, never at a home address.',
-            location: { center: [103.82, 1.355], zoom: 11, pitch: 0, bearing: 0, padding: PAD_LEFT },
+            description:
+                'Some residents also wrote a short account when they proposed a crossing. The team reviews each account before it appears here.<br><br>' +
+                'Each yellow point marks the road named in a proposal, placed at the centre of that road segment and never at a home address. Select a point to read the account.',
+            location: LOC_SG,
             mapAnimation: 'flyTo',
             rotateAnimation: false,
             callback: '',

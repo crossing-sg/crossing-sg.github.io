@@ -66,6 +66,7 @@ function doGet(e) {
   try {
     policy(); var view = e && e.parameter && e.parameter.view || 'segments';
     if (view === 'capabilities') { return json(capabilities()); }
+    if (view === 'stories') { return json(storiesState()); }
     if (['segments','summary','csv'].indexOf(view)<0) { return json({ok:false,error:'view'}); }
     var publication = publicationState(), list = publication.segments;
     if (view === 'csv') { return ContentService.createTextOutput(toCsv(list)).setMimeType(ContentService.MimeType.CSV); }
