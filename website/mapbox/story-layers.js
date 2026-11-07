@@ -147,20 +147,22 @@ function addStoryLayers(map) {
             'circle-opacity': 0, 'circle-stroke-color': SITE.basemapDark, 'circle-stroke-width': 1, 'circle-stroke-opacity': 0
         }
     });
-    if (SITE.appsScriptUrl) {
-        // On the island view, each segment is a dot at its centre, rounded to about 100 m
-        fetch(SITE.appsScriptUrl + '?view=segments')
-            .then(function (r) { return r.json(); })
-            .then(function (res) {
-                map.getSource('proposals').setData({
-                    type: 'FeatureCollection',
-                    features: res.segments.map(function (s) {
-                        return { type: 'Feature', geometry: { type: 'Point', coordinates: s.center }, properties: { count: s.count } };
-                    })
-                });
+    // Match Explore: show only v2-reviewed, publicly visible road associations.
+    // Multiple road dots may represent one distinct multi-road proposal.
+    publishedProposalsForHome().then(function (publication) {
+        map.getSource('proposals').setData({
+            type: 'FeatureCollection',
+            features: publication.segments.filter(function (s) {
+                return Array.isArray(s.center) && s.center.length === 2 &&
+                    s.center.every(Number.isFinite) && Number.isSafeInteger(s.count) && s.count >= 1;
+            }).map(function (s) {
+                return { type: 'Feature', geometry: { type: 'Point', coordinates: s.center },
+                    properties: { count: s.count } };
             })
-            .catch(function () { });
-    }
+        });
+    }).catch(function () {
+        // On service errors do not fall back to the incompatible pilot dataset.
+    });
 
     // Resident accounts for the "voices" chapter. HTML markers stay clickable while the
     // story map itself is not interactive. They show only when that chapter is active.
@@ -174,19 +176,45 @@ function addStoryLayers(map) {
 
 }
 
-// The summary cards sit above the map, so they are filled as soon as the page loads
-window.addEventListener('DOMContentLoaded', fillSummaryCards);
+// Reuse one version-checked v2 response for both Home map points and headline counts.
+var homePublicationPromise = null;
+function publishedProposalsForHome() {
+    if (!SITE.proposalApiUrl || typeof ProposalRoads === 'undefined') {
+        return Promise.reject(new Error('The v2 proposal service is unavailable'));
+    }
+    if (!homePublicationPromise) {
+        homePublicationPromise = ProposalRoads.getPublic(SITE.proposalApiUrl, 'segments').then(function (response) {
+            if (response.ok !== true || !response.summary || response.summary.ok !== true ||
+                response.summary.scope !== 'published_only' ||
+                !Number.isSafeInteger(response.summary.proposals) ||
+                !Number.isSafeInteger(response.summary.segments) ||
+                !Array.isArray(response.segments)) {
+                throw new Error('Invalid published proposal summary');
+            }
+            var segments = ProposalRoads.publicSegments(response);
+            if (segments.length !== response.summary.segments) {
+                throw new Error('Published road counts do not match');
+            }
+            return { segments: segments, summary: response.summary };
+        });
+    }
+    return homePublicationPromise;
+}
 
+window.addEventListener('DOMContentLoaded', fillSummaryCards);
 function fillSummaryCards() {
-    if (!SITE.appsScriptUrl) { return; }
-    fetch(SITE.appsScriptUrl + '?view=summary')
-        .then(function (r) { return r.json(); })
-        .then(function (s) {
-            document.getElementById('stat-proposals').innerText = s.proposals;
-            document.getElementById('stat-segments').innerText = 'proposals from residents, ' + s.segments + ' road segments shown';
-            document.getElementById('stat-updated').innerText = s.lastUpdated;
-        })
-        .catch(function () { });
+    publishedProposalsForHome().then(function (publication) {
+        var summary = publication.summary;
+        document.getElementById('stat-proposals').innerText = summary.proposals;
+        document.getElementById('stat-segments').innerText = 'accepted proposals, ' +
+            summary.segments + ' road segments shown';
+        document.getElementById('stat-updated').innerText = summary.lastUpdated || '-';
+    }).catch(function () {
+        // Failed requests are not evidence that the proposal total is zero.
+        document.getElementById('stat-proposals').innerText = '–';
+        document.getElementById('stat-segments').innerText = 'Accepted proposal data temporarily unavailable';
+        document.getElementById('stat-updated').innerText = '–';
+    });
 }
 
 function escapeHtml(t) {
