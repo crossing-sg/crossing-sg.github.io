@@ -81,7 +81,8 @@ function tourEnd(keepView) {
     if (!keepView) { map.flyTo({ center: [103.82, 1.355], zoom: 11 }); }
 }
 
-document.getElementById('tour-open').addEventListener('click', tourInvite);
+var tourOpen = document.getElementById('tour-open');
+if (tourOpen) { tourOpen.addEventListener('click', tourInvite); }
 map.on('load', function () {
     if (!params.get('layer') && !params.get('block')) { tourInvite(); }
 });
