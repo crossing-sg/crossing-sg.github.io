@@ -10,6 +10,6 @@
   .map-page .panel { position: relative; width: 100%; height: 220px; flex-shrink: 0; border-right: 0; border-bottom: 1px solid #ddd; }
   .map-area { position: relative; left: 0; flex: 1; min-height: 320px; }
   .search { max-width: calc(100% - 70px); }
-  .info-card { max-width: calc(100% - 28px); box-sizing: border-box; }
+  .info-card { top: 64px; right: 14px; max-width: calc(100% - 28px); box-sizing: border-box; }
   .thanks { padding: 20px; }
 }
