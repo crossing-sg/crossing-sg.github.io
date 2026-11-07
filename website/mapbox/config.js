@@ -221,7 +221,7 @@ var config = {
             hidden: false,
             title: 'Propose a crossing',
             description:
-                'Mark two points on opposite sides of a road and choose the type of crossing that would help. Each proposal appears on the map as soon as it is sent.' +
+                'Mark two points on opposite sides of a road, including across more than one road, and choose the type of crossing that would help. The team reviews submissions before approved proposals appear on the public map.' +
                 '<p class="buttons"><a class="btn" href="../propose.html" target="_top">Propose a crossing</a> <a class="btn btn-light" href="../map.html" target="_top">Explore the map</a></p>',
             location: LOC_SG,
             mapAnimation: 'flyTo',

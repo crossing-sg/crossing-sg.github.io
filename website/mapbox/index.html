@@ -319,17 +319,18 @@
         </div>
         <div class="cards">
             <div class="card"><b>353</b><span>pedestrian accidents outside crossings in 2024, up 23% from 2023</span><small>Singapore Police Force (2025)</small></div>
-            <div class="card"><b id="stat-proposals">0</b><span id="stat-segments">proposals from residents so far</span><small>Live count</small></div>
-            <div class="card"><b id="stat-updated">-</b><span>last proposal received</span><small>Updated automatically</small></div>
+            <div class="card"><b id="stat-proposals">–</b><span id="stat-segments">Accepted proposals</span><small>Live count</small></div>
+            <div class="card"><b id="stat-updated">-</b><span>most recent accepted proposal received</span><small>Updated automatically</small></div>
         </div>
         <p class="hint">Scroll to read the story</p>
     </div>
     <div id="story"></div>
 
     <script src="../js/site-config.js?v=20261107-voices"></script>
-    <script src="./config.js?v=20261107-voices3"></script>
+    <script src="./config.js?v=20261107-home-v2"></script>
     <!-- Added for this project: adds the GeoJSON layers used by the chapters -->
-    <script src="./story-layers.js?v=20261107-voices"></script>
+    <script src="../js/proposal-roads.js?v=20261107-home-v2"></script>
+    <script src="./story-layers.js?v=20261107-home-v2"></script>
     <script>
         let storyNav = null;
         if (window.self === window.top) {
