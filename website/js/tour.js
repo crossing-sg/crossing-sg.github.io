@@ -21,9 +21,9 @@ var TOUR = [
     {
         title: 'What residents ask for',
         theme: 'proposals',
-        view: { center: [103.765, 1.301], zoom: 16 },
-        text: 'Each line marks a crossing that a resident proposed, from one side of the road to the other. ' +
-            'Click a line to see the type of crossing and the reason given.'
+        view: { center: [103.843, 1.2918], zoom: 17 },
+        text: 'Each line marks a crossing that a resident proposed. This one, at the bus stop opposite UE Square, ' +
+            'is 149 m from the nearest crossing. Click the line to see the type of crossing and the reason given.'
     },
     {
         title: 'Your own area',
