@@ -207,8 +207,8 @@ function loadProposals() {
         proposalPublication = publication;
         var stats = document.getElementById('proposal-statistics');
         if (stats && publication.summary) {
-            stats.textContent = publication.summary.proposals + ' accepted proposals (including eligible pilot imports) · ' + publication.summary.road_memberships +
-                ' proposal-to-road associations · ' + publication.summary.segments + ' published roads. One proposal can support several roads.';
+            stats.textContent = publication.summary.proposals + ' proposals from residents on ' + publication.summary.segments +
+                ' roads. One proposal can cover more than one road.';
             stats.hidden = document.querySelector('input[name=layer]:checked').value !== 'proposals';
         }
         var segments = publication.segments;
