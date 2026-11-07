@@ -17,7 +17,7 @@ var NOTES = {
     detour: 'Each point is an HDB block, coloured by how much longer the walk to nearby bus stops and MRT exits is than the straight distance. 2.0 means twice as far. Click a block to see its routes.',
     proposals: !SITE.proposalApiUrl ?
         'Each white line is a crossing proposed by residents, from one side of the road to the other. During this pilot every proposal is shown. Click a line to read the summary and add your support.' :
-        'Each white line is an approved crossing proposal aggregate, from one side of the road to the other. Roads appear from the first accepted proposal, including eligible pilot imports. Single-proposal lines are approximate, not multi-person aggregates. Click a line to read the summary and add your support.'
+        'Each line marks a crossing that residents proposed, from one side of the road to the other. A line appears once the team has reviewed the proposal. Click a line to read the summary and add your support.'
 };
 var LEGENDS = {
     gap: [[SITE.classColors[0], 'Under 50 m'], [SITE.classColors[1], '50 to 100 m'], [SITE.classColors[2], '100 to 200 m'], [SITE.classColors[3], 'Over 200 m']],

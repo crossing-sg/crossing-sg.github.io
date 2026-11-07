@@ -3,7 +3,7 @@
 <head>
     <title>Explore the map</title>
     <link rel="stylesheet" href="css/navigation.css?v=20261106-nav3a">
-    <link rel="stylesheet" href="css/style.css?v=20261106-nav">
+    <link rel="stylesheet" href="css/style.css?v=20261108-tour">
     <link rel="stylesheet" href="css/proposal-responsive.css?v=20261106-nav">
     <meta charset='utf-8' />
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,6 +27,7 @@
     <div class="map-page">
         <div class="panel">
             <h2 style="margin:0 0 6px">Explore the map</h2>
+            <button id="tour-open" class="tour-open" type="button">Take the guided tour</button>
 
             <h3>MAP LAYER</h3>
             <label><input type="radio" name="layer" value="gap" checked> Crossing gap</label>
@@ -37,12 +38,14 @@
             <p class="note" id="proposal-statistics" hidden></p>
             <div id="legend"></div>
 
-            <h3>REFERENCE POINTS (ZOOM IN TO SEE)</h3>
-            <label><input type="checkbox" class="ref" value="ref-bus"> Bus stops</label>
-            <label><input type="checkbox" class="ref" value="ref-mrt"> MRT exits</label>
-            <label><input type="checkbox" class="ref" value="ref-crossing" checked> Existing crossings</label>
-            <label><input type="checkbox" class="ref" value="ref-bridge" checked> Overhead bridges</label>
-            <label><input type="checkbox" class="ref" value="ref-underpass" checked> Underpasses</label>
+            <details class="more-layers">
+                <summary>More layers (zoom in to see)</summary>
+                <label><input type="checkbox" class="ref" value="ref-bus"> Bus stops</label>
+                <label><input type="checkbox" class="ref" value="ref-mrt"> MRT exits</label>
+                <label><input type="checkbox" class="ref" value="ref-crossing" checked> Existing crossings</label>
+                <label><input type="checkbox" class="ref" value="ref-bridge" checked> Overhead bridges</label>
+                <label><input type="checkbox" class="ref" value="ref-underpass" checked> Underpasses</label>
+            </details>
 
             <h3>DATA</h3>
             <p><a href="methodology.html#download">Download aggregated data</a><br>
@@ -63,6 +66,7 @@
     <script src="js/icons.js?v=20261029b"></script>
     <script src="js/search.js?v=20261029b"></script>
     <script src="js/proposal-roads.js?v=20261105-multi2"></script>
-    <script src="js/explore.js?v=20261105-multi2"></script>
+    <script src="js/explore.js?v=20261108-tour"></script>
+    <script src="js/tour.js?v=20261108-tour"></script>
 </body>
 </html>

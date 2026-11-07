@@ -347,3 +347,24 @@ td, th {
   transform: translateX(-50%);
   white-space: nowrap;
 }
+
+/* Guided tour on the Explore map */
+.tour-open {
+  margin: 4px 0 2px; padding: 6px 12px; border: 1px solid #222; border-radius: 6px;
+  background: #fff; font: inherit; font-size: 13px; cursor: pointer;
+}
+.tour-card {
+  position: absolute; left: 50%; bottom: 28px; transform: translateX(-50%); z-index: 4;
+  width: 380px; max-width: calc(100% - 28px); box-sizing: border-box;
+  background: #fff; border-radius: 10px; padding: 16px 18px; box-shadow: 0 6px 24px rgba(0,0,0,.35);
+  font-size: 14px; line-height: 1.5;
+}
+.tour-card[hidden] { display: none; }
+.tour-card b { font-size: 16px; }
+.tour-card p { margin: 6px 0 12px; }
+.tour-step { display: block; font-size: 11px; color: #6b6b6b; letter-spacing: .05em; text-transform: uppercase; }
+.tour-buttons { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.tour-buttons .btn { cursor: pointer; border: 0; font: inherit; }
+.tour-exit { margin-left: auto; border: 0; background: none; color: #6b6b6b; text-decoration: underline; cursor: pointer; font: inherit; font-size: 13px; }
+.more-layers { margin-top: 18px; }
+.more-layers summary { cursor: pointer; font-size: 11px; color: #6b6b6b; letter-spacing: .05em; text-transform: uppercase; }
