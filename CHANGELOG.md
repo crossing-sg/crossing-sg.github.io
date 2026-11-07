@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-11-07 — Home and Methodology v2 proposal consistency
+
+- Switched Home's live proposal cards and island-wide proposal markers from the old pilot Apps Script to the **same reviewed v2 public segments** used by Explore. The map and cards share one version-checked response rather than two potentially inconsistent requests.
+- Home now counts each approved parent proposal once overall, even when it belongs to multiple road segments. The map retains one centre marker per published road association; the summary reports accepted proposals and published roads separately. If the v2 request fails, Home displays an unavailable state instead of an incorrect zero or stale pilot figures.
+- Updated the Home Storytelling call to action to state clearly that new proposals require review before appearing publicly, including a crossing that spans more than one road. The latest-date card is now labelled as the most recent received *accepted* proposal.
+- Updated Methodology's Proposal CSV download to `SITE.proposalApiUrl?view=csv`, the reviewed v2 published-only data source. Clarified that a multi-road proposal can contribute to several road-level counts while remaining one distinct proposal; updated the moderation, representative-line and A/B coordinate privacy explanations.
+- Bumped Home Storytelling script/iframe and Methodology configuration cache keys. The old pilot endpoint remains configured elsewhere for compatibility; this change does not alter submissions, approval workflows, Crossing Gap or Walking Detour calculations.
+
+
 ## 2026-11-07 — Retrospective website and demo change-log backfill
 
 These entries document changes already present in repository history but not described individually in the earlier change log. The successor Apps Script deployment remains separate.
