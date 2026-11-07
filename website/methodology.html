@@ -26,7 +26,7 @@
 
     <div class="description">
         <h1>Methodology</h1>
-        <p>The project links two kinds of data through the road segment. Open data describes the existing pedestrian network. Residents add proposals for where a new crossing should be. Each proposal is assigned to a 50 m road segment, which allows proposals to be compared with the distance to the nearest crossing and with the walking detours of nearby residents.</p>
+        <p>The project links two kinds of data through the road segment. Open data describes the existing pedestrian network. Residents add proposals for where a new crossing should be. Each proposal is matched to the road network and can be linked to one or several road segments that it crosses. These associations allow comparison with crossing gaps and walking detours without mistaking a multi-road proposal for several distinct submissions.</p>
 
         <h2>Data sources</h2>
         <table>
@@ -49,13 +49,13 @@
         <p>A ratio of 1.0 means the walk is as short as the straight line. A ratio of 2.0 means the walk is twice as long. Each block is coloured by the mean ratio of its pairs (Loo et al., 2024).</p>
 
         <h2>Resident proposals</h2>
-        <p>A contributor marks point A and point B on opposite sides of a road, no more than 80 m apart, and chooses a crossing type and a main reason. The form finds the road segment between the two points. Each proposal is counted on that segment as soon as it is received. During the pilot, every segment with at least one proposal is shown on the map, with the number of proposals, the most requested type, the most common reason and the distance to the nearest existing crossing. Each segment also shows a representative crossing line drawn from the mean of the submitted points. In the pilot this line is shown from the first proposal. In the new backend, a road can appear from its first accepted proposal. New submissions require moderation, while imported pilot records with status ok can count as accepted if their road IDs still match. With only one proposal, a rounded line may approximately reveal the contributor's chosen crossing location; it is not a multi-person aggregate.</p>
+        <p>A contributor marks A and B on opposite sides of a road, at least 2 m and no more than 80 m apart, and selects a crossing type and main reason. The new backend checks which road centrelines the marked crossing intersects. A single proposal can cross two roads or separate carriageways, so it is stored once and linked to each associated road segment. Only validated, accepted proposals appear in public statistics; new submissions require review, while eligible imported pilot records with status ok may count as previously accepted when their road IDs remain compatible. A road can appear from its first accepted proposal. Each published road shows its count, most requested type, most common reason and distance to the nearest existing crossing. One multi-road proposal contributes once to the overall proposal total but may contribute to each associated road count. Per-road counts must therefore not be added together to calculate the total number of proposals. The displayed crossing line is rounded or aggregated; if based on one accepted proposal, its approximate selected location may be visible rather than a multi-person average.</p>
         <p>Visitors can also add support to a segment that is already shown. Support is counted separately from proposals.</p>
 
         <h2>Moderation and privacy</h2>
         <ul>
             <li>The form collects no login, name, contact detail, photo or device identifier.</li>
-            <li>Points are rounded to about 10 m and are stored only in a sheet that the project team can access. Individual points are never published.</li>
+            <li>Original A/B coordinates are retained privately in the team spreadsheet for road matching and moderation. Raw individual points are not displayed separately on the map. Public crossing lines use rounded or aggregated coordinates; a line based on just one accepted proposal can reveal an approximate selected crossing location.</li>
             <li>Proposals are screened automatically and checked by the team, who can remove invalid entries. Removed entries leave the totals the next time the map loads.</li>
             <li>Written experiences appear only after the team approves them, and are placed on the road segment rather than at the marked points.</li>
         </ul>
@@ -76,18 +76,23 @@
             <li><a href="data/gap_segments.geojson" download>Crossing gap segments (GeoJSON)</a></li>
             <li><a href="data/detour_blocks.geojson" download>Mean detour ratio by HDB block (GeoJSON)</a></li>
             <li><a href="data/crossing_markers.geojson" download>Existing crossings, overhead bridges and underpasses (GeoJSON)</a></li>
-            <li id="csv-item">Proposals by road segment, aggregated (CSV), available once the form is open</li>
+            <li id="csv-item">Accepted proposals by road segment (CSV), available when the v2 service is online. One multi-road proposal may appear in several road-level counts.</li>
         </ul>
 
         <h2>Reference</h2>
         <p>Loo, B. P. Y., Lian, T., &amp; Frank, L. D. (2024). Walking (in)convenience: An in-depth study of pedestrian detours to daily facilities. <i>Journal of the American Planning Association, 90</i>(4), 742&ndash;757.</p>
     </div>
-    <script src="js/site-config.js?v=20261104k"></script>
+    <script src="js/site-config.js?v=20261107-method-v2"></script>
     <script>
-        // Link to the aggregated proposal table served by the Apps Script web app
-        if (SITE.appsScriptUrl) {
-            document.getElementById('csv-item').innerHTML =
-                '<a href="' + SITE.appsScriptUrl + '?view=csv">Proposals by road segment, aggregated (CSV)</a>';
+        // The v2 CSV uses the same accepted, published-only road population as Explore.
+        if (SITE.proposalApiUrl) {
+            var csvItem = document.getElementById('csv-item');
+            var csvLink = document.createElement('a');
+            csvLink.href = SITE.proposalApiUrl + '?view=csv';
+            csvLink.textContent = 'Accepted proposals by road segment (CSV)';
+            csvItem.textContent = '';
+            csvItem.appendChild(csvLink);
+            csvItem.appendChild(document.createTextNode(' — road-level counts; do not sum to find distinct proposals'));
         }
     </script>
 </body>
