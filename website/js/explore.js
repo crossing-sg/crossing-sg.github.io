@@ -171,7 +171,7 @@ function openBlock(postal, fly) {
             var block = blockInfo[Number(postal)];
             var title = block ? 'Blk ' + block.BLK_NO : 'Postal ' + postal;
             var mean = block ? block.mean_detour : '';
-            var html = '<span class="close" onclick="closeCard()">x</span><b style="font-size:16px">' + title + '</b>' +
+            var html = '<span class="close" onclick="closeCard()">x</span><b style="font-size:14px">' + title + '</b>' +
                 '<div class="small">Postal ' + postal + (mean ? ' | mean detour ratio ' + mean : '') + ' | ' + walks.length + ' destinations</div><hr>';
             var maxRoute = Math.max.apply(null, walks.map(function (w) { return w.properties.route_m; }));
             walks.slice(0, 6).forEach(function (w) {
@@ -257,7 +257,7 @@ function openMultiCrossing(p) {
     if (!crossing) { return; }
     map.getSource('proposal-line').setData({ type: 'Feature', geometry: crossing.geometry, properties: {} });
     var safe = ProposalRoads.escape;
-    showCard('<span class="close" onclick="closeCard()">x</span><b style="font-size:16px">Multi-road crossing proposal</b>' +
+    showCard('<span class="close" onclick="closeCard()">x</span><b style="font-size:14px">Multi-road crossing proposal</b>' +
         '<p>One approved Proposal associated with ' + ids.length + ' road segments. This line is drawn once for the Proposal.</p>' +
         '<p>With several proposals, the line is their average. A single-proposal line is approximate but may reflect its marked location.</p>' +
         allowed.map(function (s) { return '<div>Road ' + safe(s.seg_id) + ': ' + safe(s.count) + ' approved proposals</div>'; }).join('') +
@@ -271,7 +271,7 @@ function openSegment(p) {
     map.getSource('proposal-line').setData(line ? { type: 'Feature', geometry: { type: 'LineString', coordinates: line }, properties: {} } : empty);
     var supported = hasSupported(p.seg_id);
     var safe = ProposalRoads.escape;
-    showCard('<span class="close" onclick="closeCard()">x</span><b style="font-size:16px">' + safe(p.road) + '</b>' +
+    showCard('<span class="close" onclick="closeCard()">x</span><b style="font-size:14px">' + safe(p.road) + '</b>' +
         '<div class="nums"><div><span class="small">PROPOSALS</span><b>' + p.count + '</b></div>' +
         '<div><span class="small">SUPPORT</span><b id="support-count">' + p.support + '</b></div>' +
         '<div><span class="small">NEAREST CROSSING</span><b>' + ProposalRoads.distance(p.dist_m) + '</b></div></div>' +

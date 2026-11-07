@@ -205,12 +205,12 @@ td, th {
   overflow-y: auto;
   box-sizing: border-box;
   z-index: 2;
-  width: 360px;
+  width: 300px;
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
-  padding: 16px 18px;
-  font-size: 13px;
+  padding: 12px 14px;
+  font-size: 12px;
   display: none;
 }
 
@@ -228,7 +228,7 @@ td, th {
 
 .info-card .nums b {
   display: block;
-  font-size: 22px;
+  font-size: 18px;
 }
 
 .info-card .small {
@@ -358,13 +358,14 @@ td, th {
 }
 .tour-card {
   position: absolute; left: 50%; bottom: 28px; transform: translateX(-50%); z-index: 4;
-  width: 380px; max-width: calc(100% - 28px); box-sizing: border-box;
-  background: #fff; border-radius: 10px; padding: 16px 18px; box-shadow: 0 6px 24px rgba(0,0,0,.35);
-  font-size: 14px; line-height: 1.5;
+  width: 330px; max-width: calc(100% - 28px); box-sizing: border-box;
+  background: #fff; border-radius: 10px; padding: 12px 14px; box-shadow: 0 6px 24px rgba(0,0,0,.35);
+  font-size: 13px; line-height: 1.45;
 }
 .tour-card[hidden] { display: none; }
-.tour-card b { font-size: 16px; }
-.tour-card p { margin: 6px 0 12px; }
+.tour-card b { font-size: 15px; }
+.tour-buttons .btn { padding: 6px 14px; font-size: 13px; }
+.tour-card p { margin: 4px 0 10px; }
 .tour-step { display: block; font-size: 11px; color: #6b6b6b; letter-spacing: .05em; text-transform: uppercase; }
 .tour-buttons { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 .tour-buttons .btn { cursor: pointer; border: 0; font: inherit; }
@@ -375,3 +376,4 @@ td, th {
 @media (max-width: 1150px) {
   .info-card { top: 64px; }
 }
+.info-card .btn, .info-card button { padding: 6px 12px; font-size: 12px; }
