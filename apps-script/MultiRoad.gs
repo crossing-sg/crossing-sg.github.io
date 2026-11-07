@@ -196,7 +196,10 @@ function singleAggregateLine(list,canonical) {
   var pairs=usable.map(function(r){var a=[r.a_lng,r.a_lat],b=[r.b_lng,r.b_lat];return a[0]>b[0]||(a[0]===b[0]&&a[1]>b[1])?[b,a]:[a,b];});
   function mean(i,j){return round4(pairs.reduce(function(n,p){return n+Number(p[i][j]);},0)/pairs.length);}
   var line=[[mean(0,0),mean(0,1)],[mean(1,0),mean(1,1)]],length=RoadGeometry.metres(line[0],line[1]);
-  return length>=2&&length<=80&&RoadGeometry.hits(line[0],line[1],canonical.g).length?line:null;
+  // Pilot rows stored A/B rounded to 4 decimals (about 11 m), so their mean line can stop
+  // just short of the centreline. They were matched to this road when submitted.
+  var legacyOnly=usable.every(function(r){return r.schema_version==='';});
+  return length>=2&&length<=80&&(legacyOnly||RoadGeometry.hits(line[0],line[1],canonical.g).length)?line:null;
 }
 function publicationState() {
   policy();var parents=approvedParents(),groups={},support={},supportSeen={};
