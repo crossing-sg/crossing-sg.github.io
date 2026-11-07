@@ -377,3 +377,11 @@ td, th {
   .info-card { top: 64px; }
 }
 .info-card .btn, .info-card button { padding: 6px 12px; font-size: 12px; }
+/* Compact Explore panel, so the layers, note and legend fit without scrolling */
+.map-page .panel { padding: 14px 20px; font-size: 13px; }
+.map-page .panel h2 { font-size: 20px; }
+.map-page .panel h3 { margin: 14px 0 6px; }
+.map-page .panel label { margin: 3px 0; }
+.map-page .panel .note { font-size: 12px; line-height: 1.45; padding: 8px 10px; margin: 10px 0; }
+.map-page .panel .ref-icon { width: 18px; height: 18px; }
+#legend > div { margin: 3px 0 !important; }
