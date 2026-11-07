@@ -217,7 +217,7 @@ var config = {
         },
         {
             id: 'propose',
-            alignment: 'left',
+            alignment: 'center',
             hidden: false,
             title: 'Propose a crossing',
             description:
