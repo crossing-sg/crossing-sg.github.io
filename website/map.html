@@ -3,7 +3,7 @@
 <head>
     <title>Explore the map</title>
     <link rel="stylesheet" href="css/navigation.css?v=20261106-nav3a">
-    <link rel="stylesheet" href="css/style.css?v=20261108-tour4">
+    <link rel="stylesheet" href="css/style.css?v=20261108-tour6">
     <link rel="stylesheet" href="css/proposal-responsive.css?v=20261108-tour4">
     <meta charset='utf-8' />
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,6 +29,15 @@
             <h2 style="margin:0 0 6px">Explore the map</h2>
             <button id="tour-open" class="tour-open" type="button">Take the guided tour</button>
 
+            <details class="more-layers">
+                <summary>Reference points (zoom in to see)</summary>
+                <label><input type="checkbox" class="ref" value="ref-bus"> Bus stops</label>
+                <label><input type="checkbox" class="ref" value="ref-mrt"> MRT exits</label>
+                <label><input type="checkbox" class="ref" value="ref-crossing" checked> Existing crossings</label>
+                <label><input type="checkbox" class="ref" value="ref-bridge" checked> Overhead bridges</label>
+                <label><input type="checkbox" class="ref" value="ref-underpass" checked> Underpasses</label>
+            </details>
+
             <h3>MAP LAYER</h3>
             <label><input type="radio" name="layer" value="gap" checked> Crossing gap</label>
             <label><input type="radio" name="layer" value="detour"> Walking detour</label>
@@ -37,15 +46,6 @@
             <p class="note" id="layer-note"></p>
             <p class="note" id="proposal-statistics" hidden></p>
             <div id="legend"></div>
-
-            <details class="more-layers">
-                <summary>More layers (zoom in to see)</summary>
-                <label><input type="checkbox" class="ref" value="ref-bus"> Bus stops</label>
-                <label><input type="checkbox" class="ref" value="ref-mrt"> MRT exits</label>
-                <label><input type="checkbox" class="ref" value="ref-crossing" checked> Existing crossings</label>
-                <label><input type="checkbox" class="ref" value="ref-bridge" checked> Overhead bridges</label>
-                <label><input type="checkbox" class="ref" value="ref-underpass" checked> Underpasses</label>
-            </details>
 
             <h3>DATA</h3>
             <p><a href="methodology.html#download">Download aggregated data</a><br>
