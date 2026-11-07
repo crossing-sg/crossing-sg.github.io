@@ -108,8 +108,8 @@
             background: #FBBF24; border: 2px solid #1B1E23; box-shadow: 0 0 0 4px rgba(251, 191, 36, .3);
             color: #1B1E23; font: 700 10px/14px sans-serif;
         }
-        body[data-chapter="voices"] .voice-marker { display: block; }
-        body:not([data-chapter="voices"]) .voice-popup { display: none; }
+        body[data-chapter="voices"] .voice-marker, body[data-chapter="propose"] .voice-marker { display: block; }
+        body:not([data-chapter="voices"]):not([data-chapter="propose"]) .voice-popup { display: none; }
         .voice-popup .mapboxgl-popup-content { color: #111; font-size: 15px; line-height: 22px; padding: 14px 16px; }
         .voice-popup blockquote { margin: 0 0 6px; font-style: italic; }
         .voice-popup small { color: #555; }
@@ -327,7 +327,7 @@
     <div id="story"></div>
 
     <script src="../js/site-config.js?v=20261107-voices"></script>
-    <script src="./config.js?v=20261107-voices"></script>
+    <script src="./config.js?v=20261107-voices2"></script>
     <!-- Added for this project: adds the GeoJSON layers used by the chapters -->
     <script src="./story-layers.js?v=20261107-voices"></script>
     <script>
