@@ -29,3 +29,6 @@ jobs:
           path: website
       - id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          # The road network has about 31,000 files, so syncing can exceed the 10-minute default
+          timeout: 1800000
