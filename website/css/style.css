@@ -385,3 +385,4 @@ td, th {
 .map-page .panel .note { font-size: 12px; line-height: 1.45; padding: 8px 10px; margin: 10px 0; }
 .map-page .panel .ref-icon { width: 18px; height: 18px; }
 #legend > div { margin: 3px 0 !important; }
+.info-card > b:first-of-type { font-size: 14px !important; }
