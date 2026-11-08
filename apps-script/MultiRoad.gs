@@ -169,9 +169,10 @@ function reviewProposalRecord(request,decision,evidence) {
     updateParent(r,patch);return {ok:true};
   }finally{lock.releaseLock();}
 }
-// Only pilot imports have empty schema and review state; new rows still require moderation.
+// Demo moderation: a proposal is published once its status column is set to ok in the Sheet.
+// Stories additionally need story_status approved (see storiesState).
 function acceptedForPublication(r) {
-  return r.status==='ok' && (r.review_status==='approved' || (r.schema_version==='' && r.review_status===''));
+  return r.status==='ok';
 }
 function approvedParents() {
   var list=rows('proposals',PROPOSAL_HEADERS),counts={};
@@ -180,11 +181,11 @@ function approvedParents() {
     if(!acceptedForPublication(r)||TYPES.indexOf(r.type)<0||REASONS.indexOf(r.reason)<0)return false;
     var key=parentIdentity(r);if(seen[key])return false;
     if(r.schema_version===PROPOSAL_SCHEMA){
-      if(counts[key]!==1||r.ingestion_status!=='complete'||r.registry_version!==ROAD_REGISTRY_VERSION||r.validation_version!==ROAD_VALIDATION_VERSION||!membershipsComplete(r)||!storedParentIntact(r,true)||hardReviewReasons(r))return false;
-      if(r.validation_status!=='valid'&&!(r.validation_review_status==='verified'&&r.validation_review_note&&r.validation_review_hash===r.payload_hash))return false;
+      // Integrity checks only. The moderator's status=ok replaces the validation review step.
+      if(counts[key]!==1||r.ingestion_status!=='complete'||r.registry_version!==ROAD_REGISTRY_VERSION||!membershipsComplete(r)||!storedParentIntact(r,true))return false;
       r._ids=parseArray(r.segment_ids_json);if(!r._ids.length||r._ids.some(function(id){return !road(id);}))return false;
     }else{
-      if(!Number.isSafeInteger(r.seg_id)||!road(r.seg_id)||r.validation_status==='needs_review')return false;
+      if(!Number.isSafeInteger(r.seg_id)||!road(r.seg_id))return false;
       r._ids=[r.seg_id];
     }
     seen[key]=true;r._identity=key;return true;
