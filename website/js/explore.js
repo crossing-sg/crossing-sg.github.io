@@ -36,7 +36,7 @@ var blocksReady = fetch('data/detour_blocks.geojson')
     .then(function (gj) { gj.features.forEach(function (f) { blockInfo[f.properties.postal] = f.properties; }); });
 
 map.on('load', function () {
-    map.addSource('gap', { type: 'geojson', data: 'data/gap_segments.geojson' });
+    map.addSource('gap', { type: 'geojson', data: 'data/gap_segments_new.geojson' });
     map.addLayer({ id: 'gap', type: 'line', source: 'gap', paint: { 'line-color': SITE.gapColors, 'line-width': ['interpolate', ['linear'], ['zoom'], 11, 1.2, 16, 6] } });
 
     map.addSource('blocks', { type: 'geojson', data: 'data/detour_blocks.geojson' });
@@ -68,7 +68,7 @@ map.on('load', function () {
     var refs = [
         ['ref-bus', 'data/bus_stops.geojson', null, 'icon-bus', SITE.markerColors.bus],
         ['ref-mrt', 'data/mrt_exits.geojson', null, 'icon-mrt', SITE.markerColors.mrt],
-        ['ref-crossing', 'data/crossing_markers.geojson', 'crossing', 'icon-crossing', SITE.markerColors.crossing],
+        ['ref-crossing', 'data/crossing_markers_new.geojson', 'crossing', 'icon-crossing', SITE.markerColors.crossing],
         ['ref-bridge', 'data/crossing_markers.geojson', 'overhead_bridge', 'icon-bridge', SITE.markerColors.overhead_bridge],
         ['ref-underpass', 'data/crossing_markers.geojson', 'underpass', 'icon-underpass', SITE.markerColors.underpass]
     ];
@@ -114,7 +114,7 @@ map.on('load', function () {
     map.on('click', 'gap', function (e) {
         var p = e.features[0].properties;
         new mapboxgl.Popup().setLngLat(e.lngLat)
-            .setHTML('<b>' + p.dist_m + ' m</b> to the nearest crossing, bridge or underpass')
+            .setHTML('<b>' + Math.round(p.dist_m) + ' m</b> to the nearest crossing, bridge or underpass')
             .addTo(map);
     });
     // Clicking the open block again closes its routes
