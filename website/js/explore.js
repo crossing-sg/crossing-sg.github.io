@@ -142,6 +142,11 @@ function setTheme(theme) {
     var routesOn = theme === 'detour' ? 'visible' : 'none';
     map.setLayoutProperty('route-walk', 'visibility', routesOn);
     map.setLayoutProperty('route-straight', 'visibility', routesOn);
+    // Detour routes run from blocks to bus stops and MRT exits, so show those destinations with this layer
+    ['ref-bus', 'ref-mrt'].forEach(function (id) {
+        document.querySelector('.ref[value=' + id + ']').checked = theme === 'detour';
+    });
+    if (map.getLayer('ref-bus')) { updateRefs(); }
     document.getElementById('layer-note').innerText = NOTES[theme];
     var proposalStats = document.getElementById('proposal-statistics');
     if (proposalStats) { proposalStats.hidden = theme !== 'proposals' || !proposalPublication || !proposalPublication.summary; }
