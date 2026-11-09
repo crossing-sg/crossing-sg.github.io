@@ -126,13 +126,16 @@ function addStoryLayers(map) {
     });
 
     map.addSource('stops', { type: 'geojson', data: data + 'step3_destinations.geojson' });
-    map.addLayer({
-        id: 'stops', type: 'circle', source: 'stops',
-        paint: {
-            'circle-radius': 5, 'circle-color': SITE.basemapDark, 'circle-opacity': 0,
-            'circle-stroke-color': SITE.routeWalk, 'circle-stroke-width': 2, 'circle-stroke-opacity': 0
-        }
-    });
+    // Route destinations use the same bus and MRT pictograms as the Explore map (js/icons.js)
+    var colors = {};
+    colors['icon-bus'] = SITE.markerColors.bus;
+    colors['icon-mrt'] = SITE.markerColors.mrt;
+    addMapIcons(map, colors);
+    var iconLayout = { 'icon-size': 0.9, 'icon-allow-overlap': true, 'icon-ignore-placement': true };
+    map.addLayer({ id: 'stops', type: 'symbol', source: 'stops',
+        layout: Object.assign({ 'icon-image': 'icon-bus' }, iconLayout), paint: { 'icon-opacity': 0 } });
+    map.addLayer({ id: 'mrt-icons', type: 'symbol', source: 'ctx-mrt', minzoom: 13,
+        layout: Object.assign({ 'icon-image': 'icon-mrt' }, iconLayout), paint: { 'icon-opacity': 0 } });
 
     map.moveLayer('ex-case');
     map.moveLayer('cases');

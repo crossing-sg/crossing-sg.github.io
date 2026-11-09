@@ -2,7 +2,7 @@
 // Each chapter sets the opacity of every story layer when it is entered, so the result
 // does not depend on the order in which scrollama fires enter and exit events.
 var STORY_LAYERS = ['ctx-bus', 'ctx-crossings', 'ctx-mrt', 'area-fill', 'area-line', 'all-cases', 'cases',
-    'ex-buffer-fill', 'ex-buffer-line', 'ex-gap', 'ex-markers', 'ex-case', 'detour-blocks', 'block', 'routes-other', 'route-walk', 'route-straight', 'stops', 'proposals'];
+    'ex-buffer-fill', 'ex-buffer-line', 'ex-gap', 'ex-markers', 'ex-case', 'detour-blocks', 'block', 'routes-other', 'route-walk', 'route-straight', 'stops', 'mrt-icons', 'proposals'];
 var only = function (visible) {
     return STORY_LAYERS.map(function (l) {
         return { layer: l, opacity: visible[l] === undefined ? 0 : visible[l], duration: 800 };
@@ -197,7 +197,7 @@ var config = {
             mapAnimation: 'flyTo',
             rotateAnimation: false,
             callback: '',
-            onChapterEnter: only({ block: 1, 'routes-other': 0.7, 'route-walk': 1, 'route-straight': 1, stops: 1, 'all-cases': 1, 'ctx-crossings': 0.6 }),
+            onChapterEnter: only({ block: 1, 'routes-other': 0.7, 'route-walk': 1, 'route-straight': 1, stops: 1, 'mrt-icons': 1, 'all-cases': 1, 'ctx-crossings': 0.6 }),
             onChapterExit: []
         },
         {
