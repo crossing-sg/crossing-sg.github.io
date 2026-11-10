@@ -111,7 +111,8 @@ var config = {
             title: 'Crossings in Singapore',
             description:
                 'LTA records 9,702 road crossings and 771 overhead bridges and underpasses across Singapore. ' +
-                'The map shows where they are. The next sections compare them with reported pedestrian cases and look at one case in Bukit Batok.<br><br>' +
+                'The Central Region holds about a third of them (3,396). The planning areas with the most are Tampines, Woodlands, Sengkang and Bedok, all large HDB towns. ' +
+                'Across the island there are 3.8 crossings per km of road, and 33% of road length is more than 200 m from the nearest one.<br><br>' +
                 '<span class="dot" style="background:' + SITE.markerColors.crossing + '"></span> road crossing &nbsp; ' +
                 '<span class="dot" style="background:' + SITE.markerColors.overhead_bridge + '"></span> overhead bridge &nbsp; ' +
                 '<span class="dot" style="background:' + SITE.markerColors.underpass + '"></span> underpass<br>' +
