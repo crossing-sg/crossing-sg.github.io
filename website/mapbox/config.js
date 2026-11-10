@@ -171,11 +171,14 @@ var config = {
                 'The court heard that they crossed the road instead of using the overhead bridge nearby. Malay Mail reported the case when the sentence was passed in December 2018.<br><br>' +
                 'The road runs through an HDB estate, with blocks, Bukit Batok Polyclinic and bus stops along it. ' +
                 'Within 300 m of the case (dashed circle) there are 6 road crossings and 2 overhead bridges or underpasses, 5.2 per km of road against 3.8 across Singapore. ' +
+                'The number of crossings is not the problem here. ' +
+                'Their position may not match the routes that residents actually take, for example between a block and the bus stop across the road. ' +
+                'When the nearest crossing is far from that route, some people cross where there is none. ' +
                 'The point marks the junction named in the report, not the exact spot.<br><br>' +
                 'Roads are coloured by the distance to the nearest crossing.<br><br>' +
                 '<span class="key" style="background:' + SITE.classColors[0] + '"></span> under 50 m &nbsp; <span class="key" style="background:' + SITE.classColors[1] + '"></span> 50 to 100 m &nbsp; ' +
                 '<span class="key" style="background:' + SITE.classColors[2] + '"></span> 100 to 200 m &nbsp; <span class="key" style="background:' + SITE.classColors[3] + '"></span> over 200 m' +
-                '<br><br>The next section looks at how far residents of a nearby block walk to reach a bus stop.' +
+                '<br><br>The next section looks at how far residents of a nearby block walk to reach a bus stop using the existing crossings.' +
                 '<br><br><a href="https://www.malaymail.com/news/world/2018/12/07/singaporean-jailed-six-weeks-for-causing-death-of-4-year-old-girl/1700941" target="_blank">Source: Malay Mail, 7 December 2018</a>',
             location: { center: [103.7484, 1.3524], zoom: 16.2, pitch: 0, bearing: 0, padding: PAD_LEFT },
             mapAnimation: 'flyTo',
